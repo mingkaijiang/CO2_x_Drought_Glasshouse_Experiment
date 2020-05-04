@@ -7,7 +7,7 @@ make_whole_plant_hydraulic_conductance_plot <- function() {
     
     ################################### Plotting ######################################
     #FIGURE 7 - Eucalyptus pilularis & Eucalyptus populnea (E/(psiPD-psiMD) by Day)
-    pdf("output/test.pdf", width=8, height=6)
+    pdf("output/whole_plant_hydraulics_plot.pdf", width=8, height=6)
     #A
     #bottom,left,top,right
     par(mfrow=c(1,2), omi=c(.65, 0.75, 0.75, .65)) 
