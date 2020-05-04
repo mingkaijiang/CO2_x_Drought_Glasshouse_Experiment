@@ -19,9 +19,17 @@ make_glasshouse_condition_plots()
 ### leaf area of two species
 make_leaf_area_plot()
 
-### read in leaf area and biomass data
+### read in leaf area and biomass data & make plots for the two species
 make_leaf_area_and_biomass_plots()
 
+### make soil water content and leaf transpiration plots for the two species
+make_swc_and_transpiration_plots()
+
+### transpiration as function of leaf area
+make_transpiration_leaf_area_plot()
+
+### pre-dawn and midday leaf water potentials
+make_leaf_water_potential_plots()
 
 ### leaf gas exchange and water fluxes
 make_pilularis_physiological_plots()
@@ -33,8 +41,6 @@ make_dry_down_charts()
 ### whole plant hydraulic conductance for two species
 make_whole_plant_hydraulic_conductance_plot()
 
-### transpiration as function of leaf area
-make_transpiration_leaf_area_plot()
 
 
 ############################# end #################################
