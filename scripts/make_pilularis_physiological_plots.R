@@ -23,7 +23,7 @@ make_pilularis_physiological_plots <- function() {
     with(PILPhysGraph,points(Adaily[Trt=="PILAND"]~Day[Trt=="PILAND"],col="blue",pch=16,cex=1.25,type="o"))
     with(PILPhysGraph,arrows(Day[Trt=="PILAND"],
                              UAdaily[Trt=="PILAND"], Day[Trt=="PILAND"], LAdaily[Trt=="PILAND"]
-                             , length = .035, angle = 90, code = 3)) 
+                             , length = .035, angle = 90, code = 3,col="blue")) 
     with(PILPhysGraph,points(Adaily[Trt=="PILED"]~Day[Trt=="PILED"],col="red",pch=1,cex=1.25,type="o",lty=2))
     with(PILPhysGraph,arrows(Day[Trt=="PILED"],
                              UAdaily[Trt=="PILED"], Day[Trt=="PILED"], LAdaily[Trt=="PILED"]

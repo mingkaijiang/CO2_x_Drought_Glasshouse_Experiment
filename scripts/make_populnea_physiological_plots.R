@@ -22,7 +22,7 @@ make_populnea_physiological_plots <- function() {
     with(POPPhysGraph,points(Adaily[Trt=="POPAND"]~Day[Trt=="POPAND"],col="blue",pch=16,cex=1.25,type="o"))
     with(POPPhysGraph,arrows(Day[Trt=="POPAND"],
                              UAdaily[Trt=="POPAND"], Day[Trt=="POPAND"], LAdaily[Trt=="POPAND"]
-                             , length = .035, angle = 90, code = 3)) 
+                             , length = .035, angle = 90, code = 3, col="blue")) 
     with(POPPhysGraph,points(Adaily[Trt=="POPED"]~Day[Trt=="POPED"],col="red",pch=1,cex=1.25,type="o",lty=2))
     with(POPPhysGraph,arrows(Day[Trt=="POPED"],
                              UAdaily[Trt=="POPED"], Day[Trt=="POPED"], LAdaily[Trt=="POPED"]

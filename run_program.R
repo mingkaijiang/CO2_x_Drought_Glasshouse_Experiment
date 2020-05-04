@@ -18,7 +18,7 @@ make_pilularis_physiological_plots()
 make_populnea_physiological_plots()
 
 ### dry down charts of the two species
-make_down_down_charts()
+make_dry_down_charts()
 
 ### whole plant hydraulic conductance for two species
 make_whole_plant_hydraulic_conductance_plot()
@@ -26,6 +26,8 @@ make_whole_plant_hydraulic_conductance_plot()
 ### leaf area of two species
 make_leaf_area_plot()
 
+### transpiration as function of leaf area
+make_transpiration_leaf_area_plot()
 
 
 ############################# end #################################

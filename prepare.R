@@ -16,7 +16,7 @@ pacman::p_load(dplyr,
                scales,
                data.table,
                plantecophys,
-               stringr,        # to subtract characters
+               stringr,        
                lme4,
                cowplot,
                nlme,
