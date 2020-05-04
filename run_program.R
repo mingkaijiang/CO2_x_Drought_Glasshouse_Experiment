@@ -31,12 +31,13 @@ make_transpiration_leaf_area_plot()
 ### pre-dawn and midday leaf water potentials
 make_leaf_water_potential_plots()
 
+### pre-dawn water potential with swc
+make_predawn_water_potential_with_swc_plots()
+
+
 ### leaf gas exchange and water fluxes
 make_pilularis_physiological_plots()
 make_populnea_physiological_plots()
-
-### dry down charts of the two species
-make_dry_down_charts()
 
 ### whole plant hydraulic conductance for two species
 make_whole_plant_hydraulic_conductance_plot()
