@@ -13,11 +13,14 @@ source("prepare.R")
 
 
 ############################# plotting #################################
+### leaf area of two species
+make_leaf_area_plot()
+
 ### read in leaf area and biomass data
 make_leaf_area_and_biomass_plots()
 
-### leaf area of two species
-make_leaf_area_plot()
+### make glasshouse condition (PAR, T and RH) plots
+make_glasshouse_condition_plots()
 
 
 ### leaf gas exchange and water fluxes

@@ -23,7 +23,8 @@ pacman::p_load(dplyr,
                gridExtra,
                ggthemes,
                lmerTest,
-               multcomp)    
+               multcomp,
+               chron)    
 
 
 #### Sourcing all R files in the modules subdirectory
