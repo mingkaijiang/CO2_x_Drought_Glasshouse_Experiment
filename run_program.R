@@ -13,14 +13,14 @@ source("prepare.R")
 
 
 ############################# plotting #################################
+### make glasshouse condition (T, RH and VPD during day and night times) plots
+make_glasshouse_condition_plots()
+
 ### leaf area of two species
 make_leaf_area_plot()
 
 ### read in leaf area and biomass data
 make_leaf_area_and_biomass_plots()
-
-### make glasshouse condition (PAR, T and RH) plots
-make_glasshouse_condition_plots()
 
 
 ### leaf gas exchange and water fluxes
