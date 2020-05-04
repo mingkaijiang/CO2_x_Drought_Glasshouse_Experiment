@@ -13,6 +13,13 @@ source("prepare.R")
 
 
 ############################# plotting #################################
+### read in leaf area and biomass data
+make_leaf_area_and_biomass_plots()
+
+### leaf area of two species
+make_leaf_area_plot()
+
+
 ### leaf gas exchange and water fluxes
 make_pilularis_physiological_plots()
 make_populnea_physiological_plots()
@@ -22,9 +29,6 @@ make_dry_down_charts()
 
 ### whole plant hydraulic conductance for two species
 make_whole_plant_hydraulic_conductance_plot()
-
-### leaf area of two species
-make_leaf_area_plot()
 
 ### transpiration as function of leaf area
 make_transpiration_leaf_area_plot()
