@@ -34,14 +34,21 @@ make_leaf_water_potential_plots()
 ### pre-dawn water potential with swc
 make_predawn_water_potential_with_swc_plots()
 
-
-### leaf gas exchange and water fluxes
-make_pilularis_physiological_plots()
-make_populnea_physiological_plots()
-
 ### whole plant hydraulic conductance for two species
 make_whole_plant_hydraulic_conductance_plot()
 
+### leaf gas exchange fluxes
+make_pilularis_physiological_plots()
+make_populnea_physiological_plots()
+
+
+
+#### TO do!
+### normalized Asat, i.e. Asat(time) / Asat(D1)
+make_normalized_Asat_plots()
+
+### CO2 ratios of A and gs
+make_CO2_ratios_of_A_and_gs_plots()
 
 
 ############################# end #################################
