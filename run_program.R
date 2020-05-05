@@ -41,9 +41,6 @@ make_whole_plant_hydraulic_conductance_plot()
 make_pilularis_physiological_plots()
 make_populnea_physiological_plots()
 
-
-
-#### TO do!
 ### normalized Asat, i.e. Asat(time) / Asat(D1)
 make_normalized_Asat_plots()
 
