@@ -13,7 +13,7 @@ make_swc_and_transpiration_plots <- function() {
         geom_errorbar(aes(col=Trt, x=Day, 
                           ymin=SWC-SWCSE, ymax=SWC+SWCSE),
                       width=0.2)+
-        geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
+        geom_point(aes(col=Trt, fill=Trt, pch=Trt), size=2)+
         geom_line(aes(col=Trt, lty=Trt))+
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
@@ -36,7 +36,7 @@ make_swc_and_transpiration_plots <- function() {
                                     expression(paste(aC[a]*" - W")),
                                     expression(paste(eC[a]*" - D")),
                                     expression(paste(eC[a]*" - W"))),
-                           values=c("blue3", "blue3", "red2", "red2"),
+                           values=c("red2", "blue3", "red2", "blue3"),
                            guide=guide_legend(nrow=1))+
         scale_fill_manual(name="",
                            limits=c("PILAD", "PILAND", "PILED", "PILEND"),
@@ -44,7 +44,7 @@ make_swc_and_transpiration_plots <- function() {
                                     expression(paste(aC[a]*" - W")),
                                     expression(paste(eC[a]*" - D")),
                                     expression(paste(eC[a]*" - W"))),
-                           values=c("white", "blue3", "white", "red2"),
+                           values=c("white", "white", "red2", "blue3"),
                            guide=guide_legend(nrow=1))+
         scale_linetype_manual(name="",
                               limits=c("PILAD", "PILAND", "PILED", "PILEND"),
@@ -52,14 +52,21 @@ make_swc_and_transpiration_plots <- function() {
                                        expression(paste(aC[a]*" - W")),
                                        expression(paste(eC[a]*" - D")),
                                        expression(paste(eC[a]*" - W"))),
-                              values=c("dotted", "solid", "dotted", "solid"))+
+                              values=c("dotted", "dotted", "solid", "solid"))+
+        scale_shape_manual(name="",
+                              limits=c("PILAD", "PILAND", "PILED", "PILEND"),
+                              labels=c(expression(paste(aC[a]*" - D")), 
+                                       expression(paste(aC[a]*" - W")),
+                                       expression(paste(eC[a]*" - D")),
+                                       expression(paste(eC[a]*" - W"))),
+                              values=c(21,21,22,22))+
         ggtitle("E. Pilularis")+
         ylim(0, 0.4)+
         xlab("Day")+
-        guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 21, 21),
-                                                       fill = c("white", "blue3", "white", "red2"),
-                                                       col = c("blue3", "blue3", "red2", "red2"),
-                                                       linetype = c("dotted", "solid", "dotted", "solid"))))+
+        guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 22,22),
+                                                       fill = c("white", "white", "red2", "blue3"),
+                                                       col = c("red2", "blue3", "red2", "blue3"),
+                                                       linetype = c("dotted", "dotted", "solid", "solid"))))+
         scale_x_continuous(limits=c(0, 10),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
@@ -68,13 +75,13 @@ make_swc_and_transpiration_plots <- function() {
         geom_errorbar(aes(col=Trt, x=Day, 
                           ymin=SWC-SWCSE, ymax=SWC+SWCSE),
                       width=0.2)+
-        geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
+        geom_point(aes(col=Trt, fill=Trt, pch=Trt), size=2)+
         geom_line(aes(col=Trt, lty=Trt))+
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
               axis.title.x=element_blank(),
-              axis.text.y=element_blank(),
+              axis.text.y=element_text(size=12),
               axis.title.y=element_blank(),
               legend.text=element_text(size=14),
               legend.title=element_text(size=16),
@@ -91,7 +98,7 @@ make_swc_and_transpiration_plots <- function() {
                                     expression(paste(aC[a]*" - W")),
                                     expression(paste(eC[a]*" - D")),
                                     expression(paste(eC[a]*" - W"))),
-                           values=c("blue3", "blue3", "red2", "red2"),
+                           values=c("red2", "blue3", "red2", "blue3"),
                            guide=guide_legend(nrow=1))+
         scale_fill_manual(name="",
                           limits=c("POPAD", "POPAND", "POPED", "POPEND"),
@@ -99,7 +106,7 @@ make_swc_and_transpiration_plots <- function() {
                                    expression(paste(aC[a]*" - W")),
                                    expression(paste(eC[a]*" - D")),
                                    expression(paste(eC[a]*" - W"))),
-                          values=c("white", "blue3", "white", "red2"),
+                          values=c("white", "white", "red2", "blue3"),
                           guide=guide_legend(nrow=1))+
         scale_linetype_manual(name="",
                               limits=c("POPAD", "POPAND", "POPED", "POPEND"),
@@ -107,14 +114,21 @@ make_swc_and_transpiration_plots <- function() {
                                        expression(paste(aC[a]*" - W")),
                                        expression(paste(eC[a]*" - D")),
                                        expression(paste(eC[a]*" - W"))),
-                              values=c("dotted", "solid", "dotted", "solid"))+
+                              values=c("dotted", "dotted", "solid", "solid"))+
+        scale_shape_manual(name="",
+                           limits=c("POPAD", "POPAND", "POPED", "POPEND"),
+                           labels=c(expression(paste(aC[a]*" - D")), 
+                                    expression(paste(aC[a]*" - W")),
+                                    expression(paste(eC[a]*" - D")),
+                                    expression(paste(eC[a]*" - W"))),
+                           values=c(21,21,22,22))+
         ggtitle("E. Populnea")+
         ylim(0, 0.4)+
         xlab("Day")+
-        guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 21, 21),
-                                                       fill = c("white", "blue3", "white", "red2"),
-                                                       col = c("blue3", "blue3", "red2", "red2"),
-                                                       linetype = c("dotted", "solid", "dotted", "solid"))))+
+        guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 22,22),
+                                                       fill = c("white", "white", "red2", "blue3"),
+                                                       col = c("red2", "blue3", "red2", "blue3"),
+                                                       linetype = c("dotted", "dotted", "solid", "solid"))))+
         scale_x_continuous(limits=c(0, 40),
                            breaks=c(0, 5, 10, 20, 30, 40))
     
@@ -125,7 +139,7 @@ make_swc_and_transpiration_plots <- function() {
                           ymin=transp_plant-transp_plantSE, 
                           ymax=transp_plant+transp_plantSE),
                       width=0.2)+
-        geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
+        geom_point(aes(col=Trt, fill=Trt, pch=Trt), size=2)+
         geom_line(aes(col=Trt, lty=Trt))+
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
@@ -148,7 +162,7 @@ make_swc_and_transpiration_plots <- function() {
                                     expression(paste(aC[a]*" - W")),
                                     expression(paste(eC[a]*" - D")),
                                     expression(paste(eC[a]*" - W"))),
-                           values=c("blue3", "blue3", "red2", "red2"),
+                           values=c("red2", "blue3", "red2", "blue3"),
                            guide=guide_legend(nrow=1))+
         scale_fill_manual(name="",
                           limits=c("PILAD", "PILAND", "PILED", "PILEND"),
@@ -156,7 +170,7 @@ make_swc_and_transpiration_plots <- function() {
                                    expression(paste(aC[a]*" - W")),
                                    expression(paste(eC[a]*" - D")),
                                    expression(paste(eC[a]*" - W"))),
-                          values=c("white", "blue3", "white", "red2"),
+                          values=c("white", "white", "red2", "blue3"),
                           guide=guide_legend(nrow=1))+
         scale_linetype_manual(name="",
                               limits=c("PILAD", "PILAND", "PILED", "PILEND"),
@@ -164,13 +178,20 @@ make_swc_and_transpiration_plots <- function() {
                                        expression(paste(aC[a]*" - W")),
                                        expression(paste(eC[a]*" - D")),
                                        expression(paste(eC[a]*" - W"))),
-                              values=c("dotted", "solid", "dotted", "solid"))+
+                              values=c("dotted", "dotted", "solid", "solid"))+
+        scale_shape_manual(name="",
+                           limits=c("PILAD", "PILAND", "PILED", "PILEND"),
+                           labels=c(expression(paste(aC[a]*" - D")), 
+                                    expression(paste(aC[a]*" - W")),
+                                    expression(paste(eC[a]*" - D")),
+                                    expression(paste(eC[a]*" - W"))),
+                           values=c(21,21,22,22))+
         ylim(0,4)+
         xlab("Day")+
-        guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 21, 21),
-                                                       fill = c("white", "blue3", "white", "red2"),
-                                                       col = c("blue3", "blue3", "red2", "red2"),
-                                                       linetype = c("dotted", "solid", "dotted", "solid"))))+
+        guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 22,22),
+                                                       fill = c("white", "white", "red2", "blue3"),
+                                                       col = c("red2", "blue3", "red2", "blue3"),
+                                                       linetype = c("dotted", "dotted", "solid", "solid"))))+
         scale_x_continuous(limits=c(0, 10),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
@@ -181,13 +202,13 @@ make_swc_and_transpiration_plots <- function() {
                           ymin=transp_plant-transp_plantSE, 
                           ymax=transp_plant+transp_plantSE),
                       width=0.2)+
-        geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
+        geom_point(aes(col=Trt, fill=Trt, pch=Trt), size=2)+
         geom_line(aes(col=Trt, lty=Trt))+
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
               axis.title.x=element_blank(),
-              axis.text.y=element_blank(),
+              axis.text.y=element_text(size=12),
               axis.title.y=element_blank(),
               legend.text=element_text(size=14),
               legend.title=element_text(size=16),
@@ -204,7 +225,7 @@ make_swc_and_transpiration_plots <- function() {
                                     expression(paste(aC[a]*" - W")),
                                     expression(paste(eC[a]*" - D")),
                                     expression(paste(eC[a]*" - W"))),
-                           values=c("blue3", "blue3", "red2", "red2"),
+                           values=c("red2", "blue3", "red2", "blue3"),
                            guide=guide_legend(nrow=1))+
         scale_fill_manual(name="",
                           limits=c("POPAD", "POPAND", "POPED", "POPEND"),
@@ -212,7 +233,7 @@ make_swc_and_transpiration_plots <- function() {
                                    expression(paste(aC[a]*" - W")),
                                    expression(paste(eC[a]*" - D")),
                                    expression(paste(eC[a]*" - W"))),
-                          values=c("white", "blue3", "white", "red2"),
+                          values=c("white", "white", "red2", "blue3"),
                           guide=guide_legend(nrow=1))+
         scale_linetype_manual(name="",
                               limits=c("POPAD", "POPAND", "POPED", "POPEND"),
@@ -220,13 +241,20 @@ make_swc_and_transpiration_plots <- function() {
                                        expression(paste(aC[a]*" - W")),
                                        expression(paste(eC[a]*" - D")),
                                        expression(paste(eC[a]*" - W"))),
-                              values=c("dotted", "solid", "dotted", "solid"))+
+                              values=c("dotted", "dotted", "solid", "solid"))+
+        scale_shape_manual(name="",
+                           limits=c("POPAD", "POPAND", "POPED", "POPEND"),
+                           labels=c(expression(paste(aC[a]*" - D")), 
+                                    expression(paste(aC[a]*" - W")),
+                                    expression(paste(eC[a]*" - D")),
+                                    expression(paste(eC[a]*" - W"))),
+                           values=c(21,21,22,22))+
         ylim(0,4)+
         xlab("Day")+
-        guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 21, 21),
-                                                       fill = c("white", "blue3", "white", "red2"),
-                                                       col = c("blue3", "blue3", "red2", "red2"),
-                                                       linetype = c("dotted", "solid", "dotted", "solid"))))+
+        guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 22,22),
+                                                       fill = c("white", "white", "red2", "blue3"),
+                                                       col = c("red2", "blue3", "red2", "blue3"),
+                                                       linetype = c("dotted", "dotted", "solid", "solid"))))+
         scale_x_continuous(limits=c(0, 40),
                            breaks=c(0, 5, 10, 20, 30, 40))
     
@@ -242,7 +270,7 @@ make_swc_and_transpiration_plots <- function() {
                                 label_x=0.16, label_y=0.9)
     
     
-    pdf("output/swc_and_transpiration.pdf", width=8, height=8)
+    pdf("output/F3.swc_and_transpiration.pdf", width=8, height=8)
     plot_grid(combined_plots, combined_legend, 
               ncol=1, rel_heights=c(1, 0.1))
     dev.off() 

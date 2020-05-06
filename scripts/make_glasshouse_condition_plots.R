@@ -37,36 +37,44 @@ make_glasshouse_condition_plots <- function() {
     
     ### plotting
     p1 <- ggplot(plotDF1, aes(x=DateTime, y=Tair, group=CO2)) +
-        geom_point(aes(col=CO2))+
+        geom_point(aes(pch=CO2, fill=CO2))+
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_blank(),
               axis.title.x=element_blank(),
               axis.text.y=element_text(size=12),
               axis.title.y=element_text(size=14),
-              legend.text=element_text(size=14),
-              legend.title=element_text(size=16),
+              legend.text=element_text(size=24),
+              legend.title=element_text(size=20),
               panel.grid.major=element_blank(),
               legend.position="none",
               legend.box = 'horizontal',
               legend.box.just = 'left',
-              plot.title = element_text(size=16, face="bold", 
+              plot.title = element_text(size=30, face="bold", 
                                         hjust = 0.5))+
         ylab(expression(paste("Temperature ("*degree*"C)")))+
-        scale_color_manual(name=expression(CO[2]),
+        scale_shape_manual(name=expression(CO[2]),
                           limits=c("A", "E"),
                           labels=c("amb", "ele"),
-                          values=c("blue3", "red2"),
+                          values=c(21,22),
                           guide=guide_legend(nrow=1))+
+        scale_fill_manual(name=expression(CO[2]),
+                           limits=c("A", "E"),
+                           labels=c("amb", "ele"),
+                           values=c("white", "black"),
+                           guide=guide_legend(nrow=1))+
         scale_x_datetime(name="Date", 
                          breaks=date_breaks("24 hour"),
                          labels=date_format("%m-%d"))+
         ggtitle("Daytime")+
-        ylim(10, 35)
+        ylim(10, 35)+
+        guides(fill = guide_legend(override.aes = list(shape = c(21, 22),
+                                                       fill = c("white", "black"),
+                                                       size= c(10, 10))))
     
     ### night time
     p2 <- ggplot(plotDF2, aes(x=DateTime, y=Tair, group=CO2)) +
-        geom_point(aes(col=CO2))+
+        geom_point(aes(pch=CO2, fill=CO2))+
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_blank(),
@@ -79,13 +87,18 @@ make_glasshouse_condition_plots <- function() {
               legend.position="none",
               legend.box = 'horizontal',
               legend.box.just = 'left',
-              plot.title = element_text(size=16, face="bold", 
+              plot.title = element_text(size=20, face="bold", 
                                         hjust = 0.5))+
         ylab(expression(paste("Temperature ("*degree*"C)")))+
-        scale_color_manual(name=expression(CO[2]),
+        scale_shape_manual(name=expression(CO[2]),
                            limits=c("A", "E"),
                            labels=c("amb", "ele"),
-                           values=c("blue3", "red2"),
+                           values=c(21,22),
+                           guide=guide_legend(nrow=1))+
+        scale_fill_manual(name=expression(CO[2]),
+                          limits=c("A", "E"),
+                          labels=c("amb", "ele"),
+                          values=c("white", "black"),
                            guide=guide_legend(nrow=1))+
         scale_x_datetime(name="Date", 
                          breaks=date_breaks("24 hour"),
@@ -95,7 +108,7 @@ make_glasshouse_condition_plots <- function() {
     
     
     p3 <- ggplot(plotDF1, aes(x=DateTime, y=RH, group=CO2)) +
-        geom_point(aes(col=CO2))+
+        geom_point(aes(pch=CO2, fill=CO2))+
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_blank(),
@@ -111,10 +124,15 @@ make_glasshouse_condition_plots <- function() {
               plot.title = element_text(size=14, face="bold", 
                                         hjust = 0.5))+
         ylab("Relative Humidity (%)")+
-        scale_color_manual(name=expression(CO[2]),
+        scale_shape_manual(name=expression(CO[2]),
                            limits=c("A", "E"),
                            labels=c("amb", "ele"),
-                           values=c("blue3", "red2"),
+                           values=c(21,22),
+                           guide=guide_legend(nrow=1))+
+        scale_fill_manual(name=expression(CO[2]),
+                          limits=c("A", "E"),
+                          labels=c("amb", "ele"),
+                          values=c("white", "black"),
                            guide=guide_legend(nrow=1))+
         scale_x_datetime(name="Date", 
                          breaks=date_breaks("24 hour"),
@@ -123,7 +141,7 @@ make_glasshouse_condition_plots <- function() {
     
     ### night time
     p4 <- ggplot(plotDF2, aes(x=DateTime, y=RH, group=CO2)) +
-        geom_point(aes(col=CO2))+
+        geom_point(aes(pch=CO2, fill=CO2))+
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_blank(),
@@ -139,10 +157,15 @@ make_glasshouse_condition_plots <- function() {
               plot.title = element_text(size=14, face="bold", 
                                         hjust = 0.5))+
         ylab("Relative Humidity (%)")+
-        scale_color_manual(name=expression(CO[2]),
+        scale_shape_manual(name=expression(CO[2]),
                            limits=c("A", "E"),
                            labels=c("amb", "ele"),
-                           values=c("blue3", "red2"),
+                           values=c(21,22),
+                           guide=guide_legend(nrow=1))+
+        scale_fill_manual(name=expression(CO[2]),
+                          limits=c("A", "E"),
+                          labels=c("amb", "ele"),
+                          values=c("white", "black"),
                            guide=guide_legend(nrow=1))+
         scale_x_datetime(name="Date", 
                          breaks=date_breaks("24 hour"),
@@ -151,7 +174,7 @@ make_glasshouse_condition_plots <- function() {
     
     
     p5 <- ggplot(plotDF1, aes(x=DateTime, y=VPD, group=CO2)) +
-        geom_point(aes(col=CO2))+
+        geom_point(aes(pch=CO2, fill=CO2))+
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
@@ -167,10 +190,15 @@ make_glasshouse_condition_plots <- function() {
               plot.title = element_text(size=14, face="bold", 
                                         hjust = 0.5))+
         ylab("Vapor Pressure Deficit (kPa)")+
-        scale_color_manual(name=expression(CO[2]),
+        scale_shape_manual(name=expression(CO[2]),
                            limits=c("A", "E"),
                            labels=c("amb", "ele"),
-                           values=c("blue3", "red2"),
+                           values=c(21,22),
+                           guide=guide_legend(nrow=1))+
+        scale_fill_manual(name=expression(CO[2]),
+                          limits=c("A", "E"),
+                          labels=c("amb", "ele"),
+                          values=c("white", "black"),
                            guide=guide_legend(nrow=1))+
         scale_x_datetime(name="Date", 
                          breaks=date_breaks("24 hour"),
@@ -179,7 +207,7 @@ make_glasshouse_condition_plots <- function() {
     
     ### night time
     p6 <- ggplot(plotDF2, aes(x=DateTime, y=VPD, group=CO2)) +
-        geom_point(aes(col=CO2))+
+        geom_point(aes(pch=CO2, fill=CO2))+
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
@@ -195,10 +223,15 @@ make_glasshouse_condition_plots <- function() {
               plot.title = element_text(size=14, face="bold", 
                                         hjust = 0.5))+
         ylab("Vapor Pressure Deficit (kPa)")+
-        scale_color_manual(name=expression(CO[2]),
+        scale_shape_manual(name=expression(CO[2]),
                            limits=c("A", "E"),
                            labels=c("amb", "ele"),
-                           values=c("blue3", "red2"),
+                           values=c(21,22),
+                           guide=guide_legend(nrow=1))+
+        scale_fill_manual(name=expression(CO[2]),
+                          limits=c("A", "E"),
+                          labels=c("amb", "ele"),
+                          values=c("white", "black"),
                            guide=guide_legend(nrow=1))+
         scale_x_datetime(name="Date", 
                          breaks=date_breaks("24 hour"),
@@ -214,10 +247,10 @@ make_glasshouse_condition_plots <- function() {
     combined_plots <- plot_grid(p1, p2, p3, p4, p5, p6,
                                  labels=c("(a)", "(b)", "(c)", "(d)", "(e)", "(f)"), 
                                  ncol=2, align="vh", axis = "l",
-                                 label_x=0.08, label_y=0.9)
+                                 label_x=0.08, label_y=0.85)
     
     
-    pdf("output/glasshouse_condition.pdf", width=16, height=14)
+    pdf("output/F1.glasshouse_condition.pdf", width=16, height=14)
     plot_grid(combined_plots, combined_legend, 
               ncol=1, rel_heights=c(1, 0.1))
     dev.off() 

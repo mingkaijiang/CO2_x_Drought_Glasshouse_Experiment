@@ -72,7 +72,7 @@ make_leaf_area_and_biomass_plots <- function() {
     ### plotting
     p1 <- ggplot(data=subDF1, 
                  aes(brk, LA_final.mean)) +
-        geom_bar(stat = "identity", aes(fill=CO2, alpha=H2O), 
+        geom_bar(stat = "identity", aes(alpha=CO2, fill=H2O), 
                  position="dodge", col="black") +
         geom_errorbar(aes(x=brk, ymin=LA_final.mean-LA_final.se, 
                           ymax=LA_final.mean+LA_final.se), 
@@ -93,14 +93,14 @@ make_leaf_area_and_biomass_plots <- function() {
               plot.title = element_text(size=14, face="bold.italic", 
                                         hjust = 0.5))+
         ylab(expression(paste("Leaf area ("*m^2*")")))+
-        scale_fill_manual(name=expression(CO[2]),
+        scale_alpha_manual(name=expression(CO[2]),
                           limits=c("A", "E"),
                           labels=c("amb", "ele"),
-                          values=c("blue3", "red2"),
+                          values=c(0.2, 1.0),
                           guide=guide_legend(nrow=1))+
-        scale_alpha_manual(name=expression(H[2]*O),
+        scale_fill_manual(name=expression(H[2]*O),
                            limits=c("D", "ND"),
-                           values=c(0.5, 1.0),
+                          values=c("red2", "blue2"),
                            labels=c("Droughted", "Well-watered"),
                            guide=guide_legend(nrow=1))+
         xlab("")+
@@ -112,7 +112,7 @@ make_leaf_area_and_biomass_plots <- function() {
     
     p2 <- ggplot(data=subDF2, 
                  aes(brk, LA_final.mean)) +
-        geom_bar(stat = "identity", aes(fill=CO2, alpha=H2O), 
+        geom_bar(stat = "identity", aes(alpha=CO2, fill=H2O), 
                  position="dodge", col="black") +
         geom_errorbar(aes(x=brk, ymin=LA_final.mean-LA_final.se, 
                           ymax=LA_final.mean+LA_final.se), 
@@ -123,7 +123,7 @@ make_leaf_area_and_biomass_plots <- function() {
               axis.text.x=element_text(size=12),
               axis.title.x=element_text(size=14),
               axis.text.y=element_text(size=12),
-              axis.title.y=element_text(size=14),
+              axis.title.y=element_blank(),
               legend.text=element_text(size=12),
               legend.title=element_text(size=14),
               panel.grid.major=element_blank(),
@@ -133,16 +133,16 @@ make_leaf_area_and_biomass_plots <- function() {
               plot.title = element_text(size=14, face="bold.italic", 
                                         hjust = 0.5))+
         ylab(expression(paste("Leaf area ("*m^2*")")))+
-        scale_fill_manual(name=expression(CO[2]),
-                          limits=c("A", "E"),
-                          labels=c("amb", "ele"),
-                          values=c("blue3", "red2"),
-                          guide=guide_legend(nrow=1))+
-        scale_alpha_manual(name=expression(H[2]*O),
-                           limits=c("D", "ND"),
-                           values=c(0.5, 1.0),
-                           labels=c("Droughted", "Well-watered"),
+        scale_alpha_manual(name=expression(CO[2]),
+                           limits=c("A", "E"),
+                           labels=c("amb", "ele"),
+                           values=c(0.2, 1.0),
                            guide=guide_legend(nrow=1))+
+        scale_fill_manual(name=expression(H[2]*O),
+                          limits=c("D", "ND"),
+                          values=c("red2", "blue2"),
+                          labels=c("Droughted", "Well-watered"),
+                          guide=guide_legend(nrow=1))+
         xlab("")+
         scale_x_continuous(limits=c(0.5, 4.5),
                            breaks=c(1.5, 3.5),
@@ -179,7 +179,7 @@ make_leaf_area_and_biomass_plots <- function() {
         scale_alpha_manual(name=expression(H[2]*O),
                            limits=c("D", "ND"),
                            labels=c("Droughted", "Well-watered"),
-                           values=c(0.5, 1.0),
+                           values=c(0.2, 1.0),
                            guide=guide_legend(nrow=1))+
         xlab("")+
         ylim(0, 3000)+
@@ -201,7 +201,7 @@ make_leaf_area_and_biomass_plots <- function() {
               axis.text.x=element_text(size=12),
               axis.title.x=element_text(size=14),
               axis.text.y=element_text(size=12),
-              axis.title.y=element_text(size=14),
+              axis.title.y=element_blank(),
               legend.text=element_text(size=12),
               legend.title=element_text(size=14),
               panel.grid.major=element_blank(),
@@ -216,7 +216,7 @@ make_leaf_area_and_biomass_plots <- function() {
         scale_alpha_manual(name=expression(H[2]*O),
                            limits=c("D", "ND"),
                            labels=c("Droughted", "Well-watered"),
-                           values=c(0.5, 1.0),
+                           values=c(0.2, 1.0),
                            guide=guide_legend(nrow=1))+
         xlab("")+
         ylim(0, 1000)+
@@ -244,7 +244,7 @@ make_leaf_area_and_biomass_plots <- function() {
                                  ncol=2, align="vh", axis = "l",
                                  label_x=0.12, label_y=0.9)
     
-    pdf("output/leaf_area_biomass.pdf", width=12, height=10)
+    pdf("output/F2.leaf_area_biomass.pdf", width=12, height=10)
     plot_grid(combined_plots1, legend1, 
               combined_plots2, legend2,
               ncol=1, rel_heights=c(1, 0.3, 1, 0.3))

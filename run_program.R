@@ -17,7 +17,7 @@ source("prepare.R")
 make_glasshouse_condition_plots()
 
 ### leaf area of two species
-make_leaf_area_plot()
+#make_leaf_area_plot()
 
 ### read in leaf area and biomass data & make plots for the two species
 make_leaf_area_and_biomass_plots()
