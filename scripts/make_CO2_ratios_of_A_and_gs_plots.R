@@ -177,7 +177,7 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
     ### plotting
     p1 <- ggplot(plotDF1, aes(x=Day, y=CO2_Adaily, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
-        geom_line(aes(col=Trt, lty=Trt))+
+        geom_line(aes(col=Trt))+
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
@@ -196,30 +196,25 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
         scale_color_manual(name="",
                            limits=c("D", "ND"),
                            labels=c("Droughted", "Well-watered"),
-                           values=c("black", "black"),
+                           values=c("red3", "blue2"),
                            guide=guide_legend(nrow=1))+
         scale_fill_manual(name="",
                           limits=c("D", "ND"),
                           labels=c("Droughted", "Well-watered"),
-                          values=c("white", "black"),
+                          values=c("red3", "blue2"),
                           guide=guide_legend(nrow=1))+
-        scale_linetype_manual(name="",
-                              limits=c("D", "ND"),
-                              labels=c("Droughted", "Well-watered"),
-                              values=c("dotted", "solid"))+
         ggtitle("Daily")+
         ylim(0, 8)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
-                                                       fill = c("white", "black"),
-                                                       col = c("black", "black"),
-                                                       linetype = c("dotted", "solid"))))+
+                                                       fill = c("red3", "blue2"),
+                                                       col = c("red3", "blue2"))))+
         scale_x_continuous(limits=c(0, 10),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
     p2 <- ggplot(plotDF1, aes(x=Day, y=CO2_Aearly, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
-        geom_line(aes(col=Trt, lty=Trt))+
+        geom_line(aes(col=Trt))+
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
@@ -238,30 +233,25 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
         scale_color_manual(name="",
                            limits=c("D", "ND"),
                            labels=c("Droughted", "Well-watered"),
-                           values=c("black", "black"),
+                           values=c("red3", "blue2"),
                            guide=guide_legend(nrow=1))+
         scale_fill_manual(name="",
                           limits=c("D", "ND"),
                           labels=c("Droughted", "Well-watered"),
-                          values=c("white", "black"),
+                          values=c("red3", "blue2"),
                           guide=guide_legend(nrow=1))+
-        scale_linetype_manual(name="",
-                              limits=c("D", "ND"),
-                              labels=c("Droughted", "Well-watered"),
-                              values=c("dotted", "solid"))+
         ggtitle("Morning")+
         ylim(0, 8)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
-                                                       fill = c("white", "black"),
-                                                       col = c("black", "black"),
-                                                       linetype = c("dotted", "solid"))))+
+                                                       fill = c("red3", "blue2"),
+                                                       col = c("red3", "blue2"))))+
         scale_x_continuous(limits=c(0, 10),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
     p3 <- ggplot(plotDF1, aes(x=Day, y=CO2_Alate, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
-        geom_line(aes(col=Trt, lty=Trt))+
+        geom_line(aes(col=Trt))+
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
@@ -280,31 +270,26 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
         scale_color_manual(name="",
                            limits=c("D", "ND"),
                            labels=c("Droughted", "Well-watered"),
-                           values=c("black", "black"),
+                           values=c("red3", "blue2"),
                            guide=guide_legend(nrow=1))+
         scale_fill_manual(name="",
                           limits=c("D", "ND"),
                           labels=c("Droughted", "Well-watered"),
-                          values=c("white", "black"),
+                          values=c("red3", "blue2"),
                           guide=guide_legend(nrow=1))+
-        scale_linetype_manual(name="",
-                              limits=c("D", "ND"),
-                              labels=c("Droughted", "Well-watered"),
-                              values=c("dotted", "solid"))+
         ggtitle("Midday")+
         ylim(0, 8)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
-                                                       fill = c("white", "black"),
-                                                       col = c("black", "black"),
-                                                       linetype = c("dotted", "solid"))))+
+                                                       fill = c("red3", "blue2"),
+                                                       col = c("red3", "blue2"))))+
         scale_x_continuous(limits=c(0, 10),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
     
     p4 <- ggplot(plotDF1, aes(x=Day, y=CO2_GSdaily, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
-        geom_line(aes(col=Trt, lty=Trt))+
+        geom_line(aes(col=Trt))+
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
@@ -323,29 +308,24 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
         scale_color_manual(name="",
                            limits=c("D", "ND"),
                            labels=c("Droughted", "Well-watered"),
-                           values=c("black", "black"),
+                           values=c("red3", "blue2"),
                            guide=guide_legend(nrow=1))+
         scale_fill_manual(name="",
                           limits=c("D", "ND"),
                           labels=c("Droughted", "Well-watered"),
-                          values=c("white", "black"),
+                          values=c("red3", "blue2"),
                           guide=guide_legend(nrow=1))+
-        scale_linetype_manual(name="",
-                              limits=c("D", "ND"),
-                              labels=c("Droughted", "Well-watered"),
-                              values=c("dotted", "solid"))+
         ylim(0, 5)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
-                                                       fill = c("white", "black"),
-                                                       col = c("black", "black"),
-                                                       linetype = c("dotted", "solid"))))+
+                                                       fill = c("red3", "blue2"),
+                                                       col = c("red3", "blue2"))))+
         scale_x_continuous(limits=c(0, 10),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
     p5 <- ggplot(plotDF1, aes(x=Day, y=CO2_GSearly, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
-        geom_line(aes(col=Trt, lty=Trt))+
+        geom_line(aes(col=Trt))+
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
@@ -364,29 +344,24 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
         scale_color_manual(name="",
                            limits=c("D", "ND"),
                            labels=c("Droughted", "Well-watered"),
-                           values=c("black", "black"),
+                           values=c("red3", "blue2"),
                            guide=guide_legend(nrow=1))+
         scale_fill_manual(name="",
                           limits=c("D", "ND"),
                           labels=c("Droughted", "Well-watered"),
-                          values=c("white", "black"),
+                          values=c("red3", "blue2"),
                           guide=guide_legend(nrow=1))+
-        scale_linetype_manual(name="",
-                              limits=c("D", "ND"),
-                              labels=c("Droughted", "Well-watered"),
-                              values=c("dotted", "solid"))+
         ylim(0, 5)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
-                                                       fill = c("white", "black"),
-                                                       col = c("black", "black"),
-                                                       linetype = c("dotted", "solid"))))+
+                                                       fill = c("red3", "blue2"),
+                                                       col = c("red3", "blue2"))))+
         scale_x_continuous(limits=c(0, 10),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
     p6 <- ggplot(plotDF1, aes(x=Day, y=CO2_GSlate, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
-        geom_line(aes(col=Trt, lty=Trt))+
+        geom_line(aes(col=Trt))+
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
@@ -405,23 +380,18 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
         scale_color_manual(name="",
                            limits=c("D", "ND"),
                            labels=c("Droughted", "Well-watered"),
-                           values=c("black", "black"),
+                           values=c("red3", "blue2"),
                            guide=guide_legend(nrow=1))+
         scale_fill_manual(name="",
                           limits=c("D", "ND"),
                           labels=c("Droughted", "Well-watered"),
-                          values=c("white", "black"),
+                          values=c("red3", "blue2"),
                           guide=guide_legend(nrow=1))+
-        scale_linetype_manual(name="",
-                              limits=c("D", "ND"),
-                              labels=c("Droughted", "Well-watered"),
-                              values=c("dotted", "solid"))+
         ylim(0, 5)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
-                                                       fill = c("white", "black"),
-                                                       col = c("black", "black"),
-                                                       linetype = c("dotted", "solid"))))+
+                                                       fill = c("red3", "blue2"),
+                                                       col = c("red3", "blue2"))))+
         scale_x_continuous(limits=c(0, 10),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
@@ -439,7 +409,7 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
                                 label_x=0.85, label_y=0.85)
     
     
-    pdf("output/CO2_ratio_pilularis.pdf", width=14, height=8)
+    pdf("output/F10.1.CO2_ratio_pilularis.pdf", width=14, height=8)
     plot_grid(combined_plots, combined_legend, 
               ncol=1, rel_heights=c(1, 0.1))
     dev.off() 
@@ -451,7 +421,7 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
     ### plotting
     p1 <- ggplot(plotDF2, aes(x=Day, y=CO2_Adaily, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
-        geom_line(aes(col=Trt, lty=Trt))+
+        geom_line(aes(col=Trt))+
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
@@ -470,30 +440,25 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
         scale_color_manual(name="",
                            limits=c("D", "ND"),
                            labels=c("Droughted", "Well-watered"),
-                           values=c("black", "black"),
+                           values=c("red3", "blue2"),
                            guide=guide_legend(nrow=1))+
         scale_fill_manual(name="",
                           limits=c("D", "ND"),
                           labels=c("Droughted", "Well-watered"),
-                          values=c("white", "black"),
+                          values=c("red3", "blue2"),
                           guide=guide_legend(nrow=1))+
-        scale_linetype_manual(name="",
-                              limits=c("D", "ND"),
-                              labels=c("Droughted", "Well-watered"),
-                              values=c("dotted", "solid"))+
         ggtitle("Daily")+
         ylim(0, 4)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
-                                                       fill = c("white", "black"),
-                                                       col = c("black", "black"),
-                                                       linetype = c("dotted", "solid"))))+
+                                                       fill = c("red3", "blue2"),
+                                                       col = c("red3", "blue2"))))+
         scale_x_continuous(limits=c(0, 40),
                            breaks=c(0, 5, 10, 20, 30, 40))
     
     p2 <- ggplot(plotDF2, aes(x=Day, y=CO2_Aearly, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
-        geom_line(aes(col=Trt, lty=Trt))+
+        geom_line(aes(col=Trt))+
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
@@ -512,30 +477,25 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
         scale_color_manual(name="",
                            limits=c("D", "ND"),
                            labels=c("Droughted", "Well-watered"),
-                           values=c("black", "black"),
+                           values=c("red3", "blue2"),
                            guide=guide_legend(nrow=1))+
         scale_fill_manual(name="",
                           limits=c("D", "ND"),
                           labels=c("Droughted", "Well-watered"),
-                          values=c("white", "black"),
+                          values=c("red3", "blue2"),
                           guide=guide_legend(nrow=1))+
-        scale_linetype_manual(name="",
-                              limits=c("D", "ND"),
-                              labels=c("Droughted", "Well-watered"),
-                              values=c("dotted", "solid"))+
         ggtitle("Morning")+
         ylim(0, 4)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
-                                                       fill = c("white", "black"),
-                                                       col = c("black", "black"),
-                                                       linetype = c("dotted", "solid"))))+
+                                                       fill = c("red3", "blue2"),
+                                                       col = c("red3", "blue2"))))+
         scale_x_continuous(limits=c(0, 40),
                            breaks=c(0, 5, 10, 20, 30, 40))
     
     p3 <- ggplot(plotDF2, aes(x=Day, y=CO2_Alate, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
-        geom_line(aes(col=Trt, lty=Trt))+
+        geom_line(aes(col=Trt))+
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
@@ -554,31 +514,26 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
         scale_color_manual(name="",
                            limits=c("D", "ND"),
                            labels=c("Droughted", "Well-watered"),
-                           values=c("black", "black"),
+                           values=c("red3", "blue2"),
                            guide=guide_legend(nrow=1))+
         scale_fill_manual(name="",
                           limits=c("D", "ND"),
                           labels=c("Droughted", "Well-watered"),
-                          values=c("white", "black"),
+                          values=c("red3", "blue2"),
                           guide=guide_legend(nrow=1))+
-        scale_linetype_manual(name="",
-                              limits=c("D", "ND"),
-                              labels=c("Droughted", "Well-watered"),
-                              values=c("dotted", "solid"))+
         ggtitle("Midday")+
         ylim(0, 4)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
-                                                       fill = c("white", "black"),
-                                                       col = c("black", "black"),
-                                                       linetype = c("dotted", "solid"))))+
+                                                       fill = c("red3", "blue2"),
+                                                       col = c("red3", "blue2"))))+
         scale_x_continuous(limits=c(0, 40),
                            breaks=c(0, 5, 10, 20, 30, 40))
     
     
     p4 <- ggplot(plotDF2, aes(x=Day, y=CO2_GSdaily, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
-        geom_line(aes(col=Trt, lty=Trt))+
+        geom_line(aes(col=Trt))+
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
@@ -597,29 +552,24 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
         scale_color_manual(name="",
                            limits=c("D", "ND"),
                            labels=c("Droughted", "Well-watered"),
-                           values=c("black", "black"),
+                           values=c("red3", "blue2"),
                            guide=guide_legend(nrow=1))+
         scale_fill_manual(name="",
                           limits=c("D", "ND"),
                           labels=c("Droughted", "Well-watered"),
-                          values=c("white", "black"),
+                          values=c("red3", "blue2"),
                           guide=guide_legend(nrow=1))+
-        scale_linetype_manual(name="",
-                              limits=c("D", "ND"),
-                              labels=c("Droughted", "Well-watered"),
-                              values=c("dotted", "solid"))+
         ylim(0, 3)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
-                                                       fill = c("white", "black"),
-                                                       col = c("black", "black"),
-                                                       linetype = c("dotted", "solid"))))+
+                                                       fill = c("red3", "blue2"),
+                                                       col = c("red3", "blue2"))))+
         scale_x_continuous(limits=c(0, 40),
                            breaks=c(0, 5, 10, 20, 30, 40))
     
     p5 <- ggplot(plotDF2, aes(x=Day, y=CO2_GSearly, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
-        geom_line(aes(col=Trt, lty=Trt))+
+        geom_line(aes(col=Trt))+
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
@@ -638,29 +588,24 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
         scale_color_manual(name="",
                            limits=c("D", "ND"),
                            labels=c("Droughted", "Well-watered"),
-                           values=c("black", "black"),
+                           values=c("red3", "blue2"),
                            guide=guide_legend(nrow=1))+
         scale_fill_manual(name="",
                           limits=c("D", "ND"),
                           labels=c("Droughted", "Well-watered"),
-                          values=c("white", "black"),
+                          values=c("red3", "blue2"),
                           guide=guide_legend(nrow=1))+
-        scale_linetype_manual(name="",
-                              limits=c("D", "ND"),
-                              labels=c("Droughted", "Well-watered"),
-                              values=c("dotted", "solid"))+
         ylim(0, 3)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
-                                                       fill = c("white", "black"),
-                                                       col = c("black", "black"),
-                                                       linetype = c("dotted", "solid"))))+
+                                                       fill = c("red3", "blue2"),
+                                                       col = c("red3", "blue2"))))+
         scale_x_continuous(limits=c(0, 40),
                            breaks=c(0, 5, 10, 20, 30, 40))
     
     p6 <- ggplot(plotDF2, aes(x=Day, y=CO2_GSlate, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
-        geom_line(aes(col=Trt, lty=Trt))+
+        geom_line(aes(col=Trt))+
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
@@ -679,23 +624,18 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
         scale_color_manual(name="",
                            limits=c("D", "ND"),
                            labels=c("Droughted", "Well-watered"),
-                           values=c("black", "black"),
+                           values=c("red3", "blue2"),
                            guide=guide_legend(nrow=1))+
         scale_fill_manual(name="",
                           limits=c("D", "ND"),
                           labels=c("Droughted", "Well-watered"),
-                          values=c("white", "black"),
+                          values=c("red3", "blue2"),
                           guide=guide_legend(nrow=1))+
-        scale_linetype_manual(name="",
-                              limits=c("D", "ND"),
-                              labels=c("Droughted", "Well-watered"),
-                              values=c("dotted", "solid"))+
         ylim(0, 3)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
-                                                       fill = c("white", "black"),
-                                                       col = c("black", "black"),
-                                                       linetype = c("dotted", "solid"))))+
+                                                       fill = c("red3", "blue2"),
+                                                       col = c("red3", "blue2"))))+
         scale_x_continuous(limits=c(0, 40),
                            breaks=c(0, 5, 10, 20, 30, 40))
     
@@ -713,7 +653,7 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
                                 label_x=0.85, label_y=0.85)
     
     
-    pdf("output/CO2_ratio_populnea.pdf", width=14, height=8)
+    pdf("output/F10.2.CO2_ratio_populnea.pdf", width=14, height=8)
     plot_grid(combined_plots, combined_legend, 
               ncol=1, rel_heights=c(1, 0.1))
     dev.off() 

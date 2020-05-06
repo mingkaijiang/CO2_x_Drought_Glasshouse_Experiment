@@ -38,7 +38,7 @@ make_normalized_Asat_plots <- function() {
     
     #### plotting
     p1 <- ggplot(pilDF, aes(x=Day, y=AdailyNORM, group=Trt)) +
-        geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
+        geom_point(aes(col=Trt, fill=Trt, pch=Trt), size=2)+
         geom_line(aes(col=Trt, lty=Trt))+
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
@@ -61,7 +61,7 @@ make_normalized_Asat_plots <- function() {
                                     expression(paste(aC[a]*" - W")),
                                     expression(paste(eC[a]*" - D")),
                                     expression(paste(eC[a]*" - W"))),
-                           values=c("blue3", "blue3", "red2", "red2"),
+                           values=c("red2", "blue3", "red2", "blue3"),
                            guide=guide_legend(nrow=1))+
         scale_fill_manual(name=expression(paste("Normalized " * A[sat])),
                           limits=c("PILAD", "PILAND", "PILED", "PILEND"),
@@ -69,7 +69,7 @@ make_normalized_Asat_plots <- function() {
                                    expression(paste(aC[a]*" - W")),
                                    expression(paste(eC[a]*" - D")),
                                    expression(paste(eC[a]*" - W"))),
-                          values=c("white", "blue3", "white", "red2"),
+                          values=c("white", "white", "red2", "blue3"),
                           guide=guide_legend(nrow=1))+
         scale_linetype_manual(name=expression(paste("Normalized " * A[sat])),
                               limits=c("PILAD", "PILAND", "PILED", "PILEND"),
@@ -77,20 +77,27 @@ make_normalized_Asat_plots <- function() {
                                        expression(paste(aC[a]*" - W")),
                                        expression(paste(eC[a]*" - D")),
                                        expression(paste(eC[a]*" - W"))),
-                              values=c("dotted", "solid", "dotted", "solid"))+
+                              values=c("dotted", "dotted", "solid", "solid"))+
+        scale_shape_manual(name=expression(paste("Normalized " * A[sat])),
+                           limits=c("PILAD", "PILAND", "PILED", "PILEND"),
+                           labels=c(expression(paste(aC[a]*" - D")), 
+                                    expression(paste(aC[a]*" - W")),
+                                    expression(paste(eC[a]*" - D")),
+                                    expression(paste(eC[a]*" - W"))),
+                           values=c(21,21,22,22))+
         ggtitle("E. Pilularis")+
         ylim(0, 1)+
         xlab("Day")+
-        guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 21, 21),
-                                                       fill = c("white", "blue3", "white", "red2"),
-                                                       col = c("blue3", "blue3", "red2", "red2"),
-                                                       linetype = c("dotted", "solid", "dotted", "solid"))))+
+        guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 22,22),
+                                                       fill = c("white", "white", "red2", "blue3"),
+                                                       col = c("red2", "blue3", "red2", "blue3"),
+                                                       linetype = c("dotted", "dotted", "solid", "solid"))))+
         scale_x_continuous(limits=c(0, 10),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
     
     p3 <- ggplot(pilDF, aes(x=Day, y=AearlyNORM, group=Trt)) +
-        geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
+        geom_point(aes(col=Trt, fill=Trt, pch=Trt), size=2)+
         geom_line(aes(col=Trt, lty=Trt))+
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
@@ -113,7 +120,7 @@ make_normalized_Asat_plots <- function() {
                                     expression(paste(aC[a]*" - W")),
                                     expression(paste(eC[a]*" - D")),
                                     expression(paste(eC[a]*" - W"))),
-                           values=c("blue3", "blue3", "red2", "red2"),
+                           values=c("red2", "blue3", "red2", "blue3"),
                            guide=guide_legend(nrow=1))+
         scale_fill_manual(name=expression(paste("Normalized " * A[sat])),
                           limits=c("PILAD", "PILAND", "PILED", "PILEND"),
@@ -121,7 +128,7 @@ make_normalized_Asat_plots <- function() {
                                    expression(paste(aC[a]*" - W")),
                                    expression(paste(eC[a]*" - D")),
                                    expression(paste(eC[a]*" - W"))),
-                          values=c("white", "blue3", "white", "red2"),
+                          values=c("white", "white", "red2", "blue3"),
                           guide=guide_legend(nrow=1))+
         scale_linetype_manual(name=expression(paste("Normalized " * A[sat])),
                               limits=c("PILAD", "PILAND", "PILED", "PILEND"),
@@ -129,19 +136,26 @@ make_normalized_Asat_plots <- function() {
                                        expression(paste(aC[a]*" - W")),
                                        expression(paste(eC[a]*" - D")),
                                        expression(paste(eC[a]*" - W"))),
-                              values=c("dotted", "solid", "dotted", "solid"))+
+                              values=c("dotted", "dotted", "solid", "solid"))+
+        scale_shape_manual(name=expression(paste("Normalized " * A[sat])),
+                           limits=c("PILAD", "PILAND", "PILED", "PILEND"),
+                           labels=c(expression(paste(aC[a]*" - D")), 
+                                    expression(paste(aC[a]*" - W")),
+                                    expression(paste(eC[a]*" - D")),
+                                    expression(paste(eC[a]*" - W"))),
+                           values=c(21,21,22,22))+
         ylim(0, 1)+
         xlab("Day")+
-        guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 21, 21),
-                                                       fill = c("white", "blue3", "white", "red2"),
-                                                       col = c("blue3", "blue3", "red2", "red2"),
-                                                       linetype = c("dotted", "solid", "dotted", "solid"))))+
+        guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 22,22),
+                                                       fill = c("white", "white", "red2", "blue3"),
+                                                       col = c("red2", "blue3", "red2", "blue3"),
+                                                       linetype = c("dotted", "dotted", "solid", "solid"))))+
         scale_x_continuous(limits=c(0, 10),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
     
     p5 <- ggplot(pilDF, aes(x=Day, y=AlateNORM, group=Trt)) +
-        geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
+        geom_point(aes(col=Trt, fill=Trt, pch=Trt), size=2)+
         geom_line(aes(col=Trt, lty=Trt))+
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
@@ -164,7 +178,7 @@ make_normalized_Asat_plots <- function() {
                                     expression(paste(aC[a]*" - W")),
                                     expression(paste(eC[a]*" - D")),
                                     expression(paste(eC[a]*" - W"))),
-                           values=c("blue3", "blue3", "red2", "red2"),
+                           values=c("red2", "blue3", "red2", "blue3"),
                            guide=guide_legend(nrow=1))+
         scale_fill_manual(name=expression(paste("Normalized " * A[sat])),
                           limits=c("PILAD", "PILAND", "PILED", "PILEND"),
@@ -172,7 +186,7 @@ make_normalized_Asat_plots <- function() {
                                    expression(paste(aC[a]*" - W")),
                                    expression(paste(eC[a]*" - D")),
                                    expression(paste(eC[a]*" - W"))),
-                          values=c("white", "blue3", "white", "red2"),
+                          values=c("white", "white", "red2", "blue3"),
                           guide=guide_legend(nrow=1))+
         scale_linetype_manual(name=expression(paste("Normalized " * A[sat])),
                               limits=c("PILAD", "PILAND", "PILED", "PILEND"),
@@ -180,19 +194,26 @@ make_normalized_Asat_plots <- function() {
                                        expression(paste(aC[a]*" - W")),
                                        expression(paste(eC[a]*" - D")),
                                        expression(paste(eC[a]*" - W"))),
-                              values=c("dotted", "solid", "dotted", "solid"))+
+                              values=c("dotted", "dotted", "solid", "solid"))+
+        scale_shape_manual(name=expression(paste("Normalized " * A[sat])),
+                           limits=c("PILAD", "PILAND", "PILED", "PILEND"),
+                           labels=c(expression(paste(aC[a]*" - D")), 
+                                    expression(paste(aC[a]*" - W")),
+                                    expression(paste(eC[a]*" - D")),
+                                    expression(paste(eC[a]*" - W"))),
+                           values=c(21,21,22,22))+
         ylim(0, 1)+
         xlab("Day")+
-        guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 21, 21),
-                                                       fill = c("white", "blue3", "white", "red2"),
-                                                       col = c("blue3", "blue3", "red2", "red2"),
-                                                       linetype = c("dotted", "solid", "dotted", "solid"))))+
+        guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 22,22),
+                                                       fill = c("white", "white", "red2", "blue3"),
+                                                       col = c("red2", "blue3", "red2", "blue3"),
+                                                       linetype = c("dotted", "dotted", "solid", "solid"))))+
         scale_x_continuous(limits=c(0, 10),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
     
     p2 <- ggplot(popDF, aes(x=Day, y=AdailyNORM, group=Trt)) +
-        geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
+        geom_point(aes(col=Trt, fill=Trt, pch=Trt), size=2)+
         geom_line(aes(col=Trt, lty=Trt))+
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
@@ -215,7 +236,7 @@ make_normalized_Asat_plots <- function() {
                                     expression(paste(aC[a]*" - W")),
                                     expression(paste(eC[a]*" - D")),
                                     expression(paste(eC[a]*" - W"))),
-                           values=c("blue3", "blue3", "red2", "red2"),
+                           values=c("red2", "blue3", "red2", "blue3"),
                            guide=guide_legend(nrow=1))+
         scale_fill_manual(name=expression(paste("Normalized " * A[sat])),
                           limits=c("POPAD", "POPAND", "POPED", "POPEND"),
@@ -223,7 +244,7 @@ make_normalized_Asat_plots <- function() {
                                    expression(paste(aC[a]*" - W")),
                                    expression(paste(eC[a]*" - D")),
                                    expression(paste(eC[a]*" - W"))),
-                          values=c("white", "blue3", "white", "red2"),
+                          values=c("white", "white", "red2", "blue3"),
                           guide=guide_legend(nrow=1))+
         scale_linetype_manual(name=expression(paste("Normalized " * A[sat])),
                               limits=c("POPAD", "POPAND", "POPED", "POPEND"),
@@ -231,19 +252,26 @@ make_normalized_Asat_plots <- function() {
                                        expression(paste(aC[a]*" - W")),
                                        expression(paste(eC[a]*" - D")),
                                        expression(paste(eC[a]*" - W"))),
-                              values=c("dotted", "solid", "dotted", "solid"))+
+                              values=c("dotted", "dotted", "solid", "solid"))+
+        scale_shape_manual(name=expression(paste("Normalized " * A[sat])),
+                           limits=c("POPAD", "POPAND", "POPED", "POPEND"),
+                           labels=c(expression(paste(aC[a]*" - D")), 
+                                    expression(paste(aC[a]*" - W")),
+                                    expression(paste(eC[a]*" - D")),
+                                    expression(paste(eC[a]*" - W"))),
+                           values=c(21,21,22,22))+
         ggtitle("E. Populnea")+
         ylim(0, 1)+
         xlab("Day")+
-        guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 21, 21),
-                                                       fill = c("white", "blue3", "white", "red2"),
-                                                       col = c("blue3", "blue3", "red2", "red2"),
-                                                       linetype = c("dotted", "solid", "dotted", "solid"))))+
+        guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 22,22),
+                                                       fill = c("white", "white", "red2", "blue3"),
+                                                       col = c("red2", "blue3", "red2", "blue3"),
+                                                       linetype = c("dotted", "dotted", "solid", "solid"))))+
         scale_x_continuous(limits=c(0, 40),
                            breaks=c(0, 5, 10, 20, 30, 40))
     
     p4 <- ggplot(popDF, aes(x=Day, y=AearlyNORM, group=Trt)) +
-        geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
+        geom_point(aes(col=Trt, fill=Trt, pch=Trt), size=2)+
         geom_line(aes(col=Trt, lty=Trt))+
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
@@ -266,7 +294,7 @@ make_normalized_Asat_plots <- function() {
                                     expression(paste(aC[a]*" - W")),
                                     expression(paste(eC[a]*" - D")),
                                     expression(paste(eC[a]*" - W"))),
-                           values=c("blue3", "blue3", "red2", "red2"),
+                           values=c("red2", "blue3", "red2", "blue3"),
                            guide=guide_legend(nrow=1))+
         scale_fill_manual(name=expression(paste("Normalized " * A[sat])),
                           limits=c("POPAD", "POPAND", "POPED", "POPEND"),
@@ -274,7 +302,7 @@ make_normalized_Asat_plots <- function() {
                                    expression(paste(aC[a]*" - W")),
                                    expression(paste(eC[a]*" - D")),
                                    expression(paste(eC[a]*" - W"))),
-                          values=c("white", "blue3", "white", "red2"),
+                          values=c("white", "white", "red2", "blue3"),
                           guide=guide_legend(nrow=1))+
         scale_linetype_manual(name=expression(paste("Normalized " * A[sat])),
                               limits=c("POPAD", "POPAND", "POPED", "POPEND"),
@@ -282,18 +310,25 @@ make_normalized_Asat_plots <- function() {
                                        expression(paste(aC[a]*" - W")),
                                        expression(paste(eC[a]*" - D")),
                                        expression(paste(eC[a]*" - W"))),
-                              values=c("dotted", "solid", "dotted", "solid"))+
+                              values=c("dotted", "dotted", "solid", "solid"))+
+        scale_shape_manual(name=expression(paste("Normalized " * A[sat])),
+                           limits=c("POPAD", "POPAND", "POPED", "POPEND"),
+                           labels=c(expression(paste(aC[a]*" - D")), 
+                                    expression(paste(aC[a]*" - W")),
+                                    expression(paste(eC[a]*" - D")),
+                                    expression(paste(eC[a]*" - W"))),
+                           values=c(21,21,22,22))+
         ylim(0, 1)+
         xlab("Day")+
-        guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 21, 21),
-                                                       fill = c("white", "blue3", "white", "red2"),
-                                                       col = c("blue3", "blue3", "red2", "red2"),
-                                                       linetype = c("dotted", "solid", "dotted", "solid"))))+
+        guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 22,22),
+                                                       fill = c("white", "white", "red2", "blue3"),
+                                                       col = c("red2", "blue3", "red2", "blue3"),
+                                                       linetype = c("dotted", "dotted", "solid", "solid"))))+
         scale_x_continuous(limits=c(0, 40),
                            breaks=c(0, 5, 10, 20, 30, 40))
     
     p6 <- ggplot(popDF, aes(x=Day, y=AlateNORM, group=Trt)) +
-        geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
+        geom_point(aes(col=Trt, fill=Trt, pch=Trt), size=2)+
         geom_line(aes(col=Trt, lty=Trt))+
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
@@ -316,7 +351,7 @@ make_normalized_Asat_plots <- function() {
                                     expression(paste(aC[a]*" - W")),
                                     expression(paste(eC[a]*" - D")),
                                     expression(paste(eC[a]*" - W"))),
-                           values=c("blue3", "blue3", "red2", "red2"),
+                           values=c("red2", "blue3", "red2", "blue3"),
                            guide=guide_legend(nrow=1))+
         scale_fill_manual(name=expression(paste("Normalized " * A[sat])),
                           limits=c("POPAD", "POPAND", "POPED", "POPEND"),
@@ -324,7 +359,7 @@ make_normalized_Asat_plots <- function() {
                                    expression(paste(aC[a]*" - W")),
                                    expression(paste(eC[a]*" - D")),
                                    expression(paste(eC[a]*" - W"))),
-                          values=c("white", "blue3", "white", "red2"),
+                          values=c("white", "white", "red2", "blue3"),
                           guide=guide_legend(nrow=1))+
         scale_linetype_manual(name=expression(paste("Normalized " * A[sat])),
                               limits=c("POPAD", "POPAND", "POPED", "POPEND"),
@@ -332,13 +367,20 @@ make_normalized_Asat_plots <- function() {
                                        expression(paste(aC[a]*" - W")),
                                        expression(paste(eC[a]*" - D")),
                                        expression(paste(eC[a]*" - W"))),
-                              values=c("dotted", "solid", "dotted", "solid"))+
+                              values=c("dotted", "dotted", "solid", "solid"))+
+        scale_shape_manual(name=expression(paste("Normalized " * A[sat])),
+                           limits=c("POPAD", "POPAND", "POPED", "POPEND"),
+                           labels=c(expression(paste(aC[a]*" - D")), 
+                                    expression(paste(aC[a]*" - W")),
+                                    expression(paste(eC[a]*" - D")),
+                                    expression(paste(eC[a]*" - W"))),
+                           values=c(21,21,22,22))+
         ylim(0, 1)+
         xlab("Day")+
-        guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 21, 21),
-                                                       fill = c("white", "blue3", "white", "red2"),
-                                                       col = c("blue3", "blue3", "red2", "red2"),
-                                                       linetype = c("dotted", "solid", "dotted", "solid"))))+
+        guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 22,22),
+                                                       fill = c("white", "white", "red2", "blue3"),
+                                                       col = c("red2", "blue3", "red2", "blue3"),
+                                                       linetype = c("dotted", "dotted", "solid", "solid"))))+
         scale_x_continuous(limits=c(0, 40),
                            breaks=c(0, 5, 10, 20, 30, 40))
     
@@ -356,7 +398,7 @@ make_normalized_Asat_plots <- function() {
                                 label_x=0.85, label_y=0.85)
     
     
-    pdf("output/normalized_Asat.pdf", width=8, height=8)
+    pdf("output/F9.normalized_Asat.pdf", width=8, height=8)
     plot_grid(combined_plots, combined_legend, 
               ncol=1, rel_heights=c(1, 0.1))
     dev.off() 
