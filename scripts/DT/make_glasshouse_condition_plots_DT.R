@@ -1,4 +1,4 @@
-make_glasshouse_condition_plots <- function() {
+make_glasshouse_condition_plots_DT <- function() {
     ### four documents
     
     myDF1 <- read.csv("data/glasshouse2/met/AMBIENT_GH_TEMP_RH_PILULARIS_DRYDOWN_DAY.csv")

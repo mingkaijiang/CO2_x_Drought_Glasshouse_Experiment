@@ -1,4 +1,4 @@
-make_CO2_ratios_of_A_and_gs_plots <- function() {
+make_CO2_ratios_of_A_and_gs_plots_DT <- function() {
     
     ### read input
     pilDF<-read.csv("data/glasshouse2/Pilularis_Phys.csv",sep=",", header=TRUE)

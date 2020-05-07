@@ -1,4 +1,4 @@
-make_whole_plant_hydraulic_conductance_plot <- function() {
+make_whole_plant_hydraulic_conductance_plot_DT <- function() {
     #Eucalyptus pilularis
     pilDF<-read.csv("data/glasshouse2/Drydown_gasexchange_pilularis.csv",sep=",", header=TRUE)
     #Eucalyptus populnea

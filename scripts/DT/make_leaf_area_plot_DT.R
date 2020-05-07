@@ -1,4 +1,4 @@
-make_leaf_area_plot <- function() {
+make_leaf_area_plot_DT <- function() {
     
     ### read leaf area
     PIL<-read.csv("data/glasshouse2/PIL_LA.csv",sep=",", header=TRUE)

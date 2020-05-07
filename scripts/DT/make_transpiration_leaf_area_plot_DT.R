@@ -1,4 +1,4 @@
-make_transpiration_leaf_area_plot <- function() {
+make_transpiration_leaf_area_plot_DT <- function() {
    PilTLA<-read.csv("data/glasshouse2/PILtransp_leafarea.csv",sep=",", header=TRUE)
    PopTLA<-read.csv("data/glasshouse2/POPtransp_leafarea.csv",sep=",", header=TRUE)
    

@@ -1,4 +1,4 @@
-make_pilularis_physiological_plots <- function() {
+make_pilularis_physiological_plots_DT <- function() {
         
     #FIGURES (Eucalyptus pilularis)
     PILPhysGraph<-read.csv("data/glasshouse2/Pilularis_Phys.csv",sep=",", header=TRUE)

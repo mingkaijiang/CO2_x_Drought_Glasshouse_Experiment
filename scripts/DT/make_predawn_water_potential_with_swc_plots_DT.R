@@ -1,4 +1,4 @@
-make_predawn_water_potential_with_swc_plots <- function() {
+make_predawn_water_potential_with_swc_plots_DT <- function() {
    ### read in data
    #PILPhys<-read.csv("data/glasshouse2/Drydown_gasexchange_pilularis.csv",sep=",", header=TRUE)
    #POPPhys<-read.csv("data/glasshouse2/Drydown_gasexchange_populnea.csv",sep=",", header=TRUE)

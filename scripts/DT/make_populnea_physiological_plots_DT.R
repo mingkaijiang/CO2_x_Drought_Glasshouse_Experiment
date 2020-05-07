@@ -1,4 +1,4 @@
-make_populnea_physiological_plots <- function() {
+make_populnea_physiological_plots_DT <- function() {
     #FIGURES (Eucalyptus populnea)
     POPPhysGraph<-read.csv("data/glasshouse2/Populnea_Phys.csv",sep=",", header=TRUE)
     

@@ -1,4 +1,4 @@
-make_swc_and_transpiration_plots <- function() {
+make_swc_and_transpiration_plots_DT <- function() {
     
     ### E. pilularis
     pilDF<-read.csv("data/glasshouse2/Pilularis_Phys.csv",sep=",", header=TRUE)

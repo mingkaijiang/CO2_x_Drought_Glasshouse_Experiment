@@ -37,4 +37,7 @@ pacman::p_load(dplyr,
 
 #### Sourcing all R files in the modules subdirectory
 sourcefiles <- dir("scripts", pattern="[.]R$", recursive = TRUE, full.names = TRUE)
-for(z in sourcefiles)source(z)
+for(z1 in sourcefiles)source(z1)
+
+sourcefilesDT <- dir("scripts/DT", pattern="[.]R$", recursive = TRUE, full.names = TRUE)
+for(z2 in sourcefilesDT)source(z2)

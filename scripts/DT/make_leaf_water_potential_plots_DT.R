@@ -1,4 +1,4 @@
-make_leaf_water_potential_plots <- function() {
+make_leaf_water_potential_plots_DT <- function() {
     
     ### E. pilularis
     pilDF<-read.csv("data/glasshouse2/Pilularis_Phys.csv",sep=",", header=TRUE)

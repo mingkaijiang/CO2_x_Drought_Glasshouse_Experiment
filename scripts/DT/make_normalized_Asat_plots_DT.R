@@ -1,4 +1,4 @@
-make_normalized_Asat_plots <- function() {
+make_normalized_Asat_plots_DT <- function() {
     
     ### read input
     pilDF<-read.csv("data/glasshouse2/Pilularis_Phys.csv",sep=",", header=TRUE)

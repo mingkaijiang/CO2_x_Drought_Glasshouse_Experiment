@@ -1,4 +1,4 @@
-make_leaf_area_and_biomass_plots <- function() {
+make_leaf_area_and_biomass_plots_DT <- function() {
     
     ### processing
     myDF <- read.csv("data/glasshouse2/EUC_Leaf_Area_data.csv")
