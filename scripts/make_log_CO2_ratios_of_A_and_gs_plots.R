@@ -1,4 +1,4 @@
-make_CO2_ratios_of_A_and_gs_plots <- function() {
+make_log_CO2_ratios_of_A_and_gs_plots <- function() {
     
     ### read input
     pilDF<-read.csv("data/glasshouse2/Pilularis_Phys.csv",sep=",", header=TRUE)
@@ -14,16 +14,10 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
     ### plot DF
     plotDF1 <- data.frame(rep(w, length(d1)), 
                           rep(d1, each=2), NA, NA, NA, NA, NA, NA,
-                          NA, NA, NA, NA, NA, NA,
-                          NA, NA, NA, NA, NA, NA,
-                          NA, NA, NA, NA, NA, NA,
                           NA, NA, NA, NA, NA, NA)
     
     plotDF2 <- data.frame(rep(w, length(d2)), 
                           rep(d2, each=2), NA, NA, NA, NA, NA, NA,
-                          NA, NA, NA, NA, NA, NA,
-                          NA, NA, NA, NA, NA, NA,
-                          NA, NA, NA, NA, NA, NA,
                           NA, NA, NA, NA, NA, NA)
     colnames(plotDF1) <- colnames(plotDF2) <- c("Trt", "Day",
                                                 "amb_Adaily", "ele_Adaily",
@@ -31,16 +25,7 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
                                                 "amb_Alate", "ele_Alate",
                                                 "amb_GSdaily", "ele_GSdaily",
                                                 "amb_GSearly", "ele_GSearly",
-                                                "amb_GSlate", "ele_GSlate",
-                                                "amb_AdailySD", "ele_AdailySD",
-                                                "amb_AearlySD", "ele_AearlySD",
-                                                "amb_AlateSD", "ele_AlateSD",
-                                                "amb_GSdailySD", "ele_GSdailySD",
-                                                "amb_GSearlySD", "ele_GSearlySD",
-                                                "amb_GSlateSD", "ele_GSlateSD",
-                                                "amb_AdailyN", "ele_AdailyN",
-                                                "amb_AearlyN", "ele_AearlyN",
-                                                "amb_AlateN", "ele_AlateN")
+                                                "amb_GSlate", "ele_GSlate")
     
     for (i in d1) {
         # A
@@ -76,77 +61,6 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
         plotDF1$ele_GSdaily[plotDF1$Trt=="ND"&plotDF1$Day==i] <- pilDF$gsDaily[pilDF$Trt=="PILEND"&pilDF$Day==i]
         plotDF1$ele_GSearly[plotDF1$Trt=="ND"&plotDF1$Day==i] <- pilDF$gsearly[pilDF$Trt=="PILEND"&pilDF$Day==i]
         plotDF1$ele_GSlate[plotDF1$Trt=="ND"&plotDF1$Day==i] <- pilDF$gslate[pilDF$Trt=="PILEND"&pilDF$Day==i]
-        
-        # A SD
-        plotDF1$amb_AdailySD[plotDF1$Trt=="D"&plotDF1$Day==i] <- pilDF$AdailySD[pilDF$Trt=="PILAD"&pilDF$Day==i]
-        plotDF1$amb_AearlySD[plotDF1$Trt=="D"&plotDF1$Day==i] <- pilDF$AearlySD[pilDF$Trt=="PILAD"&pilDF$Day==i]
-        plotDF1$amb_AlateSD[plotDF1$Trt=="D"&plotDF1$Day==i] <- pilDF$AlateSD[pilDF$Trt=="PILAD"&pilDF$Day==i]
-        
-        plotDF1$ele_AdailySD[plotDF1$Trt=="D"&plotDF1$Day==i] <- pilDF$AdailySD[pilDF$Trt=="PILED"&pilDF$Day==i]
-        plotDF1$ele_AearlySD[plotDF1$Trt=="D"&plotDF1$Day==i] <- pilDF$AearlySD[pilDF$Trt=="PILED"&pilDF$Day==i]
-        plotDF1$ele_AlateSD[plotDF1$Trt=="D"&plotDF1$Day==i] <- pilDF$AlateSD[pilDF$Trt=="PILED"&pilDF$Day==i]
-        
-        plotDF1$amb_AdailySD[plotDF1$Trt=="ND"&plotDF1$Day==i] <- pilDF$AdailySD[pilDF$Trt=="PILAND"&pilDF$Day==i]
-        plotDF1$amb_AearlySD[plotDF1$Trt=="ND"&plotDF1$Day==i] <- pilDF$AearlySD[pilDF$Trt=="PILAND"&pilDF$Day==i]
-        plotDF1$amb_AlateSD[plotDF1$Trt=="ND"&plotDF1$Day==i] <- pilDF$AlateSD[pilDF$Trt=="PILAND"&pilDF$Day==i]
-        
-        plotDF1$ele_AdailySD[plotDF1$Trt=="ND"&plotDF1$Day==i] <- pilDF$AdailySD[pilDF$Trt=="PILEND"&pilDF$Day==i]
-        plotDF1$ele_AearlySD[plotDF1$Trt=="ND"&plotDF1$Day==i] <- pilDF$AearlySD[pilDF$Trt=="PILEND"&pilDF$Day==i]
-        plotDF1$ele_AlateSD[plotDF1$Trt=="ND"&plotDF1$Day==i] <- pilDF$AlateSD[pilDF$Trt=="PILEND"&pilDF$Day==i]
-        
-        
-        # A n
-        plotDF1$amb_AdailyN[plotDF1$Trt=="D"&plotDF1$Day==i] <- pilDF$n.4[pilDF$Trt=="PILAD"&pilDF$Day==i]
-        plotDF1$amb_AearlyN[plotDF1$Trt=="D"&plotDF1$Day==i] <- pilDF$n.5[pilDF$Trt=="PILAD"&pilDF$Day==i]
-        plotDF1$amb_AlateN[plotDF1$Trt=="D"&plotDF1$Day==i] <- pilDF$n.6[pilDF$Trt=="PILAD"&pilDF$Day==i]
-        
-        plotDF1$ele_AdailyN[plotDF1$Trt=="D"&plotDF1$Day==i] <- pilDF$n.4[pilDF$Trt=="PILED"&pilDF$Day==i]
-        plotDF1$ele_AearlyN[plotDF1$Trt=="D"&plotDF1$Day==i] <- pilDF$n.5[pilDF$Trt=="PILED"&pilDF$Day==i]
-        plotDF1$ele_AlateN[plotDF1$Trt=="D"&plotDF1$Day==i] <- pilDF$n.6[pilDF$Trt=="PILED"&pilDF$Day==i]
-        
-        plotDF1$amb_AdailyN[plotDF1$Trt=="ND"&plotDF1$Day==i] <- pilDF$n.4[pilDF$Trt=="PILAND"&pilDF$Day==i]
-        plotDF1$amb_AearlyN[plotDF1$Trt=="ND"&plotDF1$Day==i] <- pilDF$n.5[pilDF$Trt=="PILAND"&pilDF$Day==i]
-        plotDF1$amb_AlateN[plotDF1$Trt=="ND"&plotDF1$Day==i] <- pilDF$n.6[pilDF$Trt=="PILAND"&pilDF$Day==i]
-        
-        plotDF1$ele_AdailyN[plotDF1$Trt=="ND"&plotDF1$Day==i] <- pilDF$n.4[pilDF$Trt=="PILEND"&pilDF$Day==i]
-        plotDF1$ele_AearlyN[plotDF1$Trt=="ND"&plotDF1$Day==i] <- pilDF$n.5[pilDF$Trt=="PILEND"&pilDF$Day==i]
-        plotDF1$ele_AlateN[plotDF1$Trt=="ND"&plotDF1$Day==i] <- pilDF$n.6[pilDF$Trt=="PILEND"&pilDF$Day==i]
-        
-        # gs SD
-        plotDF1$amb_GSdailySD[plotDF1$Trt=="D"&plotDF1$Day==i] <- pilDF$gsDailySD[pilDF$Trt=="PILAD"&pilDF$Day==i]
-        plotDF1$amb_GSearlySD[plotDF1$Trt=="D"&plotDF1$Day==i] <- pilDF$gsearlySD[pilDF$Trt=="PILAD"&pilDF$Day==i]
-        plotDF1$amb_GSlateSD[plotDF1$Trt=="D"&plotDF1$Day==i] <- pilDF$gslateSD[pilDF$Trt=="PILAD"&pilDF$Day==i]
-        
-        plotDF1$ele_GSdailySD[plotDF1$Trt=="D"&plotDF1$Day==i] <- pilDF$gsDailySD[pilDF$Trt=="PILED"&pilDF$Day==i]
-        plotDF1$ele_GSearlySD[plotDF1$Trt=="D"&plotDF1$Day==i] <- pilDF$gsearlySD[pilDF$Trt=="PILED"&pilDF$Day==i]
-        plotDF1$ele_GSlateSD[plotDF1$Trt=="D"&plotDF1$Day==i] <- pilDF$gslateSD[pilDF$Trt=="PILED"&pilDF$Day==i]
-        
-        plotDF1$amb_GSdailySD[plotDF1$Trt=="ND"&plotDF1$Day==i] <- pilDF$gsDailySD[pilDF$Trt=="PILAND"&pilDF$Day==i]
-        plotDF1$amb_GSearlySD[plotDF1$Trt=="ND"&plotDF1$Day==i] <- pilDF$gsearlySD[pilDF$Trt=="PILAND"&pilDF$Day==i]
-        plotDF1$amb_GSlateSD[plotDF1$Trt=="ND"&plotDF1$Day==i] <- pilDF$gslateSD[pilDF$Trt=="PILAND"&pilDF$Day==i]
-        
-        plotDF1$ele_GSdailySD[plotDF1$Trt=="ND"&plotDF1$Day==i] <- pilDF$gsDailySD[pilDF$Trt=="PILEND"&pilDF$Day==i]
-        plotDF1$ele_GSearlySD[plotDF1$Trt=="ND"&plotDF1$Day==i] <- pilDF$gsearlySD[pilDF$Trt=="PILEND"&pilDF$Day==i]
-        plotDF1$ele_GSlateSD[plotDF1$Trt=="ND"&plotDF1$Day==i] <- pilDF$gslateSD[pilDF$Trt=="PILEND"&pilDF$Day==i]
-        
-        
-        # gs n
-        plotDF1$amb_GSdailyN[plotDF1$Trt=="D"&plotDF1$Day==i] <- pilDF$n.7[pilDF$Trt=="PILAD"&pilDF$Day==i]
-        plotDF1$amb_GSearlyN[plotDF1$Trt=="D"&plotDF1$Day==i] <- pilDF$n.8[pilDF$Trt=="PILAD"&pilDF$Day==i]
-        plotDF1$amb_GSlateN[plotDF1$Trt=="D"&plotDF1$Day==i] <- pilDF$n.9[pilDF$Trt=="PILAD"&pilDF$Day==i]
-        
-        plotDF1$ele_GSdailyN[plotDF1$Trt=="D"&plotDF1$Day==i] <- pilDF$n.7[pilDF$Trt=="PILED"&pilDF$Day==i]
-        plotDF1$ele_GSearlyN[plotDF1$Trt=="D"&plotDF1$Day==i] <- pilDF$n.8[pilDF$Trt=="PILED"&pilDF$Day==i]
-        plotDF1$ele_GSlateN[plotDF1$Trt=="D"&plotDF1$Day==i] <- pilDF$n.9[pilDF$Trt=="PILED"&pilDF$Day==i]
-        
-        plotDF1$amb_GSdailyN[plotDF1$Trt=="ND"&plotDF1$Day==i] <- pilDF$n.7[pilDF$Trt=="PILAND"&pilDF$Day==i]
-        plotDF1$amb_GSearlyN[plotDF1$Trt=="ND"&plotDF1$Day==i] <- pilDF$n.8[pilDF$Trt=="PILAND"&pilDF$Day==i]
-        plotDF1$amb_GSlateN[plotDF1$Trt=="ND"&plotDF1$Day==i] <- pilDF$n.9[pilDF$Trt=="PILAND"&pilDF$Day==i]
-        
-        plotDF1$ele_GSdailyN[plotDF1$Trt=="ND"&plotDF1$Day==i] <- pilDF$n.7[pilDF$Trt=="PILEND"&pilDF$Day==i]
-        plotDF1$ele_GSearlyN[plotDF1$Trt=="ND"&plotDF1$Day==i] <- pilDF$n.8[pilDF$Trt=="PILEND"&pilDF$Day==i]
-        plotDF1$ele_GSlateN[plotDF1$Trt=="ND"&plotDF1$Day==i] <- pilDF$n.9[pilDF$Trt=="PILEND"&pilDF$Day==i]
-        
     }
     
     
@@ -232,173 +146,6 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
         plotDF2$ele_GSlate[plotDF2$Trt=="ND"&plotDF2$Day==i] <- ifelse(length(popDF$gslate[popDF$Trt=="POPEND"&popDF$Day==i])==1,
                                                                        as.numeric(popDF$gslate[popDF$Trt=="POPEND"&popDF$Day==i]),
                                                                        NA)
-        
-        # A SD
-        plotDF2$amb_AdailySD[plotDF2$Trt=="D"&plotDF2$Day==i] <- ifelse(length(popDF$AdailySD[popDF$Trt=="POPAD"&popDF$Day==i])==1,
-                                                                               as.numeric(popDF$AdailySD[popDF$Trt=="POPAD"&popDF$Day==i]),
-                                                                               NA)
-        plotDF2$amb_AearlySD[plotDF2$Trt=="D"&plotDF2$Day==i] <- ifelse(length(popDF$AearlySD[popDF$Trt=="POPAD"&popDF$Day==i])==1,
-                                                                               as.numeric(popDF$AearlySD[popDF$Trt=="POPAD"&popDF$Day==i]),
-                                                                               NA)
-        plotDF2$amb_AlateSD[plotDF2$Trt=="D"&plotDF2$Day==i] <- ifelse(length(popDF$AlateSD[popDF$Trt=="POPAD"&popDF$Day==i])==1,
-                                                                              as.numeric(popDF$AlateSD[popDF$Trt=="POPAD"&popDF$Day==i]),
-                                                                              NA)
-        
-        plotDF2$ele_AdailySD[plotDF2$Trt=="D"&plotDF2$Day==i] <- ifelse(length(popDF$AdailySD[popDF$Trt=="POPED"&popDF$Day==i])==1,
-                                                                               as.numeric(popDF$AdailySD[popDF$Trt=="POPED"&popDF$Day==i]),
-                                                                               NA)
-        plotDF2$ele_AearlySD[plotDF2$Trt=="D"&plotDF2$Day==i] <- ifelse(length(popDF$AearlySD[popDF$Trt=="POPED"&popDF$Day==i])==1,
-                                                                               as.numeric(popDF$AearlySD[popDF$Trt=="POPED"&popDF$Day==i]),
-                                                                               NA)
-        plotDF2$ele_AlateSD[plotDF2$Trt=="D"&plotDF2$Day==i] <- ifelse(length(popDF$AlateSD[popDF$Trt=="POPED"&popDF$Day==i])==1,
-                                                                              as.numeric(popDF$AlateSD[popDF$Trt=="POPED"&popDF$Day==i]),
-                                                                              NA)
-        
-        plotDF2$amb_AdailySD[plotDF2$Trt=="ND"&plotDF2$Day==i] <- ifelse(length(popDF$AdailySD[popDF$Trt=="POPAND"&popDF$Day==i])==1,
-                                                                                as.numeric(popDF$AdailySD[popDF$Trt=="POPAND"&popDF$Day==i]),
-                                                                                NA)
-        plotDF2$amb_AearlySD[plotDF2$Trt=="ND"&plotDF2$Day==i] <- ifelse(length(popDF$AearlySD[popDF$Trt=="POPAND"&popDF$Day==i])==1,
-                                                                                as.numeric(popDF$AearlySD[popDF$Trt=="POPAND"&popDF$Day==i]),
-                                                                                NA)
-        plotDF2$amb_AlateSD[plotDF2$Trt=="ND"&plotDF2$Day==i] <- ifelse(length(popDF$AlateSD[popDF$Trt=="POPAND"&popDF$Day==i])==1,
-                                                                               as.numeric(popDF$AlateSD[popDF$Trt=="POPAND"&popDF$Day==i]),
-                                                                               NA)
-        
-        plotDF2$ele_AdailySD[plotDF2$Trt=="ND"&plotDF2$Day==i] <- ifelse(length(popDF$AdailySD[popDF$Trt=="POPEND"&popDF$Day==i])==1,
-                                                                                as.numeric(popDF$AdailySD[popDF$Trt=="POPEND"&popDF$Day==i]),
-                                                                                NA)
-        plotDF2$ele_AearlySD[plotDF2$Trt=="ND"&plotDF2$Day==i] <- ifelse(length(popDF$AearlySD[popDF$Trt=="POPEND"&popDF$Day==i])==1,
-                                                                                as.numeric(popDF$AearlySD[popDF$Trt=="POPEND"&popDF$Day==i]),
-                                                                                NA)
-        plotDF2$ele_AlateSD[plotDF2$Trt=="ND"&plotDF2$Day==i] <- ifelse(length(popDF$AlateSD[popDF$Trt=="POPEND"&popDF$Day==i])==1,
-                                                                               as.numeric(popDF$AlateSD[popDF$Trt=="POPEND"&popDF$Day==i]),
-                                                                               NA)
-        
-        
-        # A n
-        plotDF2$amb_AdailyN[plotDF2$Trt=="D"&plotDF2$Day==i] <- ifelse(length(popDF$n.4[popDF$Trt=="POPAD"&popDF$Day==i])==1,
-                                                                              as.numeric(popDF$n.4[popDF$Trt=="POPAD"&popDF$Day==i]),
-                                                                              NA)
-        plotDF2$amb_AearlyN[plotDF2$Trt=="D"&plotDF2$Day==i] <- ifelse(length(popDF$n.5[popDF$Trt=="POPAD"&popDF$Day==i])==1,
-                                                                              as.numeric(popDF$n.5[popDF$Trt=="POPAD"&popDF$Day==i]),
-                                                                              NA)
-        plotDF2$amb_AlateN[plotDF2$Trt=="D"&plotDF2$Day==i] <- ifelse(length(popDF$n.6[popDF$Trt=="POPAD"&popDF$Day==i])==1,
-                                                                             as.numeric(popDF$n.6[popDF$Trt=="POPAD"&popDF$Day==i]),
-                                                                             NA)
-        
-        plotDF2$ele_AdailyN[plotDF2$Trt=="D"&plotDF2$Day==i] <- ifelse(length(popDF$n.4[popDF$Trt=="POPED"&popDF$Day==i])==1,
-                                                                              as.numeric(popDF$n.4[popDF$Trt=="POPED"&popDF$Day==i]),
-                                                                              NA)
-        plotDF2$ele_AearlyN[plotDF2$Trt=="D"&plotDF2$Day==i] <- ifelse(length(popDF$n.5[popDF$Trt=="POPED"&popDF$Day==i])==1,
-                                                                              as.numeric(popDF$n.5[popDF$Trt=="POPED"&popDF$Day==i]),
-                                                                              NA)
-        plotDF2$ele_AlateN[plotDF2$Trt=="D"&plotDF2$Day==i] <- ifelse(length(popDF$n.6[popDF$Trt=="POPED"&popDF$Day==i])==1,
-                                                                             as.numeric(popDF$n.6[popDF$Trt=="POPED"&popDF$Day==i]),
-                                                                             NA)
-        
-        plotDF2$amb_AdailyN[plotDF2$Trt=="ND"&plotDF2$Day==i] <- ifelse(length(popDF$n.4[popDF$Trt=="POPAND"&popDF$Day==i])==1,
-                                                                               as.numeric(popDF$n.4[popDF$Trt=="POPAND"&popDF$Day==i]),
-                                                                               NA)
-        plotDF2$amb_AearlyN[plotDF2$Trt=="ND"&plotDF2$Day==i] <- ifelse(length(popDF$n.5[popDF$Trt=="POPAND"&popDF$Day==i])==1,
-                                                                               as.numeric(popDF$n.5[popDF$Trt=="POPAND"&popDF$Day==i]),
-                                                                               NA)
-        plotDF2$amb_AlateN[plotDF2$Trt=="ND"&plotDF2$Day==i] <- ifelse(length(popDF$n.6[popDF$Trt=="POPAND"&popDF$Day==i])==1,
-                                                                              as.numeric(popDF$n.6[popDF$Trt=="POPAND"&popDF$Day==i]),
-                                                                              NA)
-        
-        plotDF2$ele_AdailyN[plotDF2$Trt=="ND"&plotDF2$Day==i] <- ifelse(length(popDF$n.4[popDF$Trt=="POPEND"&popDF$Day==i])==1,
-                                                                               as.numeric(popDF$n.4[popDF$Trt=="POPEND"&popDF$Day==i]),
-                                                                               NA)
-        plotDF2$ele_AearlyN[plotDF2$Trt=="ND"&plotDF2$Day==i] <- ifelse(length(popDF$n.5[popDF$Trt=="POPEND"&popDF$Day==i])==1,
-                                                                               as.numeric(popDF$n.5[popDF$Trt=="POPEND"&popDF$Day==i]),
-                                                                               NA)
-        plotDF2$ele_AlateN[plotDF2$Trt=="ND"&plotDF2$Day==i] <- ifelse(length(popDF$n.6[popDF$Trt=="POPEND"&popDF$Day==i])==1,
-                                                                              as.numeric(popDF$n.6[popDF$Trt=="POPEND"&popDF$Day==i]),
-                                                                              NA)
-        
-        # gs SD
-        plotDF2$amb_GSdailySD[plotDF2$Trt=="D"&plotDF2$Day==i] <- ifelse(length(popDF$gsDailySD[popDF$Trt=="POPAD"&popDF$Day==i])==1,
-                                                                                as.numeric(popDF$gsDailySD[popDF$Trt=="POPAD"&popDF$Day==i]),
-                                                                                NA)
-        plotDF2$amb_GSearlySD[plotDF2$Trt=="D"&plotDF2$Day==i] <- ifelse(length(popDF$gsearlySD[popDF$Trt=="POPAD"&popDF$Day==i])==1,
-                                                                                as.numeric(popDF$gsearlySD[popDF$Trt=="POPAD"&popDF$Day==i]),
-                                                                                NA)
-        plotDF2$amb_GSlateSD[plotDF2$Trt=="D"&plotDF2$Day==i] <- ifelse(length(popDF$gslateSD[popDF$Trt=="POPAD"&popDF$Day==i])==1,
-                                                                               as.numeric(popDF$gslateSD[popDF$Trt=="POPAD"&popDF$Day==i]),
-                                                                               NA)
-        
-        plotDF2$ele_GSdailySD[plotDF2$Trt=="D"&plotDF2$Day==i] <- ifelse(length(popDF$gsDailySD[popDF$Trt=="POPED"&popDF$Day==i])==1,
-                                                                                as.numeric(popDF$gsDailySD[popDF$Trt=="POPED"&popDF$Day==i]),
-                                                                                NA)
-        plotDF2$ele_GSearlySD[plotDF2$Trt=="D"&plotDF2$Day==i] <- ifelse(length(popDF$gsearlySD[popDF$Trt=="POPED"&popDF$Day==i])==1,
-                                                                                as.numeric(popDF$gsearlySD[popDF$Trt=="POPED"&popDF$Day==i]),
-                                                                                NA)
-        plotDF2$ele_GSlateSD[plotDF2$Trt=="D"&plotDF2$Day==i] <- ifelse(length(popDF$gslateSD[popDF$Trt=="POPED"&popDF$Day==i])==1,
-                                                                               as.numeric(popDF$gslateSD[popDF$Trt=="POPED"&popDF$Day==i]),
-                                                                               NA)
-        
-        plotDF2$amb_GSdailySD[plotDF2$Trt=="ND"&plotDF2$Day==i] <- ifelse(length(popDF$gsDailySD[popDF$Trt=="POPAND"&popDF$Day==i])==1,
-                                                                                 as.numeric(popDF$gsDailySD[popDF$Trt=="POPAND"&popDF$Day==i]),
-                                                                                 NA)
-        plotDF2$amb_GSearlySD[plotDF2$Trt=="ND"&plotDF2$Day==i] <- ifelse(length(popDF$gsearlySD[popDF$Trt=="POPAND"&popDF$Day==i])==1,
-                                                                                 as.numeric(popDF$gsearlySD[popDF$Trt=="POPAND"&popDF$Day==i]),
-                                                                                 NA)
-        plotDF2$amb_GSlateSD[plotDF2$Trt=="ND"&plotDF2$Day==i] <- ifelse(length(popDF$gslateSD[popDF$Trt=="POPAND"&popDF$Day==i])==1,
-                                                                                as.numeric(popDF$gslateSD[popDF$Trt=="POPAND"&popDF$Day==i]),
-                                                                                NA)
-        
-        plotDF2$ele_GSdailySD[plotDF2$Trt=="ND"&plotDF2$Day==i] <- ifelse(length(popDF$gsDailySD[popDF$Trt=="POPEND"&popDF$Day==i])==1,
-                                                                                 as.numeric(popDF$gsDailySD[popDF$Trt=="POPEND"&popDF$Day==i]),
-                                                                                 NA)
-        plotDF2$ele_GSearlySD[plotDF2$Trt=="ND"&plotDF2$Day==i] <- ifelse(length(popDF$gsearlySD[popDF$Trt=="POPEND"&popDF$Day==i])==1,
-                                                                                 as.numeric(popDF$gsearlySD[popDF$Trt=="POPEND"&popDF$Day==i]),
-                                                                                 NA)
-        plotDF2$ele_GSlateSD[plotDF2$Trt=="ND"&plotDF2$Day==i] <- ifelse(length(popDF$gslateSD[popDF$Trt=="POPEND"&popDF$Day==i])==1,
-                                                                                as.numeric(popDF$gslateSD[popDF$Trt=="POPEND"&popDF$Day==i]),
-                                                                                NA)
-        
-        
-        # gs n
-        plotDF2$amb_GSdailyN[plotDF2$Trt=="D"&plotDF2$Day==i] <- ifelse(length(popDF$n.7[popDF$Trt=="POPAD"&popDF$Day==i])==1,
-                                                                               as.numeric(popDF$n.7[popDF$Trt=="POPAD"&popDF$Day==i]),
-                                                                               NA)
-        plotDF2$amb_GSearlyN[plotDF2$Trt=="D"&plotDF2$Day==i] <- ifelse(length(popDF$n.8[popDF$Trt=="POPAD"&popDF$Day==i])==1,
-                                                                               as.numeric(popDF$n.8[popDF$Trt=="POPAD"&popDF$Day==i]),
-                                                                               NA)
-        plotDF2$amb_GSlateN[plotDF2$Trt=="D"&plotDF2$Day==i] <- ifelse(length(popDF$n.9[popDF$Trt=="POPAD"&popDF$Day==i])==1,
-                                                                              as.numeric(popDF$n.9[popDF$Trt=="POPAD"&popDF$Day==i]),
-                                                                              NA)
-        
-        plotDF2$ele_GSdailyN[plotDF2$Trt=="D"&plotDF2$Day==i] <- ifelse(length(popDF$n.7[popDF$Trt=="POPED"&popDF$Day==i])==1,
-                                                                               as.numeric(popDF$n.7[popDF$Trt=="POPED"&popDF$Day==i]),
-                                                                               NA)
-        plotDF2$ele_GSearlyN[plotDF2$Trt=="D"&plotDF2$Day==i] <- ifelse(length(popDF$n.8[popDF$Trt=="POPED"&popDF$Day==i])==1,
-                                                                               as.numeric(popDF$n.8[popDF$Trt=="POPED"&popDF$Day==i]),
-                                                                               NA)
-        plotDF2$ele_GSlateN[plotDF2$Trt=="D"&plotDF2$Day==i] <- ifelse(length(popDF$n.9[popDF$Trt=="POPED"&popDF$Day==i])==1,
-                                                                              as.numeric(popDF$n.9[popDF$Trt=="POPED"&popDF$Day==i]),
-                                                                              NA)
-        
-        plotDF2$amb_GSdailyN[plotDF2$Trt=="ND"&plotDF2$Day==i] <- ifelse(length(popDF$n.7[popDF$Trt=="POPAND"&popDF$Day==i])==1,
-                                                                                as.numeric(popDF$n.7[popDF$Trt=="POPAND"&popDF$Day==i]),
-                                                                                NA)
-        plotDF2$amb_GSearlyN[plotDF2$Trt=="ND"&plotDF2$Day==i] <- ifelse(length(popDF$n.8[popDF$Trt=="POPAND"&popDF$Day==i])==1,
-                                                                                as.numeric(popDF$n.8[popDF$Trt=="POPAND"&popDF$Day==i]),
-                                                                                NA)
-        plotDF2$amb_GSlateN[plotDF2$Trt=="ND"&plotDF2$Day==i] <- ifelse(length(popDF$n.9[popDF$Trt=="POPAND"&popDF$Day==i])==1,
-                                                                               as.numeric(popDF$n.9[popDF$Trt=="POPAND"&popDF$Day==i]),
-                                                                               NA)
-        
-        plotDF2$ele_GSdailyN[plotDF2$Trt=="ND"&plotDF2$Day==i] <- ifelse(length(popDF$n.7[popDF$Trt=="POPEND"&popDF$Day==i])==1,
-                                                                                as.numeric(popDF$n.7[popDF$Trt=="POPEND"&popDF$Day==i]),
-                                                                                NA)
-        plotDF2$ele_GSearlyN[plotDF2$Trt=="ND"&plotDF2$Day==i] <- ifelse(length(popDF$n.8[popDF$Trt=="POPEND"&popDF$Day==i])==1,
-                                                                                as.numeric(popDF$n.8[popDF$Trt=="POPEND"&popDF$Day==i]),
-                                                                                NA)
-        plotDF2$ele_GSlateN[plotDF2$Trt=="ND"&plotDF2$Day==i] <- ifelse(length(popDF$n.9[popDF$Trt=="POPEND"&popDF$Day==i])==1,
-                                                                               as.numeric(popDF$n.9[popDF$Trt=="POPEND"&popDF$Day==i]),
-                                                                               NA)
-        
     }
     
     ### ignore NAs
@@ -426,45 +173,29 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
     plotDF2$CO2_GSearly <- plotDF2$ele_GSearly / plotDF2$amb_GSearly
     plotDF2$CO2_GSlate <- plotDF2$ele_GSlate / plotDF2$amb_GSlate
     
-    ### calculate standard error for the ratios
-    plotDF1$CO2_AdailySD <- sqrt((plotDF1$amb_AdailySD^2)/(plotDF1$amb_AdailyN) +
-                                     (plotDF1$ele_AdailySD^2)/(plotDF1$ele_AdailyN))
-    plotDF1$CO2_AearlySD <- sqrt((plotDF1$amb_AearlySD^2)/(plotDF1$amb_AearlyN) +
-                                     (plotDF1$ele_AearlySD^2)/(plotDF1$ele_AearlyN))
-    plotDF1$CO2_AlateSD <- sqrt((plotDF1$amb_AlateSD^2)/(plotDF1$amb_AlateN) +
-                                     (plotDF1$ele_AlateSD^2)/(plotDF1$ele_AlateN))
+    ### calculate the log
+    plotDF1$log_CO2_Adaily <- log(plotDF1$CO2_Adaily)
+    plotDF1$log_CO2_Aearly <- log(plotDF1$CO2_Aearly)
+    plotDF1$log_CO2_Alate <- log(plotDF1$CO2_Alate)
     
-    plotDF1$CO2_GSdailySD <- sqrt((plotDF1$amb_GSdailySD^2)/(plotDF1$amb_GSdailyN) +
-                                     (plotDF1$ele_GSdailySD^2)/(plotDF1$ele_GSdailyN))
-    plotDF1$CO2_GSearlySD <- sqrt((plotDF1$amb_GSearlySD^2)/(plotDF1$amb_GSearlyN) +
-                                     (plotDF1$ele_GSearlySD^2)/(plotDF1$ele_GSearlyN))
-    plotDF1$CO2_GSlateSD <- sqrt((plotDF1$amb_GSlateSD^2)/(plotDF1$amb_GSlateN) +
-                                    (plotDF1$ele_GSlateSD^2)/(plotDF1$ele_GSlateN))
+    plotDF1$log_CO2_GSdaily <- log(plotDF1$CO2_GSdaily)
+    plotDF1$log_CO2_GSearly <- log(plotDF1$CO2_GSearly)
+    plotDF1$log_CO2_GSlate <- log(plotDF1$CO2_GSlate)
     
-    plotDF2$CO2_AdailySD <- sqrt((plotDF2$amb_AdailySD^2)/(plotDF2$amb_AdailyN) +
-                                     (plotDF2$ele_AdailySD^2)/(plotDF2$ele_AdailyN))
-    plotDF2$CO2_AearlySD <- sqrt((plotDF2$amb_AearlySD^2)/(plotDF2$amb_AearlyN) +
-                                     (plotDF2$ele_AearlySD^2)/(plotDF2$ele_AearlyN))
-    plotDF2$CO2_AlateSD <- sqrt((plotDF2$amb_AlateSD^2)/(plotDF2$amb_AlateN) +
-                                    (plotDF2$ele_AlateSD^2)/(plotDF2$ele_AlateN))
+    plotDF2$log_CO2_Adaily <- log(plotDF2$CO2_Adaily)
+    plotDF2$log_CO2_Aearly <- log(plotDF2$CO2_Aearly)
+    plotDF2$log_CO2_Alate <- log(plotDF2$CO2_Alate)
     
-    plotDF2$CO2_GSdailySD <- sqrt((plotDF2$amb_GSdailySD^2)/(plotDF2$amb_GSdailyN) +
-                                      (plotDF2$ele_GSdailySD^2)/(plotDF2$ele_GSdailyN))
-    plotDF2$CO2_GSearlySD <- sqrt((plotDF2$amb_GSearlySD^2)/(plotDF2$amb_GSearlyN) +
-                                      (plotDF2$ele_GSearlySD^2)/(plotDF2$ele_GSearlyN))
-    plotDF2$CO2_GSlateSD <- sqrt((plotDF2$amb_GSlateSD^2)/(plotDF2$amb_GSlateN) +
-                                     (plotDF2$ele_GSlateSD^2)/(plotDF2$ele_GSlateN))
-    
+    plotDF2$log_CO2_GSdaily <- log(plotDF2$CO2_GSdaily)
+    plotDF2$log_CO2_GSearly <- log(plotDF2$CO2_GSearly)
+    plotDF2$log_CO2_GSlate <- log(plotDF2$CO2_GSlate)
     
     ### plotting
-    p1 <- ggplot(plotDF1, aes(x=Day, y=CO2_Adaily, group=Trt)) +
+    p1 <- ggplot(plotDF1, aes(x=Day, y=log_CO2_Adaily, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
         geom_line(aes(col=Trt))+
-        geom_errorbar(aes(col=Trt, x=Day, 
-                          ymin=CO2_Adaily-CO2_AdailySD, ymax=CO2_Adaily+CO2_AdailySD),
-                      width=0.2)+
         theme_linedraw() +
-        geom_hline(yintercept=1, col="black", lty=2)+
+        geom_hline(yintercept=0, col="black", lty=2)+
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
               axis.title.x=element_blank(),
@@ -490,7 +221,7 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
                           values=c("red3", "blue2"),
                           guide=guide_legend(nrow=1))+
         ggtitle("Daily")+
-        ylim(0, 8)+
+        ylim(-2, 3)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("red3", "blue2"),
@@ -498,11 +229,11 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
         scale_x_continuous(limits=c(0, 10),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
-    p2 <- ggplot(plotDF1, aes(x=Day, y=CO2_Aearly, group=Trt)) +
+    p2 <- ggplot(plotDF1, aes(x=Day, y=log_CO2_Aearly, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
         geom_line(aes(col=Trt))+
         theme_linedraw() +
-        geom_hline(yintercept=1, col="black", lty=2)+
+        geom_hline(yintercept=0, col="black", lty=2)+
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
               axis.title.x=element_blank(),
@@ -528,7 +259,7 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
                           values=c("red3", "blue2"),
                           guide=guide_legend(nrow=1))+
         ggtitle("Morning")+
-        ylim(0, 8)+
+        ylim(-2, 3)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("red3", "blue2"),
@@ -536,11 +267,11 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
         scale_x_continuous(limits=c(0, 10),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
-    p3 <- ggplot(plotDF1, aes(x=Day, y=CO2_Alate, group=Trt)) +
+    p3 <- ggplot(plotDF1, aes(x=Day, y=log_CO2_Alate, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
         geom_line(aes(col=Trt))+
         theme_linedraw() +
-        geom_hline(yintercept=1, col="black", lty=2)+
+        geom_hline(yintercept=0, col="black", lty=2)+
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
               axis.title.x=element_blank(),
@@ -566,7 +297,7 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
                           values=c("red3", "blue2"),
                           guide=guide_legend(nrow=1))+
         ggtitle("Midday")+
-        ylim(0, 8)+
+        ylim(-2, 3)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("red3", "blue2"),
@@ -575,10 +306,10 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
                            breaks=c(0, 2, 4, 6, 8, 10))
     
     
-    p4 <- ggplot(plotDF1, aes(x=Day, y=CO2_GSdaily, group=Trt)) +
+    p4 <- ggplot(plotDF1, aes(x=Day, y=log_CO2_GSdaily, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
         geom_line(aes(col=Trt))+
-        geom_hline(yintercept=1, col="black", lty=2)+
+        geom_hline(yintercept=0, col="black", lty=2)+
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
@@ -604,7 +335,7 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
                           labels=c("Droughted", "Well-watered"),
                           values=c("red3", "blue2"),
                           guide=guide_legend(nrow=1))+
-        ylim(0, 5)+
+        ylim(-2, 3)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("red3", "blue2"),
@@ -612,10 +343,10 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
         scale_x_continuous(limits=c(0, 10),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
-    p5 <- ggplot(plotDF1, aes(x=Day, y=CO2_GSearly, group=Trt)) +
+    p5 <- ggplot(plotDF1, aes(x=Day, y=log_CO2_GSearly, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
         geom_line(aes(col=Trt))+
-        geom_hline(yintercept=1, col="black", lty=2)+
+        geom_hline(yintercept=0, col="black", lty=2)+
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
@@ -641,7 +372,7 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
                           labels=c("Droughted", "Well-watered"),
                           values=c("red3", "blue2"),
                           guide=guide_legend(nrow=1))+
-        ylim(0, 5)+
+        ylim(-2, 3)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("red3", "blue2"),
@@ -649,11 +380,11 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
         scale_x_continuous(limits=c(0, 10),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
-    p6 <- ggplot(plotDF1, aes(x=Day, y=CO2_GSlate, group=Trt)) +
+    p6 <- ggplot(plotDF1, aes(x=Day, y=log_CO2_GSlate, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
         geom_line(aes(col=Trt))+
         theme_linedraw() +
-        geom_hline(yintercept=1, col="black", lty=2)+
+        geom_hline(yintercept=0, col="black", lty=2)+
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
               axis.title.x=element_blank(),
@@ -678,7 +409,7 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
                           labels=c("Droughted", "Well-watered"),
                           values=c("red3", "blue2"),
                           guide=guide_legend(nrow=1))+
-        ylim(0, 5)+
+        ylim(-2, 3)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("red3", "blue2"),
@@ -700,7 +431,7 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
                                 label_x=0.85, label_y=0.85)
     
     
-    pdf("output/F10.1.CO2_ratio_pilularis.pdf", width=14, height=8)
+    pdf("output/F10.1.log_CO2_ratio_pilularis.pdf", width=14, height=8)
     plot_grid(combined_plots, combined_legend, 
               ncol=1, rel_heights=c(1, 0.1))
     dev.off() 
@@ -710,10 +441,10 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
     
     
     ### plotting
-    p1 <- ggplot(plotDF2, aes(x=Day, y=CO2_Adaily, group=Trt)) +
+    p1 <- ggplot(plotDF2, aes(x=Day, y=log_CO2_Adaily, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
         geom_line(aes(col=Trt))+
-        geom_hline(yintercept=1, col="black", lty=2)+
+        geom_hline(yintercept=0, col="black", lty=2)+
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
@@ -740,7 +471,7 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
                           values=c("red3", "blue2"),
                           guide=guide_legend(nrow=1))+
         ggtitle("Daily")+
-        ylim(0, 4)+
+        ylim(-2, 3)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("red3", "blue2"),
@@ -748,11 +479,11 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
         scale_x_continuous(limits=c(0, 40),
                            breaks=c(0, 5, 10, 20, 30, 40))
     
-    p2 <- ggplot(plotDF2, aes(x=Day, y=CO2_Aearly, group=Trt)) +
+    p2 <- ggplot(plotDF2, aes(x=Day, y=log_CO2_Aearly, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
         geom_line(aes(col=Trt))+
         theme_linedraw() +
-        geom_hline(yintercept=1, col="black", lty=2)+
+        geom_hline(yintercept=0, col="black", lty=2)+
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
               axis.title.x=element_blank(),
@@ -778,7 +509,7 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
                           values=c("red3", "blue2"),
                           guide=guide_legend(nrow=1))+
         ggtitle("Morning")+
-        ylim(0, 4)+
+        ylim(-2, 3)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("red3", "blue2"),
@@ -786,11 +517,11 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
         scale_x_continuous(limits=c(0, 40),
                            breaks=c(0, 5, 10, 20, 30, 40))
     
-    p3 <- ggplot(plotDF2, aes(x=Day, y=CO2_Alate, group=Trt)) +
+    p3 <- ggplot(plotDF2, aes(x=Day, y=log_CO2_Alate, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
         geom_line(aes(col=Trt))+
         theme_linedraw() +
-        geom_hline(yintercept=1, col="black", lty=2)+
+        geom_hline(yintercept=0, col="black", lty=2)+
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
               axis.title.x=element_blank(),
@@ -816,7 +547,7 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
                           values=c("red3", "blue2"),
                           guide=guide_legend(nrow=1))+
         ggtitle("Midday")+
-        ylim(0, 4)+
+        ylim(-2, 3)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("red3", "blue2"),
@@ -825,11 +556,11 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
                            breaks=c(0, 5, 10, 20, 30, 40))
     
     
-    p4 <- ggplot(plotDF2, aes(x=Day, y=CO2_GSdaily, group=Trt)) +
+    p4 <- ggplot(plotDF2, aes(x=Day, y=log_CO2_GSdaily, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
         geom_line(aes(col=Trt))+
         theme_linedraw() +
-        geom_hline(yintercept=1, col="black", lty=2)+
+        geom_hline(yintercept=0, col="black", lty=2)+
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
               axis.title.x=element_blank(),
@@ -854,7 +585,7 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
                           labels=c("Droughted", "Well-watered"),
                           values=c("red3", "blue2"),
                           guide=guide_legend(nrow=1))+
-        ylim(0, 3)+
+        ylim(-2, 3)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("red3", "blue2"),
@@ -862,11 +593,11 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
         scale_x_continuous(limits=c(0, 40),
                            breaks=c(0, 5, 10, 20, 30, 40))
     
-    p5 <- ggplot(plotDF2, aes(x=Day, y=CO2_GSearly, group=Trt)) +
+    p5 <- ggplot(plotDF2, aes(x=Day, y=log_CO2_GSearly, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
         geom_line(aes(col=Trt))+
         theme_linedraw() +
-        geom_hline(yintercept=1, col="black", lty=2)+
+        geom_hline(yintercept=0, col="black", lty=2)+
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
               axis.title.x=element_blank(),
@@ -891,7 +622,7 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
                           labels=c("Droughted", "Well-watered"),
                           values=c("red3", "blue2"),
                           guide=guide_legend(nrow=1))+
-        ylim(0, 3)+
+        ylim(-2, 3)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("red3", "blue2"),
@@ -899,11 +630,11 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
         scale_x_continuous(limits=c(0, 40),
                            breaks=c(0, 5, 10, 20, 30, 40))
     
-    p6 <- ggplot(plotDF2, aes(x=Day, y=CO2_GSlate, group=Trt)) +
+    p6 <- ggplot(plotDF2, aes(x=Day, y=log_CO2_GSlate, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
         geom_line(aes(col=Trt))+
         theme_linedraw() +
-        geom_hline(yintercept=1, col="black", lty=2)+
+        geom_hline(yintercept=0, col="black", lty=2)+
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
               axis.title.x=element_blank(),
@@ -928,7 +659,7 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
                           labels=c("Droughted", "Well-watered"),
                           values=c("red3", "blue2"),
                           guide=guide_legend(nrow=1))+
-        ylim(0, 3)+
+        ylim(-2, 3)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("red3", "blue2"),
@@ -950,7 +681,7 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
                                 label_x=0.85, label_y=0.85)
     
     
-    pdf("output/F10.2.CO2_ratio_populnea.pdf", width=14, height=8)
+    pdf("output/F10.2.log_CO2_ratio_populnea.pdf", width=14, height=8)
     plot_grid(combined_plots, combined_legend, 
               ncol=1, rel_heights=c(1, 0.1))
     dev.off() 
