@@ -270,7 +270,7 @@ make_swc_and_transpiration_plots <- function() {
                                 label_x=0.16, label_y=0.9)
     
     
-    pdf("output/F3.swc_and_transpiration.pdf", width=8, height=8)
+    pdf(paste0(outdir, "F3.swc_and_transpiration.pdf"), width=8, height=8)
     plot_grid(combined_plots, combined_legend, 
               ncol=1, rel_heights=c(1, 0.1))
     dev.off() 

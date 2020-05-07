@@ -251,7 +251,7 @@ make_glasshouse_condition_plots <- function() {
                                  label_x=0.08, label_y=0.85)
     
     
-    pdf("output/F1.glasshouse_condition.pdf", width=16, height=14)
+    pdf(paste0(outdir, "F1.glasshouse_condition.pdf"), width=16, height=14)
     plot_grid(combined_plots, combined_legend, 
               ncol=1, rel_heights=c(1, 0.1))
     dev.off() 

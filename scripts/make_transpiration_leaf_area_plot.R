@@ -4,7 +4,7 @@ make_transpiration_leaf_area_plot <- function() {
    
    ################################### Plotting ######################################
    #FIGURE 5 - Eucalyptus pilularis & populnea (Transpiration as a function of leaf area)
-   pdf("output/F4.transpiration_leaf_area.pdf", width=10, height=7.5)
+   pdf(paste0(outdir, "F4.transpiration_leaf_area.pdf"), width=10, height=7.5)
    #A
    #bottom,left,top,right
    par(mfrow=c(1,2), omi=c(.65, 0.75, 0.75, .65)) 

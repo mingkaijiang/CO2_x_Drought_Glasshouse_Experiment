@@ -427,42 +427,42 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
     plotDF2$CO2_GSlate <- plotDF2$ele_GSlate / plotDF2$amb_GSlate
     
     ### calculate standard error for the ratios
-    plotDF1$CO2_AdailySD <- sqrt((plotDF1$amb_AdailySD^2)/(plotDF1$amb_AdailyN) +
-                                     (plotDF1$ele_AdailySD^2)/(plotDF1$ele_AdailyN))
-    plotDF1$CO2_AearlySD <- sqrt((plotDF1$amb_AearlySD^2)/(plotDF1$amb_AearlyN) +
-                                     (plotDF1$ele_AearlySD^2)/(plotDF1$ele_AearlyN))
-    plotDF1$CO2_AlateSD <- sqrt((plotDF1$amb_AlateSD^2)/(plotDF1$amb_AlateN) +
-                                     (plotDF1$ele_AlateSD^2)/(plotDF1$ele_AlateN))
-    
-    plotDF1$CO2_GSdailySD <- sqrt((plotDF1$amb_GSdailySD^2)/(plotDF1$amb_GSdailyN) +
-                                     (plotDF1$ele_GSdailySD^2)/(plotDF1$ele_GSdailyN))
-    plotDF1$CO2_GSearlySD <- sqrt((plotDF1$amb_GSearlySD^2)/(plotDF1$amb_GSearlyN) +
-                                     (plotDF1$ele_GSearlySD^2)/(plotDF1$ele_GSearlyN))
-    plotDF1$CO2_GSlateSD <- sqrt((plotDF1$amb_GSlateSD^2)/(plotDF1$amb_GSlateN) +
-                                    (plotDF1$ele_GSlateSD^2)/(plotDF1$ele_GSlateN))
-    
-    plotDF2$CO2_AdailySD <- sqrt((plotDF2$amb_AdailySD^2)/(plotDF2$amb_AdailyN) +
-                                     (plotDF2$ele_AdailySD^2)/(plotDF2$ele_AdailyN))
-    plotDF2$CO2_AearlySD <- sqrt((plotDF2$amb_AearlySD^2)/(plotDF2$amb_AearlyN) +
-                                     (plotDF2$ele_AearlySD^2)/(plotDF2$ele_AearlyN))
-    plotDF2$CO2_AlateSD <- sqrt((plotDF2$amb_AlateSD^2)/(plotDF2$amb_AlateN) +
-                                    (plotDF2$ele_AlateSD^2)/(plotDF2$ele_AlateN))
-    
-    plotDF2$CO2_GSdailySD <- sqrt((plotDF2$amb_GSdailySD^2)/(plotDF2$amb_GSdailyN) +
-                                      (plotDF2$ele_GSdailySD^2)/(plotDF2$ele_GSdailyN))
-    plotDF2$CO2_GSearlySD <- sqrt((plotDF2$amb_GSearlySD^2)/(plotDF2$amb_GSearlyN) +
-                                      (plotDF2$ele_GSearlySD^2)/(plotDF2$ele_GSearlyN))
-    plotDF2$CO2_GSlateSD <- sqrt((plotDF2$amb_GSlateSD^2)/(plotDF2$amb_GSlateN) +
-                                     (plotDF2$ele_GSlateSD^2)/(plotDF2$ele_GSlateN))
+    #plotDF1$CO2_AdailySD <- sqrt((plotDF1$amb_AdailySD^2)/(plotDF1$amb_AdailyN) +
+    #                                 (plotDF1$ele_AdailySD^2)/(plotDF1$ele_AdailyN))
+    #plotDF1$CO2_AearlySD <- sqrt((plotDF1$amb_AearlySD^2)/(plotDF1$amb_AearlyN) +
+    #                                 (plotDF1$ele_AearlySD^2)/(plotDF1$ele_AearlyN))
+    #plotDF1$CO2_AlateSD <- sqrt((plotDF1$amb_AlateSD^2)/(plotDF1$amb_AlateN) +
+    #                                 (plotDF1$ele_AlateSD^2)/(plotDF1$ele_AlateN))
+    #
+    #plotDF1$CO2_GSdailySD <- sqrt((plotDF1$amb_GSdailySD^2)/(plotDF1$amb_GSdailyN) +
+    #                                 (plotDF1$ele_GSdailySD^2)/(plotDF1$ele_GSdailyN))
+    #plotDF1$CO2_GSearlySD <- sqrt((plotDF1$amb_GSearlySD^2)/(plotDF1$amb_GSearlyN) +
+    #                                 (plotDF1$ele_GSearlySD^2)/(plotDF1$ele_GSearlyN))
+    #plotDF1$CO2_GSlateSD <- sqrt((plotDF1$amb_GSlateSD^2)/(plotDF1$amb_GSlateN) +
+    #                                (plotDF1$ele_GSlateSD^2)/(plotDF1$ele_GSlateN))
+    #
+    #plotDF2$CO2_AdailySD <- sqrt((plotDF2$amb_AdailySD^2)/(plotDF2$amb_AdailyN) +
+    #                                 (plotDF2$ele_AdailySD^2)/(plotDF2$ele_AdailyN))
+    #plotDF2$CO2_AearlySD <- sqrt((plotDF2$amb_AearlySD^2)/(plotDF2$amb_AearlyN) +
+    #                                 (plotDF2$ele_AearlySD^2)/(plotDF2$ele_AearlyN))
+    #plotDF2$CO2_AlateSD <- sqrt((plotDF2$amb_AlateSD^2)/(plotDF2$amb_AlateN) +
+    #                                (plotDF2$ele_AlateSD^2)/(plotDF2$ele_AlateN))
+    #
+    #plotDF2$CO2_GSdailySD <- sqrt((plotDF2$amb_GSdailySD^2)/(plotDF2$amb_GSdailyN) +
+    #                                  (plotDF2$ele_GSdailySD^2)/(plotDF2$ele_GSdailyN))
+    #plotDF2$CO2_GSearlySD <- sqrt((plotDF2$amb_GSearlySD^2)/(plotDF2$amb_GSearlyN) +
+    #                                  (plotDF2$ele_GSearlySD^2)/(plotDF2$ele_GSearlyN))
+    #plotDF2$CO2_GSlateSD <- sqrt((plotDF2$amb_GSlateSD^2)/(plotDF2$amb_GSlateN) +
+    #                                 (plotDF2$ele_GSlateSD^2)/(plotDF2$ele_GSlateN))
     
     
     ### plotting
     p1 <- ggplot(plotDF1, aes(x=Day, y=CO2_Adaily, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
         geom_line(aes(col=Trt))+
-        geom_errorbar(aes(col=Trt, x=Day, 
-                          ymin=CO2_Adaily-CO2_AdailySD, ymax=CO2_Adaily+CO2_AdailySD),
-                      width=0.2)+
+        #geom_errorbar(aes(col=Trt, x=Day, 
+        #                  ymin=CO2_Adaily-CO2_AdailySD, ymax=CO2_Adaily+CO2_AdailySD),
+        #              width=0.2)+
         theme_linedraw() +
         geom_hline(yintercept=1, col="black", lty=2)+
         theme(panel.grid.minor=element_blank(),
@@ -700,7 +700,7 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
                                 label_x=0.85, label_y=0.85)
     
     
-    pdf("output/F10.1.CO2_ratio_pilularis.pdf", width=14, height=8)
+    pdf(paste0(outdir, "F10.1.CO2_ratio_pilularis.pdf"), width=14, height=8)
     plot_grid(combined_plots, combined_legend, 
               ncol=1, rel_heights=c(1, 0.1))
     dev.off() 
@@ -950,7 +950,7 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
                                 label_x=0.85, label_y=0.85)
     
     
-    pdf("output/F10.2.CO2_ratio_populnea.pdf", width=14, height=8)
+    pdf(paste0(outdir, "F10.2.CO2_ratio_populnea.pdf"), width=14, height=8)
     plot_grid(combined_plots, combined_legend, 
               ncol=1, rel_heights=c(1, 0.1))
     dev.off() 

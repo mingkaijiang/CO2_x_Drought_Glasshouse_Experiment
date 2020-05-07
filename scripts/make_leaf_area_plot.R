@@ -5,7 +5,7 @@ make_leaf_area_plot <- function() {
     POP<-read.csv("data/glasshouse2/POP_LA.csv",sep=",", header=TRUE)
     
     ################################### Plotting ######################################
-    pdf("output/leaf_area.pdf", width=8, height=4)
+    pdf(paste0(outdir, "leaf_area.pdf"), width=8, height=4)
     #PIL BIO
     par(mfrow=c(1,2))
     #PIL BIO

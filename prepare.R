@@ -4,6 +4,14 @@ if(!dir.exists("output")) {
     dir.create("output", showWarnings = FALSE)
 }
 
+if(!dir.exists("output/BM")) {
+    dir.create("output/BM", showWarnings = FALSE)
+}
+
+
+if(!dir.exists("output/DT")) {
+    dir.create("output/DT", showWarnings = FALSE)
+}
 
 #### Install packages
 if(!require(pacman))install.packages("pacman")

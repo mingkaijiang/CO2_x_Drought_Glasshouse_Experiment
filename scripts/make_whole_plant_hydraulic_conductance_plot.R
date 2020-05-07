@@ -151,7 +151,7 @@ make_whole_plant_hydraulic_conductance_plot <- function() {
                                 label_x=0.16, label_y=0.9)
     
     
-    pdf("output/F7.whole_plant_hydraulics_plot.pdf", width=8, height=6)
+    pdf(paste0(outdir, "F7.whole_plant_hydraulics_plot.pdf"), width=8, height=6)
     plot_grid(combined_plots, combined_legend, 
               ncol=1, rel_heights=c(1, 0.1))
     dev.off() 
@@ -159,5 +159,5 @@ make_whole_plant_hydraulic_conductance_plot <- function() {
     
     
 
-
+}
 

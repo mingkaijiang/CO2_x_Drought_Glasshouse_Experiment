@@ -398,7 +398,7 @@ make_normalized_Asat_plots <- function() {
                                 label_x=0.85, label_y=0.85)
     
     
-    pdf("output/F9.normalized_Asat.pdf", width=8, height=8)
+    pdf(paste0(outdir, "F9.normalized_Asat.pdf"), width=8, height=8)
     plot_grid(combined_plots, combined_legend, 
               ncol=1, rel_heights=c(1, 0.1))
     dev.off() 

@@ -244,7 +244,7 @@ make_leaf_area_and_biomass_plots <- function() {
                                  ncol=2, align="vh", axis = "l",
                                  label_x=0.12, label_y=0.9)
     
-    pdf("output/F2.leaf_area_biomass.pdf", width=12, height=10)
+    pdf(paste0(outdir, "F2.leaf_area_biomass.pdf"), width=12, height=10)
     plot_grid(combined_plots1, legend1, 
               combined_plots2, legend2,
               ncol=1, rel_heights=c(1, 0.3, 1, 0.3))

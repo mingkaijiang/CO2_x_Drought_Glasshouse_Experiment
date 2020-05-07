@@ -431,7 +431,7 @@ make_log_CO2_ratios_of_A_and_gs_plots <- function() {
                                 label_x=0.85, label_y=0.85)
     
     
-    pdf("output/F10.1.log_CO2_ratio_pilularis.pdf", width=14, height=8)
+    pdf(paste0(outdir, "F10.1.log_CO2_ratio_pilularis.pdf"), width=14, height=8)
     plot_grid(combined_plots, combined_legend, 
               ncol=1, rel_heights=c(1, 0.1))
     dev.off() 
@@ -681,7 +681,7 @@ make_log_CO2_ratios_of_A_and_gs_plots <- function() {
                                 label_x=0.85, label_y=0.85)
     
     
-    pdf("output/F10.2.log_CO2_ratio_populnea.pdf", width=14, height=8)
+    pdf(paste0(outdir, "F10.2.log_CO2_ratio_populnea.pdf"), width=14, height=8)
     plot_grid(combined_plots, combined_legend, 
               ncol=1, rel_heights=c(1, 0.1))
     dev.off() 
