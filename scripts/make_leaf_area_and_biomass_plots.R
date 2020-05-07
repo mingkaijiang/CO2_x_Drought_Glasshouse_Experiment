@@ -77,7 +77,7 @@ make_leaf_area_and_biomass_plots <- function() {
         geom_errorbar(aes(x=brk, ymin=LA_final.mean-LA_final.se, 
                           ymax=LA_final.mean+LA_final.se), 
                       position=position_dodge(0.9), width=0.2) +
-        ggtitle("E. Pilularis")+
+        ggtitle("E. pilularis")+
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
@@ -117,7 +117,7 @@ make_leaf_area_and_biomass_plots <- function() {
         geom_errorbar(aes(x=brk, ymin=LA_final.mean-LA_final.se, 
                           ymax=LA_final.mean+LA_final.se), 
                       position=position_dodge(0.9), width=0.2) +
-        ggtitle("E. Populnea")+
+        ggtitle("E. populnea")+
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
@@ -158,7 +158,7 @@ make_leaf_area_and_biomass_plots <- function() {
                       aes(x=brk, ymin=TOT.mean-TOT.se, 
                           ymax=TOT.mean+TOT.se), 
                       position="dodge", width=0.2) +
-        ggtitle("E. Pilularis")+
+        ggtitle("E. pilularis")+
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
@@ -195,7 +195,7 @@ make_leaf_area_and_biomass_plots <- function() {
                       aes(x=brk, ymin=TOT.mean-TOT.se, 
                           ymax=TOT.mean+TOT.se), 
                       position="dodge", width=0.2) +
-        ggtitle("E. Populnea")+
+        ggtitle("E. populnea")+
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),

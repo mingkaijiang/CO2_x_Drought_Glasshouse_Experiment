@@ -3,7 +3,7 @@ make_leaf_water_potential_plots <- function() {
     ### E. pilularis
     pilDF<-read.csv("data/glasshouse2/Pilularis_Phys.csv",sep=",", header=TRUE)
     
-    ### E. Populnea
+    ### E. populnea
     popDF<-read.csv("data/glasshouse2/Populnea_Phys.csv",sep=",", header=TRUE)
     
     
@@ -60,7 +60,7 @@ make_leaf_water_potential_plots <- function() {
                                     expression(paste(eC[a]*" - D")),
                                     expression(paste(eC[a]*" - W"))),
                            values=c(21,21,22,22))+
-        ggtitle("E. Pilularis")+
+        ggtitle("E. pilularis")+
         ylim(-4, 0)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 22,22),
@@ -74,7 +74,7 @@ make_leaf_water_potential_plots <- function() {
     p2 <- ggplot(popDF, aes(x=Day, y=psiPD, group=Trt)) +
         geom_errorbar(aes(col=Trt, x=Day, 
                           ymin=psiPD-psiPDSE, ymax=psiPD+psiPDSE),
-                      width=0.2)+
+                      width=1.2)+
         geom_point(aes(col=Trt, fill=Trt, pch=Trt), size=2)+
         geom_line(aes(col=Trt, lty=Trt))+
         theme_linedraw() +
@@ -122,7 +122,7 @@ make_leaf_water_potential_plots <- function() {
                                     expression(paste(eC[a]*" - D")),
                                     expression(paste(eC[a]*" - W"))),
                            values=c(21,21,22,22))+
-        ggtitle("E. Populnea")+
+        ggtitle("E. populnea")+
         ylim(-4, 0)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 22,22),
@@ -199,7 +199,7 @@ make_leaf_water_potential_plots <- function() {
     p4 <- ggplot(popDF, aes(x=Day, y=psiMD, group=Trt)) +
         geom_errorbar(aes(col=Trt, x=Day, 
                           ymin=psiMD-psiMDSE, ymax=psiMD+psiMDSE),
-                      width=0.2)+
+                      width=1.2)+
         geom_point(aes(col=Trt, fill=Trt, pch=Trt), size=2)+
         geom_line(aes(col=Trt, lty=Trt))+
         theme_linedraw() +

@@ -29,7 +29,7 @@ make_whole_plant_hydraulic_conductance_plot <- function() {
     par(las=1)
     mtext(side=1,text=expression(bold(Day)),line=3,cex=1.25)
     axis(1,labels=TRUE,tck=-0.03,cex.axis=1.25)
-    title(main="Eucalyptus pilularis",  font.main=4,cex.main=1.1,line=0.5)
+    title(main="E. pilularis",  font.main=4,cex.main=1.1,line=0.5)
     legend("topleft",  expression(aC[a]~-~W,aC[a]~-~D,eC[a]~-~W,eC[a]~-~D),
            cex=1.025,bty="n",
            pch=c(1,1,16,16), col=c("blue","red","blue","red"))
@@ -52,7 +52,7 @@ make_whole_plant_hydraulic_conductance_plot <- function() {
     par(las=1)
     mtext(side=1,text=expression(bold(Day)),line=3,cex=1.25)
     axis(1,labels=TRUE,tck=-0.03,cex.axis=1.25)
-    title(main="Eucalyptus populnea",  font.main=4,cex.main=1.1,line=0.5)
+    title(main="E. populnea",  font.main=4,cex.main=1.1,line=0.5)
     
     dev.off()
 }

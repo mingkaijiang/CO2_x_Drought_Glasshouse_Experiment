@@ -38,6 +38,7 @@ make_glasshouse_condition_plots <- function() {
     ### plotting
     p1 <- ggplot(plotDF1, aes(x=DateTime, y=Tair, group=CO2)) +
         geom_point(aes(pch=CO2, fill=CO2))+
+        #geom_line(aes(lty=CO2))+
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_blank(),
@@ -87,7 +88,7 @@ make_glasshouse_condition_plots <- function() {
               legend.position="none",
               legend.box = 'horizontal',
               legend.box.just = 'left',
-              plot.title = element_text(size=20, face="bold", 
+              plot.title = element_text(size=30, face="bold", 
                                         hjust = 0.5))+
         ylab(expression(paste("Temperature ("*degree*"C)")))+
         scale_shape_manual(name=expression(CO[2]),

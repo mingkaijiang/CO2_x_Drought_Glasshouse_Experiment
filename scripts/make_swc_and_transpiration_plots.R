@@ -3,7 +3,7 @@ make_swc_and_transpiration_plots <- function() {
     ### E. pilularis
     pilDF<-read.csv("data/glasshouse2/Pilularis_Phys.csv",sep=",", header=TRUE)
     
-    ### E. Populnea
+    ### E. populnea
     popDF<-read.csv("data/glasshouse2/Populnea_Phys.csv",sep=",", header=TRUE)
     
     
@@ -60,7 +60,7 @@ make_swc_and_transpiration_plots <- function() {
                                        expression(paste(eC[a]*" - D")),
                                        expression(paste(eC[a]*" - W"))),
                               values=c(21,21,22,22))+
-        ggtitle("E. Pilularis")+
+        ggtitle("E. pilularis")+
         ylim(0, 0.4)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 22,22),
@@ -122,7 +122,7 @@ make_swc_and_transpiration_plots <- function() {
                                     expression(paste(eC[a]*" - D")),
                                     expression(paste(eC[a]*" - W"))),
                            values=c(21,21,22,22))+
-        ggtitle("E. Populnea")+
+        ggtitle("E. populnea")+
         ylim(0, 0.4)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 22,22),
