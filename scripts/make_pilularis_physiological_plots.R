@@ -62,7 +62,7 @@ make_pilularis_physiological_plots <- function() {
     with(PILPhysGraph,arrows(Day[Trt=="PILEND"],
                              UAearly[Trt=="PILEND"], Day[Trt=="PILEND"], LAearly[Trt=="PILEND"]
                              , length = .035, angle = 90, code = 3,col="blue")) 
-    mtext(side = 3, text ="Eucalyptus pilularis", line = 2.5,font=4, cex=1.0)
+    mtext(side = 3, text ="E. pilularis", line = 2.5,font=4, cex=1.0)
     mtext(side=3,text="Morning",line=0.5,font=1,cex=1.0)
     text(8.25,27.75, "(b)", pos=4,cex=1,font=2)
     

@@ -85,7 +85,7 @@ make_normalized_Asat_plots <- function() {
                                     expression(paste(eC[a]*" - D")),
                                     expression(paste(eC[a]*" - W"))),
                            values=c(21,21,22,22))+
-        ggtitle("E. Pilularis")+
+        ggtitle("E. pilularis")+
         ylim(0, 1)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 22,22),
@@ -260,7 +260,7 @@ make_normalized_Asat_plots <- function() {
                                     expression(paste(eC[a]*" - D")),
                                     expression(paste(eC[a]*" - W"))),
                            values=c(21,21,22,22))+
-        ggtitle("E. Populnea")+
+        ggtitle("E. populnea")+
         ylim(0, 1)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 22,22),

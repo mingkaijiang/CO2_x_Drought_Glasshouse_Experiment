@@ -179,6 +179,7 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
         geom_line(aes(col=Trt))+
         theme_linedraw() +
+        geom_hline(yintercept=1, col="black", lty=2)+
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
               axis.title.x=element_blank(),
@@ -216,6 +217,7 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
         geom_line(aes(col=Trt))+
         theme_linedraw() +
+        geom_hline(yintercept=1, col="black", lty=2)+
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
               axis.title.x=element_blank(),
@@ -253,6 +255,7 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
         geom_line(aes(col=Trt))+
         theme_linedraw() +
+        geom_hline(yintercept=1, col="black", lty=2)+
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
               axis.title.x=element_blank(),
@@ -290,6 +293,7 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
     p4 <- ggplot(plotDF1, aes(x=Day, y=CO2_GSdaily, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
         geom_line(aes(col=Trt))+
+        geom_hline(yintercept=1, col="black", lty=2)+
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
@@ -326,6 +330,7 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
     p5 <- ggplot(plotDF1, aes(x=Day, y=CO2_GSearly, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
         geom_line(aes(col=Trt))+
+        geom_hline(yintercept=1, col="black", lty=2)+
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
@@ -363,6 +368,7 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
         geom_line(aes(col=Trt))+
         theme_linedraw() +
+        geom_hline(yintercept=1, col="black", lty=2)+
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
               axis.title.x=element_blank(),
@@ -422,6 +428,7 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
     p1 <- ggplot(plotDF2, aes(x=Day, y=CO2_Adaily, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
         geom_line(aes(col=Trt))+
+        geom_hline(yintercept=1, col="black", lty=2)+
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
@@ -460,6 +467,7 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
         geom_line(aes(col=Trt))+
         theme_linedraw() +
+        geom_hline(yintercept=1, col="black", lty=2)+
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
               axis.title.x=element_blank(),
@@ -497,6 +505,7 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
         geom_line(aes(col=Trt))+
         theme_linedraw() +
+        geom_hline(yintercept=1, col="black", lty=2)+
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
               axis.title.x=element_blank(),
@@ -535,6 +544,7 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
         geom_line(aes(col=Trt))+
         theme_linedraw() +
+        geom_hline(yintercept=1, col="black", lty=2)+
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
               axis.title.x=element_blank(),
@@ -571,6 +581,7 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
         geom_line(aes(col=Trt))+
         theme_linedraw() +
+        geom_hline(yintercept=1, col="black", lty=2)+
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
               axis.title.x=element_blank(),
@@ -607,6 +618,7 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
         geom_line(aes(col=Trt))+
         theme_linedraw() +
+        geom_hline(yintercept=1, col="black", lty=2)+
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
               axis.title.x=element_blank(),

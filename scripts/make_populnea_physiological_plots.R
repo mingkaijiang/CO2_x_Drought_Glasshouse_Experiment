@@ -61,7 +61,7 @@ make_populnea_physiological_plots <- function() {
     with(POPPhysGraph,arrows(Day[Trt=="POPEND"],
                              UAearly[Trt=="POPEND"], Day[Trt=="POPEND"], LAearly[Trt=="POPEND"]
                              , length = .035, angle = 90, code = 3,col="blue")) 
-    mtext(side = 3, text ="Eucalyptus populnea", line = 2.5,font=4, cex=1.0)
+    mtext(side = 3, text ="E. populnea", line = 2.5,font=4, cex=1.0)
     mtext(side=3,text="Morning",line=0.5,font=1,cex=1.0)
     text(0.25,27.75, "(b)", pos=4,cex=1,font=2)
     
