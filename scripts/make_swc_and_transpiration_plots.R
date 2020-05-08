@@ -162,7 +162,7 @@ make_swc_and_transpiration_plots <- function() {
                                     expression(paste(aC[a]*" - W")),
                                     expression(paste(eC[a]*" - D")),
                                     expression(paste(eC[a]*" - W"))),
-                           values=c("white", "blue3", "white", "red2"),
+                           values=c("blue3", "blue3", "red2", "red2"),
                            guide=guide_legend(nrow=1))+
         scale_fill_manual(name="",
                           limits=c("PILAD", "PILAND", "PILED", "PILEND"),
@@ -170,7 +170,7 @@ make_swc_and_transpiration_plots <- function() {
                                    expression(paste(aC[a]*" - W")),
                                    expression(paste(eC[a]*" - D")),
                                    expression(paste(eC[a]*" - W"))),
-                          values=c("white", "white", "red2", "blue3"),
+                          values=c("white", "blue3", "white", "red2"),
                           guide=guide_legend(nrow=1))+
         scale_linetype_manual(name="",
                               limits=c("PILAD", "PILAND", "PILED", "PILEND"),
