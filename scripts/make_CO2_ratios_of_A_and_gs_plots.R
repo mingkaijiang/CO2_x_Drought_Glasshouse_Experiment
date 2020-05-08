@@ -452,43 +452,185 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
     plotDF2$CO2_WUEearly <- plotDF2$ele_WUEearly / plotDF2$amb_WUEearly
     plotDF2$CO2_WUElate <- plotDF2$ele_WUElate / plotDF2$amb_WUElate
     
-    ### calculate standard error for the ratios
-    #plotDF1$CO2_AdailySD <- sqrt((plotDF1$amb_AdailySD^2)/(plotDF1$amb_AdailyN) +
-    #                                 (plotDF1$ele_AdailySD^2)/(plotDF1$ele_AdailyN))
-    #plotDF1$CO2_AearlySD <- sqrt((plotDF1$amb_AearlySD^2)/(plotDF1$amb_AearlyN) +
-    #                                 (plotDF1$ele_AearlySD^2)/(plotDF1$ele_AearlyN))
-    #plotDF1$CO2_AlateSD <- sqrt((plotDF1$amb_AlateSD^2)/(plotDF1$amb_AlateN) +
-    #                                 (plotDF1$ele_AlateSD^2)/(plotDF1$ele_AlateN))
-    #
-    #plotDF1$CO2_GSdailySD <- sqrt((plotDF1$amb_GSdailySD^2)/(plotDF1$amb_GSdailyN) +
-    #                                 (plotDF1$ele_GSdailySD^2)/(plotDF1$ele_GSdailyN))
-    #plotDF1$CO2_GSearlySD <- sqrt((plotDF1$amb_GSearlySD^2)/(plotDF1$amb_GSearlyN) +
-    #                                 (plotDF1$ele_GSearlySD^2)/(plotDF1$ele_GSearlyN))
-    #plotDF1$CO2_GSlateSD <- sqrt((plotDF1$amb_GSlateSD^2)/(plotDF1$amb_GSlateN) +
-    #                                (plotDF1$ele_GSlateSD^2)/(plotDF1$ele_GSlateN))
-    #
-    #plotDF2$CO2_AdailySD <- sqrt((plotDF2$amb_AdailySD^2)/(plotDF2$amb_AdailyN) +
-    #                                 (plotDF2$ele_AdailySD^2)/(plotDF2$ele_AdailyN))
-    #plotDF2$CO2_AearlySD <- sqrt((plotDF2$amb_AearlySD^2)/(plotDF2$amb_AearlyN) +
-    #                                 (plotDF2$ele_AearlySD^2)/(plotDF2$ele_AearlyN))
-    #plotDF2$CO2_AlateSD <- sqrt((plotDF2$amb_AlateSD^2)/(plotDF2$amb_AlateN) +
-    #                                (plotDF2$ele_AlateSD^2)/(plotDF2$ele_AlateN))
-    #
-    #plotDF2$CO2_GSdailySD <- sqrt((plotDF2$amb_GSdailySD^2)/(plotDF2$amb_GSdailyN) +
-    #                                  (plotDF2$ele_GSdailySD^2)/(plotDF2$ele_GSdailyN))
-    #plotDF2$CO2_GSearlySD <- sqrt((plotDF2$amb_GSearlySD^2)/(plotDF2$amb_GSearlyN) +
-    #                                  (plotDF2$ele_GSearlySD^2)/(plotDF2$ele_GSearlyN))
-    #plotDF2$CO2_GSlateSD <- sqrt((plotDF2$amb_GSlateSD^2)/(plotDF2$amb_GSlateN) +
-    #                                 (plotDF2$ele_GSlateSD^2)/(plotDF2$ele_GSlateN))
+    ### calculate log to obtain SE
+    set.seed(123)
+    for (i in w) {
+        for (j in d1) {
+            ## subset
+            subDF <- subset(plotDF1, Trt==i & Day== j)
+            
+            ### create random data
+            XA1 <- rnorm(n=subDF$amb_AdailyN, mean=subDF$amb_Adaily, 
+                         sd=subDF$amb_AdailySD)
+            XE1 <- rnorm(n=subDF$ele_AdailyN, mean=subDF$ele_Adaily, 
+                         sd=subDF$ele_AdailySD)
+            
+            XA2 <- rnorm(n=subDF$amb_AearlyN, mean=subDF$amb_Aearly, 
+                         sd=subDF$amb_AearlySD)
+            XE2 <- rnorm(n=subDF$ele_AearlyN, mean=subDF$ele_Aearly, 
+                         sd=subDF$ele_AearlySD)
+            
+            XA3 <- rnorm(n=subDF$amb_AlateN, mean=subDF$amb_Alate, 
+                         sd=subDF$amb_AlateSD)
+            XE3 <- rnorm(n=subDF$ele_AlateN, mean=subDF$ele_Alate, 
+                         sd=subDF$ele_AlateSD)
+            
+            XA4 <- rnorm(n=subDF$amb_GSdailyN, mean=subDF$amb_GSdaily, 
+                         sd=subDF$amb_GSdailySD)
+            XE4 <- rnorm(n=subDF$ele_GSdailyN, mean=subDF$ele_GSdaily, 
+                         sd=subDF$ele_GSdailySD)
+            
+            XA5 <- rnorm(n=subDF$amb_GSearlyN, mean=subDF$amb_GSearly, 
+                         sd=subDF$amb_GSearlySD)
+            XE5 <- rnorm(n=subDF$ele_GSearlyN, mean=subDF$ele_GSearly, 
+                         sd=subDF$ele_GSearlySD)
+            
+            XA6 <- rnorm(n=subDF$amb_GSlateN, mean=subDF$amb_GSlate, 
+                         sd=subDF$amb_GSlateSD)
+            XE6 <- rnorm(n=subDF$ele_GSlateN, mean=subDF$ele_GSlate, 
+                         sd=subDF$ele_GSlateSD)
+            
+            ## calculate log
+            lnXA1 <- log(XA1) 
+            lnXE1 <- log(XE1)  
+            lnXA2 <- log(XA2) 
+            lnXE2 <- log(XE2)  
+            lnXA3 <- log(XA3) 
+            lnXE3 <- log(XE3)  
+            lnXA4 <- log(XA4) 
+            lnXE4 <- log(XE4)  
+            lnXA5 <- log(XA5) 
+            lnXE5 <- log(XE5)  
+            lnXA6 <- log(XA6) 
+            lnXE6 <- log(XE6) 
+            
+            ## log difference
+            ln.diff1 <- mean(lnXE1, na.rm=T) - mean(lnXA1, na.rm=T)
+            ln.diff2 <- mean(lnXE2, na.rm=T) - mean(lnXA2, na.rm=T)
+            ln.diff3 <- mean(lnXE3, na.rm=T) - mean(lnXA3, na.rm=T)
+            ln.diff4 <- mean(lnXE4, na.rm=T) - mean(lnXA4, na.rm=T)
+            ln.diff5 <- mean(lnXE5, na.rm=T) - mean(lnXA5, na.rm=T)
+            ln.diff6 <- mean(lnXE6, na.rm=T) - mean(lnXA6, na.rm=T)
+            
+            ## SE
+            ln.se1 <- sqrt(se(lnXA1)^2 + se(lnXE1)^2)
+            ln.se2 <- sqrt(se(lnXA2)^2 + se(lnXE2)^2)
+            ln.se3 <- sqrt(se(lnXA3)^2 + se(lnXE3)^2)
+            ln.se4 <- sqrt(se(lnXA4)^2 + se(lnXE4)^2)
+            ln.se5 <- sqrt(se(lnXA5)^2 + se(lnXE5)^2)
+            ln.se6 <- sqrt(se(lnXA6)^2 + se(lnXE6)^2)
+            
+            ## assign to original dataframe
+            plotDF1$CO2_AdailyUP[plotDF1$Trt==i&plotDF1$Day==j] <- exp(ln.diff1+ln.se1)
+            plotDF1$CO2_AearlyUP[plotDF1$Trt==i&plotDF1$Day==j] <- exp(ln.diff2+ln.se2)
+            plotDF1$CO2_AlateUP[plotDF1$Trt==i&plotDF1$Day==j] <- exp(ln.diff3+ln.se3)
+            plotDF1$CO2_GSdailyUP[plotDF1$Trt==i&plotDF1$Day==j] <- exp(ln.diff4+ln.se4)
+            plotDF1$CO2_GSearlyUP[plotDF1$Trt==i&plotDF1$Day==j] <- exp(ln.diff5+ln.se5)
+            plotDF1$CO2_GSlateUP[plotDF1$Trt==i&plotDF1$Day==j] <- exp(ln.diff6+ln.se6)
+            
+            
+            plotDF1$CO2_AdailyLO[plotDF1$Trt==i&plotDF1$Day==j] <- exp(ln.diff1-ln.se1)
+            plotDF1$CO2_AearlyLO[plotDF1$Trt==i&plotDF1$Day==j] <- exp(ln.diff2-ln.se2)
+            plotDF1$CO2_AlateLO[plotDF1$Trt==i&plotDF1$Day==j] <- exp(ln.diff3-ln.se3)
+            plotDF1$CO2_GSdailyLO[plotDF1$Trt==i&plotDF1$Day==j] <- exp(ln.diff4-ln.se4)
+            plotDF1$CO2_GSearlyLO[plotDF1$Trt==i&plotDF1$Day==j] <- exp(ln.diff5-ln.se5)
+            plotDF1$CO2_GSlateLO[plotDF1$Trt==i&plotDF1$Day==j] <- exp(ln.diff6-ln.se6)
+            
+        }
+    }
+    
+    for (i in w) {
+        for (j in d1) {
+            ## subset
+            subDF <- subset(plotDF2, Trt==i & Day== j)
+            
+            ### create random data
+            XA1 <- rnorm(n=subDF$amb_AdailyN, mean=subDF$amb_Adaily, 
+                         sd=subDF$amb_AdailySD)
+            XE1 <- rnorm(n=subDF$ele_AdailyN, mean=subDF$ele_Adaily, 
+                         sd=subDF$ele_AdailySD)
+            
+            XA2 <- rnorm(n=subDF$amb_AearlyN, mean=subDF$amb_Aearly, 
+                         sd=subDF$amb_AearlySD)
+            XE2 <- rnorm(n=subDF$ele_AearlyN, mean=subDF$ele_Aearly, 
+                         sd=subDF$ele_AearlySD)
+            
+            XA3 <- rnorm(n=subDF$amb_AlateN, mean=subDF$amb_Alate, 
+                         sd=subDF$amb_AlateSD)
+            XE3 <- rnorm(n=subDF$ele_AlateN, mean=subDF$ele_Alate, 
+                         sd=subDF$ele_AlateSD)
+            
+            XA4 <- rnorm(n=subDF$amb_GSdailyN, mean=subDF$amb_GSdaily, 
+                         sd=subDF$amb_GSdailySD)
+            XE4 <- rnorm(n=subDF$ele_GSdailyN, mean=subDF$ele_GSdaily, 
+                         sd=subDF$ele_GSdailySD)
+            
+            XA5 <- rnorm(n=subDF$amb_GSearlyN, mean=subDF$amb_GSearly, 
+                         sd=subDF$amb_GSearlySD)
+            XE5 <- rnorm(n=subDF$ele_GSearlyN, mean=subDF$ele_GSearly, 
+                         sd=subDF$ele_GSearlySD)
+            
+            XA6 <- rnorm(n=subDF$amb_GSlateN, mean=subDF$amb_GSlate, 
+                         sd=subDF$amb_GSlateSD)
+            XE6 <- rnorm(n=subDF$ele_GSlateN, mean=subDF$ele_GSlate, 
+                         sd=subDF$ele_GSlateSD)
+            
+            ## calculate log
+            lnXA1 <- log(XA1) 
+            lnXE1 <- log(XE1)  
+            lnXA2 <- log(XA2) 
+            lnXE2 <- log(XE2)  
+            lnXA3 <- log(XA3) 
+            lnXE3 <- log(XE3)  
+            lnXA4 <- log(XA4) 
+            lnXE4 <- log(XE4)  
+            lnXA5 <- log(XA5) 
+            lnXE5 <- log(XE5)  
+            lnXA6 <- log(XA6) 
+            lnXE6 <- log(XE6) 
+            
+            ## log difference
+            ln.diff1 <- mean(lnXE1, na.rm=T) - mean(lnXA1, na.rm=T)
+            ln.diff2 <- mean(lnXE2, na.rm=T) - mean(lnXA2, na.rm=T)
+            ln.diff3 <- mean(lnXE3, na.rm=T) - mean(lnXA3, na.rm=T)
+            ln.diff4 <- mean(lnXE4, na.rm=T) - mean(lnXA4, na.rm=T)
+            ln.diff5 <- mean(lnXE5, na.rm=T) - mean(lnXA5, na.rm=T)
+            ln.diff6 <- mean(lnXE6, na.rm=T) - mean(lnXA6, na.rm=T)
+            
+            ## SE
+            ln.se1 <- sqrt(se(lnXA1)^2 + se(lnXE1)^2)
+            ln.se2 <- sqrt(se(lnXA2)^2 + se(lnXE2)^2)
+            ln.se3 <- sqrt(se(lnXA3)^2 + se(lnXE3)^2)
+            ln.se4 <- sqrt(se(lnXA4)^2 + se(lnXE4)^2)
+            ln.se5 <- sqrt(se(lnXA5)^2 + se(lnXE5)^2)
+            ln.se6 <- sqrt(se(lnXA6)^2 + se(lnXE6)^2)
+            
+            ## assign to original dataframe
+            plotDF2$CO2_AdailyUP[plotDF2$Trt==i&plotDF2$Day==j] <- exp(ln.diff1+ln.se1)
+            plotDF2$CO2_AearlyUP[plotDF2$Trt==i&plotDF2$Day==j] <- exp(ln.diff2+ln.se2)
+            plotDF2$CO2_AlateUP[plotDF2$Trt==i&plotDF2$Day==j] <- exp(ln.diff3+ln.se3)
+            plotDF2$CO2_GSdailyUP[plotDF2$Trt==i&plotDF2$Day==j] <- exp(ln.diff4+ln.se4)
+            plotDF2$CO2_GSearlyUP[plotDF2$Trt==i&plotDF2$Day==j] <- exp(ln.diff5+ln.se5)
+            plotDF2$CO2_GSlateUP[plotDF2$Trt==i&plotDF2$Day==j] <- exp(ln.diff6+ln.se6)
+            
+            
+            plotDF2$CO2_AdailyLO[plotDF2$Trt==i&plotDF2$Day==j] <- exp(ln.diff1-ln.se1)
+            plotDF2$CO2_AearlyLO[plotDF2$Trt==i&plotDF2$Day==j] <- exp(ln.diff2-ln.se2)
+            plotDF2$CO2_AlateLO[plotDF2$Trt==i&plotDF2$Day==j] <- exp(ln.diff3-ln.se3)
+            plotDF2$CO2_GSdailyLO[plotDF2$Trt==i&plotDF2$Day==j] <- exp(ln.diff4-ln.se4)
+            plotDF2$CO2_GSearlyLO[plotDF2$Trt==i&plotDF2$Day==j] <- exp(ln.diff5-ln.se5)
+            plotDF2$CO2_GSlateLO[plotDF2$Trt==i&plotDF2$Day==j] <- exp(ln.diff6-ln.se6)
+        }
+    }
     
     
     ### plotting
     p1 <- ggplot(plotDF1, aes(x=Day, y=CO2_Adaily, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
         geom_line(aes(col=Trt))+
-        #geom_errorbar(aes(col=Trt, x=Day, 
-        #                  ymin=CO2_Adaily-CO2_AdailySD, ymax=CO2_Adaily+CO2_AdailySD),
-        #              width=0.2)+
+        geom_errorbar(aes(col=Trt, x=Day, 
+                          ymin=CO2_AdailyLO, ymax=CO2_AdailyUP),
+                      width=0.2)+
         theme_linedraw() +
         geom_hline(yintercept=1, col="black", lty=2)+
         theme(panel.grid.minor=element_blank(),
@@ -516,7 +658,7 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
                           values=c("grey", "black"),
                           guide=guide_legend(nrow=1))+
         ggtitle("Daily")+
-        ylim(0, 8)+
+        ylim(0, 12)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("grey", "black"),
