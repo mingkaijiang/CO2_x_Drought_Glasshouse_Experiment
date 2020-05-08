@@ -213,19 +213,19 @@ make_log_CO2_ratios_of_A_and_gs_plots <- function() {
         scale_color_manual(name="",
                            limits=c("D", "ND"),
                            labels=c("Droughted", "Well-watered"),
-                           values=c("red3", "blue2"),
+                           values=c("grey", "black"),
                            guide=guide_legend(nrow=1))+
         scale_fill_manual(name="",
                           limits=c("D", "ND"),
                           labels=c("Droughted", "Well-watered"),
-                          values=c("red3", "blue2"),
+                          values=c("grey", "black"),
                           guide=guide_legend(nrow=1))+
         ggtitle("Daily")+
         ylim(-2, 3)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
-                                                       fill = c("red3", "blue2"),
-                                                       col = c("red3", "blue2"))))+
+                                                       fill = c("grey", "black"),
+                                                       col = c("grey", "black"))))+
         scale_x_continuous(limits=c(0, 10),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
@@ -251,19 +251,19 @@ make_log_CO2_ratios_of_A_and_gs_plots <- function() {
         scale_color_manual(name="",
                            limits=c("D", "ND"),
                            labels=c("Droughted", "Well-watered"),
-                           values=c("red3", "blue2"),
+                           values=c("grey", "black"),
                            guide=guide_legend(nrow=1))+
         scale_fill_manual(name="",
                           limits=c("D", "ND"),
                           labels=c("Droughted", "Well-watered"),
-                          values=c("red3", "blue2"),
+                          values=c("grey", "black"),
                           guide=guide_legend(nrow=1))+
         ggtitle("Morning")+
         ylim(-2, 3)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
-                                                       fill = c("red3", "blue2"),
-                                                       col = c("red3", "blue2"))))+
+                                                       fill = c("grey", "black"),
+                                                       col = c("grey", "black"))))+
         scale_x_continuous(limits=c(0, 10),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
@@ -289,19 +289,19 @@ make_log_CO2_ratios_of_A_and_gs_plots <- function() {
         scale_color_manual(name="",
                            limits=c("D", "ND"),
                            labels=c("Droughted", "Well-watered"),
-                           values=c("red3", "blue2"),
+                           values=c("grey", "black"),
                            guide=guide_legend(nrow=1))+
         scale_fill_manual(name="",
                           limits=c("D", "ND"),
                           labels=c("Droughted", "Well-watered"),
-                          values=c("red3", "blue2"),
+                          values=c("grey", "black"),
                           guide=guide_legend(nrow=1))+
         ggtitle("Midday")+
         ylim(-2, 3)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
-                                                       fill = c("red3", "blue2"),
-                                                       col = c("red3", "blue2"))))+
+                                                       fill = c("grey", "black"),
+                                                       col = c("grey", "black"))))+
         scale_x_continuous(limits=c(0, 10),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
@@ -328,18 +328,18 @@ make_log_CO2_ratios_of_A_and_gs_plots <- function() {
         scale_color_manual(name="",
                            limits=c("D", "ND"),
                            labels=c("Droughted", "Well-watered"),
-                           values=c("red3", "blue2"),
+                           values=c("grey", "black"),
                            guide=guide_legend(nrow=1))+
         scale_fill_manual(name="",
                           limits=c("D", "ND"),
                           labels=c("Droughted", "Well-watered"),
-                          values=c("red3", "blue2"),
+                          values=c("grey", "black"),
                           guide=guide_legend(nrow=1))+
         ylim(-2, 3)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
-                                                       fill = c("red3", "blue2"),
-                                                       col = c("red3", "blue2"))))+
+                                                       fill = c("grey", "black"),
+                                                       col = c("grey", "black"))))+
         scale_x_continuous(limits=c(0, 10),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
@@ -365,18 +365,18 @@ make_log_CO2_ratios_of_A_and_gs_plots <- function() {
         scale_color_manual(name="",
                            limits=c("D", "ND"),
                            labels=c("Droughted", "Well-watered"),
-                           values=c("red3", "blue2"),
+                           values=c("grey", "black"),
                            guide=guide_legend(nrow=1))+
         scale_fill_manual(name="",
                           limits=c("D", "ND"),
                           labels=c("Droughted", "Well-watered"),
-                          values=c("red3", "blue2"),
+                          values=c("grey", "black"),
                           guide=guide_legend(nrow=1))+
         ylim(-2, 3)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
-                                                       fill = c("red3", "blue2"),
-                                                       col = c("red3", "blue2"))))+
+                                                       fill = c("grey", "black"),
+                                                       col = c("grey", "black"))))+
         scale_x_continuous(limits=c(0, 10),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
@@ -402,18 +402,18 @@ make_log_CO2_ratios_of_A_and_gs_plots <- function() {
         scale_color_manual(name="",
                            limits=c("D", "ND"),
                            labels=c("Droughted", "Well-watered"),
-                           values=c("red3", "blue2"),
+                           values=c("grey", "black"),
                            guide=guide_legend(nrow=1))+
         scale_fill_manual(name="",
                           limits=c("D", "ND"),
                           labels=c("Droughted", "Well-watered"),
-                          values=c("red3", "blue2"),
+                          values=c("grey", "black"),
                           guide=guide_legend(nrow=1))+
         ylim(-2, 3)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
-                                                       fill = c("red3", "blue2"),
-                                                       col = c("red3", "blue2"))))+
+                                                       fill = c("grey", "black"),
+                                                       col = c("grey", "black"))))+
         scale_x_continuous(limits=c(0, 10),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
@@ -463,19 +463,19 @@ make_log_CO2_ratios_of_A_and_gs_plots <- function() {
         scale_color_manual(name="",
                            limits=c("D", "ND"),
                            labels=c("Droughted", "Well-watered"),
-                           values=c("red3", "blue2"),
+                           values=c("grey", "black"),
                            guide=guide_legend(nrow=1))+
         scale_fill_manual(name="",
                           limits=c("D", "ND"),
                           labels=c("Droughted", "Well-watered"),
-                          values=c("red3", "blue2"),
+                          values=c("grey", "black"),
                           guide=guide_legend(nrow=1))+
         ggtitle("Daily")+
         ylim(-2, 3)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
-                                                       fill = c("red3", "blue2"),
-                                                       col = c("red3", "blue2"))))+
+                                                       fill = c("grey", "black"),
+                                                       col = c("grey", "black"))))+
         scale_x_continuous(limits=c(0, 40),
                            breaks=c(0, 5, 10, 20, 30, 40))
     
@@ -501,19 +501,19 @@ make_log_CO2_ratios_of_A_and_gs_plots <- function() {
         scale_color_manual(name="",
                            limits=c("D", "ND"),
                            labels=c("Droughted", "Well-watered"),
-                           values=c("red3", "blue2"),
+                           values=c("grey", "black"),
                            guide=guide_legend(nrow=1))+
         scale_fill_manual(name="",
                           limits=c("D", "ND"),
                           labels=c("Droughted", "Well-watered"),
-                          values=c("red3", "blue2"),
+                          values=c("grey", "black"),
                           guide=guide_legend(nrow=1))+
         ggtitle("Morning")+
         ylim(-2, 3)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
-                                                       fill = c("red3", "blue2"),
-                                                       col = c("red3", "blue2"))))+
+                                                       fill = c("grey", "black"),
+                                                       col = c("grey", "black"))))+
         scale_x_continuous(limits=c(0, 40),
                            breaks=c(0, 5, 10, 20, 30, 40))
     
@@ -539,19 +539,19 @@ make_log_CO2_ratios_of_A_and_gs_plots <- function() {
         scale_color_manual(name="",
                            limits=c("D", "ND"),
                            labels=c("Droughted", "Well-watered"),
-                           values=c("red3", "blue2"),
+                           values=c("grey", "black"),
                            guide=guide_legend(nrow=1))+
         scale_fill_manual(name="",
                           limits=c("D", "ND"),
                           labels=c("Droughted", "Well-watered"),
-                          values=c("red3", "blue2"),
+                          values=c("grey", "black"),
                           guide=guide_legend(nrow=1))+
         ggtitle("Midday")+
         ylim(-2, 3)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
-                                                       fill = c("red3", "blue2"),
-                                                       col = c("red3", "blue2"))))+
+                                                       fill = c("grey", "black"),
+                                                       col = c("grey", "black"))))+
         scale_x_continuous(limits=c(0, 40),
                            breaks=c(0, 5, 10, 20, 30, 40))
     
@@ -578,18 +578,18 @@ make_log_CO2_ratios_of_A_and_gs_plots <- function() {
         scale_color_manual(name="",
                            limits=c("D", "ND"),
                            labels=c("Droughted", "Well-watered"),
-                           values=c("red3", "blue2"),
+                           values=c("grey", "black"),
                            guide=guide_legend(nrow=1))+
         scale_fill_manual(name="",
                           limits=c("D", "ND"),
                           labels=c("Droughted", "Well-watered"),
-                          values=c("red3", "blue2"),
+                          values=c("grey", "black"),
                           guide=guide_legend(nrow=1))+
         ylim(-2, 3)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
-                                                       fill = c("red3", "blue2"),
-                                                       col = c("red3", "blue2"))))+
+                                                       fill = c("grey", "black"),
+                                                       col = c("grey", "black"))))+
         scale_x_continuous(limits=c(0, 40),
                            breaks=c(0, 5, 10, 20, 30, 40))
     
@@ -615,18 +615,18 @@ make_log_CO2_ratios_of_A_and_gs_plots <- function() {
         scale_color_manual(name="",
                            limits=c("D", "ND"),
                            labels=c("Droughted", "Well-watered"),
-                           values=c("red3", "blue2"),
+                           values=c("grey", "black"),
                            guide=guide_legend(nrow=1))+
         scale_fill_manual(name="",
                           limits=c("D", "ND"),
                           labels=c("Droughted", "Well-watered"),
-                          values=c("red3", "blue2"),
+                          values=c("grey", "black"),
                           guide=guide_legend(nrow=1))+
         ylim(-2, 3)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
-                                                       fill = c("red3", "blue2"),
-                                                       col = c("red3", "blue2"))))+
+                                                       fill = c("grey", "black"),
+                                                       col = c("grey", "black"))))+
         scale_x_continuous(limits=c(0, 40),
                            breaks=c(0, 5, 10, 20, 30, 40))
     
@@ -652,18 +652,18 @@ make_log_CO2_ratios_of_A_and_gs_plots <- function() {
         scale_color_manual(name="",
                            limits=c("D", "ND"),
                            labels=c("Droughted", "Well-watered"),
-                           values=c("red3", "blue2"),
+                           values=c("grey", "black"),
                            guide=guide_legend(nrow=1))+
         scale_fill_manual(name="",
                           limits=c("D", "ND"),
                           labels=c("Droughted", "Well-watered"),
-                          values=c("red3", "blue2"),
+                          values=c("grey", "black"),
                           guide=guide_legend(nrow=1))+
         ylim(-2, 3)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
-                                                       fill = c("red3", "blue2"),
-                                                       col = c("red3", "blue2"))))+
+                                                       fill = c("grey", "black"),
+                                                       col = c("grey", "black"))))+
         scale_x_continuous(limits=c(0, 40),
                            breaks=c(0, 5, 10, 20, 30, 40))
     
