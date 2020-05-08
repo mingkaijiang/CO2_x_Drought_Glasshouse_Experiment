@@ -11,6 +11,7 @@ rm(list=ls(all=TRUE))
 #### read in necessary stuffs
 source("prepare.R")
 
+outdir <- "output/BM/"
 
 ############################# plotting #################################
 ### make glasshouse condition (T, RH and VPD during day and night times) plots

@@ -37,8 +37,7 @@ make_glasshouse_condition_plots <- function() {
     
     ### plotting
     p1 <- ggplot(plotDF1, aes(x=DateTime, y=Tair, group=CO2)) +
-        geom_point(aes(pch=CO2, fill=CO2))+
-        #geom_line(aes(lty=CO2))+
+        geom_point(aes(color=CO2), pch=19)+
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_blank(),
@@ -57,25 +56,25 @@ make_glasshouse_condition_plots <- function() {
         scale_shape_manual(name=expression(CO[2]),
                           limits=c("A", "E"),
                           labels=c("amb", "ele"),
-                          values=c(21,22),
+                          values=c(19,19),
                           guide=guide_legend(nrow=1))+
-        scale_fill_manual(name=expression(CO[2]),
+        scale_color_manual(name=expression(CO[2]),
                            limits=c("A", "E"),
                            labels=c("amb", "ele"),
-                           values=c("white", "black"),
+                           values=c("blue3", "red2"),
                            guide=guide_legend(nrow=1))+
         scale_x_datetime(name="Date", 
                          breaks=date_breaks("24 hour"),
                          labels=date_format("%m-%d"))+
         ggtitle("Daytime")+
         ylim(10, 35)+
-        guides(fill = guide_legend(override.aes = list(shape = c(21, 22),
-                                                       fill = c("white", "black"),
+        guides(fill = guide_legend(override.aes = list(shape = c(19, 19),
+                                                       fill = c("blue3", "red2"),
                                                        size= c(10, 10))))
     
     ### night time
     p2 <- ggplot(plotDF2, aes(x=DateTime, y=Tair, group=CO2)) +
-        geom_point(aes(pch=CO2, fill=CO2))+
+        geom_point(aes(color=CO2), pch=19)+
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_blank(),
@@ -94,13 +93,13 @@ make_glasshouse_condition_plots <- function() {
         scale_shape_manual(name=expression(CO[2]),
                            limits=c("A", "E"),
                            labels=c("amb", "ele"),
-                           values=c(21,22),
+                           values=c(19,19),
                            guide=guide_legend(nrow=1))+
-        scale_fill_manual(name=expression(CO[2]),
+        scale_color_manual(name=expression(CO[2]),
                           limits=c("A", "E"),
                           labels=c("amb", "ele"),
-                          values=c("white", "black"),
-                           guide=guide_legend(nrow=1))+
+                          values=c("blue3", "red2"),
+                          guide=guide_legend(nrow=1))+
         scale_x_datetime(name="Date", 
                          breaks=date_breaks("24 hour"),
                          labels=date_format("%m-%d"))+
@@ -109,7 +108,7 @@ make_glasshouse_condition_plots <- function() {
     
     
     p3 <- ggplot(plotDF1, aes(x=DateTime, y=RH, group=CO2)) +
-        geom_point(aes(pch=CO2, fill=CO2))+
+        geom_point(aes(color=CO2), pch=19)+
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_blank(),
@@ -128,13 +127,13 @@ make_glasshouse_condition_plots <- function() {
         scale_shape_manual(name=expression(CO[2]),
                            limits=c("A", "E"),
                            labels=c("amb", "ele"),
-                           values=c(21,22),
+                           values=c(19,19),
                            guide=guide_legend(nrow=1))+
-        scale_fill_manual(name=expression(CO[2]),
+        scale_color_manual(name=expression(CO[2]),
                           limits=c("A", "E"),
                           labels=c("amb", "ele"),
-                          values=c("white", "black"),
-                           guide=guide_legend(nrow=1))+
+                          values=c("blue3", "red2"),
+                          guide=guide_legend(nrow=1))+
         scale_x_datetime(name="Date", 
                          breaks=date_breaks("24 hour"),
                          labels=date_format("%m-%d"))+
@@ -142,7 +141,7 @@ make_glasshouse_condition_plots <- function() {
     
     ### night time
     p4 <- ggplot(plotDF2, aes(x=DateTime, y=RH, group=CO2)) +
-        geom_point(aes(pch=CO2, fill=CO2))+
+        geom_point(aes(color=CO2), pch=19)+
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_blank(),
@@ -161,13 +160,13 @@ make_glasshouse_condition_plots <- function() {
         scale_shape_manual(name=expression(CO[2]),
                            limits=c("A", "E"),
                            labels=c("amb", "ele"),
-                           values=c(21,22),
+                           values=c(19,19),
                            guide=guide_legend(nrow=1))+
-        scale_fill_manual(name=expression(CO[2]),
+        scale_color_manual(name=expression(CO[2]),
                           limits=c("A", "E"),
                           labels=c("amb", "ele"),
-                          values=c("white", "black"),
-                           guide=guide_legend(nrow=1))+
+                          values=c("blue3", "red2"),
+                          guide=guide_legend(nrow=1))+
         scale_x_datetime(name="Date", 
                          breaks=date_breaks("24 hour"),
                          labels=date_format("%m-%d"))+
@@ -175,7 +174,7 @@ make_glasshouse_condition_plots <- function() {
     
     
     p5 <- ggplot(plotDF1, aes(x=DateTime, y=VPD, group=CO2)) +
-        geom_point(aes(pch=CO2, fill=CO2))+
+        geom_point(aes(color=CO2), pch=19)+
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
@@ -194,13 +193,13 @@ make_glasshouse_condition_plots <- function() {
         scale_shape_manual(name=expression(CO[2]),
                            limits=c("A", "E"),
                            labels=c("amb", "ele"),
-                           values=c(21,22),
+                           values=c(19,19),
                            guide=guide_legend(nrow=1))+
-        scale_fill_manual(name=expression(CO[2]),
+        scale_color_manual(name=expression(CO[2]),
                           limits=c("A", "E"),
                           labels=c("amb", "ele"),
-                          values=c("white", "black"),
-                           guide=guide_legend(nrow=1))+
+                          values=c("blue3", "red2"),
+                          guide=guide_legend(nrow=1))+
         scale_x_datetime(name="Date", 
                          breaks=date_breaks("24 hour"),
                          labels=date_format("%m-%d"))+
@@ -208,7 +207,7 @@ make_glasshouse_condition_plots <- function() {
     
     ### night time
     p6 <- ggplot(plotDF2, aes(x=DateTime, y=VPD, group=CO2)) +
-        geom_point(aes(pch=CO2, fill=CO2))+
+        geom_point(aes(color=CO2), pch=19)+
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
@@ -227,13 +226,13 @@ make_glasshouse_condition_plots <- function() {
         scale_shape_manual(name=expression(CO[2]),
                            limits=c("A", "E"),
                            labels=c("amb", "ele"),
-                           values=c(21,22),
+                           values=c(19,19),
                            guide=guide_legend(nrow=1))+
-        scale_fill_manual(name=expression(CO[2]),
+        scale_color_manual(name=expression(CO[2]),
                           limits=c("A", "E"),
                           labels=c("amb", "ele"),
-                          values=c("white", "black"),
-                           guide=guide_legend(nrow=1))+
+                          values=c("blue3", "red2"),
+                          guide=guide_legend(nrow=1))+
         scale_x_datetime(name="Date", 
                          breaks=date_breaks("24 hour"),
                          labels=date_format("%m-%d"))+

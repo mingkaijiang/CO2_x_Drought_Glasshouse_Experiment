@@ -72,7 +72,7 @@ make_leaf_area_and_biomass_plots <- function() {
     ### plotting
     p1 <- ggplot(data=subDF1, 
                  aes(brk, LA_final.mean)) +
-        geom_bar(stat = "identity", aes(alpha=CO2, fill=H2O), 
+        geom_bar(stat = "identity", aes(alpha=H2O, fill=CO2), 
                  position="dodge", col="black") +
         geom_errorbar(aes(x=brk, ymin=LA_final.mean-LA_final.se, 
                           ymax=LA_final.mean+LA_final.se), 
@@ -93,14 +93,14 @@ make_leaf_area_and_biomass_plots <- function() {
               plot.title = element_text(size=14, face="bold.italic", 
                                         hjust = 0.5))+
         ylab(expression(paste("Leaf area ("*m^2*")")))+
-        scale_alpha_manual(name=expression(CO[2]),
+        scale_fill_manual(name=expression(CO[2]),
                           limits=c("A", "E"),
                           labels=c("amb", "ele"),
-                          values=c(0.2, 1.0),
+                          values=c("blue2", "red2"),
                           guide=guide_legend(nrow=1))+
-        scale_fill_manual(name=expression(H[2]*O),
+        scale_alpha_manual(name=expression(H[2]*O),
                            limits=c("D", "ND"),
-                          values=c("red2", "blue2"),
+                           values=c(0.2, 1.0),
                            labels=c("Droughted", "Well-watered"),
                            guide=guide_legend(nrow=1))+
         xlab("")+
@@ -112,7 +112,7 @@ make_leaf_area_and_biomass_plots <- function() {
     
     p2 <- ggplot(data=subDF2, 
                  aes(brk, LA_final.mean)) +
-        geom_bar(stat = "identity", aes(alpha=CO2, fill=H2O), 
+        geom_bar(stat = "identity", aes(alpha=H2O, fill=CO2), 
                  position="dodge", col="black") +
         geom_errorbar(aes(x=brk, ymin=LA_final.mean-LA_final.se, 
                           ymax=LA_final.mean+LA_final.se), 
@@ -133,16 +133,16 @@ make_leaf_area_and_biomass_plots <- function() {
               plot.title = element_text(size=14, face="bold.italic", 
                                         hjust = 0.5))+
         ylab(expression(paste("Leaf area ("*m^2*")")))+
-        scale_alpha_manual(name=expression(CO[2]),
-                           limits=c("A", "E"),
-                           labels=c("amb", "ele"),
-                           values=c(0.2, 1.0),
-                           guide=guide_legend(nrow=1))+
-        scale_fill_manual(name=expression(H[2]*O),
-                          limits=c("D", "ND"),
-                          values=c("red2", "blue2"),
-                          labels=c("Droughted", "Well-watered"),
+        scale_fill_manual(name=expression(CO[2]),
+                          limits=c("A", "E"),
+                          labels=c("amb", "ele"),
+                          values=c("blue2", "red2"),
                           guide=guide_legend(nrow=1))+
+        scale_alpha_manual(name=expression(H[2]*O),
+                           limits=c("D", "ND"),
+                           values=c(0.2, 1.0),
+                           labels=c("Droughted", "Well-watered"),
+                           guide=guide_legend(nrow=1))+
         xlab("")+
         scale_x_continuous(limits=c(0.5, 4.5),
                            breaks=c(1.5, 3.5),

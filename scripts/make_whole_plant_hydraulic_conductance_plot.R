@@ -41,7 +41,7 @@ make_whole_plant_hydraulic_conductance_plot <- function() {
                                     expression(paste(aC[a]*" - W")),
                                     expression(paste(eC[a]*" - D")),
                                     expression(paste(eC[a]*" - W"))),
-                           values=c("red2", "blue3", "red2", "blue3"),
+                           values=c("blue3", "blue3", "red2", "red2"),
                            guide=guide_legend(nrow=1))+
         scale_fill_manual(name="",
                           limits=c("PILAD", "PILAND", "PILED", "PILEND"),
@@ -49,7 +49,7 @@ make_whole_plant_hydraulic_conductance_plot <- function() {
                                    expression(paste(aC[a]*" - W")),
                                    expression(paste(eC[a]*" - D")),
                                    expression(paste(eC[a]*" - W"))),
-                          values=c("white", "white", "red2", "blue3"),
+                          values=c("white", "blue3", "white", "red2"),
                           guide=guide_legend(nrow=1))+
         scale_linetype_manual(name="",
                               limits=c("PILAD", "PILAND", "PILED", "PILEND"),
@@ -57,20 +57,20 @@ make_whole_plant_hydraulic_conductance_plot <- function() {
                                        expression(paste(aC[a]*" - W")),
                                        expression(paste(eC[a]*" - D")),
                                        expression(paste(eC[a]*" - W"))),
-                              values=c("dotted", "dotted", "solid", "solid"))+
+                              values=c("dotted", "solid", "dotted", "solid"))+
         scale_shape_manual(name="",
                            limits=c("PILAD", "PILAND", "PILED", "PILEND"),
                            labels=c(expression(paste(aC[a]*" - D")), 
                                     expression(paste(aC[a]*" - W")),
                                     expression(paste(eC[a]*" - D")),
                                     expression(paste(eC[a]*" - W"))),
-                           values=c(21,21,22,22))+
+                           values=c(21,21,21,21))+
         ggtitle("E. pilularis")+
         ylim(0, 30)+
         xlab("Day")+
-        guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 22,22),
-                                                       fill = c("white", "white", "red2", "blue3"),
-                                                       col = c("red2", "blue3", "red2", "blue3"),
+        guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 21, 21),
+                                                       fill = c("white", "blue3", "white", "red2"),
+                                                       col = c("blue3", "blue3", "red2", "red2"),
                                                        linetype = c("dotted", "dotted", "solid", "solid"))))+
         scale_x_continuous(limits=c(0, 10),
                            breaks=c(0, 2, 4, 6, 8, 10))
@@ -105,7 +105,7 @@ make_whole_plant_hydraulic_conductance_plot <- function() {
                                     expression(paste(aC[a]*" - W")),
                                     expression(paste(eC[a]*" - D")),
                                     expression(paste(eC[a]*" - W"))),
-                           values=c("red2", "blue3", "red2", "blue3"),
+                           values=c("blue3", "blue3", "red2", "red2"),
                            guide=guide_legend(nrow=1))+
         scale_fill_manual(name="",
                           limits=c("POPAD", "POPAND", "POPED", "POPEND"),
@@ -113,7 +113,7 @@ make_whole_plant_hydraulic_conductance_plot <- function() {
                                    expression(paste(aC[a]*" - W")),
                                    expression(paste(eC[a]*" - D")),
                                    expression(paste(eC[a]*" - W"))),
-                          values=c("white", "white", "red2", "blue3"),
+                          values=c("white", "blue3", "white", "red2"),
                           guide=guide_legend(nrow=1))+
         scale_linetype_manual(name="",
                               limits=c("POPAD", "POPAND", "POPED", "POPEND"),
@@ -121,20 +121,20 @@ make_whole_plant_hydraulic_conductance_plot <- function() {
                                        expression(paste(aC[a]*" - W")),
                                        expression(paste(eC[a]*" - D")),
                                        expression(paste(eC[a]*" - W"))),
-                              values=c("dotted", "dotted", "solid", "solid"))+
+                              values=c("dotted", "solid", "dotted", "solid"))+
         scale_shape_manual(name="",
                            limits=c("POPAD", "POPAND", "POPED", "POPEND"),
                            labels=c(expression(paste(aC[a]*" - D")), 
                                     expression(paste(aC[a]*" - W")),
                                     expression(paste(eC[a]*" - D")),
                                     expression(paste(eC[a]*" - W"))),
-                           values=c(21,21,22,22))+
+                           values=c(21,21,21,21))+
         ggtitle("E. populnea")+
         ylim(0, 30)+
         xlab("Day")+
-        guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 22,22),
-                                                       fill = c("white", "white", "red2", "blue3"),
-                                                       col = c("red2", "blue3", "red2", "blue3"),
+        guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 21, 21),
+                                                       fill = c("white", "blue3", "white", "red2"),
+                                                       col = c("blue3", "blue3", "red2", "red2"),
                                                        linetype = c("dotted", "dotted", "solid", "solid"))))+
         scale_x_continuous(limits=c(0, 40),
                            breaks=c(0, 5, 10, 20, 30, 40))
