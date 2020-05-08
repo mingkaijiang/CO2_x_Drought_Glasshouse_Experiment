@@ -409,6 +409,24 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
     plotDF2$Trt <- gsub(2, "ND", plotDF2$Trt)
     plotDF2$Trt <- as.character(plotDF2$Trt)
     
+    ### Calcualte iWUE
+    plotDF1$amb_WUEdaily <- plotDF1$amb_Adaily / plotDF1$amb_GSdaily
+    plotDF1$amb_WUEearly <- plotDF1$amb_Aearly / plotDF1$amb_GSearly
+    plotDF1$amb_WUElate <- plotDF1$amb_Alate / plotDF1$amb_GSlate
+    
+    plotDF1$ele_WUEdaily <- plotDF1$ele_Adaily / plotDF1$ele_GSdaily
+    plotDF1$ele_WUEearly <- plotDF1$ele_Aearly / plotDF1$ele_GSearly
+    plotDF1$ele_WUElate <- plotDF1$ele_Alate / plotDF1$ele_GSlate
+    
+    plotDF2$amb_WUEdaily <- plotDF2$amb_Adaily / plotDF2$amb_GSdaily
+    plotDF2$amb_WUEearly <- plotDF2$amb_Aearly / plotDF2$amb_GSearly
+    plotDF2$amb_WUElate <- plotDF2$amb_Alate / plotDF2$amb_GSlate
+    
+    plotDF2$ele_WUEdaily <- plotDF2$ele_Adaily / plotDF2$ele_GSdaily
+    plotDF2$ele_WUEearly <- plotDF2$ele_Aearly / plotDF2$ele_GSearly
+    plotDF2$ele_WUElate <- plotDF2$ele_Alate / plotDF2$ele_GSlate
+    
+    
     ### Calculate CO2 signal
     plotDF1$CO2_Adaily <- plotDF1$ele_Adaily / plotDF1$amb_Adaily
     plotDF1$CO2_Aearly <- plotDF1$ele_Aearly / plotDF1$amb_Aearly
@@ -425,6 +443,14 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
     plotDF2$CO2_GSdaily <- plotDF2$ele_GSdaily / plotDF2$amb_GSdaily
     plotDF2$CO2_GSearly <- plotDF2$ele_GSearly / plotDF2$amb_GSearly
     plotDF2$CO2_GSlate <- plotDF2$ele_GSlate / plotDF2$amb_GSlate
+    
+    plotDF1$CO2_WUEdaily <- plotDF1$ele_WUEdaily / plotDF1$amb_WUEdaily
+    plotDF1$CO2_WUEearly <- plotDF1$ele_WUEearly / plotDF1$amb_WUEearly
+    plotDF1$CO2_WUElate <- plotDF1$ele_WUElate / plotDF1$amb_WUElate
+    
+    plotDF2$CO2_WUEdaily <- plotDF2$ele_WUEdaily / plotDF2$amb_WUEdaily
+    plotDF2$CO2_WUEearly <- plotDF2$ele_WUEearly / plotDF2$amb_WUEearly
+    plotDF2$CO2_WUElate <- plotDF2$ele_WUElate / plotDF2$amb_WUElate
     
     ### calculate standard error for the ratios
     #plotDF1$CO2_AdailySD <- sqrt((plotDF1$amb_AdailySD^2)/(plotDF1$amb_AdailyN) +
@@ -687,20 +713,134 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
                            breaks=c(0, 2, 4, 6, 8, 10))
     
     
+    
+    p7 <- ggplot(plotDF1, aes(x=Day, y=CO2_WUEdaily, group=Trt)) +
+        geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
+        geom_line(aes(col=Trt))+
+        geom_hline(yintercept=1, col="black", lty=2)+
+        theme_linedraw() +
+        theme(panel.grid.minor=element_blank(),
+              axis.text.x=element_text(size=12),
+              axis.title.x=element_blank(),
+              axis.text.y=element_text(size=12),
+              axis.title.y=element_text(size=14),
+              legend.text=element_text(size=14),
+              legend.title=element_text(size=16),
+              panel.grid.major=element_blank(),
+              legend.position="none",
+              legend.box = 'horizontal',
+              legend.box.just = 'left',
+              plot.title = element_text(size=16, face="bold", 
+                                        hjust = 0.5))+
+        ylab(expression(paste(CO[2]* " ratio iWUE")))+
+        scale_color_manual(name="",
+                           limits=c("D", "ND"),
+                           labels=c("Droughted", "Well-watered"),
+                           values=c("grey", "black"),
+                           guide=guide_legend(nrow=1))+
+        scale_fill_manual(name="",
+                          limits=c("D", "ND"),
+                          labels=c("Droughted", "Well-watered"),
+                          values=c("grey", "black"),
+                          guide=guide_legend(nrow=1))+
+        ylim(0, 5)+
+        xlab("Day")+
+        guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
+                                                       fill = c("grey", "black"),
+                                                       col = c("grey", "black"))))+
+        scale_x_continuous(limits=c(0, 10),
+                           breaks=c(0, 2, 4, 6, 8, 10))
+    
+    p8 <- ggplot(plotDF1, aes(x=Day, y=CO2_WUEearly, group=Trt)) +
+        geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
+        geom_line(aes(col=Trt))+
+        geom_hline(yintercept=1, col="black", lty=2)+
+        theme_linedraw() +
+        theme(panel.grid.minor=element_blank(),
+              axis.text.x=element_text(size=12),
+              axis.title.x=element_blank(),
+              axis.text.y=element_text(size=12),
+              axis.title.y=element_blank(),
+              legend.text=element_text(size=14),
+              legend.title=element_text(size=16),
+              panel.grid.major=element_blank(),
+              legend.position="none",
+              legend.box = 'horizontal',
+              legend.box.just = 'left',
+              plot.title = element_text(size=16, face="bold", 
+                                        hjust = 0.5))+
+        ylab(expression(paste(CO[2]* " ratio iWUE")))+
+        scale_color_manual(name="",
+                           limits=c("D", "ND"),
+                           labels=c("Droughted", "Well-watered"),
+                           values=c("grey", "black"),
+                           guide=guide_legend(nrow=1))+
+        scale_fill_manual(name="",
+                          limits=c("D", "ND"),
+                          labels=c("Droughted", "Well-watered"),
+                          values=c("grey", "black"),
+                          guide=guide_legend(nrow=1))+
+        ylim(0, 5)+
+        xlab("Day")+
+        guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
+                                                       fill = c("grey", "black"),
+                                                       col = c("grey", "black"))))+
+        scale_x_continuous(limits=c(0, 10),
+                           breaks=c(0, 2, 4, 6, 8, 10))
+    
+    p9 <- ggplot(plotDF1, aes(x=Day, y=CO2_WUElate, group=Trt)) +
+        geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
+        geom_line(aes(col=Trt))+
+        theme_linedraw() +
+        geom_hline(yintercept=1, col="black", lty=2)+
+        theme(panel.grid.minor=element_blank(),
+              axis.text.x=element_text(size=12),
+              axis.title.x=element_blank(),
+              axis.text.y=element_text(size=12),
+              axis.title.y=element_blank(),
+              legend.text=element_text(size=14),
+              legend.title=element_text(size=16),
+              panel.grid.major=element_blank(),
+              legend.position="none",
+              legend.box = 'horizontal',
+              legend.box.just = 'left',
+              plot.title = element_text(size=16, face="bold", 
+                                        hjust = 0.5))+
+        ylab(expression(paste(CO[2]* " ratio iWUE")))+
+        scale_color_manual(name="",
+                           limits=c("D", "ND"),
+                           labels=c("Droughted", "Well-watered"),
+                           values=c("grey", "black"),
+                           guide=guide_legend(nrow=1))+
+        scale_fill_manual(name="",
+                          limits=c("D", "ND"),
+                          labels=c("Droughted", "Well-watered"),
+                          values=c("grey", "black"),
+                          guide=guide_legend(nrow=1))+
+        ylim(0, 5)+
+        xlab("Day")+
+        guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
+                                                       fill = c("grey", "black"),
+                                                       col = c("grey", "black"))))+
+        scale_x_continuous(limits=c(0, 10),
+                           breaks=c(0, 2, 4, 6, 8, 10))
+    
+    
     ### output
     combined_legend <- get_legend(p1 + theme(legend.position="bottom",
                                              legend.box = 'vertical',
                                              legend.box.just = 'left'))
     
     
-    combined_plots <- plot_grid(p1, p2, p3, p4, p5, p6, 
-                                labels=c("(a)", "(b)", "(c)", "(d)", "(e)", "(f)"), 
+    combined_plots <- plot_grid(p1, p2, p3, p4, p5, p6, p7, p8, p9,
+                                labels=c("(a)", "(b)", "(c)", "(d)", "(e)", "(f)",
+                                         "(g)", "(h)", "(i)"), 
                                 ncol=3, align="h", axis = "l",
                                 rel_widths=c(1,0.9),
                                 label_x=0.85, label_y=0.85)
     
     
-    pdf(paste0(outdir, "F10.1.CO2_ratio_pilularis.pdf"), width=14, height=8)
+    pdf(paste0(outdir, "F10.1.CO2_ratio_pilularis.pdf"), width=14, height=12)
     plot_grid(combined_plots, combined_legend, 
               ncol=1, rel_heights=c(1, 0.1))
     dev.off() 
@@ -936,6 +1076,116 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
         scale_x_continuous(limits=c(0, 40),
                            breaks=c(0, 5, 10, 20, 30, 40))
     
+    p7 <- ggplot(plotDF2, aes(x=Day, y=CO2_WUEdaily, group=Trt)) +
+        geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
+        geom_line(aes(col=Trt))+
+        theme_linedraw() +
+        geom_hline(yintercept=1, col="black", lty=2)+
+        theme(panel.grid.minor=element_blank(),
+              axis.text.x=element_text(size=12),
+              axis.title.x=element_blank(),
+              axis.text.y=element_text(size=12),
+              axis.title.y=element_text(size=14),
+              legend.text=element_text(size=14),
+              legend.title=element_text(size=16),
+              panel.grid.major=element_blank(),
+              legend.position="none",
+              legend.box = 'horizontal',
+              legend.box.just = 'left',
+              plot.title = element_text(size=16, face="bold", 
+                                        hjust = 0.5))+
+        ylab(expression(paste(CO[2]* " ratio iWUE")))+
+        scale_color_manual(name="",
+                           limits=c("D", "ND"),
+                           labels=c("Droughted", "Well-watered"),
+                           values=c("grey", "black"),
+                           guide=guide_legend(nrow=1))+
+        scale_fill_manual(name="",
+                          limits=c("D", "ND"),
+                          labels=c("Droughted", "Well-watered"),
+                          values=c("grey", "black"),
+                          guide=guide_legend(nrow=1))+
+        ylim(0, 3)+
+        xlab("Day")+
+        guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
+                                                       fill = c("grey", "black"),
+                                                       col = c("grey", "black"))))+
+        scale_x_continuous(limits=c(0, 40),
+                           breaks=c(0, 5, 10, 20, 30, 40))
+    
+    p8 <- ggplot(plotDF2, aes(x=Day, y=CO2_WUEearly, group=Trt)) +
+        geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
+        geom_line(aes(col=Trt))+
+        theme_linedraw() +
+        geom_hline(yintercept=1, col="black", lty=2)+
+        theme(panel.grid.minor=element_blank(),
+              axis.text.x=element_text(size=12),
+              axis.title.x=element_blank(),
+              axis.text.y=element_text(size=12),
+              axis.title.y=element_blank(),
+              legend.text=element_text(size=14),
+              legend.title=element_text(size=16),
+              panel.grid.major=element_blank(),
+              legend.position="none",
+              legend.box = 'horizontal',
+              legend.box.just = 'left',
+              plot.title = element_text(size=16, face="bold", 
+                                        hjust = 0.5))+
+        ylab(expression(paste(CO[2]* " ratio iWUE")))+
+        scale_color_manual(name="",
+                           limits=c("D", "ND"),
+                           labels=c("Droughted", "Well-watered"),
+                           values=c("grey", "black"),
+                           guide=guide_legend(nrow=1))+
+        scale_fill_manual(name="",
+                          limits=c("D", "ND"),
+                          labels=c("Droughted", "Well-watered"),
+                          values=c("grey", "black"),
+                          guide=guide_legend(nrow=1))+
+        ylim(0, 3)+
+        xlab("Day")+
+        guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
+                                                       fill = c("grey", "black"),
+                                                       col = c("grey", "black"))))+
+        scale_x_continuous(limits=c(0, 40),
+                           breaks=c(0, 5, 10, 20, 30, 40))
+    
+    p9 <- ggplot(plotDF2, aes(x=Day, y=CO2_WUElate, group=Trt)) +
+        geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
+        geom_line(aes(col=Trt))+
+        theme_linedraw() +
+        geom_hline(yintercept=1, col="black", lty=2)+
+        theme(panel.grid.minor=element_blank(),
+              axis.text.x=element_text(size=12),
+              axis.title.x=element_blank(),
+              axis.text.y=element_text(size=12),
+              axis.title.y=element_blank(),
+              legend.text=element_text(size=14),
+              legend.title=element_text(size=16),
+              panel.grid.major=element_blank(),
+              legend.position="none",
+              legend.box = 'horizontal',
+              legend.box.just = 'left',
+              plot.title = element_text(size=16, face="bold", 
+                                        hjust = 0.5))+
+        ylab(expression(paste(CO[2]* " ratio iWUE")))+
+        scale_color_manual(name="",
+                           limits=c("D", "ND"),
+                           labels=c("Droughted", "Well-watered"),
+                           values=c("grey", "black"),
+                           guide=guide_legend(nrow=1))+
+        scale_fill_manual(name="",
+                          limits=c("D", "ND"),
+                          labels=c("Droughted", "Well-watered"),
+                          values=c("grey", "black"),
+                          guide=guide_legend(nrow=1))+
+        ylim(0, 3)+
+        xlab("Day")+
+        guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
+                                                       fill = c("grey", "black"),
+                                                       col = c("grey", "black"))))+
+        scale_x_continuous(limits=c(0, 40),
+                           breaks=c(0, 5, 10, 20, 30, 40))
     
     ### output
     combined_legend <- get_legend(p1 + theme(legend.position="bottom",
@@ -943,14 +1193,15 @@ make_CO2_ratios_of_A_and_gs_plots <- function() {
                                              legend.box.just = 'left'))
     
     
-    combined_plots <- plot_grid(p1, p2, p3, p4, p5, p6, 
-                                labels=c("(a)", "(b)", "(c)", "(d)", "(e)", "(f)"), 
+    combined_plots <- plot_grid(p1, p2, p3, p4, p5, p6, p7, p8, p9,
+                                labels=c("(a)", "(b)", "(c)", "(d)", "(e)", "(f)",
+                                         "(g)", "(h)", "(i)"), 
                                 ncol=3, align="h", axis = "l",
                                 rel_widths=c(1,0.9),
                                 label_x=0.85, label_y=0.85)
     
     
-    pdf(paste0(outdir, "F10.2.CO2_ratio_populnea.pdf"), width=14, height=8)
+    pdf(paste0(outdir, "F10.2.CO2_ratio_populnea.pdf"), width=14, height=12)
     plot_grid(combined_plots, combined_legend, 
               ncol=1, rel_heights=c(1, 0.1))
     dev.off() 
