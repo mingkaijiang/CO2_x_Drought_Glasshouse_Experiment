@@ -1,4 +1,4 @@
-make_CO2_ratios_of_A_and_gs_plots_alternative <- function() {
+make_CO2_ratios_of_A_and_gs_plots_with_se <- function() {
     
     ### read input
     pilDF<-read.csv("data/glasshouse2/Drydown_gasexchange_pilularis.csv",sep=",", header=TRUE)
@@ -300,6 +300,48 @@ make_CO2_ratios_of_A_and_gs_plots_alternative <- function() {
                                                                        as.numeric(pDF2$log_gslate.mean[pDF2$Trt=="POPEND"&pDF2$Day==i]),
                                                                        NA)
         
+        
+        ### WUE
+        plotDF2$amb_log_WUEdaily[plotDF2$Trt=="D"&plotDF2$Day==i] <- ifelse(length(pDF2$log_WUE_daily.mean[pDF2$Trt=="POPAD"&pDF2$Day==i])==1,
+                                                                           as.numeric(pDF2$log_WUE_daily.mean[pDF2$Trt=="POPAD"&pDF2$Day==i]), 
+                                                                           NA)
+        plotDF2$amb_log_WUEearly[plotDF2$Trt=="D"&plotDF2$Day==i] <- ifelse(length(pDF2$log_WUE_early.mean[pDF2$Trt=="POPAD"&pDF2$Day==i])==1,
+                                                                           as.numeric(pDF2$log_WUE_early.mean[pDF2$Trt=="POPAD"&pDF2$Day==i]), 
+                                                                           NA)
+        plotDF2$amb_log_WUElate[plotDF2$Trt=="D"&plotDF2$Day==i] <- ifelse(length(pDF2$log_WUE_late.mean[pDF2$Trt=="POPAD"&pDF2$Day==i])==1,
+                                                                          as.numeric(pDF2$log_WUE_late.mean[pDF2$Trt=="POPAD"&pDF2$Day==i]), 
+                                                                          NA)
+        
+        plotDF2$ele_log_WUEdaily[plotDF2$Trt=="D"&plotDF2$Day==i] <- ifelse(length(pDF2$log_WUE_daily.mean[pDF2$Trt=="POPED"&pDF2$Day==i])==1,
+                                                                           as.numeric(pDF2$log_WUE_daily.mean[pDF2$Trt=="POPED"&pDF2$Day==i]), 
+                                                                           NA)
+        plotDF2$ele_log_WUEearly[plotDF2$Trt=="D"&plotDF2$Day==i] <- ifelse(length(pDF2$log_WUE_early.mean[pDF2$Trt=="POPED"&pDF2$Day==i])==1,
+                                                                           as.numeric(pDF2$log_WUE_early.mean[pDF2$Trt=="POPED"&pDF2$Day==i]), 
+                                                                           NA)
+        plotDF2$ele_log_WUElate[plotDF2$Trt=="D"&plotDF2$Day==i] <- ifelse(length(pDF2$log_WUE_late.mean[pDF2$Trt=="POPED"&pDF2$Day==i])==1,
+                                                                          as.numeric(pDF2$log_WUE_late.mean[pDF2$Trt=="POPED"&pDF2$Day==i]), 
+                                                                          NA)
+        
+        plotDF2$amb_log_WUEdaily[plotDF2$Trt=="ND"&plotDF2$Day==i] <- ifelse(length(pDF2$log_WUE_daily.mean[pDF2$Trt=="POPAND"&pDF2$Day==i])==1, 
+                                                                            as.numeric(pDF2$log_WUE_daily.mean[pDF2$Trt=="POPAND"&pDF2$Day==i]), 
+                                                                            NA)
+        plotDF2$amb_log_WUEearly[plotDF2$Trt=="ND"&plotDF2$Day==i] <- ifelse(length(pDF2$log_WUE_early.mean[pDF2$Trt=="POPAND"&pDF2$Day==i])==1,
+                                                                            as.numeric(pDF2$log_WUE_early.mean[pDF2$Trt=="POPAND"&pDF2$Day==i]),
+                                                                            NA)
+        plotDF2$amb_log_WUElate[plotDF2$Trt=="ND"&plotDF2$Day==i] <- ifelse(length(pDF2$log_WUE_late.mean[pDF2$Trt=="POPAND"&pDF2$Day==i])==1,
+                                                                           as.numeric(pDF2$log_WUE_late.mean[pDF2$Trt=="POPAND"&pDF2$Day==i]),
+                                                                           NA)
+        
+        plotDF2$ele_log_WUEdaily[plotDF2$Trt=="ND"&plotDF2$Day==i] <- ifelse(length(pDF2$log_WUE_daily.mean[pDF2$Trt=="POPEND"&pDF2$Day==i])==1,
+                                                                            as.numeric(pDF2$log_WUE_daily.mean[pDF2$Trt=="POPEND"&pDF2$Day==i]),
+                                                                            NA)
+        plotDF2$ele_log_WUEearly[plotDF2$Trt=="ND"&plotDF2$Day==i] <- ifelse(length(pDF2$log_WUE_early.mean[pDF2$Trt=="POPEND"&pDF2$Day==i])==1,
+                                                                            as.numeric(pDF2$log_WUE_early.mean[pDF2$Trt=="POPEND"&pDF2$Day==i]),
+                                                                            NA)
+        plotDF2$ele_log_WUElate[plotDF2$Trt=="ND"&plotDF2$Day==i] <- ifelse(length(pDF2$log_WUE_late.mean[pDF2$Trt=="POPEND"&pDF2$Day==i])==1,
+                                                                           as.numeric(pDF2$log_WUE_late.mean[pDF2$Trt=="POPEND"&pDF2$Day==i]),
+                                                                           NA)
+        
         # A SD
         plotDF2$amb_log_AdailySE[plotDF2$Trt=="D"&plotDF2$Day==i] <- ifelse(length(pDF2$log_Adaily.se[pDF2$Trt=="POPAD"&pDF2$Day==i])==1,
                                                                                as.numeric(pDF2$log_Adaily.se[pDF2$Trt=="POPAD"&pDF2$Day==i]),
@@ -487,20 +529,104 @@ make_CO2_ratios_of_A_and_gs_plots_alternative <- function() {
     plotDF2$log_CO2_WUElateSE <- sqrt(plotDF2$amb_log_WUElateSE^2 + plotDF2$ele_log_WUElateSE^2)
     
     
-    ### exponential
+    ### exponential mean
+    plotDF1$CO2_Adaily <- exp(plotDF1$log_CO2_Adaily)
+    plotDF1$CO2_Aearly <- exp(plotDF1$log_CO2_Aearly)
+    plotDF1$CO2_Alate <- exp(plotDF1$log_CO2_Alate)
     
+    plotDF1$CO2_GSdaily <- exp(plotDF1$log_CO2_GSdaily)
+    plotDF1$CO2_GSearly <- exp(plotDF1$log_CO2_GSearly)
+    plotDF1$CO2_GSlate <- exp(plotDF1$log_CO2_GSlate)
+    
+    plotDF1$CO2_WUEdaily <- exp(plotDF1$log_CO2_WUEdaily)
+    plotDF1$CO2_WUEearly <- exp(plotDF1$log_CO2_WUEearly)
+    plotDF1$CO2_WUElate <- exp(plotDF1$log_CO2_WUElate)
+    
+    ## plotDF2
+    plotDF2$CO2_Adaily <- exp(plotDF2$log_CO2_Adaily)
+    plotDF2$CO2_Aearly <- exp(plotDF2$log_CO2_Aearly)
+    plotDF2$CO2_Alate <- exp(plotDF2$log_CO2_Alate)
+    
+    plotDF2$CO2_GSdaily <- exp(plotDF2$log_CO2_GSdaily)
+    plotDF2$CO2_GSearly <- exp(plotDF2$log_CO2_GSearly)
+    plotDF2$CO2_GSlate <- exp(plotDF2$log_CO2_GSlate)
+    
+    plotDF2$CO2_WUEdaily <- exp(plotDF2$log_CO2_WUEdaily)
+    plotDF2$CO2_WUEearly <- exp(plotDF2$log_CO2_WUEearly)
+    plotDF2$CO2_WUElate <- exp(plotDF2$log_CO2_WUElate)
+    
+    ### exponential se
+    plotDF1$CO2_AdailyUP <- exp(plotDF1$log_CO2_Adaily+plotDF1$log_CO2_AdailySE)
+    plotDF1$CO2_AdailyLO <- exp(plotDF1$log_CO2_Adaily-plotDF1$log_CO2_AdailySE)
+    
+    plotDF1$CO2_AearlyUP <- exp(plotDF1$log_CO2_Aearly+plotDF1$log_CO2_AearlySE)
+    plotDF1$CO2_AearlyLO <- exp(plotDF1$log_CO2_Aearly-plotDF1$log_CO2_AearlySE)
+    
+    plotDF1$CO2_AlateUP <- exp(plotDF1$log_CO2_Alate+plotDF1$log_CO2_AlateSE)
+    plotDF1$CO2_AlateLO <- exp(plotDF1$log_CO2_Alate-plotDF1$log_CO2_AlateSE)
+    
+    
+    plotDF1$CO2_GSdailyUP <- exp(plotDF1$log_CO2_GSdaily+plotDF1$log_CO2_GSdailySE)
+    plotDF1$CO2_GSdailyLO <- exp(plotDF1$log_CO2_GSdaily-plotDF1$log_CO2_GSdailySE)
+    
+    plotDF1$CO2_GSearlyUP <- exp(plotDF1$log_CO2_GSearly+plotDF1$log_CO2_GSearlySE)
+    plotDF1$CO2_GSearlyLO <- exp(plotDF1$log_CO2_GSearly-plotDF1$log_CO2_GSearlySE)
+    
+    plotDF1$CO2_GSlateUP <- exp(plotDF1$log_CO2_GSlate+plotDF1$log_CO2_GSlateSE)
+    plotDF1$CO2_GSlateLO <- exp(plotDF1$log_CO2_GSlate-plotDF1$log_CO2_GSlateSE)
+    
+    
+    plotDF1$CO2_WUEdailyUP <- exp(plotDF1$log_CO2_WUEdaily+plotDF1$log_CO2_WUEdailySE)
+    plotDF1$CO2_WUEdailyLO <- exp(plotDF1$log_CO2_WUEdaily-plotDF1$log_CO2_WUEdailySE)
+    
+    plotDF1$CO2_WUEearlyUP <- exp(plotDF1$log_CO2_WUEearly+plotDF1$log_CO2_WUEearlySE)
+    plotDF1$CO2_WUEearlyLO <- exp(plotDF1$log_CO2_WUEearly-plotDF1$log_CO2_WUEearlySE)
+    
+    plotDF1$CO2_WUElateUP <- exp(plotDF1$log_CO2_WUElate+plotDF1$log_CO2_WUElateSE)
+    plotDF1$CO2_WUElateLO <- exp(plotDF1$log_CO2_WUElate-plotDF1$log_CO2_WUElateSE)
+    
+    
+    ## plotDF2
+    plotDF2$CO2_AdailyUP <- exp(plotDF2$log_CO2_Adaily+plotDF2$log_CO2_AdailySE)
+    plotDF2$CO2_AdailyLO <- exp(plotDF2$log_CO2_Adaily-plotDF2$log_CO2_AdailySE)
+    
+    plotDF2$CO2_AearlyUP <- exp(plotDF2$log_CO2_Aearly+plotDF2$log_CO2_AearlySE)
+    plotDF2$CO2_AearlyLO <- exp(plotDF2$log_CO2_Aearly-plotDF2$log_CO2_AearlySE)
+    
+    plotDF2$CO2_AlateUP <- exp(plotDF2$log_CO2_Alate+plotDF2$log_CO2_AlateSE)
+    plotDF2$CO2_AlateLO <- exp(plotDF2$log_CO2_Alate-plotDF2$log_CO2_AlateSE)
+    
+    
+    plotDF2$CO2_GSdailyUP <- exp(plotDF2$log_CO2_GSdaily+plotDF2$log_CO2_GSdailySE)
+    plotDF2$CO2_GSdailyLO <- exp(plotDF2$log_CO2_GSdaily-plotDF2$log_CO2_GSdailySE)
+    
+    plotDF2$CO2_GSearlyUP <- exp(plotDF2$log_CO2_GSearly+plotDF2$log_CO2_GSearlySE)
+    plotDF2$CO2_GSearlyLO <- exp(plotDF2$log_CO2_GSearly-plotDF2$log_CO2_GSearlySE)
+    
+    plotDF2$CO2_GSlateUP <- exp(plotDF2$log_CO2_GSlate+plotDF2$log_CO2_GSlateSE)
+    plotDF2$CO2_GSlateLO <- exp(plotDF2$log_CO2_GSlate-plotDF2$log_CO2_GSlateSE)
+    
+    
+    plotDF2$CO2_WUEdailyUP <- exp(plotDF2$log_CO2_WUEdaily+plotDF2$log_CO2_WUEdailySE)
+    plotDF2$CO2_WUEdailyLO <- exp(plotDF2$log_CO2_WUEdaily-plotDF2$log_CO2_WUEdailySE)
+    
+    plotDF2$CO2_WUEearlyUP <- exp(plotDF2$log_CO2_WUEearly+plotDF2$log_CO2_WUEearlySE)
+    plotDF2$CO2_WUEearlyLO <- exp(plotDF2$log_CO2_WUEearly-plotDF2$log_CO2_WUEearlySE)
+    
+    plotDF2$CO2_WUElateUP <- exp(plotDF2$log_CO2_WUElate+plotDF2$log_CO2_WUElateSE)
+    plotDF2$CO2_WUElateLO <- exp(plotDF2$log_CO2_WUElate-plotDF2$log_CO2_WUElateSE)
     
     
     ### plotting
-    p1 <- ggplot(plotDF1, aes(x=Day, y=log_CO2_Adaily, group=Trt)) +
+    p1 <- ggplot(plotDF1, aes(x=Day, y=CO2_Adaily, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
         geom_line(aes(col=Trt))+
         geom_errorbar(aes(col=Trt, x=Day, 
-                          ymin=log_CO2_Adaily-log_CO2_AdailySE, 
-                          ymax=log_CO2_Adaily+log_CO2_AdailySE),
+                          ymin=CO2_AdailyLO, 
+                          ymax=CO2_AdailyUP),
                       width=0.2)+
         theme_linedraw() +
-        geom_hline(yintercept=0, col="black", lty=2)+
+        geom_hline(yintercept=1, col="black", lty=2)+
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
               axis.title.x=element_blank(),
@@ -526,7 +652,7 @@ make_CO2_ratios_of_A_and_gs_plots_alternative <- function() {
                           values=c("grey", "black"),
                           guide=guide_legend(nrow=1))+
         ggtitle("Daily")+
-        ylim(0, 3)+
+        ylim(0, 20)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("grey", "black"),
@@ -536,6 +662,10 @@ make_CO2_ratios_of_A_and_gs_plots_alternative <- function() {
     
     p2 <- ggplot(plotDF1, aes(x=Day, y=CO2_Aearly, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
+        geom_errorbar(aes(col=Trt, x=Day, 
+                          ymin=CO2_AearlyLO, 
+                          ymax=CO2_AearlyUP),
+                      width=0.2)+
         geom_line(aes(col=Trt))+
         theme_linedraw() +
         geom_hline(yintercept=1, col="black", lty=2)+
@@ -564,7 +694,7 @@ make_CO2_ratios_of_A_and_gs_plots_alternative <- function() {
                           values=c("grey", "black"),
                           guide=guide_legend(nrow=1))+
         ggtitle("Morning")+
-        ylim(0, 8)+
+        ylim(0, 20)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("grey", "black"),
@@ -574,6 +704,10 @@ make_CO2_ratios_of_A_and_gs_plots_alternative <- function() {
     
     p3 <- ggplot(plotDF1, aes(x=Day, y=CO2_Alate, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
+        geom_errorbar(aes(col=Trt, x=Day, 
+                          ymin=CO2_AlateLO, 
+                          ymax=CO2_AlateUP),
+                      width=0.2)+
         geom_line(aes(col=Trt))+
         theme_linedraw() +
         geom_hline(yintercept=1, col="black", lty=2)+
@@ -602,7 +736,7 @@ make_CO2_ratios_of_A_and_gs_plots_alternative <- function() {
                           values=c("grey", "black"),
                           guide=guide_legend(nrow=1))+
         ggtitle("Midday")+
-        ylim(0, 8)+
+        ylim(0, 20)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("grey", "black"),
@@ -610,10 +744,13 @@ make_CO2_ratios_of_A_and_gs_plots_alternative <- function() {
         scale_x_continuous(limits=c(0, 10),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
-    
     p4 <- ggplot(plotDF1, aes(x=Day, y=CO2_GSdaily, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
         geom_line(aes(col=Trt))+
+        geom_errorbar(aes(col=Trt, x=Day, 
+                          ymin=CO2_GSdailyLO, 
+                          ymax=CO2_GSdailyUP),
+                      width=0.2)+
         geom_hline(yintercept=1, col="black", lty=2)+
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
@@ -640,7 +777,7 @@ make_CO2_ratios_of_A_and_gs_plots_alternative <- function() {
                           labels=c("Droughted", "Well-watered"),
                           values=c("grey", "black"),
                           guide=guide_legend(nrow=1))+
-        ylim(0, 5)+
+        ylim(0, 10)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("grey", "black"),
@@ -651,6 +788,10 @@ make_CO2_ratios_of_A_and_gs_plots_alternative <- function() {
     p5 <- ggplot(plotDF1, aes(x=Day, y=CO2_GSearly, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
         geom_line(aes(col=Trt))+
+        geom_errorbar(aes(col=Trt, x=Day, 
+                          ymin=CO2_GSearlyLO, 
+                          ymax=CO2_GSearlyUP),
+                      width=0.2)+
         geom_hline(yintercept=1, col="black", lty=2)+
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
@@ -677,7 +818,7 @@ make_CO2_ratios_of_A_and_gs_plots_alternative <- function() {
                           labels=c("Droughted", "Well-watered"),
                           values=c("grey", "black"),
                           guide=guide_legend(nrow=1))+
-        ylim(0, 5)+
+        ylim(0, 10)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("grey", "black"),
@@ -688,6 +829,10 @@ make_CO2_ratios_of_A_and_gs_plots_alternative <- function() {
     p6 <- ggplot(plotDF1, aes(x=Day, y=CO2_GSlate, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
         geom_line(aes(col=Trt))+
+        geom_errorbar(aes(col=Trt, x=Day, 
+                          ymin=CO2_GSlateLO, 
+                          ymax=CO2_GSlateUP),
+                      width=0.2)+
         theme_linedraw() +
         geom_hline(yintercept=1, col="black", lty=2)+
         theme(panel.grid.minor=element_blank(),
@@ -714,7 +859,7 @@ make_CO2_ratios_of_A_and_gs_plots_alternative <- function() {
                           labels=c("Droughted", "Well-watered"),
                           values=c("grey", "black"),
                           guide=guide_legend(nrow=1))+
-        ylim(0, 5)+
+        ylim(0, 10)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("grey", "black"),
@@ -727,6 +872,10 @@ make_CO2_ratios_of_A_and_gs_plots_alternative <- function() {
     p7 <- ggplot(plotDF1, aes(x=Day, y=CO2_WUEdaily, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
         geom_line(aes(col=Trt))+
+        geom_errorbar(aes(col=Trt, x=Day, 
+                          ymin=CO2_WUEdailyLO, 
+                          ymax=CO2_WUEdailyUP),
+                      width=0.2)+
         geom_hline(yintercept=1, col="black", lty=2)+
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
@@ -753,7 +902,7 @@ make_CO2_ratios_of_A_and_gs_plots_alternative <- function() {
                           labels=c("Droughted", "Well-watered"),
                           values=c("grey", "black"),
                           guide=guide_legend(nrow=1))+
-        ylim(0, 5)+
+        ylim(0, 20)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("grey", "black"),
@@ -764,6 +913,10 @@ make_CO2_ratios_of_A_and_gs_plots_alternative <- function() {
     p8 <- ggplot(plotDF1, aes(x=Day, y=CO2_WUEearly, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
         geom_line(aes(col=Trt))+
+        geom_errorbar(aes(col=Trt, x=Day, 
+                          ymin=CO2_WUEearlyLO, 
+                          ymax=CO2_WUEearlyUP),
+                      width=0.2)+
         geom_hline(yintercept=1, col="black", lty=2)+
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
@@ -790,7 +943,7 @@ make_CO2_ratios_of_A_and_gs_plots_alternative <- function() {
                           labels=c("Droughted", "Well-watered"),
                           values=c("grey", "black"),
                           guide=guide_legend(nrow=1))+
-        ylim(0, 5)+
+        ylim(0, 20)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("grey", "black"),
@@ -801,6 +954,10 @@ make_CO2_ratios_of_A_and_gs_plots_alternative <- function() {
     p9 <- ggplot(plotDF1, aes(x=Day, y=CO2_WUElate, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
         geom_line(aes(col=Trt))+
+        geom_errorbar(aes(col=Trt, x=Day, 
+                          ymin=CO2_WUElateLO, 
+                          ymax=CO2_WUElateUP),
+                      width=0.2)+
         theme_linedraw() +
         geom_hline(yintercept=1, col="black", lty=2)+
         theme(panel.grid.minor=element_blank(),
@@ -827,7 +984,7 @@ make_CO2_ratios_of_A_and_gs_plots_alternative <- function() {
                           labels=c("Droughted", "Well-watered"),
                           values=c("grey", "black"),
                           guide=guide_legend(nrow=1))+
-        ylim(0, 5)+
+        ylim(0, 20)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("grey", "black"),
@@ -863,6 +1020,10 @@ make_CO2_ratios_of_A_and_gs_plots_alternative <- function() {
     p1 <- ggplot(plotDF2, aes(x=Day, y=CO2_Adaily, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
         geom_line(aes(col=Trt))+
+        geom_errorbar(aes(col=Trt, x=Day, 
+                          ymin=CO2_AdailyLO, 
+                          ymax=CO2_AdailyUP),
+                      width=1.2)+
         geom_hline(yintercept=1, col="black", lty=2)+
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
@@ -890,7 +1051,7 @@ make_CO2_ratios_of_A_and_gs_plots_alternative <- function() {
                           values=c("grey", "black"),
                           guide=guide_legend(nrow=1))+
         ggtitle("Daily")+
-        ylim(0, 4)+
+        ylim(0, 20)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("grey", "black"),
@@ -901,6 +1062,10 @@ make_CO2_ratios_of_A_and_gs_plots_alternative <- function() {
     p2 <- ggplot(plotDF2, aes(x=Day, y=CO2_Aearly, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
         geom_line(aes(col=Trt))+
+        geom_errorbar(aes(col=Trt, x=Day, 
+                          ymin=CO2_AearlyLO, 
+                          ymax=CO2_AearlyUP),
+                      width=1.2)+
         theme_linedraw() +
         geom_hline(yintercept=1, col="black", lty=2)+
         theme(panel.grid.minor=element_blank(),
@@ -928,7 +1093,7 @@ make_CO2_ratios_of_A_and_gs_plots_alternative <- function() {
                           values=c("grey", "black"),
                           guide=guide_legend(nrow=1))+
         ggtitle("Morning")+
-        ylim(0, 4)+
+        ylim(0, 20)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("grey", "black"),
@@ -939,6 +1104,10 @@ make_CO2_ratios_of_A_and_gs_plots_alternative <- function() {
     p3 <- ggplot(plotDF2, aes(x=Day, y=CO2_Alate, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
         geom_line(aes(col=Trt))+
+        geom_errorbar(aes(col=Trt, x=Day, 
+                          ymin=CO2_AlateLO, 
+                          ymax=CO2_AlateUP),
+                      width=1.2)+
         theme_linedraw() +
         geom_hline(yintercept=1, col="black", lty=2)+
         theme(panel.grid.minor=element_blank(),
@@ -966,7 +1135,7 @@ make_CO2_ratios_of_A_and_gs_plots_alternative <- function() {
                           values=c("grey", "black"),
                           guide=guide_legend(nrow=1))+
         ggtitle("Midday")+
-        ylim(0, 4)+
+        ylim(0, 20)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("grey", "black"),
@@ -978,6 +1147,10 @@ make_CO2_ratios_of_A_and_gs_plots_alternative <- function() {
     p4 <- ggplot(plotDF2, aes(x=Day, y=CO2_GSdaily, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
         geom_line(aes(col=Trt))+
+        geom_errorbar(aes(col=Trt, x=Day, 
+                          ymin=CO2_GSdailyLO, 
+                          ymax=CO2_GSdailyUP),
+                      width=1.2)+
         theme_linedraw() +
         geom_hline(yintercept=1, col="black", lty=2)+
         theme(panel.grid.minor=element_blank(),
@@ -1004,7 +1177,7 @@ make_CO2_ratios_of_A_and_gs_plots_alternative <- function() {
                           labels=c("Droughted", "Well-watered"),
                           values=c("grey", "black"),
                           guide=guide_legend(nrow=1))+
-        ylim(0, 3)+
+        ylim(0, 10)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("grey", "black"),
@@ -1015,6 +1188,10 @@ make_CO2_ratios_of_A_and_gs_plots_alternative <- function() {
     p5 <- ggplot(plotDF2, aes(x=Day, y=CO2_GSearly, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
         geom_line(aes(col=Trt))+
+        geom_errorbar(aes(col=Trt, x=Day, 
+                          ymin=CO2_GSearlyLO, 
+                          ymax=CO2_GSearlyUP),
+                      width=1.2)+
         theme_linedraw() +
         geom_hline(yintercept=1, col="black", lty=2)+
         theme(panel.grid.minor=element_blank(),
@@ -1041,7 +1218,7 @@ make_CO2_ratios_of_A_and_gs_plots_alternative <- function() {
                           labels=c("Droughted", "Well-watered"),
                           values=c("grey", "black"),
                           guide=guide_legend(nrow=1))+
-        ylim(0, 3)+
+        ylim(0, 10)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("grey", "black"),
@@ -1052,6 +1229,10 @@ make_CO2_ratios_of_A_and_gs_plots_alternative <- function() {
     p6 <- ggplot(plotDF2, aes(x=Day, y=CO2_GSlate, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
         geom_line(aes(col=Trt))+
+        geom_errorbar(aes(col=Trt, x=Day, 
+                          ymin=CO2_GSlateLO, 
+                          ymax=CO2_GSlateUP),
+                      width=1.2)+
         theme_linedraw() +
         geom_hline(yintercept=1, col="black", lty=2)+
         theme(panel.grid.minor=element_blank(),
@@ -1078,7 +1259,7 @@ make_CO2_ratios_of_A_and_gs_plots_alternative <- function() {
                           labels=c("Droughted", "Well-watered"),
                           values=c("grey", "black"),
                           guide=guide_legend(nrow=1))+
-        ylim(0, 3)+
+        ylim(0, 10)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("grey", "black"),
@@ -1089,6 +1270,10 @@ make_CO2_ratios_of_A_and_gs_plots_alternative <- function() {
     p7 <- ggplot(plotDF2, aes(x=Day, y=CO2_WUEdaily, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
         geom_line(aes(col=Trt))+
+        geom_errorbar(aes(col=Trt, x=Day, 
+                          ymin=CO2_WUEdailyLO, 
+                          ymax=CO2_WUEdailyUP),
+                      width=1.2)+
         theme_linedraw() +
         geom_hline(yintercept=1, col="black", lty=2)+
         theme(panel.grid.minor=element_blank(),
@@ -1115,7 +1300,7 @@ make_CO2_ratios_of_A_and_gs_plots_alternative <- function() {
                           labels=c("Droughted", "Well-watered"),
                           values=c("grey", "black"),
                           guide=guide_legend(nrow=1))+
-        ylim(0, 3)+
+        ylim(0, 10)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("grey", "black"),
@@ -1126,6 +1311,10 @@ make_CO2_ratios_of_A_and_gs_plots_alternative <- function() {
     p8 <- ggplot(plotDF2, aes(x=Day, y=CO2_WUEearly, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
         geom_line(aes(col=Trt))+
+        geom_errorbar(aes(col=Trt, x=Day, 
+                          ymin=CO2_WUEearlyLO, 
+                          ymax=CO2_WUEearlyUP),
+                      width=1.2)+
         theme_linedraw() +
         geom_hline(yintercept=1, col="black", lty=2)+
         theme(panel.grid.minor=element_blank(),
@@ -1152,7 +1341,7 @@ make_CO2_ratios_of_A_and_gs_plots_alternative <- function() {
                           labels=c("Droughted", "Well-watered"),
                           values=c("grey", "black"),
                           guide=guide_legend(nrow=1))+
-        ylim(0, 3)+
+        ylim(0, 10)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("grey", "black"),
@@ -1163,6 +1352,10 @@ make_CO2_ratios_of_A_and_gs_plots_alternative <- function() {
     p9 <- ggplot(plotDF2, aes(x=Day, y=CO2_WUElate, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
         geom_line(aes(col=Trt))+
+        geom_errorbar(aes(col=Trt, x=Day, 
+                          ymin=CO2_WUElateLO, 
+                          ymax=CO2_WUElateUP),
+                      width=1.2)+
         theme_linedraw() +
         geom_hline(yintercept=1, col="black", lty=2)+
         theme(panel.grid.minor=element_blank(),
@@ -1189,7 +1382,7 @@ make_CO2_ratios_of_A_and_gs_plots_alternative <- function() {
                           labels=c("Droughted", "Well-watered"),
                           values=c("grey", "black"),
                           guide=guide_legend(nrow=1))+
-        ylim(0, 3)+
+        ylim(0, 10)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("grey", "black"),

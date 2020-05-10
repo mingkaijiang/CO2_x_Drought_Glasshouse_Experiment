@@ -46,7 +46,9 @@ make_populnea_physiological_plots()
 make_normalized_Asat_plots()
 
 ### CO2 ratios of A and gs
-make_CO2_ratios_of_A_and_gs_plots()
+make_CO2_ratios_of_A_and_gs_plots_with_se()
+
+make_CO2_difference_of_A_and_gs_plots_with_se()
 
 make_log_CO2_ratios_of_A_and_gs_plots()
 
