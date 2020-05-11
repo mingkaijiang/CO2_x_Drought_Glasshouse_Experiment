@@ -247,7 +247,9 @@ make_CO2_difference_of_A_and_gs_plots_with_se <- function() {
               legend.box.just = 'left',
               plot.title = element_text(size=16, face="bold", 
                                         hjust = 0.5))+
-        ylab(expression(paste(eC[a] * " - " * aC[a] * " for " * A[sat])))+
+        ylab(expression(paste(eC[a] * " - " * aC[a] * " for " * A[sat]* 
+                                  " (" * mu * "mol " * m^-2 * " " * 
+                                  s^-1 *")")))+
         scale_color_manual(name="",
                            limits=c("D", "ND"),
                            labels=c("Droughted", "Well-watered"),
@@ -289,7 +291,9 @@ make_CO2_difference_of_A_and_gs_plots_with_se <- function() {
               legend.box.just = 'left',
               plot.title = element_text(size=16, face="bold", 
                                         hjust = 0.5))+
-        ylab(expression(paste(eC[a] * " - " * aC[a] * " for " * A[sat])))+
+        ylab(expression(paste(eC[a] * " - " * aC[a] * " for " * A[sat]* 
+                                  " (" * mu * "mol " * m^-2 * " " * 
+                                  s^-1 *")")))+
         scale_color_manual(name="",
                            limits=c("D", "ND"),
                            labels=c("Droughted", "Well-watered"),
@@ -331,7 +335,9 @@ make_CO2_difference_of_A_and_gs_plots_with_se <- function() {
               legend.box.just = 'left',
               plot.title = element_text(size=16, face="bold", 
                                         hjust = 0.5))+
-        ylab(expression(paste(eC[a] * " - " * aC[a] * " for " * g[s])))+
+        ylab(expression(paste(eC[a] * " - " * aC[a] * " for " * g[s]* 
+                                  " (" * "mol " * m^-2 * " " * 
+                                  s^-1 *")")))+
         scale_color_manual(name="",
                            limits=c("D", "ND"),
                            labels=c("Droughted", "Well-watered"),
@@ -372,7 +378,9 @@ make_CO2_difference_of_A_and_gs_plots_with_se <- function() {
               legend.box.just = 'left',
               plot.title = element_text(size=16, face="bold", 
                                         hjust = 0.5))+
-        ylab(expression(paste(eC[a] * " - " * aC[a] * " for " * g[s])))+
+        ylab(expression(paste(eC[a] * " - " * aC[a] * " for " * g[s]* 
+                                  " (" * "mol " * m^-2 * " " * 
+                                  s^-1 *")")))+
         scale_color_manual(name="",
                            limits=c("D", "ND"),
                            labels=c("Droughted", "Well-watered"),
@@ -413,7 +421,9 @@ make_CO2_difference_of_A_and_gs_plots_with_se <- function() {
               legend.box.just = 'left',
               plot.title = element_text(size=16, face="bold", 
                                         hjust = 0.5))+
-        ylab(expression(paste(eC[a] * " - " * aC[a] * " for " * g[s])))+
+        ylab(expression(paste(eC[a] * " - " * aC[a] * " for " * g[s]* 
+                                  " (" * "mol " * m^-2 * " " * 
+                                  s^-1 *")")))+
         scale_color_manual(name="",
                            limits=c("D", "ND"),
                            labels=c("Droughted", "Well-watered"),
@@ -467,7 +477,7 @@ make_CO2_difference_of_A_and_gs_plots_with_se <- function() {
                           labels=c("Droughted", "Well-watered"),
                           values=c("grey", "black"),
                           guide=guide_legend(nrow=1))+
-        ylim(-50, 250)+
+        ylim(-50, 300)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("grey", "black"),
@@ -508,7 +518,7 @@ make_CO2_difference_of_A_and_gs_plots_with_se <- function() {
                           labels=c("Droughted", "Well-watered"),
                           values=c("grey", "black"),
                           guide=guide_legend(nrow=1))+
-        ylim(-50, 250)+
+        ylim(-50, 300)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("grey", "black"),
@@ -549,7 +559,7 @@ make_CO2_difference_of_A_and_gs_plots_with_se <- function() {
                           labels=c("Droughted", "Well-watered"),
                           values=c("grey", "black"),
                           guide=guide_legend(nrow=1))+
-        ylim(-50, 250)+
+        ylim(-50, 300)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("grey", "black"),
@@ -589,7 +599,7 @@ make_CO2_difference_of_A_and_gs_plots_with_se <- function() {
                           ymin=CO2_AdailyLO, 
                           ymax=CO2_AdailyUP),
                       width=1.2)+
-        geom_hline(yintercept=1, col="black", lty=2)+
+        geom_hline(yintercept=0, col="black", lty=2)+
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
@@ -604,7 +614,9 @@ make_CO2_difference_of_A_and_gs_plots_with_se <- function() {
               legend.box.just = 'left',
               plot.title = element_text(size=16, face="bold", 
                                         hjust = 0.5))+
-        ylab(expression(paste(eC[a] * " - " * aC[a] * " for " * A[sat])))+
+        ylab(expression(paste(eC[a] * " - " * aC[a] * " for " * A[sat]* 
+                                  " (" * mu * "mol " * m^-2 * " " * 
+                                  s^-1 *")")))+
         scale_color_manual(name="",
                            limits=c("D", "ND"),
                            labels=c("Droughted", "Well-watered"),
@@ -616,7 +628,7 @@ make_CO2_difference_of_A_and_gs_plots_with_se <- function() {
                           values=c("grey", "black"),
                           guide=guide_legend(nrow=1))+
         ggtitle("Daily")+
-        ylim(0, 20)+
+        ylim(-5, 15)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("grey", "black"),
@@ -632,7 +644,7 @@ make_CO2_difference_of_A_and_gs_plots_with_se <- function() {
                           ymax=CO2_AearlyUP),
                       width=1.2)+
         theme_linedraw() +
-        geom_hline(yintercept=1, col="black", lty=2)+
+        geom_hline(yintercept=0, col="black", lty=2)+
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
               axis.title.x=element_blank(),
@@ -646,7 +658,9 @@ make_CO2_difference_of_A_and_gs_plots_with_se <- function() {
               legend.box.just = 'left',
               plot.title = element_text(size=16, face="bold", 
                                         hjust = 0.5))+
-        ylab(expression(paste(eC[a] * " - " * aC[a] * " for " * A[sat])))+
+        ylab(expression(paste(eC[a] * " - " * aC[a] * " for " * A[sat]* 
+                                  " (" * mu * "mol " * m^-2 * " " * 
+                                  s^-1 *")")))+
         scale_color_manual(name="",
                            limits=c("D", "ND"),
                            labels=c("Droughted", "Well-watered"),
@@ -658,7 +672,7 @@ make_CO2_difference_of_A_and_gs_plots_with_se <- function() {
                           values=c("grey", "black"),
                           guide=guide_legend(nrow=1))+
         ggtitle("Morning")+
-        ylim(0, 20)+
+        ylim(-5, 15)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("grey", "black"),
@@ -674,7 +688,7 @@ make_CO2_difference_of_A_and_gs_plots_with_se <- function() {
                           ymax=CO2_AlateUP),
                       width=1.2)+
         theme_linedraw() +
-        geom_hline(yintercept=1, col="black", lty=2)+
+        geom_hline(yintercept=0, col="black", lty=2)+
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
               axis.title.x=element_blank(),
@@ -688,7 +702,9 @@ make_CO2_difference_of_A_and_gs_plots_with_se <- function() {
               legend.box.just = 'left',
               plot.title = element_text(size=16, face="bold", 
                                         hjust = 0.5))+
-        ylab(expression(paste(eC[a] * " - " * aC[a] * " for " * A[sat])))+
+        ylab(expression(paste(eC[a] * " - " * aC[a] * " for " * A[sat]* 
+                                  " (" * mu * "mol " * m^-2 * " " * 
+                                  s^-1 *")")))+
         scale_color_manual(name="",
                            limits=c("D", "ND"),
                            labels=c("Droughted", "Well-watered"),
@@ -700,7 +716,7 @@ make_CO2_difference_of_A_and_gs_plots_with_se <- function() {
                           values=c("grey", "black"),
                           guide=guide_legend(nrow=1))+
         ggtitle("Midday")+
-        ylim(0, 20)+
+        ylim(-5, 15)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("grey", "black"),
@@ -717,7 +733,7 @@ make_CO2_difference_of_A_and_gs_plots_with_se <- function() {
                           ymax=CO2_GSdailyUP),
                       width=1.2)+
         theme_linedraw() +
-        geom_hline(yintercept=1, col="black", lty=2)+
+        geom_hline(yintercept=0, col="black", lty=2)+
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
               axis.title.x=element_blank(),
@@ -731,7 +747,9 @@ make_CO2_difference_of_A_and_gs_plots_with_se <- function() {
               legend.box.just = 'left',
               plot.title = element_text(size=16, face="bold", 
                                         hjust = 0.5))+
-        ylab(expression(paste(eC[a] * " - " * aC[a] * " for " * g[s])))+
+        ylab(expression(paste(eC[a] * " - " * aC[a] * " for " * g[s]* 
+                                  " (" * "mol " * m^-2 * " " * 
+                                  s^-1 *")")))+
         scale_color_manual(name="",
                            limits=c("D", "ND"),
                            labels=c("Droughted", "Well-watered"),
@@ -742,7 +760,7 @@ make_CO2_difference_of_A_and_gs_plots_with_se <- function() {
                           labels=c("Droughted", "Well-watered"),
                           values=c("grey", "black"),
                           guide=guide_legend(nrow=1))+
-        ylim(0, 10)+
+        ylim(-0.2, 0.2)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("grey", "black"),
@@ -758,7 +776,7 @@ make_CO2_difference_of_A_and_gs_plots_with_se <- function() {
                           ymax=CO2_GSearlyUP),
                       width=1.2)+
         theme_linedraw() +
-        geom_hline(yintercept=1, col="black", lty=2)+
+        geom_hline(yintercept=0, col="black", lty=2)+
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
               axis.title.x=element_blank(),
@@ -772,7 +790,9 @@ make_CO2_difference_of_A_and_gs_plots_with_se <- function() {
               legend.box.just = 'left',
               plot.title = element_text(size=16, face="bold", 
                                         hjust = 0.5))+
-        ylab(expression(paste(eC[a] * " - " * aC[a] * " for " * g[s])))+
+        ylab(expression(paste(eC[a] * " - " * aC[a] * " for " * g[s]* 
+                                  " (" * "mol " * m^-2 * " " * 
+                                  s^-1 *")")))+
         scale_color_manual(name="",
                            limits=c("D", "ND"),
                            labels=c("Droughted", "Well-watered"),
@@ -783,7 +803,7 @@ make_CO2_difference_of_A_and_gs_plots_with_se <- function() {
                           labels=c("Droughted", "Well-watered"),
                           values=c("grey", "black"),
                           guide=guide_legend(nrow=1))+
-        ylim(0, 10)+
+        ylim(-0.2, 0.2)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("grey", "black"),
@@ -799,7 +819,7 @@ make_CO2_difference_of_A_and_gs_plots_with_se <- function() {
                           ymax=CO2_GSlateUP),
                       width=1.2)+
         theme_linedraw() +
-        geom_hline(yintercept=1, col="black", lty=2)+
+        geom_hline(yintercept=0, col="black", lty=2)+
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
               axis.title.x=element_blank(),
@@ -813,7 +833,9 @@ make_CO2_difference_of_A_and_gs_plots_with_se <- function() {
               legend.box.just = 'left',
               plot.title = element_text(size=16, face="bold", 
                                         hjust = 0.5))+
-        ylab(expression(paste(eC[a] * " - " * aC[a] * " for " * g[s])))+
+        ylab(expression(paste(eC[a] * " - " * aC[a] * " for " * g[s]* 
+                                  " (" * "mol " * m^-2 * " " * 
+                                  s^-1 *")")))+
         scale_color_manual(name="",
                            limits=c("D", "ND"),
                            labels=c("Droughted", "Well-watered"),
@@ -824,7 +846,7 @@ make_CO2_difference_of_A_and_gs_plots_with_se <- function() {
                           labels=c("Droughted", "Well-watered"),
                           values=c("grey", "black"),
                           guide=guide_legend(nrow=1))+
-        ylim(0, 10)+
+        ylim(-0.2, 0.2)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("grey", "black"),
@@ -840,7 +862,7 @@ make_CO2_difference_of_A_and_gs_plots_with_se <- function() {
                           ymax=CO2_WUEdailyUP),
                       width=1.2)+
         theme_linedraw() +
-        geom_hline(yintercept=1, col="black", lty=2)+
+        geom_hline(yintercept=0, col="black", lty=2)+
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
               axis.title.x=element_blank(),
@@ -865,7 +887,7 @@ make_CO2_difference_of_A_and_gs_plots_with_se <- function() {
                           labels=c("Droughted", "Well-watered"),
                           values=c("grey", "black"),
                           guide=guide_legend(nrow=1))+
-        ylim(0, 10)+
+        ylim(-50, 400)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("grey", "black"),
@@ -881,7 +903,7 @@ make_CO2_difference_of_A_and_gs_plots_with_se <- function() {
                           ymax=CO2_WUEearlyUP),
                       width=1.2)+
         theme_linedraw() +
-        geom_hline(yintercept=1, col="black", lty=2)+
+        geom_hline(yintercept=0, col="black", lty=2)+
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
               axis.title.x=element_blank(),
@@ -906,7 +928,7 @@ make_CO2_difference_of_A_and_gs_plots_with_se <- function() {
                           labels=c("Droughted", "Well-watered"),
                           values=c("grey", "black"),
                           guide=guide_legend(nrow=1))+
-        ylim(0, 10)+
+        ylim(-50, 400)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("grey", "black"),
@@ -922,7 +944,7 @@ make_CO2_difference_of_A_and_gs_plots_with_se <- function() {
                           ymax=CO2_WUElateUP),
                       width=1.2)+
         theme_linedraw() +
-        geom_hline(yintercept=1, col="black", lty=2)+
+        geom_hline(yintercept=0, col="black", lty=2)+
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
               axis.title.x=element_blank(),
@@ -947,7 +969,7 @@ make_CO2_difference_of_A_and_gs_plots_with_se <- function() {
                           labels=c("Droughted", "Well-watered"),
                           values=c("grey", "black"),
                           guide=guide_legend(nrow=1))+
-        ylim(0, 10)+
+        ylim(-50, 400)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("grey", "black"),
