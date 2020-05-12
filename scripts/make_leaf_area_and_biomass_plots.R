@@ -25,6 +25,8 @@ make_leaf_area_and_biomass_plots <- function() {
     
     
     ############################# Finish statistical tests ###############################
+    
+    
     ### summarize data - Leaf area
     sumDF <- summaryBy(LA_early+LA_plant+LA_final+SM+LM+RM+CRM+FRM+TOT~Species+Species_Treatment+CO2+H2O, 
                        FUN=c(mean, se),

@@ -1,6 +1,34 @@
 make_transpiration_leaf_area_plot <- function() {
+   
+   ### read in data
    PilTLA<-read.csv("data/glasshouse2/PILtransp_leafarea.csv",sep=",", header=TRUE)
    PopTLA<-read.csv("data/glasshouse2/POPtransp_leafarea.csv",sep=",", header=TRUE)
+   
+   
+   ############################# perform statistical tests ##############################
+   ### perform linear mixed effect model statistics 
+   mod1 <- lmer(leaf_area ~ CO2 * H2O + (1|Glasshouse), data=PilTLA)
+   outDF1 <- anova(mod1)
+   write.csv(outDF1, paste0(outdir, "statistics_leaf_area_pilularis.csv"))
+   
+   mod2 <- lmer(transp_plant ~ CO2 * H2O + (1|Glasshouse), data=PilTLA)
+   outDF2 <- anova(mod2)
+   write.csv(outDF2, paste0(outdir, "statistics_transpiration_pilularis.csv"))
+   
+   
+   ### perform linear mixed effect model statistics on LA
+   mod1 <- lmer(leaf_area ~ CO2 * H2O + (1|Glasshouse), data=PopTLA)
+   outDF1 <- anova(mod1)
+   write.csv(outDF1, paste0(outdir, "statistics_leaf_area_populnea.csv"))
+   
+   mod2 <- lmer(transp_plant ~ CO2 * H2O + (1|Glasshouse), data=PopTLA)
+   outDF2 <- anova(mod2)
+   write.csv(outDF2, paste0(outdir, "statistics_transpiration_populnea.csv"))
+   
+   
+   ############################# Finish statistical tests ###############################
+   
+   
    
    ################################### Plotting ######################################
    #FIGURE 5 - Eucalyptus pilularis & populnea (Transpiration as a function of leaf area)

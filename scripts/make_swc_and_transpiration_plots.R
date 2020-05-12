@@ -1,10 +1,32 @@
 make_swc_and_transpiration_plots <- function() {
     
+    ### read in processed data for plotting
     ### E. pilularis
     pilDF<-read.csv("data/glasshouse2/Pilularis_Phys.csv",sep=",", header=TRUE)
     
     ### E. populnea
     popDF<-read.csv("data/glasshouse2/Populnea_Phys.csv",sep=",", header=TRUE)
+    
+    
+    ############################# perform statistical tests ##############################
+    ### read in raw data
+    myDF1 <- read.csv("data/glasshouse2/Drydown_gasexchange_pilularis.csv")
+    myDF2 <- read.csv("data/glasshouse2/Drydown_gasexchange_populnea.csv")
+    
+    myDF1$Day <- as.character(myDF1$Day)
+    myDF2$Day <- as.character(myDF2$Day)
+    
+    ### perform linear mixed effect model statistics on SWC PIL
+    #mod1 <- lmer(SWC ~ CO2 * H2O * Day + (1|Glasshouse), data=myDF1)
+    #outDF <- anova(mod1)
+    #write.csv(outDF, paste0(outdir, "statistics_leaf_area.csv"))
+    #
+    #mod2 <- lmer(TOT ~ CO2 * H2O * Species + (1|GH), data=myDF)
+    #outDF.tot <- anova(mod2)
+    #write.csv(outDF.tot, paste0(outdir, "statistics_total_biomass.csv"))
+    
+    
+    ############################# Finish statistical tests ###############################
     
     
     
