@@ -20,6 +20,11 @@ make_predawn_water_potential_with_swc_plots <- function() {
    POPPhysGraph$UpsiMD <- POPPhysGraph$psiMD + POPPhysGraph$psiMDSE
    POPPhysGraph$LpsiMD <- POPPhysGraph$psiMD - POPPhysGraph$psiMDSE
    
+   
+   ## remove data points with unequal sample size
+   PILPhysGraph <- PILPhysGraph[PILPhysGraph$n.1==6, ]
+   POPPhysGraph <- POPPhysGraph[POPPhysGraph$n.1==6, ]
+   
    # Eucalyptus pilularis & populnea (Pre-dawn leaf water potential (mean & SE) vs. Soil water content)
    pdf(paste0(outdir, "F6.predawn_leaf_water_potential_vs_swc_with_se.pdf"), 
        width=8, height=6)

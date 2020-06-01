@@ -4,6 +4,10 @@ make_whole_plant_hydraulic_conductance_plot <- function() {
     #Eucalyptus populnea
     popDF<-read.csv("data/glasshouse2/Drydown_gasexchange_populnea.csv",sep=",", header=TRUE)
     
+    ## remove data points with unequal sample size
+    pilDF <- pilDF[pilDF$n.1==6, ]
+    popDF <- popDF[popDF$n.1==6, ]
+    
     
     ### plotting DFs
     plotDF1 <- summaryBy(E_psi~Trt+Day, FUN=c(mean, se), 

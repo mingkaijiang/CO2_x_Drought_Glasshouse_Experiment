@@ -12,6 +12,25 @@ make_transpiration_leaf_area_plot <- function() {
    sumDF2 <- summaryBy(leaf_area+transp_plant~Trt, FUN=c(mean,se),
                        data=popDF, keep.names=T)
    
+   
+   ### calculate transpiration per leaf area
+   pilDF$transp_leaf <- with(pilDF, transp_plant/leaf_area)
+   popDF$transp_leaf <- with(popDF, transp_plant/leaf_area)
+   
+   barDF1 <- summaryBy(transp_leaf~Trt, FUN=c(mean,se), data=pilDF, keep.names=T)
+   barDF2 <- summaryBy(transp_leaf~Trt, FUN=c(mean,se), data=popDF, keep.names=T)
+   
+   barDF1$brk[barDF1$Trt=="PILAD"] <- 1.8
+   barDF1$brk[barDF1$Trt=="PILAND"] <- 1.2
+   barDF1$brk[barDF1$Trt=="PILED"] <- 3.8
+   barDF1$brk[barDF1$Trt=="PILEND"] <- 3.2
+   
+   barDF2$brk[barDF2$Trt=="POPAD"] <- 1.8
+   barDF2$brk[barDF2$Trt=="POPAND"] <- 1.2
+   barDF2$brk[barDF2$Trt=="POPED"] <- 3.8
+   barDF2$brk[barDF2$Trt=="POPEND"] <- 3.2
+   
+   
    ############################# perform statistical tests ##############################
    ### perform linear mixed effect model statistics 
    mod1 <- lmer(leaf_area ~ CO2 * H2O + (1|Glasshouse), data=pilDF)
@@ -171,6 +190,8 @@ make_transpiration_leaf_area_plot <- function() {
       scale_x_continuous(limits=c(0, 2),
                          breaks=c(0, 0.5, 1, 1.5, 2.0))
    
+   
+   ### plotting seting
    combined_legend <- get_legend(p1 + theme(legend.position="bottom",
                                             legend.box = 'vertical',
                                             legend.box.just = 'left'))
@@ -188,7 +209,101 @@ make_transpiration_leaf_area_plot <- function() {
    dev.off() 
    
    
+   #### plant transpiration per leaf area bar plant
+   p1 <- ggplot(data=barDF1, 
+                aes(brk, transp_leaf.mean)) +
+      geom_bar(stat = "identity", aes(fill=Trt), 
+               position="dodge", col="black") +
+      geom_errorbar(aes(x=brk, ymin=transp_leaf.mean-transp_leaf.se, 
+                        ymax=transp_leaf.mean+transp_leaf.se), 
+                    position=position_dodge(0.9), width=0.2) +
+      ggtitle("E. pilularis")+
+      theme_linedraw() +
+      theme(panel.grid.minor=element_blank(),
+            axis.text.x=element_text(size=12),
+            axis.title.x=element_text(size=14),
+            axis.text.y=element_text(size=12),
+            axis.title.y=element_text(size=14),
+            legend.text=element_text(size=12),
+            legend.title=element_text(size=14),
+            panel.grid.major=element_blank(),
+            legend.position="none",
+            legend.box = 'horizontal',
+            legend.box.just = 'left',
+            plot.title = element_text(size=14, face="bold.italic", 
+                                      hjust = 0.5))+
+      ylab(expression(paste("Transpiration (l " * m^-2 * " " * d^-1 * ")")))+
+      scale_fill_manual(name="",
+                        limits=c("PILAD", "PILAND", "PILED", "PILEND"),
+                        labels=c(expression(paste(aC[a]*" - D")), 
+                                 expression(paste(aC[a]*" - W")),
+                                 expression(paste(eC[a]*" - D")),
+                                 expression(paste(eC[a]*" - W"))),
+                        values=c(alpha("blue3", 0.2), "blue3", 
+                                 alpha("red2", 0.2), "red2"),
+                        guide=guide_legend(nrow=1))+
+      xlab("")+
+      scale_x_continuous(limits=c(0.5, 4.5),
+                         breaks=c(1.5, 3.5),
+                         labels=c("ambient","elevated"))+
+      ylim(0, 1)
    
+   
+   
+   p2 <- ggplot(data=barDF2, 
+                aes(brk, transp_leaf.mean)) +
+      geom_bar(stat = "identity", aes(fill=Trt), 
+               position="dodge", col="black") +
+      geom_errorbar(aes(x=brk, ymin=transp_leaf.mean-transp_leaf.se, 
+                        ymax=transp_leaf.mean+transp_leaf.se), 
+                    position=position_dodge(0.9), width=0.2) +
+      ggtitle("E. populnea")+
+      theme_linedraw() +
+      theme(panel.grid.minor=element_blank(),
+            axis.text.x=element_text(size=12),
+            axis.title.x=element_text(size=14),
+            axis.text.y=element_text(size=12),
+            axis.title.y=element_text(size=14),
+            legend.text=element_text(size=12),
+            legend.title=element_text(size=14),
+            panel.grid.major=element_blank(),
+            legend.position="none",
+            legend.box = 'horizontal',
+            legend.box.just = 'left',
+            plot.title = element_text(size=14, face="bold.italic", 
+                                      hjust = 0.5))+
+      ylab(expression(paste("Transpiration (l " * m^-2 * " " * d^-1 * ")")))+
+      scale_fill_manual(name="",
+                        limits=c("POPAD", "POPAND", "POPED", "POPEND"),
+                        labels=c(expression(paste(aC[a]*" - D")), 
+                                 expression(paste(aC[a]*" - W")),
+                                 expression(paste(eC[a]*" - D")),
+                                 expression(paste(eC[a]*" - W"))),
+                        values=c(alpha("blue3", 0.2), "blue3", 
+                                 alpha("red2", 0.2), "red2"),
+                        guide=guide_legend(nrow=1))+
+      xlab("")+
+      scale_x_continuous(limits=c(0.5, 4.5),
+                         breaks=c(1.5, 3.5),
+                         labels=c("ambient","elevated"))+
+      ylim(0, 4)
+   
+   
+   combined_legend <- get_legend(p1 + theme(legend.position="bottom",
+                                            legend.box = 'vertical',
+                                            legend.box.just = 'left'))
+   
+   
+   combined_plots <- plot_grid(p1, p2, 
+                               labels=c("(a)", "(b)"), 
+                               ncol=2, align="vh", axis = "l",
+                               label_x=0.2, label_y=0.9)
+   
+   
+   pdf(paste0(outdir, "F4.transpiration_per_leaf_area.pdf"), width=8, height=4)
+   plot_grid(combined_plots, combined_legend, 
+             ncol=1, rel_heights=c(1, 0.1))
+   dev.off() 
   
 }
 

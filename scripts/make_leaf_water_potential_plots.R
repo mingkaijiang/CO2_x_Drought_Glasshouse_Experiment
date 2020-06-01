@@ -7,6 +7,10 @@ make_leaf_water_potential_plots <- function() {
     popDF<-read.csv("data/glasshouse2/Populnea_Phys.csv",sep=",", header=TRUE)
     
     
+    ## remove data points with unequal sample size
+    pilDF <- pilDF[pilDF$n.1==6, ]
+    popDF <- popDF[popDF$n.1==6, ]
+    
     
     #### plotting
     p1 <- ggplot(pilDF, aes(x=Day, y=psiPD, group=Trt)) +
@@ -265,7 +269,7 @@ make_leaf_water_potential_plots <- function() {
     combined_plots <- plot_grid(p1, p2, p3, p4,
                                 labels=c("(a)", "(b)", "(c)", "(d)"), 
                                 ncol=2, align="vh", axis = "l",
-                                label_x=0.16, label_y=0.9)
+                                label_x=0.84, label_y=0.86)
     
     
     pdf(paste0(outdir, "F5.leaf_water_potentials.pdf"), width=8, height=8)
