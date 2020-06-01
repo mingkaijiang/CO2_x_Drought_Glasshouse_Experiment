@@ -1,12 +1,32 @@
 make_whole_plant_hydraulic_conductance_plot <- function() {
-    #Eucalyptus pilularis
+ 
+   #Eucalyptus pilularis
     pilDF<-read.csv("data/glasshouse2/Drydown_gasexchange_pilularis.csv",sep=",", header=TRUE)
     #Eucalyptus populnea
     popDF<-read.csv("data/glasshouse2/Drydown_gasexchange_populnea.csv",sep=",", header=TRUE)
     
     ## remove data points with unequal sample size
-    pilDF <- pilDF[pilDF$n.1==6, ]
-    popDF <- popDF[popDF$n.1==6, ]
+    ## E.pilularis: Day > 6, well-watered
+    ## E. populnea: POPAD: Day > 30
+    ## E. populnea: POPAND: day >=19
+    ## E. populnea: POPED: day >= 22
+    ## E. populnea: POPEND: day >= 19
+    
+    ### pilDF
+    subDF1 <- pilDF[pilDF$Trt%in%c("PILAD", "PILED"),]
+    subDF2 <- pilDF[pilDF$Trt%in%c("PILAND", "PILEND"),]
+    #subDF1 <- subDF1[subDF1$Day <= 6, ]
+    subDF2 <- subDF2[subDF2$Day <= 6, ]
+    
+    pilDF <- rbind(subDF1, subDF2)
+    
+    ### popDF
+    subDF1 <- popDF[popDF$Trt=="POPAD"&popDF$Day<= 30,]
+    subDF2 <- popDF[popDF$Trt=="POPAND"&popDF$Day< 19,]
+    subDF3 <- popDF[popDF$Trt=="POPED"&popDF$Day< 22,]
+    subDF4 <- popDF[popDF$Trt=="POPEND"&popDF$Day< 19,]
+    
+    popDF <- rbind(subDF1, subDF2, subDF3, subDF4)
     
     
     ### plotting DFs
@@ -80,7 +100,7 @@ make_whole_plant_hydraulic_conductance_plot <- function() {
                                     expression(paste(eC[a]*" - W"))),
                            values=c(21,21,21,21))+
         ggtitle("E. pilularis")+
-        ylim(0, 30)+
+        ylim(0, 8)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 21, 21),
                                                        fill = c("white", "blue3", "white", "red2"),
@@ -144,7 +164,7 @@ make_whole_plant_hydraulic_conductance_plot <- function() {
                                     expression(paste(eC[a]*" - W"))),
                            values=c(21,21,21,21))+
         ggtitle("E. populnea")+
-        ylim(0, 30)+
+        ylim(0, 8)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 21, 21),
                                                        fill = c("white", "blue3", "white", "red2"),
@@ -162,10 +182,10 @@ make_whole_plant_hydraulic_conductance_plot <- function() {
     combined_plots <- plot_grid(p1, p2, 
                                 labels=c("(a)", "(b)"), 
                                 ncol=2, align="vh", axis = "l",
-                                label_x=0.16, label_y=0.9)
+                                label_x=0.2, label_y=0.9)
     
     
-    pdf(paste0(outdir, "F7.whole_plant_hydraulics_plot.pdf"), width=8, height=6)
+    pdf(paste0(outdir, "F7.whole_plant_hydraulics_plot.pdf"), width=8, height=4)
     plot_grid(combined_plots, combined_legend, 
               ncol=1, rel_heights=c(1, 0.1))
     dev.off() 
@@ -307,7 +327,7 @@ make_whole_plant_hydraulic_conductance_plot <- function() {
     combined_plots <- plot_grid(p1, p2, 
                                 labels=c("(a)", "(b)"), 
                                 ncol=2, align="h", axis = "l",
-                                label_x=0.16, label_y=0.9)
+                                label_x=c(0.16, 0.1), label_y=0.9)
     
     
     pdf(paste0(outdir, "F7.whole_plant_hydraulics_log_plot.pdf"), width=8, height=4)

@@ -11,7 +11,6 @@ make_leaf_water_potential_plots <- function() {
     pilDF <- pilDF[pilDF$n.1==6, ]
     popDF <- popDF[popDF$n.1==6, ]
     
-    
     #### plotting
     p1 <- ggplot(pilDF, aes(x=Day, y=psiPD, group=Trt)) +
         geom_errorbar(aes(col=Trt, x=Day, 
