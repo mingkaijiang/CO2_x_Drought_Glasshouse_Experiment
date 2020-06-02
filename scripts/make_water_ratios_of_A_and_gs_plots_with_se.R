@@ -339,7 +339,7 @@ make_water_ratios_of_A_and_gs_plots_with_se <- function() {
                           values=c("blue3", "red2"),
                           guide=guide_legend(nrow=1))+
         ggtitle("Morning")+
-        ylim(0, 8)+
+        ylim(0, 2)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("blue3", "red2"),
@@ -383,7 +383,7 @@ make_water_ratios_of_A_and_gs_plots_with_se <- function() {
                           values=c("blue3", "red2"),
                           guide=guide_legend(nrow=1))+
         ggtitle("Midday")+
-        ylim(0, 8)+
+        ylim(0, 2)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("blue3", "red2"),
@@ -426,7 +426,7 @@ make_water_ratios_of_A_and_gs_plots_with_se <- function() {
                                    expression(eC[a])),
                           values=c("blue3", "red2"),
                           guide=guide_legend(nrow=1))+
-        ylim(0, 3)+
+        ylim(0, 2)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("blue3", "red2"),
@@ -469,7 +469,7 @@ make_water_ratios_of_A_and_gs_plots_with_se <- function() {
                                    expression(eC[a])),
                           values=c("blue3", "red2"),
                           guide=guide_legend(nrow=1))+
-        ylim(0, 3)+
+        ylim(0, 2)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("blue3", "red2"),
@@ -512,7 +512,7 @@ make_water_ratios_of_A_and_gs_plots_with_se <- function() {
                                    expression(eC[a])),
                           values=c("blue3", "red2"),
                           guide=guide_legend(nrow=1))+
-        ylim(0, 3)+
+        ylim(0, 2)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("blue3", "red2"),
@@ -557,7 +557,7 @@ make_water_ratios_of_A_and_gs_plots_with_se <- function() {
                                    expression(eC[a])),
                           values=c("blue3", "red2"),
                           guide=guide_legend(nrow=1))+
-        ylim(0, 5)+
+        ylim(0, 2.5)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("blue3", "red2"),
@@ -600,7 +600,7 @@ make_water_ratios_of_A_and_gs_plots_with_se <- function() {
                                    expression(eC[a])),
                           values=c("blue3", "red2"),
                           guide=guide_legend(nrow=1))+
-        ylim(0, 5)+
+        ylim(0, 2.5)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("blue3", "red2"),
@@ -643,7 +643,7 @@ make_water_ratios_of_A_and_gs_plots_with_se <- function() {
                                    expression(eC[a])),
                           values=c("blue3", "red2"),
                           guide=guide_legend(nrow=1))+
-        ylim(0, 5)+
+        ylim(0, 2.5)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("blue3", "red2"),
@@ -666,7 +666,7 @@ make_water_ratios_of_A_and_gs_plots_with_se <- function() {
                                 label_x=0.85, label_y=0.85)
     
     
-    pdf(paste0(outdir, "F10.1.Water_ratio_pilularis.pdf"), width=14, height=12)
+    pdf(paste0(outdir, "F11.1.Water_ratio_pilularis.pdf"), width=14, height=12)
     plot_grid(combined_plots, combined_legend, 
               ncol=1, rel_heights=c(1, 0.1))
     dev.off() 
@@ -698,7 +698,7 @@ make_water_ratios_of_A_and_gs_plots_with_se <- function() {
               legend.box.just = 'left',
               plot.title = element_text(size=16, face="bold", 
                                         hjust = 0.5))+
-        ylab(expression(paste(CO[2]* " ratio " * A[sat])))+
+        ylab(expression(paste(H[2]* "O ratio " * A[sat])))+
         scale_color_manual(name="",
                            limits=c("A", "E"),
                            labels=c(expression(aC[a]), 
@@ -712,7 +712,7 @@ make_water_ratios_of_A_and_gs_plots_with_se <- function() {
                           values=c("blue3", "red2"),
                           guide=guide_legend(nrow=1))+
         ggtitle("Daily")+
-        ylim(0, 3)+
+        ylim(0, 1.5)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("blue3", "red2"),
@@ -742,7 +742,7 @@ make_water_ratios_of_A_and_gs_plots_with_se <- function() {
               legend.box.just = 'left',
               plot.title = element_text(size=16, face="bold", 
                                         hjust = 0.5))+
-        ylab(expression(paste(CO[2]* " ratio " * A[sat])))+
+        ylab(expression(paste(H[2]* "O ratio "  * A[sat])))+
         scale_color_manual(name="",
                            limits=c("A", "E"),
                            labels=c(expression(aC[a]), 
@@ -756,7 +756,7 @@ make_water_ratios_of_A_and_gs_plots_with_se <- function() {
                           values=c("blue3", "red2"),
                           guide=guide_legend(nrow=1))+
         ggtitle("Morning")+
-        ylim(0, 3)+
+        ylim(0, 1.5)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("blue3", "red2"),
@@ -786,7 +786,7 @@ make_water_ratios_of_A_and_gs_plots_with_se <- function() {
               legend.box.just = 'left',
               plot.title = element_text(size=16, face="bold", 
                                         hjust = 0.5))+
-        ylab(expression(paste(CO[2]* " ratio " * A[sat])))+
+        ylab(expression(paste(H[2]* "O ratio "  * A[sat])))+
         scale_color_manual(name="",
                            limits=c("A", "E"),
                            labels=c(expression(aC[a]), 
@@ -800,7 +800,7 @@ make_water_ratios_of_A_and_gs_plots_with_se <- function() {
                           values=c("blue3", "red2"),
                           guide=guide_legend(nrow=1))+
         ggtitle("Midday")+
-        ylim(0, 3)+
+        ylim(0, 1.5)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("blue3", "red2"),
@@ -831,7 +831,7 @@ make_water_ratios_of_A_and_gs_plots_with_se <- function() {
               legend.box.just = 'left',
               plot.title = element_text(size=16, face="bold", 
                                         hjust = 0.5))+
-        ylab(expression(paste(CO[2]* " ratio " * g[s])))+
+        ylab(expression(paste(H[2]* "O ratio "  * g[s])))+
         scale_color_manual(name="",
                            limits=c("A", "E"),
                            labels=c(expression(aC[a]), 
@@ -844,7 +844,7 @@ make_water_ratios_of_A_and_gs_plots_with_se <- function() {
                                    expression(eC[a])),
                           values=c("blue3", "red2"),
                           guide=guide_legend(nrow=1))+
-        ylim(0, 1)+
+        ylim(0, 2)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("blue3", "red2"),
@@ -874,7 +874,7 @@ make_water_ratios_of_A_and_gs_plots_with_se <- function() {
               legend.box.just = 'left',
               plot.title = element_text(size=16, face="bold", 
                                         hjust = 0.5))+
-        ylab(expression(paste(CO[2]* " ratio " * g[s])))+
+        ylab(expression(paste(H[2]* "O ratio " * g[s])))+
         scale_color_manual(name="",
                            limits=c("A", "E"),
                            labels=c(expression(aC[a]), 
@@ -887,7 +887,7 @@ make_water_ratios_of_A_and_gs_plots_with_se <- function() {
                                    expression(eC[a])),
                           values=c("blue3", "red2"),
                           guide=guide_legend(nrow=1))+
-        ylim(0, 1)+
+        ylim(0, 2)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("blue3", "red2"),
@@ -917,7 +917,7 @@ make_water_ratios_of_A_and_gs_plots_with_se <- function() {
               legend.box.just = 'left',
               plot.title = element_text(size=16, face="bold", 
                                         hjust = 0.5))+
-        ylab(expression(paste(CO[2]* " ratio " * g[s])))+
+        ylab(expression(paste(H[2]* "O ratio " * g[s])))+
         scale_color_manual(name="",
                            limits=c("A", "E"),
                            labels=c(expression(aC[a]), 
@@ -930,7 +930,7 @@ make_water_ratios_of_A_and_gs_plots_with_se <- function() {
                                    expression(eC[a])),
                           values=c("blue3", "red2"),
                           guide=guide_legend(nrow=1))+
-        ylim(0, 1)+
+        ylim(0, 2)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("blue3", "red2"),
@@ -960,7 +960,7 @@ make_water_ratios_of_A_and_gs_plots_with_se <- function() {
               legend.box.just = 'left',
               plot.title = element_text(size=16, face="bold", 
                                         hjust = 0.5))+
-        ylab(expression(paste(CO[2]* " ratio iWUE")))+
+        ylab(expression(paste(H[2]* "O ratio iWUE")))+
         scale_color_manual(name="",
                            limits=c("A", "E"),
                            labels=c(expression(aC[a]), 
@@ -973,7 +973,7 @@ make_water_ratios_of_A_and_gs_plots_with_se <- function() {
                                    expression(eC[a])),
                           values=c("blue3", "red2"),
                           guide=guide_legend(nrow=1))+
-        ylim(0, 4)+
+        ylim(0, 2)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("blue3", "red2"),
@@ -1003,7 +1003,7 @@ make_water_ratios_of_A_and_gs_plots_with_se <- function() {
               legend.box.just = 'left',
               plot.title = element_text(size=16, face="bold", 
                                         hjust = 0.5))+
-        ylab(expression(paste(CO[2]* " ratio iWUE")))+
+        ylab(expression(paste(H[2]* "O ratio iWUE")))+
         scale_color_manual(name="",
                            limits=c("A", "E"),
                            labels=c(expression(aC[a]), 
@@ -1016,7 +1016,7 @@ make_water_ratios_of_A_and_gs_plots_with_se <- function() {
                                    expression(eC[a])),
                           values=c("blue3", "red2"),
                           guide=guide_legend(nrow=1))+
-        ylim(0, 4)+
+        ylim(0, 2)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("blue3", "red2"),
@@ -1046,7 +1046,7 @@ make_water_ratios_of_A_and_gs_plots_with_se <- function() {
               legend.box.just = 'left',
               plot.title = element_text(size=16, face="bold", 
                                         hjust = 0.5))+
-        ylab(expression(paste(CO[2]* " ratio iWUE")))+
+        ylab(expression(paste(H[2]* "O ratio iWUE")))+
         scale_color_manual(name="",
                            limits=c("A", "E"),
                            labels=c(expression(aC[a]), 
@@ -1059,7 +1059,7 @@ make_water_ratios_of_A_and_gs_plots_with_se <- function() {
                                    expression(eC[a])),
                           values=c("blue3", "red2"),
                           guide=guide_legend(nrow=1))+
-        ylim(0, 4)+
+        ylim(0, 2)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("blue3", "red2"),
@@ -1081,7 +1081,7 @@ make_water_ratios_of_A_and_gs_plots_with_se <- function() {
                                 label_x=0.85, label_y=0.85)
     
     
-    pdf(paste0(outdir, "F10.2.Water_ratio_populnea.pdf"), width=14, height=12)
+    pdf(paste0(outdir, "F11.2.Water_ratio_populnea.pdf"), width=14, height=12)
     plot_grid(combined_plots, combined_legend, 
               ncol=1, rel_heights=c(1, 0.1))
     dev.off() 
