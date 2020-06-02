@@ -1,4 +1,4 @@
-make_CO2_ratios_of_A_and_gs_plots_with_se <- function() {
+make_water_ratios_of_A_and_gs_plots_with_se <- function() {
     
     ### read input
     pilDF<-read.csv("data/glasshouse2/Drydown_gasexchange_pilularis.csv",sep=",", header=TRUE)
@@ -82,189 +82,189 @@ make_CO2_ratios_of_A_and_gs_plots_with_se <- function() {
     d1 <- unique(pilDF$Day)
     d2 <- unique(popDF$Day)
     
-    ### water treatment
-    w <- c("D", "ND")
+    ### CO2 treatment
+    w <- c("A", "E")
     
     ### subset
-    pDF1.amb <- subset(pDF1, CO2 == "A")
-    pDF1.ele <- subset(pDF1, CO2 == "E")
+    pDF1.d <- subset(pDF1, H2O == "D")
+    pDF1.nd <- subset(pDF1, H2O == "ND")
     
-    pDF2.amb <- subset(pDF2, CO2 == "A")
-    pDF2.ele <- subset(pDF2, CO2 == "E")
+    pDF2.d <- subset(pDF2, H2O == "D")
+    pDF2.nd <- subset(pDF2, H2O == "ND")
     
     ### merge the two datasets
-    plotDF1 <- merge(pDF1.amb, pDF1.ele, by=c("Day", "H2O"), keep.all=T)
-    plotDF2 <- merge(pDF2.amb, pDF2.ele, by=c("Day", "H2O"), keep.all=T)
+    plotDF1 <- merge(pDF1.d, pDF1.nd, by=c("Day", "CO2"), keep.all=T)
+    plotDF2 <- merge(pDF2.d, pDF2.nd, by=c("Day", "CO2"), keep.all=T)
     
-    colnames(plotDF1) <- colnames(plotDF2) <- c("Day", "H2O", "Trt.amb", "CO2.amb",
-                                                "amb_log_Adaily_mean", "amb_log_Aearly_mean", "amb_log_Alate_mean",
-                                                "amb_log_GSdaily_mean", "amb_log_GSearly_mean", "amb_log_GSlate_mean",
-                                                "amb_log_WUEdaily_mean", "amb_log_WUEearly_mean", "amb_log_WUElate_mean",
-                                                "amb_log_Adaily_se", "amb_log_Aearly_se", "amb_log_Alate_se",
-                                                "amb_log_GSdaily_se", "amb_log_GSearly_se", "amb_log_GSlate_se",
-                                                "amb_log_WUEdaily_se", "amb_log_WUEearly_se", "amb_log_WUElate_se",
-                                                "Trt.ele", "CO2.ele",
-                                                "ele_log_Adaily_mean", "ele_log_Aearly_mean", "ele_log_Alate_mean",
-                                                "ele_log_GSdaily_mean", "ele_log_GSearly_mean", "ele_log_GSlate_mean",
-                                                "ele_log_WUEdaily_mean", "ele_log_WUEearly_mean", "ele_log_WUElate_mean",
-                                                "ele_log_Adaily_se", "ele_log_Aearly_se", "ele_log_Alate_se",
-                                                "ele_log_GSdaily_se", "ele_log_GSearly_se", "ele_log_GSlate_se",
-                                                "ele_log_WUEdaily_se", "ele_log_WUEearly_se", "ele_log_WUElate_se")
+    colnames(plotDF1) <- colnames(plotDF2) <- c("Day", "CO2", "Trt.d", "H2O.d",
+                                                "d_log_Adaily_mean", "d_log_Aearly_mean", "d_log_Alate_mean",
+                                                "d_log_GSdaily_mean", "d_log_GSearly_mean", "d_log_GSlate_mean",
+                                                "d_log_WUEdaily_mean", "d_log_WUEearly_mean", "d_log_WUElate_mean",
+                                                "d_log_Adaily_se", "d_log_Aearly_se", "d_log_Alate_se",
+                                                "d_log_GSdaily_se", "d_log_GSearly_se", "d_log_GSlate_se",
+                                                "d_log_WUEdaily_se", "d_log_WUEearly_se", "d_log_WUElate_se",
+                                                "Trt.nd", "CO2.nd",
+                                                "nd_log_Adaily_mean", "nd_log_Aearly_mean", "nd_log_Alate_mean",
+                                                "nd_log_GSdaily_mean", "nd_log_GSearly_mean", "nd_log_GSlate_mean",
+                                                "nd_log_WUEdaily_mean", "nd_log_WUEearly_mean", "nd_log_WUElate_mean",
+                                                "nd_log_Adaily_se", "nd_log_Aearly_se", "nd_log_Alate_se",
+                                                "nd_log_GSdaily_se", "nd_log_GSearly_se", "nd_log_GSlate_se",
+                                                "nd_log_WUEdaily_se", "nd_log_WUEearly_se", "nd_log_WUElate_se")
     
     ### Calculate CO2 signal
-    plotDF1$log_CO2_Adaily <- plotDF1$ele_log_Adaily_mean - plotDF1$amb_log_Adaily_mean
-    plotDF1$log_CO2_Aearly <- plotDF1$ele_log_Aearly_mean - plotDF1$amb_log_Aearly_mean
-    plotDF1$log_CO2_Alate <- plotDF1$ele_log_Alate_mean - plotDF1$amb_log_Alate_mean
+    plotDF1$log_Water_Adaily <- plotDF1$nd_log_Adaily_mean - plotDF1$d_log_Adaily_mean
+    plotDF1$log_Water_Aearly <- plotDF1$nd_log_Aearly_mean - plotDF1$d_log_Aearly_mean
+    plotDF1$log_Water_Alate <- plotDF1$nd_log_Alate_mean - plotDF1$d_log_Alate_mean
     
-    plotDF1$log_CO2_GSdaily <- plotDF1$ele_log_GSdaily_mean - plotDF1$amb_log_GSdaily_mean
-    plotDF1$log_CO2_GSearly <- plotDF1$ele_log_GSearly_mean - plotDF1$amb_log_GSearly_mean
-    plotDF1$log_CO2_GSlate <- plotDF1$ele_log_GSlate_mean - plotDF1$amb_log_GSlate_mean
+    plotDF1$log_Water_GSdaily <- plotDF1$nd_log_GSdaily_mean - plotDF1$d_log_GSdaily_mean
+    plotDF1$log_Water_GSearly <- plotDF1$nd_log_GSearly_mean - plotDF1$d_log_GSearly_mean
+    plotDF1$log_Water_GSlate <- plotDF1$nd_log_GSlate_mean - plotDF1$d_log_GSlate_mean
     
-    plotDF1$log_CO2_WUEdaily <- plotDF1$ele_log_WUEdaily_mean - plotDF1$amb_log_WUEdaily_mean
-    plotDF1$log_CO2_WUEearly <- plotDF1$ele_log_WUEearly_mean - plotDF1$amb_log_WUEearly_mean
-    plotDF1$log_CO2_WUElate <- plotDF1$ele_log_WUElate_mean - plotDF1$amb_log_WUElate_mean
+    plotDF1$log_Water_WUEdaily <- plotDF1$nd_log_WUEdaily_mean - plotDF1$d_log_WUEdaily_mean
+    plotDF1$log_Water_WUEearly <- plotDF1$nd_log_WUEearly_mean - plotDF1$d_log_WUEearly_mean
+    plotDF1$log_Water_WUElate <- plotDF1$nd_log_WUElate_mean - plotDF1$d_log_WUElate_mean
     
     ## plotDF2
-    plotDF2$log_CO2_Adaily <- plotDF2$ele_log_Adaily_mean - plotDF2$amb_log_Adaily_mean
-    plotDF2$log_CO2_Aearly <- plotDF2$ele_log_Aearly_mean - plotDF2$amb_log_Aearly_mean
-    plotDF2$log_CO2_Alate <- plotDF2$ele_log_Alate_mean - plotDF2$amb_log_Alate_mean
+    plotDF2$log_Water_Adaily <- plotDF2$nd_log_Adaily_mean - plotDF2$d_log_Adaily_mean
+    plotDF2$log_Water_Aearly <- plotDF2$nd_log_Aearly_mean - plotDF2$d_log_Aearly_mean
+    plotDF2$log_Water_Alate <- plotDF2$nd_log_Alate_mean - plotDF2$d_log_Alate_mean
     
     
-    plotDF2$log_CO2_GSdaily <- plotDF2$ele_log_GSdaily_mean - plotDF2$amb_log_GSdaily_mean
-    plotDF2$log_CO2_GSearly <- plotDF2$ele_log_GSearly_mean - plotDF2$amb_log_GSearly_mean
-    plotDF2$log_CO2_GSlate <- plotDF2$ele_log_GSlate_mean - plotDF2$amb_log_GSlate_mean
+    plotDF2$log_Water_GSdaily <- plotDF2$nd_log_GSdaily_mean - plotDF2$d_log_GSdaily_mean
+    plotDF2$log_Water_GSearly <- plotDF2$nd_log_GSearly_mean - plotDF2$d_log_GSearly_mean
+    plotDF2$log_Water_GSlate <- plotDF2$nd_log_GSlate_mean - plotDF2$d_log_GSlate_mean
     
-    plotDF2$log_CO2_WUEdaily <- plotDF2$ele_log_WUEdaily_mean - plotDF2$amb_log_WUEdaily_mean
-    plotDF2$log_CO2_WUEearly <- plotDF2$ele_log_WUEearly_mean - plotDF2$amb_log_WUEearly_mean
-    plotDF2$log_CO2_WUElate <- plotDF2$ele_log_WUElate_mean - plotDF2$amb_log_WUElate_mean
+    plotDF2$log_Water_WUEdaily <- plotDF2$nd_log_WUEdaily_mean - plotDF2$d_log_WUEdaily_mean
+    plotDF2$log_Water_WUEearly <- plotDF2$nd_log_WUEearly_mean - plotDF2$d_log_WUEearly_mean
+    plotDF2$log_Water_WUElate <- plotDF2$nd_log_WUElate_mean - plotDF2$d_log_WUElate_mean
     
-    ### Calculate CO2 ratio SE
-    plotDF1$log_CO2_Adaily_se <- sqrt(plotDF1$amb_log_Adaily_se^2 + plotDF1$ele_log_Adaily_se^2)
-    plotDF1$log_CO2_Aearly_se <- sqrt(plotDF1$amb_log_Aearly_se^2 + plotDF1$ele_log_Aearly_se^2)
-    plotDF1$log_CO2_Alate_se <- sqrt(plotDF1$amb_log_Alate_se^2 + plotDF1$ele_log_Alate_se^2)
+    ### Calculate Water ratio SE
+    plotDF1$log_Water_Adaily_se <- sqrt(plotDF1$d_log_Adaily_se^2 + plotDF1$nd_log_Adaily_se^2)
+    plotDF1$log_Water_Aearly_se <- sqrt(plotDF1$d_log_Aearly_se^2 + plotDF1$nd_log_Aearly_se^2)
+    plotDF1$log_Water_Alate_se <- sqrt(plotDF1$d_log_Alate_se^2 + plotDF1$nd_log_Alate_se^2)
     
-    plotDF1$log_CO2_GSdaily_se <- sqrt(plotDF1$amb_log_GSdaily_se^2 + plotDF1$ele_log_GSdaily_se^2)
-    plotDF1$log_CO2_GSearly_se <- sqrt(plotDF1$amb_log_GSearly_se^2 + plotDF1$ele_log_GSearly_se^2)
-    plotDF1$log_CO2_GSlate_se <- sqrt(plotDF1$amb_log_GSlate_se^2 + plotDF1$ele_log_GSlate_se^2)
+    plotDF1$log_Water_GSdaily_se <- sqrt(plotDF1$d_log_GSdaily_se^2 + plotDF1$nd_log_GSdaily_se^2)
+    plotDF1$log_Water_GSearly_se <- sqrt(plotDF1$d_log_GSearly_se^2 + plotDF1$nd_log_GSearly_se^2)
+    plotDF1$log_Water_GSlate_se <- sqrt(plotDF1$d_log_GSlate_se^2 + plotDF1$nd_log_GSlate_se^2)
     
-    plotDF1$log_CO2_WUEdaily_se <- sqrt(plotDF1$amb_log_WUEdaily_se^2 + plotDF1$ele_log_WUEdaily_se^2)
-    plotDF1$log_CO2_WUEearly_se <- sqrt(plotDF1$amb_log_WUEearly_se^2 + plotDF1$ele_log_WUEearly_se^2)
-    plotDF1$log_CO2_WUElate_se <- sqrt(plotDF1$amb_log_WUElate_se^2 + plotDF1$ele_log_WUElate_se^2)
+    plotDF1$log_Water_WUEdaily_se <- sqrt(plotDF1$d_log_WUEdaily_se^2 + plotDF1$nd_log_WUEdaily_se^2)
+    plotDF1$log_Water_WUEearly_se <- sqrt(plotDF1$d_log_WUEearly_se^2 + plotDF1$nd_log_WUEearly_se^2)
+    plotDF1$log_Water_WUElate_se <- sqrt(plotDF1$d_log_WUElate_se^2 + plotDF1$nd_log_WUElate_se^2)
     
     # plotDF2
-    plotDF2$log_CO2_Adaily_se <- sqrt(plotDF2$amb_log_Adaily_se^2 + plotDF2$ele_log_Adaily_se^2)
-    plotDF2$log_CO2_Aearly_se <- sqrt(plotDF2$amb_log_Aearly_se^2 + plotDF2$ele_log_Aearly_se^2)
-    plotDF2$log_CO2_Alate_se <- sqrt(plotDF2$amb_log_Alate_se^2 + plotDF2$ele_log_Alate_se^2)
+    plotDF2$log_Water_Adaily_se <- sqrt(plotDF2$d_log_Adaily_se^2 + plotDF2$nd_log_Adaily_se^2)
+    plotDF2$log_Water_Aearly_se <- sqrt(plotDF2$d_log_Aearly_se^2 + plotDF2$nd_log_Aearly_se^2)
+    plotDF2$log_Water_Alate_se <- sqrt(plotDF2$d_log_Alate_se^2 + plotDF2$nd_log_Alate_se^2)
     
-    plotDF2$log_CO2_GSdaily_se <- sqrt(plotDF2$amb_log_GSdaily_se^2 + plotDF2$ele_log_GSdaily_se^2)
-    plotDF2$log_CO2_GSearly_se <- sqrt(plotDF2$amb_log_GSearly_se^2 + plotDF2$ele_log_GSearly_se^2)
-    plotDF2$log_CO2_GSlate_se <- sqrt(plotDF2$amb_log_GSlate_se^2 + plotDF2$ele_log_GSlate_se^2)
+    plotDF2$log_Water_GSdaily_se <- sqrt(plotDF2$d_log_GSdaily_se^2 + plotDF2$nd_log_GSdaily_se^2)
+    plotDF2$log_Water_GSearly_se <- sqrt(plotDF2$d_log_GSearly_se^2 + plotDF2$nd_log_GSearly_se^2)
+    plotDF2$log_Water_GSlate_se <- sqrt(plotDF2$d_log_GSlate_se^2 + plotDF2$nd_log_GSlate_se^2)
     
-    plotDF2$log_CO2_WUEdaily_se <- sqrt(plotDF2$amb_log_WUEdaily_se^2 + plotDF2$ele_log_WUEdaily_se^2)
-    plotDF2$log_CO2_WUEearly_se <- sqrt(plotDF2$amb_log_WUEearly_se^2 + plotDF2$ele_log_WUEearly_se^2)
-    plotDF2$log_CO2_WUElate_se <- sqrt(plotDF2$amb_log_WUElate_se^2 + plotDF2$ele_log_WUElate_se^2)
+    plotDF2$log_Water_WUEdaily_se <- sqrt(plotDF2$d_log_WUEdaily_se^2 + plotDF2$nd_log_WUEdaily_se^2)
+    plotDF2$log_Water_WUEearly_se <- sqrt(plotDF2$d_log_WUEearly_se^2 + plotDF2$nd_log_WUEearly_se^2)
+    plotDF2$log_Water_WUElate_se <- sqrt(plotDF2$d_log_WUElate_se^2 + plotDF2$nd_log_WUElate_se^2)
     
     
     ### exponential mean
-    plotDF1$CO2_Adaily <- exp(plotDF1$log_CO2_Adaily)
-    plotDF1$CO2_Aearly <- exp(plotDF1$log_CO2_Aearly)
-    plotDF1$CO2_Alate <- exp(plotDF1$log_CO2_Alate)
+    plotDF1$Water_Adaily <- exp(plotDF1$log_Water_Adaily)
+    plotDF1$Water_Aearly <- exp(plotDF1$log_Water_Aearly)
+    plotDF1$Water_Alate <- exp(plotDF1$log_Water_Alate)
     
-    plotDF1$CO2_GSdaily <- exp(plotDF1$log_CO2_GSdaily)
-    plotDF1$CO2_GSearly <- exp(plotDF1$log_CO2_GSearly)
-    plotDF1$CO2_GSlate <- exp(plotDF1$log_CO2_GSlate)
+    plotDF1$Water_GSdaily <- exp(plotDF1$log_Water_GSdaily)
+    plotDF1$Water_GSearly <- exp(plotDF1$log_Water_GSearly)
+    plotDF1$Water_GSlate <- exp(plotDF1$log_Water_GSlate)
     
-    plotDF1$CO2_WUEdaily <- exp(plotDF1$log_CO2_WUEdaily)
-    plotDF1$CO2_WUEearly <- exp(plotDF1$log_CO2_WUEearly)
-    plotDF1$CO2_WUElate <- exp(plotDF1$log_CO2_WUElate)
+    plotDF1$Water_WUEdaily <- exp(plotDF1$log_Water_WUEdaily)
+    plotDF1$Water_WUEearly <- exp(plotDF1$log_Water_WUEearly)
+    plotDF1$Water_WUElate <- exp(plotDF1$log_Water_WUElate)
     
     ## plotDF2
-    plotDF2$CO2_Adaily <- exp(plotDF2$log_CO2_Adaily)
-    plotDF2$CO2_Aearly <- exp(plotDF2$log_CO2_Aearly)
-    plotDF2$CO2_Alate <- exp(plotDF2$log_CO2_Alate)
+    plotDF2$Water_Adaily <- exp(plotDF2$log_Water_Adaily)
+    plotDF2$Water_Aearly <- exp(plotDF2$log_Water_Aearly)
+    plotDF2$Water_Alate <- exp(plotDF2$log_Water_Alate)
     
-    plotDF2$CO2_GSdaily <- exp(plotDF2$log_CO2_GSdaily)
-    plotDF2$CO2_GSearly <- exp(plotDF2$log_CO2_GSearly)
-    plotDF2$CO2_GSlate <- exp(plotDF2$log_CO2_GSlate)
+    plotDF2$Water_GSdaily <- exp(plotDF2$log_Water_GSdaily)
+    plotDF2$Water_GSearly <- exp(plotDF2$log_Water_GSearly)
+    plotDF2$Water_GSlate <- exp(plotDF2$log_Water_GSlate)
     
-    plotDF2$CO2_WUEdaily <- exp(plotDF2$log_CO2_WUEdaily)
-    plotDF2$CO2_WUEearly <- exp(plotDF2$log_CO2_WUEearly)
-    plotDF2$CO2_WUElate <- exp(plotDF2$log_CO2_WUElate)
+    plotDF2$Water_WUEdaily <- exp(plotDF2$log_Water_WUEdaily)
+    plotDF2$Water_WUEearly <- exp(plotDF2$log_Water_WUEearly)
+    plotDF2$Water_WUElate <- exp(plotDF2$log_Water_WUElate)
     
     ### exponential se
-    plotDF1$CO2_AdailyUP <- exp(plotDF1$log_CO2_Adaily+plotDF1$log_CO2_Adaily_se)
-    plotDF1$CO2_AdailyLO <- exp(plotDF1$log_CO2_Adaily-plotDF1$log_CO2_Adaily_se)
+    plotDF1$Water_AdailyUP <- exp(plotDF1$log_Water_Adaily+plotDF1$log_Water_Adaily_se)
+    plotDF1$Water_AdailyLO <- exp(plotDF1$log_Water_Adaily-plotDF1$log_Water_Adaily_se)
     
-    plotDF1$CO2_AearlyUP <- exp(plotDF1$log_CO2_Aearly+plotDF1$log_CO2_Aearly_se)
-    plotDF1$CO2_AearlyLO <- exp(plotDF1$log_CO2_Aearly-plotDF1$log_CO2_Aearly_se)
+    plotDF1$Water_AearlyUP <- exp(plotDF1$log_Water_Aearly+plotDF1$log_Water_Aearly_se)
+    plotDF1$Water_AearlyLO <- exp(plotDF1$log_Water_Aearly-plotDF1$log_Water_Aearly_se)
     
-    plotDF1$CO2_AlateUP <- exp(plotDF1$log_CO2_Alate+plotDF1$log_CO2_Alate_se)
-    plotDF1$CO2_AlateLO <- exp(plotDF1$log_CO2_Alate-plotDF1$log_CO2_Alate_se)
-    
-    
-    plotDF1$CO2_GSdailyUP <- exp(plotDF1$log_CO2_GSdaily+plotDF1$log_CO2_GSdaily_se)
-    plotDF1$CO2_GSdailyLO <- exp(plotDF1$log_CO2_GSdaily-plotDF1$log_CO2_GSdaily_se)
-    
-    plotDF1$CO2_GSearlyUP <- exp(plotDF1$log_CO2_GSearly+plotDF1$log_CO2_GSearly_se)
-    plotDF1$CO2_GSearlyLO <- exp(plotDF1$log_CO2_GSearly-plotDF1$log_CO2_GSearly_se)
-    
-    plotDF1$CO2_GSlateUP <- exp(plotDF1$log_CO2_GSlate+plotDF1$log_CO2_GSlate_se)
-    plotDF1$CO2_GSlateLO <- exp(plotDF1$log_CO2_GSlate-plotDF1$log_CO2_GSlate_se)
+    plotDF1$Water_AlateUP <- exp(plotDF1$log_Water_Alate+plotDF1$log_Water_Alate_se)
+    plotDF1$Water_AlateLO <- exp(plotDF1$log_Water_Alate-plotDF1$log_Water_Alate_se)
     
     
-    plotDF1$CO2_WUEdailyUP <- exp(plotDF1$log_CO2_WUEdaily+plotDF1$log_CO2_WUEdaily_se)
-    plotDF1$CO2_WUEdailyLO <- exp(plotDF1$log_CO2_WUEdaily-plotDF1$log_CO2_WUEdaily_se)
+    plotDF1$Water_GSdailyUP <- exp(plotDF1$log_Water_GSdaily+plotDF1$log_Water_GSdaily_se)
+    plotDF1$Water_GSdailyLO <- exp(plotDF1$log_Water_GSdaily-plotDF1$log_Water_GSdaily_se)
     
-    plotDF1$CO2_WUEearlyUP <- exp(plotDF1$log_CO2_WUEearly+plotDF1$log_CO2_WUEearly_se)
-    plotDF1$CO2_WUEearlyLO <- exp(plotDF1$log_CO2_WUEearly-plotDF1$log_CO2_WUEearly_se)
+    plotDF1$Water_GSearlyUP <- exp(plotDF1$log_Water_GSearly+plotDF1$log_Water_GSearly_se)
+    plotDF1$Water_GSearlyLO <- exp(plotDF1$log_Water_GSearly-plotDF1$log_Water_GSearly_se)
     
-    plotDF1$CO2_WUElateUP <- exp(plotDF1$log_CO2_WUElate+plotDF1$log_CO2_WUElate_se)
-    plotDF1$CO2_WUElateLO <- exp(plotDF1$log_CO2_WUElate-plotDF1$log_CO2_WUElate_se)
+    plotDF1$Water_GSlateUP <- exp(plotDF1$log_Water_GSlate+plotDF1$log_Water_GSlate_se)
+    plotDF1$Water_GSlateLO <- exp(plotDF1$log_Water_GSlate-plotDF1$log_Water_GSlate_se)
+    
+    
+    plotDF1$Water_WUEdailyUP <- exp(plotDF1$log_Water_WUEdaily+plotDF1$log_Water_WUEdaily_se)
+    plotDF1$Water_WUEdailyLO <- exp(plotDF1$log_Water_WUEdaily-plotDF1$log_Water_WUEdaily_se)
+    
+    plotDF1$Water_WUEearlyUP <- exp(plotDF1$log_Water_WUEearly+plotDF1$log_Water_WUEearly_se)
+    plotDF1$Water_WUEearlyLO <- exp(plotDF1$log_Water_WUEearly-plotDF1$log_Water_WUEearly_se)
+    
+    plotDF1$Water_WUElateUP <- exp(plotDF1$log_Water_WUElate+plotDF1$log_Water_WUElate_se)
+    plotDF1$Water_WUElateLO <- exp(plotDF1$log_Water_WUElate-plotDF1$log_Water_WUElate_se)
     
     
     ## plotDF2
-    plotDF2$CO2_AdailyUP <- exp(plotDF2$log_CO2_Adaily+plotDF2$log_CO2_Adaily_se)
-    plotDF2$CO2_AdailyLO <- exp(plotDF2$log_CO2_Adaily-plotDF2$log_CO2_Adaily_se)
+    plotDF2$Water_AdailyUP <- exp(plotDF2$log_Water_Adaily+plotDF2$log_Water_Adaily_se)
+    plotDF2$Water_AdailyLO <- exp(plotDF2$log_Water_Adaily-plotDF2$log_Water_Adaily_se)
     
-    plotDF2$CO2_AearlyUP <- exp(plotDF2$log_CO2_Aearly+plotDF2$log_CO2_Aearly_se)
-    plotDF2$CO2_AearlyLO <- exp(plotDF2$log_CO2_Aearly-plotDF2$log_CO2_Aearly_se)
+    plotDF2$Water_AearlyUP <- exp(plotDF2$log_Water_Aearly+plotDF2$log_Water_Aearly_se)
+    plotDF2$Water_AearlyLO <- exp(plotDF2$log_Water_Aearly-plotDF2$log_Water_Aearly_se)
     
-    plotDF2$CO2_AlateUP <- exp(plotDF2$log_CO2_Alate+plotDF2$log_CO2_Alate_se)
-    plotDF2$CO2_AlateLO <- exp(plotDF2$log_CO2_Alate-plotDF2$log_CO2_Alate_se)
-    
-    
-    plotDF2$CO2_GSdailyUP <- exp(plotDF2$log_CO2_GSdaily+plotDF2$log_CO2_GSdaily_se)
-    plotDF2$CO2_GSdailyLO <- exp(plotDF2$log_CO2_GSdaily-plotDF2$log_CO2_GSdaily_se)
-    
-    plotDF2$CO2_GSearlyUP <- exp(plotDF2$log_CO2_GSearly+plotDF2$log_CO2_GSearly_se)
-    plotDF2$CO2_GSearlyLO <- exp(plotDF2$log_CO2_GSearly-plotDF2$log_CO2_GSearly_se)
-    
-    plotDF2$CO2_GSlateUP <- exp(plotDF2$log_CO2_GSlate+plotDF2$log_CO2_GSlate_se)
-    plotDF2$CO2_GSlateLO <- exp(plotDF2$log_CO2_GSlate-plotDF2$log_CO2_GSlate_se)
+    plotDF2$Water_AlateUP <- exp(plotDF2$log_Water_Alate+plotDF2$log_Water_Alate_se)
+    plotDF2$Water_AlateLO <- exp(plotDF2$log_Water_Alate-plotDF2$log_Water_Alate_se)
     
     
-    plotDF2$CO2_WUEdailyUP <- exp(plotDF2$log_CO2_WUEdaily+plotDF2$log_CO2_WUEdaily_se)
-    plotDF2$CO2_WUEdailyLO <- exp(plotDF2$log_CO2_WUEdaily-plotDF2$log_CO2_WUEdaily_se)
+    plotDF2$Water_GSdailyUP <- exp(plotDF2$log_Water_GSdaily+plotDF2$log_Water_GSdaily_se)
+    plotDF2$Water_GSdailyLO <- exp(plotDF2$log_Water_GSdaily-plotDF2$log_Water_GSdaily_se)
     
-    plotDF2$CO2_WUEearlyUP <- exp(plotDF2$log_CO2_WUEearly+plotDF2$log_CO2_WUEearly_se)
-    plotDF2$CO2_WUEearlyLO <- exp(plotDF2$log_CO2_WUEearly-plotDF2$log_CO2_WUEearly_se)
+    plotDF2$Water_GSearlyUP <- exp(plotDF2$log_Water_GSearly+plotDF2$log_Water_GSearly_se)
+    plotDF2$Water_GSearlyLO <- exp(plotDF2$log_Water_GSearly-plotDF2$log_Water_GSearly_se)
     
-    plotDF2$CO2_WUElateUP <- exp(plotDF2$log_CO2_WUElate+plotDF2$log_CO2_WUElate_se)
-    plotDF2$CO2_WUElateLO <- exp(plotDF2$log_CO2_WUElate-plotDF2$log_CO2_WUElate_se)
+    plotDF2$Water_GSlateUP <- exp(plotDF2$log_Water_GSlate+plotDF2$log_Water_GSlate_se)
+    plotDF2$Water_GSlateLO <- exp(plotDF2$log_Water_GSlate-plotDF2$log_Water_GSlate_se)
+    
+    
+    plotDF2$Water_WUEdailyUP <- exp(plotDF2$log_Water_WUEdaily+plotDF2$log_Water_WUEdaily_se)
+    plotDF2$Water_WUEdailyLO <- exp(plotDF2$log_Water_WUEdaily-plotDF2$log_Water_WUEdaily_se)
+    
+    plotDF2$Water_WUEearlyUP <- exp(plotDF2$log_Water_WUEearly+plotDF2$log_Water_WUEearly_se)
+    plotDF2$Water_WUEearlyLO <- exp(plotDF2$log_Water_WUEearly-plotDF2$log_Water_WUEearly_se)
+    
+    plotDF2$Water_WUElateUP <- exp(plotDF2$log_Water_WUElate+plotDF2$log_Water_WUElate_se)
+    plotDF2$Water_WUElateLO <- exp(plotDF2$log_Water_WUElate-plotDF2$log_Water_WUElate_se)
     
     
     ### treatment factor
-    names(plotDF1)[names(plotDF1)=="H2O"] <- "Trt"
-    names(plotDF2)[names(plotDF2)=="H2O"] <- "Trt"
+    names(plotDF1)[names(plotDF1)=="CO2"] <- "Trt"
+    names(plotDF2)[names(plotDF2)=="CO2"] <- "Trt"
     
     
     ### plotting
-    p1 <- ggplot(plotDF1, aes(x=Day, y=CO2_Adaily, group=Trt)) +
+    p1 <- ggplot(plotDF1, aes(x=Day, y=Water_Adaily, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
         geom_line(aes(col=Trt))+
         geom_errorbar(aes(col=Trt, x=Day, 
-                          ymin=CO2_AdailyLO, 
-                          ymax=CO2_AdailyUP),
+                          ymin=Water_AdailyLO, 
+                          ymax=Water_AdailyUP),
                       width=0.2)+
         theme_linedraw() +
         geom_hline(yintercept=1, col="black", lty=2)+
@@ -281,31 +281,33 @@ make_CO2_ratios_of_A_and_gs_plots_with_se <- function() {
               legend.box.just = 'left',
               plot.title = element_text(size=16, face="bold", 
                                         hjust = 0.5))+
-        ylab(expression(paste(CO[2]* " ratio " * A[sat])))+
+        ylab(expression(paste(H[2] * "O ratio " * A[sat])))+
         scale_color_manual(name="",
-                           limits=c("D", "ND"),
-                           labels=c("Droughted", "Well-watered"),
-                           values=c("grey", "black"),
+                           limits=c("A", "E"),
+                           labels=c(expression(aC[a]), 
+                                    expression(eC[a])),
+                           values=c("blue3", "red2"),
                            guide=guide_legend(nrow=1))+
         scale_fill_manual(name="",
-                          limits=c("D", "ND"),
-                          labels=c("Droughted", "Well-watered"),
-                          values=c("grey", "black"),
+                          limits=c("A", "E"),
+                          labels=c(expression(aC[a]), 
+                                   expression(eC[a])),
+                          values=c("blue3", "red2"),
                           guide=guide_legend(nrow=1))+
         ggtitle("Daily")+
-        ylim(0, 8)+
+        ylim(0, 2)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
-                                                       fill = c("grey", "black"),
-                                                       col = c("grey", "black"))))+
+                                                       fill = c("blue3", "red2"),
+                                                       col = c("blue3", "red2"))))+
         scale_x_continuous(limits=c(0, 10),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
-    p2 <- ggplot(plotDF1, aes(x=Day, y=CO2_Aearly, group=Trt)) +
+    p2 <- ggplot(plotDF1, aes(x=Day, y=Water_Aearly, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
         geom_errorbar(aes(col=Trt, x=Day, 
-                          ymin=CO2_AearlyLO, 
-                          ymax=CO2_AearlyUP),
+                          ymin=Water_AearlyLO, 
+                          ymax=Water_AearlyUP),
                       width=0.2)+
         geom_line(aes(col=Trt))+
         theme_linedraw() +
@@ -323,31 +325,33 @@ make_CO2_ratios_of_A_and_gs_plots_with_se <- function() {
               legend.box.just = 'left',
               plot.title = element_text(size=16, face="bold", 
                                         hjust = 0.5))+
-        ylab(expression(paste(CO[2]* " ratio " * A[sat])))+
+        ylab(expression(paste(H[2] * "O ratio " * A[sat])))+
         scale_color_manual(name="",
-                           limits=c("D", "ND"),
-                           labels=c("Droughted", "Well-watered"),
-                           values=c("grey", "black"),
+                           limits=c("A", "E"),
+                           labels=c(expression(aC[a]), 
+                                    expression(eC[a])),
+                           values=c("blue3", "red2"),
                            guide=guide_legend(nrow=1))+
         scale_fill_manual(name="",
-                          limits=c("D", "ND"),
-                          labels=c("Droughted", "Well-watered"),
-                          values=c("grey", "black"),
+                          limits=c("A", "E"),
+                          labels=c(expression(aC[a]), 
+                                   expression(eC[a])),
+                          values=c("blue3", "red2"),
                           guide=guide_legend(nrow=1))+
         ggtitle("Morning")+
         ylim(0, 8)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
-                                                       fill = c("grey", "black"),
-                                                       col = c("grey", "black"))))+
+                                                       fill = c("blue3", "red2"),
+                                                       col = c("blue3", "red2"))))+
         scale_x_continuous(limits=c(0, 10),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
-    p3 <- ggplot(plotDF1, aes(x=Day, y=CO2_Alate, group=Trt)) +
+    p3 <- ggplot(plotDF1, aes(x=Day, y=Water_Alate, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
         geom_errorbar(aes(col=Trt, x=Day, 
-                          ymin=CO2_AlateLO, 
-                          ymax=CO2_AlateUP),
+                          ymin=Water_AlateLO, 
+                          ymax=Water_AlateUP),
                       width=0.2)+
         geom_line(aes(col=Trt))+
         theme_linedraw() +
@@ -365,32 +369,34 @@ make_CO2_ratios_of_A_and_gs_plots_with_se <- function() {
               legend.box.just = 'left',
               plot.title = element_text(size=16, face="bold", 
                                         hjust = 0.5))+
-        ylab(expression(paste(CO[2]* " ratio " * A[sat])))+
+        ylab(expression(paste(H[2] * "O ratio " * A[sat])))+
         scale_color_manual(name="",
-                           limits=c("D", "ND"),
-                           labels=c("Droughted", "Well-watered"),
-                           values=c("grey", "black"),
+                           limits=c("A", "E"),
+                           labels=c(expression(aC[a]), 
+                                    expression(eC[a])),
+                           values=c("blue3", "red2"),
                            guide=guide_legend(nrow=1))+
         scale_fill_manual(name="",
-                          limits=c("D", "ND"),
-                          labels=c("Droughted", "Well-watered"),
-                          values=c("grey", "black"),
+                          limits=c("A", "E"),
+                          labels=c(expression(aC[a]), 
+                                   expression(eC[a])),
+                          values=c("blue3", "red2"),
                           guide=guide_legend(nrow=1))+
         ggtitle("Midday")+
         ylim(0, 8)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
-                                                       fill = c("grey", "black"),
-                                                       col = c("grey", "black"))))+
+                                                       fill = c("blue3", "red2"),
+                                                       col = c("blue3", "red2"))))+
         scale_x_continuous(limits=c(0, 10),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
-    p4 <- ggplot(plotDF1, aes(x=Day, y=CO2_GSdaily, group=Trt)) +
+    p4 <- ggplot(plotDF1, aes(x=Day, y=Water_GSdaily, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
         geom_line(aes(col=Trt))+
         geom_errorbar(aes(col=Trt, x=Day, 
-                          ymin=CO2_GSdailyLO, 
-                          ymax=CO2_GSdailyUP),
+                          ymin=Water_GSdailyLO, 
+                          ymax=Water_GSdailyUP),
                       width=0.2)+
         geom_hline(yintercept=1, col="black", lty=2)+
         theme_linedraw() +
@@ -407,31 +413,33 @@ make_CO2_ratios_of_A_and_gs_plots_with_se <- function() {
               legend.box.just = 'left',
               plot.title = element_text(size=16, face="bold", 
                                         hjust = 0.5))+
-        ylab(expression(paste(CO[2]* " ratio " * g[s])))+
+        ylab(expression(paste(H[2] * "O ratio " * g[s])))+
         scale_color_manual(name="",
-                           limits=c("D", "ND"),
-                           labels=c("Droughted", "Well-watered"),
-                           values=c("grey", "black"),
+                           limits=c("A", "E"),
+                           labels=c(expression(aC[a]), 
+                                    expression(eC[a])),
+                           values=c("blue3", "red2"),
                            guide=guide_legend(nrow=1))+
         scale_fill_manual(name="",
-                          limits=c("D", "ND"),
-                          labels=c("Droughted", "Well-watered"),
-                          values=c("grey", "black"),
+                          limits=c("A", "E"),
+                          labels=c(expression(aC[a]), 
+                                   expression(eC[a])),
+                          values=c("blue3", "red2"),
                           guide=guide_legend(nrow=1))+
         ylim(0, 3)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
-                                                       fill = c("grey", "black"),
-                                                       col = c("grey", "black"))))+
+                                                       fill = c("blue3", "red2"),
+                                                       col = c("blue3", "red2"))))+
         scale_x_continuous(limits=c(0, 10),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
-    p5 <- ggplot(plotDF1, aes(x=Day, y=CO2_GSearly, group=Trt)) +
+    p5 <- ggplot(plotDF1, aes(x=Day, y=Water_GSearly, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
         geom_line(aes(col=Trt))+
         geom_errorbar(aes(col=Trt, x=Day, 
-                          ymin=CO2_GSearlyLO, 
-                          ymax=CO2_GSearlyUP),
+                          ymin=Water_GSearlyLO, 
+                          ymax=Water_GSearlyUP),
                       width=0.2)+
         geom_hline(yintercept=1, col="black", lty=2)+
         theme_linedraw() +
@@ -448,31 +456,33 @@ make_CO2_ratios_of_A_and_gs_plots_with_se <- function() {
               legend.box.just = 'left',
               plot.title = element_text(size=16, face="bold", 
                                         hjust = 0.5))+
-        ylab(expression(paste(CO[2]* " ratio " * g[s])))+
+        ylab(expression(paste(H[2] * "O ratio " * g[s])))+
         scale_color_manual(name="",
-                           limits=c("D", "ND"),
-                           labels=c("Droughted", "Well-watered"),
-                           values=c("grey", "black"),
+                           limits=c("A", "E"),
+                           labels=c(expression(aC[a]), 
+                                    expression(eC[a])),
+                           values=c("blue3", "red2"),
                            guide=guide_legend(nrow=1))+
         scale_fill_manual(name="",
-                          limits=c("D", "ND"),
-                          labels=c("Droughted", "Well-watered"),
-                          values=c("grey", "black"),
+                          limits=c("A", "E"),
+                          labels=c(expression(aC[a]), 
+                                   expression(eC[a])),
+                          values=c("blue3", "red2"),
                           guide=guide_legend(nrow=1))+
         ylim(0, 3)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
-                                                       fill = c("grey", "black"),
-                                                       col = c("grey", "black"))))+
+                                                       fill = c("blue3", "red2"),
+                                                       col = c("blue3", "red2"))))+
         scale_x_continuous(limits=c(0, 10),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
-    p6 <- ggplot(plotDF1, aes(x=Day, y=CO2_GSlate, group=Trt)) +
+    p6 <- ggplot(plotDF1, aes(x=Day, y=Water_GSlate, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
         geom_line(aes(col=Trt))+
         geom_errorbar(aes(col=Trt, x=Day, 
-                          ymin=CO2_GSlateLO, 
-                          ymax=CO2_GSlateUP),
+                          ymin=Water_GSlateLO, 
+                          ymax=Water_GSlateUP),
                       width=0.2)+
         theme_linedraw() +
         geom_hline(yintercept=1, col="black", lty=2)+
@@ -489,33 +499,35 @@ make_CO2_ratios_of_A_and_gs_plots_with_se <- function() {
               legend.box.just = 'left',
               plot.title = element_text(size=16, face="bold", 
                                         hjust = 0.5))+
-        ylab(expression(paste(CO[2]* " ratio " * g[s])))+
+        ylab(expression(paste(H[2] * "O ratio " * g[s])))+
         scale_color_manual(name="",
-                           limits=c("D", "ND"),
-                           labels=c("Droughted", "Well-watered"),
-                           values=c("grey", "black"),
+                           limits=c("A", "E"),
+                           labels=c(expression(aC[a]), 
+                                    expression(eC[a])),
+                           values=c("blue3", "red2"),
                            guide=guide_legend(nrow=1))+
         scale_fill_manual(name="",
-                          limits=c("D", "ND"),
-                          labels=c("Droughted", "Well-watered"),
-                          values=c("grey", "black"),
+                          limits=c("A", "E"),
+                          labels=c(expression(aC[a]), 
+                                   expression(eC[a])),
+                          values=c("blue3", "red2"),
                           guide=guide_legend(nrow=1))+
         ylim(0, 3)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
-                                                       fill = c("grey", "black"),
-                                                       col = c("grey", "black"))))+
+                                                       fill = c("blue3", "red2"),
+                                                       col = c("blue3", "red2"))))+
         scale_x_continuous(limits=c(0, 10),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
     
     
-    p7 <- ggplot(plotDF1, aes(x=Day, y=CO2_WUEdaily, group=Trt)) +
+    p7 <- ggplot(plotDF1, aes(x=Day, y=Water_WUEdaily, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
         geom_line(aes(col=Trt))+
         geom_errorbar(aes(col=Trt, x=Day, 
-                          ymin=CO2_WUEdailyLO, 
-                          ymax=CO2_WUEdailyUP),
+                          ymin=Water_WUEdailyLO, 
+                          ymax=Water_WUEdailyUP),
                       width=0.2)+
         geom_hline(yintercept=1, col="black", lty=2)+
         theme_linedraw() +
@@ -532,31 +544,33 @@ make_CO2_ratios_of_A_and_gs_plots_with_se <- function() {
               legend.box.just = 'left',
               plot.title = element_text(size=16, face="bold", 
                                         hjust = 0.5))+
-        ylab(expression(paste(CO[2]* " ratio iWUE")))+
+        ylab(expression(paste(H[2] * "O ratio iWUE")))+
         scale_color_manual(name="",
-                           limits=c("D", "ND"),
-                           labels=c("Droughted", "Well-watered"),
-                           values=c("grey", "black"),
+                           limits=c("A", "E"),
+                           labels=c(expression(aC[a]), 
+                                    expression(eC[a])),
+                           values=c("blue3", "red2"),
                            guide=guide_legend(nrow=1))+
         scale_fill_manual(name="",
-                          limits=c("D", "ND"),
-                          labels=c("Droughted", "Well-watered"),
-                          values=c("grey", "black"),
+                          limits=c("A", "E"),
+                          labels=c(expression(aC[a]), 
+                                   expression(eC[a])),
+                          values=c("blue3", "red2"),
                           guide=guide_legend(nrow=1))+
         ylim(0, 5)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
-                                                       fill = c("grey", "black"),
-                                                       col = c("grey", "black"))))+
+                                                       fill = c("blue3", "red2"),
+                                                       col = c("blue3", "red2"))))+
         scale_x_continuous(limits=c(0, 10),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
-    p8 <- ggplot(plotDF1, aes(x=Day, y=CO2_WUEearly, group=Trt)) +
+    p8 <- ggplot(plotDF1, aes(x=Day, y=Water_WUEearly, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
         geom_line(aes(col=Trt))+
         geom_errorbar(aes(col=Trt, x=Day, 
-                          ymin=CO2_WUEearlyLO, 
-                          ymax=CO2_WUEearlyUP),
+                          ymin=Water_WUEearlyLO, 
+                          ymax=Water_WUEearlyUP),
                       width=0.2)+
         geom_hline(yintercept=1, col="black", lty=2)+
         theme_linedraw() +
@@ -573,31 +587,33 @@ make_CO2_ratios_of_A_and_gs_plots_with_se <- function() {
               legend.box.just = 'left',
               plot.title = element_text(size=16, face="bold", 
                                         hjust = 0.5))+
-        ylab(expression(paste(CO[2]* " ratio iWUE")))+
+        ylab(expression(paste(H[2] * "O ratio iWUE")))+
         scale_color_manual(name="",
-                           limits=c("D", "ND"),
-                           labels=c("Droughted", "Well-watered"),
-                           values=c("grey", "black"),
+                           limits=c("A", "E"),
+                           labels=c(expression(aC[a]), 
+                                    expression(eC[a])),
+                           values=c("blue3", "red2"),
                            guide=guide_legend(nrow=1))+
         scale_fill_manual(name="",
-                          limits=c("D", "ND"),
-                          labels=c("Droughted", "Well-watered"),
-                          values=c("grey", "black"),
+                          limits=c("A", "E"),
+                          labels=c(expression(aC[a]), 
+                                   expression(eC[a])),
+                          values=c("blue3", "red2"),
                           guide=guide_legend(nrow=1))+
         ylim(0, 5)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
-                                                       fill = c("grey", "black"),
-                                                       col = c("grey", "black"))))+
+                                                       fill = c("blue3", "red2"),
+                                                       col = c("blue3", "red2"))))+
         scale_x_continuous(limits=c(0, 10),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
-    p9 <- ggplot(plotDF1, aes(x=Day, y=CO2_WUElate, group=Trt)) +
+    p9 <- ggplot(plotDF1, aes(x=Day, y=Water_WUElate, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
         geom_line(aes(col=Trt))+
         geom_errorbar(aes(col=Trt, x=Day, 
-                          ymin=CO2_WUElateLO, 
-                          ymax=CO2_WUElateUP),
+                          ymin=Water_WUElateLO, 
+                          ymax=Water_WUElateUP),
                       width=0.2)+
         theme_linedraw() +
         geom_hline(yintercept=1, col="black", lty=2)+
@@ -614,22 +630,24 @@ make_CO2_ratios_of_A_and_gs_plots_with_se <- function() {
               legend.box.just = 'left',
               plot.title = element_text(size=16, face="bold", 
                                         hjust = 0.5))+
-        ylab(expression(paste(CO[2]* " ratio iWUE")))+
+        ylab(expression(paste(H[2] * "O ratio iWUE")))+
         scale_color_manual(name="",
-                           limits=c("D", "ND"),
-                           labels=c("Droughted", "Well-watered"),
-                           values=c("grey", "black"),
+                           limits=c("A", "E"),
+                           labels=c(expression(aC[a]), 
+                                    expression(eC[a])),
+                           values=c("blue3", "red2"),
                            guide=guide_legend(nrow=1))+
         scale_fill_manual(name="",
-                          limits=c("D", "ND"),
-                          labels=c("Droughted", "Well-watered"),
-                          values=c("grey", "black"),
+                          limits=c("A", "E"),
+                          labels=c(expression(aC[a]), 
+                                   expression(eC[a])),
+                          values=c("blue3", "red2"),
                           guide=guide_legend(nrow=1))+
         ylim(0, 5)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
-                                                       fill = c("grey", "black"),
-                                                       col = c("grey", "black"))))+
+                                                       fill = c("blue3", "red2"),
+                                                       col = c("blue3", "red2"))))+
         scale_x_continuous(limits=c(0, 10),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
@@ -648,7 +666,7 @@ make_CO2_ratios_of_A_and_gs_plots_with_se <- function() {
                                 label_x=0.85, label_y=0.85)
     
     
-    pdf(paste0(outdir, "F10.1.CO2_ratio_pilularis.pdf"), width=14, height=12)
+    pdf(paste0(outdir, "F10.1.Water_ratio_pilularis.pdf"), width=14, height=12)
     plot_grid(combined_plots, combined_legend, 
               ncol=1, rel_heights=c(1, 0.1))
     dev.off() 
@@ -658,12 +676,12 @@ make_CO2_ratios_of_A_and_gs_plots_with_se <- function() {
     
     
     ### plotting
-    p1 <- ggplot(plotDF2, aes(x=Day, y=CO2_Adaily, group=Trt)) +
+    p1 <- ggplot(plotDF2, aes(x=Day, y=Water_Adaily, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
         geom_line(aes(col=Trt))+
         geom_errorbar(aes(col=Trt, x=Day, 
-                          ymin=CO2_AdailyLO, 
-                          ymax=CO2_AdailyUP),
+                          ymin=Water_AdailyLO, 
+                          ymax=Water_AdailyUP),
                       width=1.2)+
         geom_hline(yintercept=1, col="black", lty=2)+
         theme_linedraw() +
@@ -682,30 +700,32 @@ make_CO2_ratios_of_A_and_gs_plots_with_se <- function() {
                                         hjust = 0.5))+
         ylab(expression(paste(CO[2]* " ratio " * A[sat])))+
         scale_color_manual(name="",
-                           limits=c("D", "ND"),
-                           labels=c("Droughted", "Well-watered"),
-                           values=c("grey", "black"),
+                           limits=c("A", "E"),
+                           labels=c(expression(aC[a]), 
+                                    expression(eC[a])),
+                           values=c("blue3", "red2"),
                            guide=guide_legend(nrow=1))+
         scale_fill_manual(name="",
-                          limits=c("D", "ND"),
-                          labels=c("Droughted", "Well-watered"),
-                          values=c("grey", "black"),
+                          limits=c("A", "E"),
+                          labels=c(expression(aC[a]), 
+                                   expression(eC[a])),
+                          values=c("blue3", "red2"),
                           guide=guide_legend(nrow=1))+
         ggtitle("Daily")+
         ylim(0, 3)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
-                                                       fill = c("grey", "black"),
-                                                       col = c("grey", "black"))))+
+                                                       fill = c("blue3", "red2"),
+                                                       col = c("blue3", "red2"))))+
         scale_x_continuous(limits=c(0, 40),
                            breaks=c(0, 5, 10, 20, 30, 40))
     
-    p2 <- ggplot(plotDF2, aes(x=Day, y=CO2_Aearly, group=Trt)) +
+    p2 <- ggplot(plotDF2, aes(x=Day, y=Water_Aearly, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
         geom_line(aes(col=Trt))+
         geom_errorbar(aes(col=Trt, x=Day, 
-                          ymin=CO2_AearlyLO, 
-                          ymax=CO2_AearlyUP),
+                          ymin=Water_AearlyLO, 
+                          ymax=Water_AearlyUP),
                       width=1.2)+
         theme_linedraw() +
         geom_hline(yintercept=1, col="black", lty=2)+
@@ -724,30 +744,32 @@ make_CO2_ratios_of_A_and_gs_plots_with_se <- function() {
                                         hjust = 0.5))+
         ylab(expression(paste(CO[2]* " ratio " * A[sat])))+
         scale_color_manual(name="",
-                           limits=c("D", "ND"),
-                           labels=c("Droughted", "Well-watered"),
-                           values=c("grey", "black"),
+                           limits=c("A", "E"),
+                           labels=c(expression(aC[a]), 
+                                    expression(eC[a])),
+                           values=c("blue3", "red2"),
                            guide=guide_legend(nrow=1))+
         scale_fill_manual(name="",
-                          limits=c("D", "ND"),
-                          labels=c("Droughted", "Well-watered"),
-                          values=c("grey", "black"),
+                          limits=c("A", "E"),
+                          labels=c(expression(aC[a]), 
+                                   expression(eC[a])),
+                          values=c("blue3", "red2"),
                           guide=guide_legend(nrow=1))+
         ggtitle("Morning")+
         ylim(0, 3)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
-                                                       fill = c("grey", "black"),
-                                                       col = c("grey", "black"))))+
+                                                       fill = c("blue3", "red2"),
+                                                       col = c("blue3", "red2"))))+
         scale_x_continuous(limits=c(0, 40),
                            breaks=c(0, 5, 10, 20, 30, 40))
     
-    p3 <- ggplot(plotDF2, aes(x=Day, y=CO2_Alate, group=Trt)) +
+    p3 <- ggplot(plotDF2, aes(x=Day, y=Water_Alate, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
         geom_line(aes(col=Trt))+
         geom_errorbar(aes(col=Trt, x=Day, 
-                          ymin=CO2_AlateLO, 
-                          ymax=CO2_AlateUP),
+                          ymin=Water_AlateLO, 
+                          ymax=Water_AlateUP),
                       width=1.2)+
         theme_linedraw() +
         geom_hline(yintercept=1, col="black", lty=2)+
@@ -766,31 +788,33 @@ make_CO2_ratios_of_A_and_gs_plots_with_se <- function() {
                                         hjust = 0.5))+
         ylab(expression(paste(CO[2]* " ratio " * A[sat])))+
         scale_color_manual(name="",
-                           limits=c("D", "ND"),
-                           labels=c("Droughted", "Well-watered"),
-                           values=c("grey", "black"),
+                           limits=c("A", "E"),
+                           labels=c(expression(aC[a]), 
+                                    expression(eC[a])),
+                           values=c("blue3", "red2"),
                            guide=guide_legend(nrow=1))+
         scale_fill_manual(name="",
-                          limits=c("D", "ND"),
-                          labels=c("Droughted", "Well-watered"),
-                          values=c("grey", "black"),
+                          limits=c("A", "E"),
+                          labels=c(expression(aC[a]), 
+                                   expression(eC[a])),
+                          values=c("blue3", "red2"),
                           guide=guide_legend(nrow=1))+
         ggtitle("Midday")+
         ylim(0, 3)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
-                                                       fill = c("grey", "black"),
-                                                       col = c("grey", "black"))))+
+                                                       fill = c("blue3", "red2"),
+                                                       col = c("blue3", "red2"))))+
         scale_x_continuous(limits=c(0, 40),
                            breaks=c(0, 5, 10, 20, 30, 40))
     
     
-    p4 <- ggplot(plotDF2, aes(x=Day, y=CO2_GSdaily, group=Trt)) +
+    p4 <- ggplot(plotDF2, aes(x=Day, y=Water_GSdaily, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
         geom_line(aes(col=Trt))+
         geom_errorbar(aes(col=Trt, x=Day, 
-                          ymin=CO2_GSdailyLO, 
-                          ymax=CO2_GSdailyUP),
+                          ymin=Water_GSdailyLO, 
+                          ymax=Water_GSdailyUP),
                       width=1.2)+
         theme_linedraw() +
         geom_hline(yintercept=1, col="black", lty=2)+
@@ -809,29 +833,31 @@ make_CO2_ratios_of_A_and_gs_plots_with_se <- function() {
                                         hjust = 0.5))+
         ylab(expression(paste(CO[2]* " ratio " * g[s])))+
         scale_color_manual(name="",
-                           limits=c("D", "ND"),
-                           labels=c("Droughted", "Well-watered"),
-                           values=c("grey", "black"),
+                           limits=c("A", "E"),
+                           labels=c(expression(aC[a]), 
+                                    expression(eC[a])),
+                           values=c("blue3", "red2"),
                            guide=guide_legend(nrow=1))+
         scale_fill_manual(name="",
-                          limits=c("D", "ND"),
-                          labels=c("Droughted", "Well-watered"),
-                          values=c("grey", "black"),
+                          limits=c("A", "E"),
+                          labels=c(expression(aC[a]), 
+                                   expression(eC[a])),
+                          values=c("blue3", "red2"),
                           guide=guide_legend(nrow=1))+
         ylim(0, 1)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
-                                                       fill = c("grey", "black"),
-                                                       col = c("grey", "black"))))+
+                                                       fill = c("blue3", "red2"),
+                                                       col = c("blue3", "red2"))))+
         scale_x_continuous(limits=c(0, 40),
                            breaks=c(0, 5, 10, 20, 30, 40))
     
-    p5 <- ggplot(plotDF2, aes(x=Day, y=CO2_GSearly, group=Trt)) +
+    p5 <- ggplot(plotDF2, aes(x=Day, y=Water_GSearly, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
         geom_line(aes(col=Trt))+
         geom_errorbar(aes(col=Trt, x=Day, 
-                          ymin=CO2_GSearlyLO, 
-                          ymax=CO2_GSearlyUP),
+                          ymin=Water_GSearlyLO, 
+                          ymax=Water_GSearlyUP),
                       width=1.2)+
         theme_linedraw() +
         geom_hline(yintercept=1, col="black", lty=2)+
@@ -850,29 +876,31 @@ make_CO2_ratios_of_A_and_gs_plots_with_se <- function() {
                                         hjust = 0.5))+
         ylab(expression(paste(CO[2]* " ratio " * g[s])))+
         scale_color_manual(name="",
-                           limits=c("D", "ND"),
-                           labels=c("Droughted", "Well-watered"),
-                           values=c("grey", "black"),
+                           limits=c("A", "E"),
+                           labels=c(expression(aC[a]), 
+                                    expression(eC[a])),
+                           values=c("blue3", "red2"),
                            guide=guide_legend(nrow=1))+
         scale_fill_manual(name="",
-                          limits=c("D", "ND"),
-                          labels=c("Droughted", "Well-watered"),
-                          values=c("grey", "black"),
+                          limits=c("A", "E"),
+                          labels=c(expression(aC[a]), 
+                                   expression(eC[a])),
+                          values=c("blue3", "red2"),
                           guide=guide_legend(nrow=1))+
         ylim(0, 1)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
-                                                       fill = c("grey", "black"),
-                                                       col = c("grey", "black"))))+
+                                                       fill = c("blue3", "red2"),
+                                                       col = c("blue3", "red2"))))+
         scale_x_continuous(limits=c(0, 40),
                            breaks=c(0, 5, 10, 20, 30, 40))
     
-    p6 <- ggplot(plotDF2, aes(x=Day, y=CO2_GSlate, group=Trt)) +
+    p6 <- ggplot(plotDF2, aes(x=Day, y=Water_GSlate, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
         geom_line(aes(col=Trt))+
         geom_errorbar(aes(col=Trt, x=Day, 
-                          ymin=CO2_GSlateLO, 
-                          ymax=CO2_GSlateUP),
+                          ymin=Water_GSlateLO, 
+                          ymax=Water_GSlateUP),
                       width=1.2)+
         theme_linedraw() +
         geom_hline(yintercept=1, col="black", lty=2)+
@@ -891,29 +919,31 @@ make_CO2_ratios_of_A_and_gs_plots_with_se <- function() {
                                         hjust = 0.5))+
         ylab(expression(paste(CO[2]* " ratio " * g[s])))+
         scale_color_manual(name="",
-                           limits=c("D", "ND"),
-                           labels=c("Droughted", "Well-watered"),
-                           values=c("grey", "black"),
+                           limits=c("A", "E"),
+                           labels=c(expression(aC[a]), 
+                                    expression(eC[a])),
+                           values=c("blue3", "red2"),
                            guide=guide_legend(nrow=1))+
         scale_fill_manual(name="",
-                          limits=c("D", "ND"),
-                          labels=c("Droughted", "Well-watered"),
-                          values=c("grey", "black"),
+                          limits=c("A", "E"),
+                          labels=c(expression(aC[a]), 
+                                   expression(eC[a])),
+                          values=c("blue3", "red2"),
                           guide=guide_legend(nrow=1))+
         ylim(0, 1)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
-                                                       fill = c("grey", "black"),
-                                                       col = c("grey", "black"))))+
+                                                       fill = c("blue3", "red2"),
+                                                       col = c("blue3", "red2"))))+
         scale_x_continuous(limits=c(0, 40),
                            breaks=c(0, 5, 10, 20, 30, 40))
     
-    p7 <- ggplot(plotDF2, aes(x=Day, y=CO2_WUEdaily, group=Trt)) +
+    p7 <- ggplot(plotDF2, aes(x=Day, y=Water_WUEdaily, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
         geom_line(aes(col=Trt))+
         geom_errorbar(aes(col=Trt, x=Day, 
-                          ymin=CO2_WUEdailyLO, 
-                          ymax=CO2_WUEdailyUP),
+                          ymin=Water_WUEdailyLO, 
+                          ymax=Water_WUEdailyUP),
                       width=1.2)+
         theme_linedraw() +
         geom_hline(yintercept=1, col="black", lty=2)+
@@ -932,29 +962,31 @@ make_CO2_ratios_of_A_and_gs_plots_with_se <- function() {
                                         hjust = 0.5))+
         ylab(expression(paste(CO[2]* " ratio iWUE")))+
         scale_color_manual(name="",
-                           limits=c("D", "ND"),
-                           labels=c("Droughted", "Well-watered"),
-                           values=c("grey", "black"),
+                           limits=c("A", "E"),
+                           labels=c(expression(aC[a]), 
+                                    expression(eC[a])),
+                           values=c("blue3", "red2"),
                            guide=guide_legend(nrow=1))+
         scale_fill_manual(name="",
-                          limits=c("D", "ND"),
-                          labels=c("Droughted", "Well-watered"),
-                          values=c("grey", "black"),
+                          limits=c("A", "E"),
+                          labels=c(expression(aC[a]), 
+                                   expression(eC[a])),
+                          values=c("blue3", "red2"),
                           guide=guide_legend(nrow=1))+
         ylim(0, 4)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
-                                                       fill = c("grey", "black"),
-                                                       col = c("grey", "black"))))+
+                                                       fill = c("blue3", "red2"),
+                                                       col = c("blue3", "red2"))))+
         scale_x_continuous(limits=c(0, 40),
                            breaks=c(0, 5, 10, 20, 30, 40))
     
-    p8 <- ggplot(plotDF2, aes(x=Day, y=CO2_WUEearly, group=Trt)) +
+    p8 <- ggplot(plotDF2, aes(x=Day, y=Water_WUEearly, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
         geom_line(aes(col=Trt))+
         geom_errorbar(aes(col=Trt, x=Day, 
-                          ymin=CO2_WUEearlyLO, 
-                          ymax=CO2_WUEearlyUP),
+                          ymin=Water_WUEearlyLO, 
+                          ymax=Water_WUEearlyUP),
                       width=1.2)+
         theme_linedraw() +
         geom_hline(yintercept=1, col="black", lty=2)+
@@ -973,29 +1005,31 @@ make_CO2_ratios_of_A_and_gs_plots_with_se <- function() {
                                         hjust = 0.5))+
         ylab(expression(paste(CO[2]* " ratio iWUE")))+
         scale_color_manual(name="",
-                           limits=c("D", "ND"),
-                           labels=c("Droughted", "Well-watered"),
-                           values=c("grey", "black"),
+                           limits=c("A", "E"),
+                           labels=c(expression(aC[a]), 
+                                    expression(eC[a])),
+                           values=c("blue3", "red2"),
                            guide=guide_legend(nrow=1))+
         scale_fill_manual(name="",
-                          limits=c("D", "ND"),
-                          labels=c("Droughted", "Well-watered"),
-                          values=c("grey", "black"),
+                          limits=c("A", "E"),
+                          labels=c(expression(aC[a]), 
+                                   expression(eC[a])),
+                          values=c("blue3", "red2"),
                           guide=guide_legend(nrow=1))+
         ylim(0, 4)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
-                                                       fill = c("grey", "black"),
-                                                       col = c("grey", "black"))))+
+                                                       fill = c("blue3", "red2"),
+                                                       col = c("blue3", "red2"))))+
         scale_x_continuous(limits=c(0, 40),
                            breaks=c(0, 5, 10, 20, 30, 40))
     
-    p9 <- ggplot(plotDF2, aes(x=Day, y=CO2_WUElate, group=Trt)) +
+    p9 <- ggplot(plotDF2, aes(x=Day, y=Water_WUElate, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
         geom_line(aes(col=Trt))+
         geom_errorbar(aes(col=Trt, x=Day, 
-                          ymin=CO2_WUElateLO, 
-                          ymax=CO2_WUElateUP),
+                          ymin=Water_WUElateLO, 
+                          ymax=Water_WUElateUP),
                       width=1.2)+
         theme_linedraw() +
         geom_hline(yintercept=1, col="black", lty=2)+
@@ -1014,20 +1048,22 @@ make_CO2_ratios_of_A_and_gs_plots_with_se <- function() {
                                         hjust = 0.5))+
         ylab(expression(paste(CO[2]* " ratio iWUE")))+
         scale_color_manual(name="",
-                           limits=c("D", "ND"),
-                           labels=c("Droughted", "Well-watered"),
-                           values=c("grey", "black"),
+                           limits=c("A", "E"),
+                           labels=c(expression(aC[a]), 
+                                    expression(eC[a])),
+                           values=c("blue3", "red2"),
                            guide=guide_legend(nrow=1))+
         scale_fill_manual(name="",
-                          limits=c("D", "ND"),
-                          labels=c("Droughted", "Well-watered"),
-                          values=c("grey", "black"),
+                          limits=c("A", "E"),
+                          labels=c(expression(aC[a]), 
+                                   expression(eC[a])),
+                          values=c("blue3", "red2"),
                           guide=guide_legend(nrow=1))+
         ylim(0, 4)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
-                                                       fill = c("grey", "black"),
-                                                       col = c("grey", "black"))))+
+                                                       fill = c("blue3", "red2"),
+                                                       col = c("blue3", "red2"))))+
         scale_x_continuous(limits=c(0, 40),
                            breaks=c(0, 5, 10, 20, 30, 40))
     
@@ -1045,7 +1081,7 @@ make_CO2_ratios_of_A_and_gs_plots_with_se <- function() {
                                 label_x=0.85, label_y=0.85)
     
     
-    pdf(paste0(outdir, "F10.2.CO2_ratio_populnea.pdf"), width=14, height=12)
+    pdf(paste0(outdir, "F10.2.Water_ratio_populnea.pdf"), width=14, height=12)
     plot_grid(combined_plots, combined_legend, 
               ncol=1, rel_heights=c(1, 0.1))
     dev.off() 

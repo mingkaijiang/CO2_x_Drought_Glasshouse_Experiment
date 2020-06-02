@@ -3,6 +3,10 @@ make_pilularis_physiological_plots <- function() {
     #FIGURES (Eucalyptus pilularis)
     PILPhysGraph<-read.csv("data/glasshouse2/Pilularis_Phys.csv",sep=",", header=TRUE)
     
+    ## remove data points with unequal sample size
+    PILPhysGraph <- PILPhysGraph[PILPhysGraph$n.1==6, ]
+    
+    
     ################################### Plotting ######################################
     # Eucalyptus pilularis (Daily, morning and midday Asat & gs)
     pdf(paste0(outdir, "F8.1.Pil_gas_exchange.pdf"), width=8, height=6)

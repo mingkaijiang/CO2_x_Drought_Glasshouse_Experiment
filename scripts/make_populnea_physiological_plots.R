@@ -2,6 +2,9 @@ make_populnea_physiological_plots <- function() {
     #FIGURES (Eucalyptus populnea)
     POPPhysGraph<-read.csv("data/glasshouse2/Populnea_Phys.csv",sep=",", header=TRUE)
     
+    POPPhysGraph <- POPPhysGraph[POPPhysGraph$n.1==6, ]
+
+    
     ################################### Plotting ######################################
     #FIGURE 3 - Eucalyptus populnea (Daily, morning and midday Asat & gs)
     pdf(paste0(outdir, "F8.2.Pop_gas_exchange.pdf"), width=8, height=6)

@@ -4,6 +4,11 @@ make_normalized_Asat_plots <- function() {
     pilDF<-read.csv("data/glasshouse2/Pilularis_Phys.csv",sep=",", header=TRUE)
     popDF<-read.csv("data/glasshouse2/Populnea_Phys.csv",sep=",", header=TRUE)
     
+    ## remove data points with unequal sample size
+    pilDF <- pilDF[pilDF$n.1==6, ]
+    popDF <- popDF[popDF$n.1==6, ]
+    
+    
     ### baseline 1 day Asat
     bDF1 <- subset(pilDF, Day == 1)
     bDF2 <- subset(popDF, Day == 1)

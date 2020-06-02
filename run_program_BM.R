@@ -50,7 +50,13 @@ make_CO2_ratios_of_A_and_gs_plots_with_se()
 
 make_CO2_difference_of_A_and_gs_plots_with_se()
 
-make_log_CO2_ratios_of_A_and_gs_plots()
+#make_log_CO2_ratios_of_A_and_gs_plots()
+
+
+### Water ratios of A and gs
+make_water_ratios_of_A_and_gs_plots_with_se()
+
+make_water_difference_of_A_and_gs_plots_with_se()
 
 ############################# end #################################
 
