@@ -8,7 +8,7 @@ make_glasshouse_condition_plots <- function() {
     
     ### merge by day and night separately
     plotDF1 <- rbind(myDF1, myDF3)
-    plotDF2 <- rbind(myDF2, myDF3)
+    plotDF2 <- rbind(myDF2, myDF4)
     
     plotDF <- rbind(plotDF1, plotDF2)
     
