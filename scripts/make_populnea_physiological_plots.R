@@ -1,8 +1,11 @@
 make_populnea_physiological_plots <- function() {
+
     #FIGURES (Eucalyptus populnea)
     POPPhysGraph<-read.csv("data/glasshouse2/Populnea_Phys.csv",sep=",", header=TRUE)
     
-    POPPhysGraph <- POPPhysGraph[POPPhysGraph$n.1==6, ]
+    n2 <- min(unique(POPPhysGraph[POPPhysGraph$n.1<6,]$Day))
+    
+    POPPhysGraph <- POPPhysGraph[POPPhysGraph$Day<n2, ]
 
     
     ################################### Plotting ######################################

@@ -7,6 +7,17 @@ make_swc_and_transpiration_plots <- function() {
     ### E. populnea
     popDF<-read.csv("data/glasshouse2/Populnea_Phys.csv",sep=",", header=TRUE)
     
+    ### filter by days
+    n1 <- min(unique(pilDF[pilDF$n.1<6,]$Day))
+    n2 <- min(unique(popDF[popDF$n.1<6,]$Day))
+    
+    pilDF <- pilDF[pilDF$Day<n1, ]
+    popDF <- popDF[popDF$Day<n2, ]
+    
+    
+    #pilDF <- pilDF[pilDF$n.1==6, ]
+    #popDF <- popDF[popDF$n.1==6, ]
+    
     
     ############################# perform statistical tests ##############################
     ### read in raw data
@@ -89,7 +100,7 @@ make_swc_and_transpiration_plots <- function() {
                                                        fill = c("white", "blue3", "white", "red2"),
                                                        col = c("blue3", "blue3", "red2", "red2"),
                                                        linetype = c("dotted", "dotted", "solid", "solid"))))+
-        scale_x_continuous(limits=c(0, 10),
+        scale_x_continuous(limits=c(0, 8),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
     
@@ -151,8 +162,8 @@ make_swc_and_transpiration_plots <- function() {
                                                        fill = c("white", "blue3", "white", "red2"),
                                                        col = c("blue3", "blue3", "red2", "red2"),
                                                        linetype = c("dotted", "dotted", "solid", "solid"))))+
-        scale_x_continuous(limits=c(0, 40),
-                           breaks=c(0, 5, 10, 20, 30, 40))
+        scale_x_continuous(limits=c(0, 20),
+                           breaks=c(0, 4, 8, 12, 16, 20))
     
     
     
@@ -214,7 +225,7 @@ make_swc_and_transpiration_plots <- function() {
                                                        fill = c("white", "blue3", "white", "red2"),
                                                        col = c("blue3", "blue3", "red2", "red2"),
                                                        linetype = c("dotted", "dotted", "solid", "solid"))))+
-        scale_x_continuous(limits=c(0, 10),
+        scale_x_continuous(limits=c(0, 8),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
     
@@ -277,8 +288,8 @@ make_swc_and_transpiration_plots <- function() {
                                                        fill = c("white", "blue3", "white", "red2"),
                                                        col = c("blue3", "blue3", "red2", "red2"),
                                                        linetype = c("dotted", "dotted", "solid", "solid"))))+
-        scale_x_continuous(limits=c(0, 40),
-                           breaks=c(0, 5, 10, 20, 30, 40))
+        scale_x_continuous(limits=c(0, 20),
+                           breaks=c(0, 4, 8, 12, 16, 20))
     
     ### output
     combined_legend <- get_legend(p1 + theme(legend.position="bottom",

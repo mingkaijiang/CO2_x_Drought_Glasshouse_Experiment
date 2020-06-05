@@ -8,8 +8,11 @@ make_leaf_water_potential_plots <- function() {
     
     
     ## remove data points with unequal sample size
-    pilDF <- pilDF[pilDF$n.1==6, ]
-    popDF <- popDF[popDF$n.1==6, ]
+    n1 <- min(unique(pilDF[pilDF$n.1<6,]$Day))
+    n2 <- min(unique(popDF[popDF$n.1<6,]$Day))
+    
+    pilDF <- pilDF[pilDF$Day<n1, ]
+    popDF <- popDF[popDF$Day<n2, ]
     
     #### plotting
     p1 <- ggplot(pilDF, aes(x=Day, y=psiPD, group=Trt)) +
@@ -70,14 +73,14 @@ make_leaf_water_potential_plots <- function() {
                                                        fill = c("white", "blue3", "white", "red2"),
                                                        col = c("blue3", "blue3", "red2", "red2"),
                                                        linetype = c("dotted", "dotted", "solid", "solid"))))+
-        scale_x_continuous(limits=c(0, 10),
+        scale_x_continuous(limits=c(0, 8),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
     
     p2 <- ggplot(popDF, aes(x=Day, y=psiPD, group=Trt)) +
         geom_errorbar(aes(col=Trt, x=Day, 
                           ymin=psiPD-psiPDSE, ymax=psiPD+psiPDSE),
-                      width=1.2)+
+                      width=0.6)+
         geom_point(aes(col=Trt, fill=Trt, pch=Trt), size=2)+
         geom_line(aes(col=Trt, lty=Trt))+
         theme_linedraw() +
@@ -132,8 +135,8 @@ make_leaf_water_potential_plots <- function() {
                                                        fill = c("white", "blue3", "white", "red2"),
                                                        col = c("blue3", "blue3", "red2", "red2"),
                                                        linetype = c("dotted", "dotted", "solid", "solid"))))+
-        scale_x_continuous(limits=c(0, 40),
-                           breaks=c(0, 5, 10, 20, 30, 40))
+        scale_x_continuous(limits=c(0, 20),
+                           breaks=c(0, 4, 8, 12, 16, 20))
     
     
     
@@ -194,7 +197,7 @@ make_leaf_water_potential_plots <- function() {
                                                        fill = c("white", "blue3", "white", "red2"),
                                                        col = c("blue3", "blue3", "red2", "red2"),
                                                        linetype = c("dotted", "dotted", "solid", "solid"))))+
-        scale_x_continuous(limits=c(0, 10),
+        scale_x_continuous(limits=c(0, 8),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
     
@@ -202,7 +205,7 @@ make_leaf_water_potential_plots <- function() {
     p4 <- ggplot(popDF, aes(x=Day, y=psiMD, group=Trt)) +
         geom_errorbar(aes(col=Trt, x=Day, 
                           ymin=psiMD-psiMDSE, ymax=psiMD+psiMDSE),
-                      width=1.2)+
+                      width=0.6)+
         geom_point(aes(col=Trt, fill=Trt, pch=Trt), size=2)+
         geom_line(aes(col=Trt, lty=Trt))+
         theme_linedraw() +
@@ -256,8 +259,8 @@ make_leaf_water_potential_plots <- function() {
                                                        fill = c("white", "blue3", "white", "red2"),
                                                        col = c("blue3", "blue3", "red2", "red2"),
                                                        linetype = c("dotted", "dotted", "solid", "solid"))))+
-        scale_x_continuous(limits=c(0, 40),
-                           breaks=c(0, 5, 10, 20, 30, 40))
+        scale_x_continuous(limits=c(0, 20),
+                           breaks=c(0, 4, 8, 12, 16, 20))
     
     ### output
     combined_legend <- get_legend(p1 + theme(legend.position="bottom",

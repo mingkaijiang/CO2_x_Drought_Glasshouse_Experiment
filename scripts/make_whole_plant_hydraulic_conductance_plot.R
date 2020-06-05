@@ -11,22 +11,8 @@ make_whole_plant_hydraulic_conductance_plot <- function() {
     ## E. populnea: POPAND: day >=19
     ## E. populnea: POPED: day >= 22
     ## E. populnea: POPEND: day >= 19
-    
-    ### pilDF
-    subDF1 <- pilDF[pilDF$Trt%in%c("PILAD", "PILED"),]
-    subDF2 <- pilDF[pilDF$Trt%in%c("PILAND", "PILEND"),]
-    #subDF1 <- subDF1[subDF1$Day <= 6, ]
-    subDF2 <- subDF2[subDF2$Day <= 6, ]
-    
-    pilDF <- rbind(subDF1, subDF2)
-    
-    ### popDF
-    subDF1 <- popDF[popDF$Trt=="POPAD"&popDF$Day<= 30,]
-    subDF2 <- popDF[popDF$Trt=="POPAND"&popDF$Day< 19,]
-    subDF3 <- popDF[popDF$Trt=="POPED"&popDF$Day< 22,]
-    subDF4 <- popDF[popDF$Trt=="POPEND"&popDF$Day< 19,]
-    
-    popDF <- rbind(subDF1, subDF2, subDF3, subDF4)
+    pilDF <- pilDF[pilDF$Day<7, ]
+    popDF <- popDF[popDF$Day<19, ]
     
     
     ### plotting DFs
@@ -106,7 +92,7 @@ make_whole_plant_hydraulic_conductance_plot <- function() {
                                                        fill = c("white", "blue3", "white", "red2"),
                                                        col = c("blue3", "blue3", "red2", "red2"),
                                                        linetype = c("dotted", "dotted", "solid", "solid"))))+
-        scale_x_continuous(limits=c(0, 10),
+        scale_x_continuous(limits=c(0, 8),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
     
@@ -115,7 +101,7 @@ make_whole_plant_hydraulic_conductance_plot <- function() {
         geom_point(aes(col=Trt, fill=Trt, pch=Trt), size=2)+
         geom_errorbar(aes(col=Trt, x=Day, 
                           ymin=E_psi.mean-E_psi.se, ymax=E_psi.mean+E_psi.se),
-                      width=0.2)+
+                      width=0.6)+
         geom_line(aes(col=Trt, lty=Trt))+
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
@@ -170,8 +156,8 @@ make_whole_plant_hydraulic_conductance_plot <- function() {
                                                        fill = c("white", "blue3", "white", "red2"),
                                                        col = c("blue3", "blue3", "red2", "red2"),
                                                        linetype = c("dotted", "dotted", "solid", "solid"))))+
-        scale_x_continuous(limits=c(0, 40),
-                           breaks=c(0, 5, 10, 20, 30, 40))
+        scale_x_continuous(limits=c(0, 20),
+                           breaks=c(0, 4, 8, 12, 16, 20))
     
     ### output
     combined_legend <- get_legend(p1 + theme(legend.position="bottom",
@@ -251,7 +237,7 @@ make_whole_plant_hydraulic_conductance_plot <- function() {
                                                        fill = c("white", "blue3", "white", "red2"),
                                                        col = c("blue3", "blue3", "red2", "red2"),
                                                        linetype = c("dotted", "dotted", "solid", "solid"))))+
-        scale_x_continuous(limits=c(0, 10),
+        scale_x_continuous(limits=c(0, 8),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
     
@@ -260,7 +246,7 @@ make_whole_plant_hydraulic_conductance_plot <- function() {
         geom_point(aes(col=Trt, fill=Trt, pch=Trt), size=2)+
         geom_errorbar(aes(col=Trt, x=Day, 
                           ymin=log_E_psi_neg, ymax=log_E_psi_pos),
-                      width=0.2)+
+                      width=0.6)+
         geom_line(aes(col=Trt, lty=Trt))+
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
@@ -315,8 +301,8 @@ make_whole_plant_hydraulic_conductance_plot <- function() {
                                                        fill = c("white", "blue3", "white", "red2"),
                                                        col = c("blue3", "blue3", "red2", "red2"),
                                                        linetype = c("dotted", "dotted", "solid", "solid"))))+
-        scale_x_continuous(limits=c(0, 40),
-                           breaks=c(0, 5, 10, 20, 30, 40))
+        scale_x_continuous(limits=c(0, 20),
+                           breaks=c(0, 4, 8, 12, 16, 20))
     
     ### output
     combined_legend <- get_legend(p1 + theme(legend.position="bottom",
@@ -330,10 +316,10 @@ make_whole_plant_hydraulic_conductance_plot <- function() {
                                 label_x=c(0.16, 0.1), label_y=0.9)
     
     
-    pdf(paste0(outdir, "F7.whole_plant_hydraulics_log_plot.pdf"), width=8, height=4)
-    plot_grid(combined_plots, combined_legend, 
-              ncol=1, rel_heights=c(1, 0.1))
-    dev.off() 
+    #pdf(paste0(outdir, "F7.whole_plant_hydraulics_log_plot.pdf"), width=8, height=4)
+    #plot_grid(combined_plots, combined_legend, 
+    #          ncol=1, rel_heights=c(1, 0.1))
+    #dev.off() 
     
     
 

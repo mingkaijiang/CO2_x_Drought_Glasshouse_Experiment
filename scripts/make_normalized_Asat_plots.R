@@ -5,8 +5,11 @@ make_normalized_Asat_plots <- function() {
     popDF<-read.csv("data/glasshouse2/Populnea_Phys.csv",sep=",", header=TRUE)
     
     ## remove data points with unequal sample size
-    pilDF <- pilDF[pilDF$n.1==6, ]
-    popDF <- popDF[popDF$n.1==6, ]
+    n1 <- min(unique(pilDF[pilDF$n.1<6,]$Day))
+    n2 <- min(unique(popDF[popDF$n.1<6,]$Day))
+    
+    pilDF <- pilDF[pilDF$Day<n1, ]
+    popDF <- popDF[popDF$Day<n2, ]
     
     
     ### baseline 1 day Asat
@@ -91,13 +94,14 @@ make_normalized_Asat_plots <- function() {
                                     expression(paste(eC[a]*" - W"))),
                            values=c(21,21,21,21))+
         ggtitle("E. pilularis")+
-        ylim(0, 1)+
+        scale_y_continuous(limits=c(0, 1.1),
+                           breaks=c(0.0, 0.2, 0.4, 0.6, 0.8, 1.0))+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 21, 21),
                                                        fill = c("white", "blue3", "white", "red2"),
                                                        col = c("blue3", "blue3", "red2", "red2"),
                                                        linetype = c("dotted", "dotted", "solid", "solid"))))+
-        scale_x_continuous(limits=c(0, 10),
+        scale_x_continuous(limits=c(0, 8),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
     
@@ -149,13 +153,14 @@ make_normalized_Asat_plots <- function() {
                                     expression(paste(eC[a]*" - D")),
                                     expression(paste(eC[a]*" - W"))),
                            values=c(21,21,21,21))+
-        ylim(0, 1)+
+        scale_y_continuous(limits=c(0, 1.1),
+                           breaks=c(0.0, 0.2, 0.4, 0.6, 0.8, 1.0))+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 21, 21),
                                                        fill = c("white", "blue3", "white", "red2"),
                                                        col = c("blue3", "blue3", "red2", "red2"),
                                                        linetype = c("dotted", "dotted", "solid", "solid"))))+
-        scale_x_continuous(limits=c(0, 10),
+        scale_x_continuous(limits=c(0, 8),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
     
@@ -207,13 +212,14 @@ make_normalized_Asat_plots <- function() {
                                     expression(paste(eC[a]*" - D")),
                                     expression(paste(eC[a]*" - W"))),
                            values=c(21,21,21,21))+
-        ylim(0, 1)+
+        scale_y_continuous(limits=c(0, 1.1),
+                           breaks=c(0.0, 0.2, 0.4, 0.6, 0.8, 1.0))+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 21, 21),
                                                        fill = c("white", "blue3", "white", "red2"),
                                                        col = c("blue3", "blue3", "red2", "red2"),
                                                        linetype = c("dotted", "dotted", "solid", "solid"))))+
-        scale_x_continuous(limits=c(0, 10),
+        scale_x_continuous(limits=c(0, 8),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
     
@@ -266,14 +272,15 @@ make_normalized_Asat_plots <- function() {
                                     expression(paste(eC[a]*" - W"))),
                            values=c(21,21,21,21))+
         ggtitle("E. populnea")+
-        ylim(0, 1)+
+        scale_y_continuous(limits=c(0, 1.1),
+                           breaks=c(0.0, 0.2, 0.4, 0.6, 0.8, 1.0))+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 21, 21),
                                                        fill = c("white", "blue3", "white", "red2"),
                                                        col = c("blue3", "blue3", "red2", "red2"),
                                                        linetype = c("dotted", "dotted", "solid", "solid"))))+
-        scale_x_continuous(limits=c(0, 40),
-                           breaks=c(0, 5, 10, 20, 30, 40))
+        scale_x_continuous(limits=c(0, 20),
+                           breaks=c(0, 4, 8, 12, 16, 20))
     
     p4 <- ggplot(popDF, aes(x=Day, y=AearlyNORM, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt, pch=Trt), size=2)+
@@ -323,14 +330,15 @@ make_normalized_Asat_plots <- function() {
                                     expression(paste(eC[a]*" - D")),
                                     expression(paste(eC[a]*" - W"))),
                            values=c(21,21,21,21))+
-        ylim(0, 1)+
+        scale_y_continuous(limits=c(0, 1.1),
+                           breaks=c(0.0, 0.2, 0.4, 0.6, 0.8, 1.0))+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 21, 21),
                                                        fill = c("white", "blue3", "white", "red2"),
                                                        col = c("blue3", "blue3", "red2", "red2"),
                                                        linetype = c("dotted", "dotted", "solid", "solid"))))+
-        scale_x_continuous(limits=c(0, 40),
-                           breaks=c(0, 5, 10, 20, 30, 40))
+        scale_x_continuous(limits=c(0, 20),
+                           breaks=c(0, 4, 8, 12, 16, 20))
     
     p6 <- ggplot(popDF, aes(x=Day, y=AlateNORM, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt, pch=Trt), size=2)+
@@ -380,14 +388,15 @@ make_normalized_Asat_plots <- function() {
                                     expression(paste(eC[a]*" - D")),
                                     expression(paste(eC[a]*" - W"))),
                            values=c(21,21,21,21))+
-        ylim(0, 1)+
+        scale_y_continuous(limits=c(0, 1.1),
+                           breaks=c(0.0, 0.2, 0.4, 0.6, 0.8, 1.0))+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 21, 21),
                                                        fill = c("white", "blue3", "white", "red2"),
                                                        col = c("blue3", "blue3", "red2", "red2"),
                                                        linetype = c("dotted", "dotted", "solid", "solid"))))+
-        scale_x_continuous(limits=c(0, 40),
-                           breaks=c(0, 5, 10, 20, 30, 40))
+        scale_x_continuous(limits=c(0, 20),
+                           breaks=c(0, 4, 8, 12, 16, 20))
     
     
     ### output
