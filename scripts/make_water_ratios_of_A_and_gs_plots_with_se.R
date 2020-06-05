@@ -10,21 +10,8 @@ make_water_ratios_of_A_and_gs_plots_with_se <- function() {
     ## E. populnea: POPAND: day >=19
     ## E. populnea: POPED: day >= 22
     ## E. populnea: POPEND: day >= 19
-    
-    ### pilDF
-    subDF1 <- pilDF[pilDF$Trt%in%c("PILAD", "PILED"),]
-    subDF2 <- pilDF[pilDF$Trt%in%c("PILAND", "PILEND"),]
-    subDF2 <- subDF2[subDF2$Day <= 6, ]
-    subDF1 <- subDF1[subDF1$Day <= 7, ]
-    pilDF <- rbind(subDF1, subDF2)
-    
-    ### popDF
-    subDF1 <- popDF[popDF$Trt=="POPAD"&popDF$Day<= 30,]
-    subDF2 <- popDF[popDF$Trt=="POPAND"&popDF$Day< 19,]
-    subDF3 <- popDF[popDF$Trt=="POPED"&popDF$Day< 22,]
-    subDF4 <- popDF[popDF$Trt=="POPEND"&popDF$Day< 19,]
-    
-    popDF <- rbind(subDF1, subDF2, subDF3, subDF4)
+    pilDF <- pilDF[pilDF$Day<7, ]
+    popDF <- popDF[popDF$Day<19, ]
     
     ### caclulate daily
     pilDF$Adaily <- (pilDF$Aearly + pilDF$Alate) / 2
@@ -300,7 +287,7 @@ make_water_ratios_of_A_and_gs_plots_with_se <- function() {
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("blue3", "red2"),
                                                        col = c("blue3", "red2"))))+
-        scale_x_continuous(limits=c(0, 10),
+        scale_x_continuous(limits=c(0, 8),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
     p2 <- ggplot(plotDF1, aes(x=Day, y=Water_Aearly, group=Trt)) +
@@ -344,7 +331,7 @@ make_water_ratios_of_A_and_gs_plots_with_se <- function() {
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("blue3", "red2"),
                                                        col = c("blue3", "red2"))))+
-        scale_x_continuous(limits=c(0, 10),
+        scale_x_continuous(limits=c(0, 8),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
     p3 <- ggplot(plotDF1, aes(x=Day, y=Water_Alate, group=Trt)) +
@@ -388,7 +375,7 @@ make_water_ratios_of_A_and_gs_plots_with_se <- function() {
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("blue3", "red2"),
                                                        col = c("blue3", "red2"))))+
-        scale_x_continuous(limits=c(0, 10),
+        scale_x_continuous(limits=c(0, 8),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
     p4 <- ggplot(plotDF1, aes(x=Day, y=Water_GSdaily, group=Trt)) +
@@ -431,7 +418,7 @@ make_water_ratios_of_A_and_gs_plots_with_se <- function() {
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("blue3", "red2"),
                                                        col = c("blue3", "red2"))))+
-        scale_x_continuous(limits=c(0, 10),
+        scale_x_continuous(limits=c(0, 8),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
     p5 <- ggplot(plotDF1, aes(x=Day, y=Water_GSearly, group=Trt)) +
@@ -474,7 +461,7 @@ make_water_ratios_of_A_and_gs_plots_with_se <- function() {
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("blue3", "red2"),
                                                        col = c("blue3", "red2"))))+
-        scale_x_continuous(limits=c(0, 10),
+        scale_x_continuous(limits=c(0, 8),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
     p6 <- ggplot(plotDF1, aes(x=Day, y=Water_GSlate, group=Trt)) +
@@ -517,7 +504,7 @@ make_water_ratios_of_A_and_gs_plots_with_se <- function() {
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("blue3", "red2"),
                                                        col = c("blue3", "red2"))))+
-        scale_x_continuous(limits=c(0, 10),
+        scale_x_continuous(limits=c(0, 8),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
     
@@ -562,7 +549,7 @@ make_water_ratios_of_A_and_gs_plots_with_se <- function() {
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("blue3", "red2"),
                                                        col = c("blue3", "red2"))))+
-        scale_x_continuous(limits=c(0, 10),
+        scale_x_continuous(limits=c(0, 8),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
     p8 <- ggplot(plotDF1, aes(x=Day, y=Water_WUEearly, group=Trt)) +
@@ -605,7 +592,7 @@ make_water_ratios_of_A_and_gs_plots_with_se <- function() {
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("blue3", "red2"),
                                                        col = c("blue3", "red2"))))+
-        scale_x_continuous(limits=c(0, 10),
+        scale_x_continuous(limits=c(0, 8),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
     p9 <- ggplot(plotDF1, aes(x=Day, y=Water_WUElate, group=Trt)) +
@@ -648,7 +635,7 @@ make_water_ratios_of_A_and_gs_plots_with_se <- function() {
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("blue3", "red2"),
                                                        col = c("blue3", "red2"))))+
-        scale_x_continuous(limits=c(0, 10),
+        scale_x_continuous(limits=c(0, 8),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
     

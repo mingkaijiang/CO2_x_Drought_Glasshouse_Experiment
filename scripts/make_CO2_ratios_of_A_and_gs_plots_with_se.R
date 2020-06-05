@@ -684,8 +684,8 @@ make_CO2_ratios_of_A_and_gs_plots_with_se <- function() {
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("grey", "black"),
                                                        col = c("grey", "black"))))+
-        scale_x_continuous(limits=c(0, 40),
-                           breaks=c(0, 5, 10, 20, 30, 40))
+        scale_x_continuous(limits=c(0, 20),
+                           breaks=c(0, 4, 8, 12, 16, 20))
     
     p2 <- ggplot(plotDF2, aes(x=Day, y=CO2_Aearly, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
@@ -726,8 +726,8 @@ make_CO2_ratios_of_A_and_gs_plots_with_se <- function() {
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("grey", "black"),
                                                        col = c("grey", "black"))))+
-        scale_x_continuous(limits=c(0, 40),
-                           breaks=c(0, 5, 10, 20, 30, 40))
+        scale_x_continuous(limits=c(0, 20),
+                           breaks=c(0, 4, 8, 12, 16, 20))
     
     p3 <- ggplot(plotDF2, aes(x=Day, y=CO2_Alate, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
@@ -768,8 +768,8 @@ make_CO2_ratios_of_A_and_gs_plots_with_se <- function() {
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("grey", "black"),
                                                        col = c("grey", "black"))))+
-        scale_x_continuous(limits=c(0, 40),
-                           breaks=c(0, 5, 10, 20, 30, 40))
+        scale_x_continuous(limits=c(0, 20),
+                           breaks=c(0, 4, 8, 12, 16, 20))
     
     
     p4 <- ggplot(plotDF2, aes(x=Day, y=CO2_GSdaily, group=Trt)) +
@@ -810,8 +810,8 @@ make_CO2_ratios_of_A_and_gs_plots_with_se <- function() {
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("grey", "black"),
                                                        col = c("grey", "black"))))+
-        scale_x_continuous(limits=c(0, 40),
-                           breaks=c(0, 5, 10, 20, 30, 40))
+        scale_x_continuous(limits=c(0, 20),
+                           breaks=c(0, 4, 8, 12, 16, 20))
     
     p5 <- ggplot(plotDF2, aes(x=Day, y=CO2_GSearly, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
@@ -851,8 +851,8 @@ make_CO2_ratios_of_A_and_gs_plots_with_se <- function() {
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("grey", "black"),
                                                        col = c("grey", "black"))))+
-        scale_x_continuous(limits=c(0, 40),
-                           breaks=c(0, 5, 10, 20, 30, 40))
+        scale_x_continuous(limits=c(0, 20),
+                           breaks=c(0, 4, 8, 12, 16, 20))
     
     p6 <- ggplot(plotDF2, aes(x=Day, y=CO2_GSlate, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
@@ -892,8 +892,8 @@ make_CO2_ratios_of_A_and_gs_plots_with_se <- function() {
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("grey", "black"),
                                                        col = c("grey", "black"))))+
-        scale_x_continuous(limits=c(0, 40),
-                           breaks=c(0, 5, 10, 20, 30, 40))
+        scale_x_continuous(limits=c(0, 20),
+                           breaks=c(0, 4, 8, 12, 16, 20))
     
     p7 <- ggplot(plotDF2, aes(x=Day, y=CO2_WUEdaily, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
@@ -933,8 +933,8 @@ make_CO2_ratios_of_A_and_gs_plots_with_se <- function() {
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("grey", "black"),
                                                        col = c("grey", "black"))))+
-        scale_x_continuous(limits=c(0, 40),
-                           breaks=c(0, 5, 10, 20, 30, 40))
+        scale_x_continuous(limits=c(0, 20),
+                           breaks=c(0, 4, 8, 12, 16, 20))
     
     p8 <- ggplot(plotDF2, aes(x=Day, y=CO2_WUEearly, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
@@ -974,8 +974,8 @@ make_CO2_ratios_of_A_and_gs_plots_with_se <- function() {
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("grey", "black"),
                                                        col = c("grey", "black"))))+
-        scale_x_continuous(limits=c(0, 40),
-                           breaks=c(0, 5, 10, 20, 30, 40))
+        scale_x_continuous(limits=c(0, 20),
+                           breaks=c(0, 4, 8, 12, 16, 20))
     
     p9 <- ggplot(plotDF2, aes(x=Day, y=CO2_WUElate, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt), pch=21, size=2)+
@@ -1015,8 +1015,8 @@ make_CO2_ratios_of_A_and_gs_plots_with_se <- function() {
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("grey", "black"),
                                                        col = c("grey", "black"))))+
-        scale_x_continuous(limits=c(0, 40),
-                           breaks=c(0, 5, 10, 20, 30, 40))
+        scale_x_continuous(limits=c(0, 20),
+                           breaks=c(0, 4, 8, 12, 16, 20))
     
     ### output
     combined_legend <- get_legend(p1 + theme(legend.position="bottom",
