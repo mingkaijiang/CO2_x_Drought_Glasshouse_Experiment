@@ -1,4 +1,4 @@
-make_leaf_area_and_biomass_plots <- function() {
+make_leaf_area_and_biomass_plots_by_H2O <- function() {
     
     ### processing
     myDF <- read.csv("data/glasshouse2/EUC_Leaf_Area_data.csv")
@@ -63,25 +63,29 @@ make_leaf_area_and_biomass_plots <- function() {
     #### Plotting
     color.blind.pal <- rev(viridis(4))
     
-    subDF1$brk[subDF1$Species_Treatment=="PILAD"] <- 1.8
-    subDF1$brk[subDF1$Species_Treatment=="PILAND"] <- 1.2
+    subDF1$brk[subDF1$Species_Treatment=="PILAD"] <- 3.2
     subDF1$brk[subDF1$Species_Treatment=="PILED"] <- 3.8
-    subDF1$brk[subDF1$Species_Treatment=="PILEND"] <- 3.2
     
-    subDF3$brk[subDF3$Species_Treatment=="PILAD"] <- 1.8
-    subDF3$brk[subDF3$Species_Treatment=="PILAND"] <- 1.2
+    subDF1$brk[subDF1$Species_Treatment=="PILAND"] <- 1.2
+    subDF1$brk[subDF1$Species_Treatment=="PILEND"] <- 1.8
+    
+    subDF3$brk[subDF3$Species_Treatment=="PILAD"] <- 3.2
     subDF3$brk[subDF3$Species_Treatment=="PILED"] <- 3.8
-    subDF3$brk[subDF3$Species_Treatment=="PILEND"] <- 3.2
     
-    subDF2$brk[subDF2$Species_Treatment=="POPAD"] <- 1.8
-    subDF2$brk[subDF2$Species_Treatment=="POPAND"] <- 1.2
+    subDF3$brk[subDF3$Species_Treatment=="PILAND"] <- 1.2
+    subDF3$brk[subDF3$Species_Treatment=="PILEND"] <- 1.8
+    
+    subDF2$brk[subDF2$Species_Treatment=="POPAD"] <- 3.2
     subDF2$brk[subDF2$Species_Treatment=="POPED"] <- 3.8
-    subDF2$brk[subDF2$Species_Treatment=="POPEND"] <- 3.2
     
-    subDF4$brk[subDF4$Species_Treatment=="POPAD"] <- 1.8
-    subDF4$brk[subDF4$Species_Treatment=="POPAND"] <- 1.2
+    subDF2$brk[subDF2$Species_Treatment=="POPAND"] <- 1.2
+    subDF2$brk[subDF2$Species_Treatment=="POPEND"] <- 1.8
+    
+    subDF4$brk[subDF4$Species_Treatment=="POPAD"] <- 3.2
     subDF4$brk[subDF4$Species_Treatment=="POPED"] <- 3.8
-    subDF4$brk[subDF4$Species_Treatment=="POPEND"] <- 3.2
+    
+    subDF4$brk[subDF4$Species_Treatment=="POPAND"] <- 1.2
+    subDF4$brk[subDF4$Species_Treatment=="POPEND"] <- 1.8
     
     ### plotting
     p1 <- ggplot(data=subDF1, 
@@ -120,7 +124,7 @@ make_leaf_area_and_biomass_plots <- function() {
         xlab("")+
         scale_x_continuous(limits=c(0.5, 4.5),
                          breaks=c(1.5, 3.5),
-                         labels=c("ambient","elevated"))+
+                         labels=c("well-watered","droughted"))+
         ylim(0, 10)
     
     
@@ -160,7 +164,7 @@ make_leaf_area_and_biomass_plots <- function() {
         xlab("")+
         scale_x_continuous(limits=c(0.5, 4.5),
                            breaks=c(1.5, 3.5),
-                           labels=c("ambient","elevated"))+
+                           labels=c("well-watered","droughted"))+
         ylim(0, 2)
     
     
@@ -199,7 +203,7 @@ make_leaf_area_and_biomass_plots <- function() {
         ylim(0, 3000)+
         scale_x_continuous(limits=c(0.5, 4.5),
                            breaks=c(1.5, 3.5),
-                           labels=c("ambient","elevated"))
+                           labels=c("well-watered","droughted"))
     
     p4 <- ggplot() +
         geom_bar(data=subDF4, stat = "identity", aes(brk, BM,
@@ -236,7 +240,7 @@ make_leaf_area_and_biomass_plots <- function() {
         ylim(0, 1000)+
         scale_x_continuous(limits=c(0.5, 4.5),
                            breaks=c(1.5, 3.5),
-                           labels=c("ambient","elevated"))
+                           labels=c("well-watered","droughted"))
     
     
     ### output
@@ -258,7 +262,7 @@ make_leaf_area_and_biomass_plots <- function() {
                                  ncol=2, align="vh", axis = "l",
                                  label_x=0.12, label_y=0.9)
     
-    pdf(paste0(outdir, "F2.leaf_area_biomass.pdf"), width=12, height=10)
+    pdf(paste0(outdir, "F2.leaf_area_biomass_by_H2O_treatment.pdf"), width=12, height=10)
     plot_grid(combined_plots1, legend1, 
               combined_plots2, legend2,
               ncol=1, rel_heights=c(1, 0.3, 1, 0.3))

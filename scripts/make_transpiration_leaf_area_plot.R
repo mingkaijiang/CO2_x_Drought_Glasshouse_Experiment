@@ -20,15 +20,17 @@ make_transpiration_leaf_area_plot <- function() {
    barDF1 <- summaryBy(transp_leaf~Trt, FUN=c(mean,se), data=pilDF, keep.names=T)
    barDF2 <- summaryBy(transp_leaf~Trt, FUN=c(mean,se), data=popDF, keep.names=T)
    
-   barDF1$brk[barDF1$Trt=="PILAD"] <- 1.8
-   barDF1$brk[barDF1$Trt=="PILAND"] <- 1.2
+   barDF1$brk[barDF1$Trt=="PILAD"] <- 3.2
    barDF1$brk[barDF1$Trt=="PILED"] <- 3.8
-   barDF1$brk[barDF1$Trt=="PILEND"] <- 3.2
    
-   barDF2$brk[barDF2$Trt=="POPAD"] <- 1.8
-   barDF2$brk[barDF2$Trt=="POPAND"] <- 1.2
+   barDF1$brk[barDF1$Trt=="PILAND"] <- 1.2
+   barDF1$brk[barDF1$Trt=="PILEND"] <- 1.8
+   
+   barDF2$brk[barDF2$Trt=="POPAD"] <- 3.2
    barDF2$brk[barDF2$Trt=="POPED"] <- 3.8
-   barDF2$brk[barDF2$Trt=="POPEND"] <- 3.2
+   
+   barDF2$brk[barDF2$Trt=="POPAND"] <- 1.2
+   barDF2$brk[barDF2$Trt=="POPEND"] <- 1.8
    
    
    ############################# perform statistical tests ##############################
@@ -245,7 +247,7 @@ make_transpiration_leaf_area_plot <- function() {
       xlab("")+
       scale_x_continuous(limits=c(0.5, 4.5),
                          breaks=c(1.5, 3.5),
-                         labels=c("ambient","elevated"))+
+                         labels=c("well-watered","droughted"))+
       ylim(0, 1)
    
    
@@ -285,7 +287,7 @@ make_transpiration_leaf_area_plot <- function() {
       xlab("")+
       scale_x_continuous(limits=c(0.5, 4.5),
                          breaks=c(1.5, 3.5),
-                         labels=c("ambient","elevated"))+
+                         labels=c("well-watered","droughted"))+
       ylim(0, 4)
    
    
