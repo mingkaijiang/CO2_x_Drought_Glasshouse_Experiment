@@ -13,20 +13,6 @@ make_leaf_area_and_biomass_plots_by_CO2 <- function() {
     myDF$TOT <- with(myDF, SM+LM+FRM+CRM)
     
     
-    ############################# perform statistical tests ##############################
-    ### perform linear mixed effect model statistics on LA
-    mod1 <- lmer(LA ~ CO2 * H2O * Species + (1|GH), data=myDF)
-    outDF.la <- anova(mod1)
-    write.csv(outDF.la, paste0(outdir, "statistics_leaf_area.csv"))
-    
-    mod2 <- lmer(TOT ~ CO2 * H2O * Species + (1|GH), data=myDF)
-    outDF.tot <- anova(mod2)
-    write.csv(outDF.tot, paste0(outdir, "statistics_total_biomass.csv"))
-    
-    
-    ############################# Finish statistical tests ###############################
-    
-    
     ### summarize data - Leaf area
     sumDF <- summaryBy(LA_early+LA_plant+LA_final+SM+LM+RM+CRM+FRM+TOT~Species+Species_Treatment+CO2+H2O, 
                        FUN=c(mean, se),
