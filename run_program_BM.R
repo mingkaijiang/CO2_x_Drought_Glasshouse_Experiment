@@ -15,6 +15,7 @@ outdir <- "output/BM/"
 
 ############################# plotting #################################
 ### make glasshouse condition (T, RH and VPD during day and night times) plots
+### open the function to plot!
 make_glasshouse_condition_plots()
 
 ### leaf area of two species
