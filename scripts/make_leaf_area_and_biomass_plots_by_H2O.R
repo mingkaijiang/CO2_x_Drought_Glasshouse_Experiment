@@ -113,18 +113,18 @@ make_leaf_area_and_biomass_plots_by_H2O <- function() {
         ylab(expression(paste("Leaf area ("*m^2*")")))+
         scale_fill_manual(name=expression(CO[2]),
                           limits=c("A", "E"),
-                          labels=c("amb", "ele"),
+                          labels=c(expression(aC[a]), expression(eC[a])),
                           values=c("blue2", "red2"),
                           guide=guide_legend(nrow=1))+
         scale_alpha_manual(name=expression(H[2]*O),
                            limits=c("D", "ND"),
                            values=c(0.2, 1.0),
-                           labels=c("Droughted", "Well-watered"),
+                           labels=c("D", "W"),
                            guide=guide_legend(nrow=1))+
         xlab("")+
         scale_x_continuous(limits=c(0.5, 4.5),
                          breaks=c(1.5, 3.5),
-                         labels=c("well-watered","droughted"))+
+                         labels=c("Well-watered","Droughted"))+
         ylim(0, 10)
     
     
@@ -153,18 +153,18 @@ make_leaf_area_and_biomass_plots_by_H2O <- function() {
         ylab(expression(paste("Leaf area ("*m^2*")")))+
         scale_fill_manual(name=expression(CO[2]),
                           limits=c("A", "E"),
-                          labels=c("amb", "ele"),
+                          labels=c(expression(aC[a]), expression(eC[a])),
                           values=c("blue2", "red2"),
                           guide=guide_legend(nrow=1))+
         scale_alpha_manual(name=expression(H[2]*O),
                            limits=c("D", "ND"),
                            values=c(0.2, 1.0),
-                           labels=c("Droughted", "Well-watered"),
+                           labels=c("D", "W"),
                            guide=guide_legend(nrow=1))+
         xlab("")+
         scale_x_continuous(limits=c(0.5, 4.5),
                            breaks=c(1.5, 3.5),
-                           labels=c("well-watered","droughted"))+
+                           labels=c("Well-watered","Droughted"))+
         ylim(0, 2)
     
     
@@ -196,14 +196,14 @@ make_leaf_area_and_biomass_plots_by_H2O <- function() {
                           values=color.blind.pal)+
         scale_alpha_manual(name=expression(H[2]*O),
                            limits=c("D", "ND"),
-                           labels=c("Droughted", "Well-watered"),
+                           labels=c("D", "W"),
                            values=c(0.2, 1.0),
                            guide=guide_legend(nrow=1))+
         xlab("")+
         ylim(0, 3000)+
         scale_x_continuous(limits=c(0.5, 4.5),
                            breaks=c(1.5, 3.5),
-                           labels=c("well-watered","droughted"))
+                           labels=c("Well-watered","Droughted"))
     
     p4 <- ggplot() +
         geom_bar(data=subDF4, stat = "identity", aes(brk, BM,
@@ -233,14 +233,14 @@ make_leaf_area_and_biomass_plots_by_H2O <- function() {
                           values=color.blind.pal)+
         scale_alpha_manual(name=expression(H[2]*O),
                            limits=c("D", "ND"),
-                           labels=c("Droughted", "Well-watered"),
+                           labels=c("D", "W"),
                            values=c(0.2, 1.0),
                            guide=guide_legend(nrow=1))+
         xlab("")+
         ylim(0, 1000)+
         scale_x_continuous(limits=c(0.5, 4.5),
                            breaks=c(1.5, 3.5),
-                           labels=c("well-watered","droughted"))
+                           labels=c("Well-watered","Droughted"))
     
     
     ### output

@@ -149,7 +149,7 @@ make_leaf_water_potential_plots <- function() {
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
-              axis.title.x=element_blank(),
+              axis.title.x=element_text(size=14),
               axis.text.y=element_text(size=12),
               axis.title.y=element_text(size=14),
               legend.text=element_text(size=14),
@@ -211,7 +211,7 @@ make_leaf_water_potential_plots <- function() {
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
-              axis.title.x=element_blank(),
+              axis.title.x=element_text(size=14),
               axis.text.y=element_blank(),
               axis.title.y=element_blank(),
               legend.text=element_text(size=14),

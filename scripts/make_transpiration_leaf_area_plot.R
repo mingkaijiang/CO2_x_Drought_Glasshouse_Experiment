@@ -247,7 +247,7 @@ make_transpiration_leaf_area_plot <- function() {
       xlab("")+
       scale_x_continuous(limits=c(0.5, 4.5),
                          breaks=c(1.5, 3.5),
-                         labels=c("well-watered","droughted"))+
+                         labels=c("Well-watered","Droughted"))+
       ylim(0, 1)
    
    
@@ -287,7 +287,7 @@ make_transpiration_leaf_area_plot <- function() {
       xlab("")+
       scale_x_continuous(limits=c(0.5, 4.5),
                          breaks=c(1.5, 3.5),
-                         labels=c("well-watered","droughted"))+
+                         labels=c("Well-watered","Droughted"))+
       ylim(0, 4)
    
    

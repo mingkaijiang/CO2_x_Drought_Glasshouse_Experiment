@@ -109,13 +109,13 @@ make_leaf_area_and_biomass_plots_by_CO2 <- function() {
         ylab(expression(paste("Leaf area ("*m^2*")")))+
         scale_fill_manual(name=expression(CO[2]),
                           limits=c("A", "E"),
-                          labels=c("amb", "ele"),
+                          labels=c(expression(aC[a]), expression(eC[a])),
                           values=c("blue2", "red2"),
                           guide=guide_legend(nrow=1))+
         scale_alpha_manual(name=expression(H[2]*O),
                            limits=c("D", "ND"),
                            values=c(0.2, 1.0),
-                           labels=c("Droughted", "Well-watered"),
+                           labels=c("D", "W"),
                            guide=guide_legend(nrow=1))+
         xlab("")+
         scale_x_continuous(limits=c(0.5, 4.5),
@@ -149,13 +149,13 @@ make_leaf_area_and_biomass_plots_by_CO2 <- function() {
         ylab(expression(paste("Leaf area ("*m^2*")")))+
         scale_fill_manual(name=expression(CO[2]),
                           limits=c("A", "E"),
-                          labels=c("amb", "ele"),
+                          labels=c(expression(aC[a]), expression(eC[a])),
                           values=c("blue2", "red2"),
                           guide=guide_legend(nrow=1))+
         scale_alpha_manual(name=expression(H[2]*O),
                            limits=c("D", "ND"),
                            values=c(0.2, 1.0),
-                           labels=c("Droughted", "Well-watered"),
+                           labels=c("D", "W"),
                            guide=guide_legend(nrow=1))+
         xlab("")+
         scale_x_continuous(limits=c(0.5, 4.5),
@@ -192,7 +192,7 @@ make_leaf_area_and_biomass_plots_by_CO2 <- function() {
                           values=color.blind.pal)+
         scale_alpha_manual(name=expression(H[2]*O),
                            limits=c("D", "ND"),
-                           labels=c("Droughted", "Well-watered"),
+                           labels=c("D", "W"),
                            values=c(0.2, 1.0),
                            guide=guide_legend(nrow=1))+
         xlab("")+
@@ -229,7 +229,7 @@ make_leaf_area_and_biomass_plots_by_CO2 <- function() {
                           values=color.blind.pal)+
         scale_alpha_manual(name=expression(H[2]*O),
                            limits=c("D", "ND"),
-                           labels=c("Droughted", "Well-watered"),
+                           labels=c("D", "W"),
                            values=c(0.2, 1.0),
                            guide=guide_legend(nrow=1))+
         xlab("")+

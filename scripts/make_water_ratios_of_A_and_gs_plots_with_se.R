@@ -520,7 +520,7 @@ make_water_ratios_of_A_and_gs_plots_with_se <- function() {
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
-              axis.title.x=element_blank(),
+              axis.title.x=element_text(size=14),
               axis.text.y=element_text(size=12),
               axis.title.y=element_text(size=14),
               legend.text=element_text(size=14),
@@ -563,7 +563,7 @@ make_water_ratios_of_A_and_gs_plots_with_se <- function() {
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
-              axis.title.x=element_blank(),
+              axis.title.x=element_text(size=14),
               axis.text.y=element_text(size=12),
               axis.title.y=element_blank(),
               legend.text=element_text(size=14),
@@ -606,7 +606,7 @@ make_water_ratios_of_A_and_gs_plots_with_se <- function() {
         geom_hline(yintercept=1, col="black", lty=2)+
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
-              axis.title.x=element_blank(),
+              axis.title.x=element_text(size=14),
               axis.text.y=element_text(size=12),
               axis.title.y=element_blank(),
               legend.text=element_text(size=14),
@@ -936,7 +936,7 @@ make_water_ratios_of_A_and_gs_plots_with_se <- function() {
         geom_hline(yintercept=1, col="black", lty=2)+
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
-              axis.title.x=element_blank(),
+              axis.title.x=element_text(size=14),
               axis.text.y=element_text(size=12),
               axis.title.y=element_text(size=14),
               legend.text=element_text(size=14),
@@ -979,7 +979,7 @@ make_water_ratios_of_A_and_gs_plots_with_se <- function() {
         geom_hline(yintercept=1, col="black", lty=2)+
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
-              axis.title.x=element_blank(),
+              axis.title.x=element_text(size=14),
               axis.text.y=element_text(size=12),
               axis.title.y=element_blank(),
               legend.text=element_text(size=14),
@@ -1022,7 +1022,7 @@ make_water_ratios_of_A_and_gs_plots_with_se <- function() {
         geom_hline(yintercept=1, col="black", lty=2)+
         theme(panel.grid.minor=element_blank(),
               axis.text.x=element_text(size=12),
-              axis.title.x=element_blank(),
+              axis.title.x=element_text(size=14),
               axis.text.y=element_text(size=12),
               axis.title.y=element_blank(),
               legend.text=element_text(size=14),
