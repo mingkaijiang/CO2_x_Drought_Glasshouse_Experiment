@@ -31,7 +31,7 @@ make_leaf_area_and_biomass_plots_by_H2O()
 
 
 ### make soil water content and leaf transpiration plots for the two species
-make_statistics_swc_and_transpiration_table()
+make_statistics_leaf_water_relations_gas_exchange_table()
 
 make_swc_and_transpiration_plots()
 
