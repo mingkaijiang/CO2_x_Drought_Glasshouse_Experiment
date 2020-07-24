@@ -6,10 +6,14 @@ make_statistics_leaf_water_relations_gas_exchange_table <- function() {
     myDF1 <- read.csv("data/glasshouse2/Drydown_gasexchange_pilularis.csv")
     myDF2 <- read.csv("data/glasshouse2/Drydown_gasexchange_populnea.csv")
     
+    myDF1 <- subset(myDF1, Day <= 6)
     myDF2 <- subset(myDF2, Day <= 16)
     
-    myDF1$Day <- as.character(myDF1$Day)
-    myDF2$Day <- as.character(myDF2$Day)
+    myDF1$Glasshouse <- as.character(myDF1$Glasshouse)
+    myDF2$Glasshouse <- as.character(myDF2$Glasshouse)
+    
+    #myDF1$Day <- as.character(myDF1$Day)
+    #myDF2$Day <- as.character(myDF2$Day)
     
     
     #### prepare output
