@@ -125,8 +125,10 @@ make_leaf_area_and_biomass_plots_by_H2O <- function() {
         scale_x_continuous(limits=c(0.5, 4.5),
                          breaks=c(1.5, 3.5),
                          labels=c("Well-watered","Droughted"))+
-        ylim(0, 10)
-    
+        ylim(0, 10)+
+        annotate('text', x=3.8, y=10, label = expression(CO[2] * " ***"))+
+        annotate('text', x=3.8, y=9, label = expression(H[2] * "O **"))+
+        annotate('text', x=4, y=8, label = expression(CO[2] * " x " * H[2] * "O ***"))
     
     p2 <- ggplot(data=subDF2, 
                  aes(brk, LA_final.mean)) +
@@ -165,7 +167,10 @@ make_leaf_area_and_biomass_plots_by_H2O <- function() {
         scale_x_continuous(limits=c(0.5, 4.5),
                            breaks=c(1.5, 3.5),
                            labels=c("Well-watered","Droughted"))+
-        ylim(0, 2)
+        ylim(0, 2)+
+        annotate('text', x=3.7, y=2, label = expression(CO[2] * " *"))+
+        annotate('text', x=3.8, y=1.8, label = expression(H[2] * "O ***"))+
+        annotate('text', x=4, y=1.6, label = expression(CO[2] * " x " * H[2] * "O n.s."))
     
     
     p3 <- ggplot() +
@@ -203,7 +208,10 @@ make_leaf_area_and_biomass_plots_by_H2O <- function() {
         ylim(0, 3000)+
         scale_x_continuous(limits=c(0.5, 4.5),
                            breaks=c(1.5, 3.5),
-                           labels=c("Well-watered","Droughted"))
+                           labels=c("Well-watered","Droughted"))+
+        annotate('text', x=3.8, y=3000, label = expression(CO[2] * " ***"))+
+        annotate('text', x=3.8, y=2700, label = expression(H[2] * "O ***"))+
+        annotate('text', x=4, y=2400, label = expression(CO[2] * " x " * H[2] * "O ***"))
     
     p4 <- ggplot() +
         geom_bar(data=subDF4, stat = "identity", aes(brk, BM,
@@ -240,7 +248,10 @@ make_leaf_area_and_biomass_plots_by_H2O <- function() {
         ylim(0, 1000)+
         scale_x_continuous(limits=c(0.5, 4.5),
                            breaks=c(1.5, 3.5),
-                           labels=c("Well-watered","Droughted"))
+                           labels=c("Well-watered","Droughted"))+
+        annotate('text', x=3.8, y=1000, label = expression(CO[2] * " n.s."))+
+        annotate('text', x=3.8, y=900, label = expression(H[2] * "O ***"))+
+        annotate('text', x=4, y=800, label = expression(CO[2] * " x " * H[2] * "O n.s."))
     
     
     ### output
