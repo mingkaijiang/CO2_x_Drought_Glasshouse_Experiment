@@ -22,14 +22,17 @@ make_glasshouse_condition_plots()
 #make_leaf_area_plot()
 
 ### read in leaf area and biomass data & make plots for the two species
-
 make_statistics_leaf_area_and_biomass_table()
 
 make_leaf_area_and_biomass_plots_by_CO2()
 
 make_leaf_area_and_biomass_plots_by_H2O()
 
+
+
 ### make soil water content and leaf transpiration plots for the two species
+make_statistics_swc_and_transpiration_table()
+
 make_swc_and_transpiration_plots()
 
 ### transpiration as function of leaf area
