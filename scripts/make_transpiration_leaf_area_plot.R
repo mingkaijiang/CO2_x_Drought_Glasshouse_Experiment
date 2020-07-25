@@ -45,7 +45,7 @@ make_transpiration_leaf_area_plot <- function() {
    
    mod3 <- lmer(transp_leaf ~ CO2 * H2O + (1|Glasshouse), data=pilDF)
    outDF3 <- anova(mod3)
-   write.csv(outDF3, paste0(outdir, "statistics_transpiration_per_leaf_area_populnea.csv"))
+   write.csv(outDF3, paste0(outdir, "statistics_transpiration_per_leaf_area_pilularis.csv"))
    
    
    ### perform linear mixed effect model statistics on LA
@@ -128,7 +128,7 @@ make_transpiration_leaf_area_plot <- function() {
       guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 21, 21),
                                                      fill = c("white", "blue3", "white", "red2"),
                                                      col = c("blue3", "blue3", "red2", "red2"),
-                                                     linetype = c("dotted", "dotted", "solid", "solid"))))+
+                                                     linetype = c("dotted", "solid", "dotted", "solid"))))+
       scale_x_continuous(limits=c(0, 10),
                          breaks=c(0, 2, 4, 6, 8, 10))
    
@@ -195,7 +195,7 @@ make_transpiration_leaf_area_plot <- function() {
       guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 21, 21),
                                                      fill = c("white", "blue3", "white", "red2"),
                                                      col = c("blue3", "blue3", "red2", "red2"),
-                                                     linetype = c("dotted", "dotted", "solid", "solid"))))+
+                                                     linetype = c("dotted", "solid", "dotted", "solid"))))+
       scale_x_continuous(limits=c(0, 2),
                          breaks=c(0, 0.5, 1, 1.5, 2.0))
    
@@ -219,7 +219,7 @@ make_transpiration_leaf_area_plot <- function() {
    
    
    #### plant transpiration per leaf area bar plant
-   p1 <- ggplot(data=barDF1, 
+   p3 <- ggplot(data=barDF1, 
                 aes(brk, transp_leaf.mean)) +
       geom_bar(stat = "identity", aes(fill=Trt), 
                position="dodge", col="black") +
@@ -255,14 +255,14 @@ make_transpiration_leaf_area_plot <- function() {
       scale_x_continuous(limits=c(0.5, 4.5),
                          breaks=c(1.5, 3.5),
                          labels=c("Well-watered","Droughted"))+
-      ylim(0, 1)+
-      annotate('text', x=3.7, y=1, label = expression(CO[2] * " n.s.    "))+
-      annotate('text', x=3.7, y=0.92, label = expression(H[2] * "O *      "))+
-      annotate('text', x=3.9, y=0.84, label = expression(CO[2] * " x " * H[2] * "O n.s."))
+      ylim(0, 1)#+
+      #annotate('text', x=3.7, y=1, label = expression(CO[2] * " n.s.    "))+
+      #annotate('text', x=3.7, y=0.92, label = expression(H[2] * "O *      "))+
+      #annotate('text', x=3.9, y=0.84, label = expression(CO[2] * " x " * H[2] * "O n.s."))
    
    
    
-   p2 <- ggplot(data=barDF2, 
+   p4 <- ggplot(data=barDF2, 
                 aes(brk, transp_leaf.mean)) +
       geom_bar(stat = "identity", aes(fill=Trt), 
                position="dodge", col="black") +
@@ -298,18 +298,18 @@ make_transpiration_leaf_area_plot <- function() {
       scale_x_continuous(limits=c(0.5, 4.5),
                          breaks=c(1.5, 3.5),
                          labels=c("Well-watered","Droughted"))+
-      ylim(0, 4)+
-      annotate('text', x=3.65, y=4, label = expression(CO[2] * " **     "))+
-      annotate('text', x=3.7, y=3.7, label = expression(H[2] * "O n.s.   "))+
-      annotate('text', x=3.9, y=3.4, label = expression(CO[2] * " x " * H[2] * "O n.s."))
+      ylim(0, 4)#+
+      #annotate('text', x=3.65, y=4, label = expression(CO[2] * " **     "))+
+      #annotate('text', x=3.7, y=3.7, label = expression(H[2] * "O n.s.   "))+
+      #annotate('text', x=3.89, y=3.4, label = expression(CO[2] * " x " * H[2] * "O n.s."))
    
    
-   combined_legend <- get_legend(p1 + theme(legend.position="bottom",
+   combined_legend <- get_legend(p3 + theme(legend.position="bottom",
                                             legend.box = 'vertical',
                                             legend.box.just = 'left'))
    
    
-   combined_plots <- plot_grid(p1, p2, 
+   combined_plots <- plot_grid(p3, p4, 
                                labels=c("(a)", "(b)"), 
                                ncol=2, align="vh", axis = "l",
                                label_x=0.2, label_y=0.9)
@@ -320,5 +320,31 @@ make_transpiration_leaf_area_plot <- function() {
              ncol=1, rel_heights=c(1, 0.1))
    dev.off() 
   
+   
+   legend1 <- get_legend(p1 + theme(legend.position="bottom",
+                                    legend.box = 'horizontal',
+                                    legend.box.just = 'left'))
+   
+   legend2 <- get_legend(p3 + theme(legend.position="bottom",
+                                    legend.box = 'horizontal',
+                                    legend.box.just = 'left'))
+   
+   combined_plots1 <- plot_grid(p1, p2, 
+                                labels=c("(a)", "(b)"), 
+                                ncol=2, align="vh", axis = "l",
+                                label_x=0.12, label_y=0.9)
+   
+   combined_plots2 <- plot_grid(p3, p4, 
+                                labels=c("(c)", "(d)"), 
+                                ncol=2, align="vh", axis = "l",
+                                label_x=0.18, label_y=0.94)
+   
+   pdf(paste0(outdir, "F4.transpiration_per_leaf_area_combined.pdf"), width=10, height=10)
+   plot_grid(combined_plots1, legend1, 
+             combined_plots2, legend2,
+             ncol=1, rel_heights=c(1, 0.3, 1, 0.3))
+   dev.off() 
+   
+   
 }
 

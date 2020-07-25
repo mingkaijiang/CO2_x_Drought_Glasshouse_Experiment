@@ -171,7 +171,7 @@ make_populnea_physiological_plots <- function() {
     text(x=2, y=0.4, expression(bold("(f)")), cex=1.5)
     legend("topright",  expression(aC[a]~-~W, aC[a]~-~D,eC[a]~-~W ,eC[a]~-~D),
            cex=1.35,bty="n",
-           pch = c(19,1,19,1),lty=c(2,1,2,1), col=c("blue","blue","red","red"))
+           pch = c(19,1,19,1),lty=c(1,2,1,2), col=c("blue","blue","red","red"))
     
     dev.off()
     

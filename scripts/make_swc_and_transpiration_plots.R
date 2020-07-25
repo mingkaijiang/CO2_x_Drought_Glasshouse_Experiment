@@ -19,27 +19,6 @@ make_swc_and_transpiration_plots <- function() {
     #popDF <- popDF[popDF$n.1==6, ]
     
     
-    ############################# perform statistical tests ##############################
-    ### read in raw data
-    myDF1 <- read.csv("data/glasshouse2/Drydown_gasexchange_pilularis.csv")
-    myDF2 <- read.csv("data/glasshouse2/Drydown_gasexchange_populnea.csv")
-    
-    myDF1$Day <- as.character(myDF1$Day)
-    myDF2$Day <- as.character(myDF2$Day)
-    
-    ### perform linear mixed effect model statistics on SWC PIL
-    #mod1 <- lmer(SWC ~ CO2 * H2O * Day + (1|Glasshouse), data=myDF1)
-    #outDF <- anova(mod1)
-    #write.csv(outDF, paste0(outdir, "statistics_leaf_area.csv"))
-    #
-    #mod2 <- lmer(TOT ~ CO2 * H2O * Species + (1|GH), data=myDF)
-    #outDF.tot <- anova(mod2)
-    #write.csv(outDF.tot, paste0(outdir, "statistics_total_biomass.csv"))
-    
-    
-    ############################# Finish statistical tests ###############################
-    
-    
     
     #### plotting
     p1 <- ggplot(pilDF, aes(x=Day, y=SWC, group=Trt)) +
@@ -99,7 +78,7 @@ make_swc_and_transpiration_plots <- function() {
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 21, 21),
                                                        fill = c("white", "blue3", "white", "red2"),
                                                        col = c("blue3", "blue3", "red2", "red2"),
-                                                       linetype = c("dotted", "dotted", "solid", "solid"))))+
+                                                       linetype = c("dotted", "solid", "dotted", "solid"))))+
         scale_x_continuous(limits=c(0, 8),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
@@ -161,7 +140,7 @@ make_swc_and_transpiration_plots <- function() {
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 21, 21),
                                                        fill = c("white", "blue3", "white", "red2"),
                                                        col = c("blue3", "blue3", "red2", "red2"),
-                                                       linetype = c("dotted", "dotted", "solid", "solid"))))+
+                                                       linetype = c("dotted", "solid", "dotted", "solid"))))+
         scale_x_continuous(limits=c(0, 20),
                            breaks=c(0, 4, 8, 12, 16, 20))
     
@@ -224,7 +203,7 @@ make_swc_and_transpiration_plots <- function() {
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 21, 21),
                                                        fill = c("white", "blue3", "white", "red2"),
                                                        col = c("blue3", "blue3", "red2", "red2"),
-                                                       linetype = c("dotted", "dotted", "solid", "solid"))))+
+                                                       linetype = c("dotted", "solid", "dotted", "solid"))))+
         scale_x_continuous(limits=c(0, 8),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
@@ -287,7 +266,7 @@ make_swc_and_transpiration_plots <- function() {
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 21, 21),
                                                        fill = c("white", "blue3", "white", "red2"),
                                                        col = c("blue3", "blue3", "red2", "red2"),
-                                                       linetype = c("dotted", "dotted", "solid", "solid"))))+
+                                                       linetype = c("dotted", "solid", "dotted", "solid"))))+
         scale_x_continuous(limits=c(0, 20),
                            breaks=c(0, 4, 8, 12, 16, 20))
     

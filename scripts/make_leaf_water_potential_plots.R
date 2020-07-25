@@ -72,7 +72,7 @@ make_leaf_water_potential_plots <- function() {
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 21, 21),
                                                        fill = c("white", "blue3", "white", "red2"),
                                                        col = c("blue3", "blue3", "red2", "red2"),
-                                                       linetype = c("dotted", "dotted", "solid", "solid"))))+
+                                                       linetype = c("dotted", "solid", "dotted", "solid"))))+
         scale_x_continuous(limits=c(0, 8),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
@@ -134,7 +134,7 @@ make_leaf_water_potential_plots <- function() {
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 21, 21),
                                                        fill = c("white", "blue3", "white", "red2"),
                                                        col = c("blue3", "blue3", "red2", "red2"),
-                                                       linetype = c("dotted", "dotted", "solid", "solid"))))+
+                                                       linetype = c("dotted", "solid", "dotted", "solid"))))+
         scale_x_continuous(limits=c(0, 20),
                            breaks=c(0, 4, 8, 12, 16, 20))
     
@@ -196,7 +196,7 @@ make_leaf_water_potential_plots <- function() {
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 21, 21),
                                                        fill = c("white", "blue3", "white", "red2"),
                                                        col = c("blue3", "blue3", "red2", "red2"),
-                                                       linetype = c("dotted", "dotted", "solid", "solid"))))+
+                                                       linetype = c("dotted", "solid", "dotted", "solid"))))+
         scale_x_continuous(limits=c(0, 8),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
@@ -258,7 +258,7 @@ make_leaf_water_potential_plots <- function() {
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 21, 21),
                                                        fill = c("white", "blue3", "white", "red2"),
                                                        col = c("blue3", "blue3", "red2", "red2"),
-                                                       linetype = c("dotted", "dotted", "solid", "solid"))))+
+                                                       linetype = c("dotted", "solid", "dotted", "solid"))))+
         scale_x_continuous(limits=c(0, 20),
                            breaks=c(0, 4, 8, 12, 16, 20))
     
