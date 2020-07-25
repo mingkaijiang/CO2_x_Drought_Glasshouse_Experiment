@@ -219,7 +219,7 @@ make_swc_and_transpiration_plots <- function() {
                                     expression(paste(eC[a]*" - D")),
                                     expression(paste(eC[a]*" - W"))),
                            values=c(21,21,21,21))+
-        ylim(0,4)+
+        ylim(0,4.2)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 21, 21),
                                                        fill = c("white", "blue3", "white", "red2"),
@@ -282,7 +282,7 @@ make_swc_and_transpiration_plots <- function() {
                                     expression(paste(eC[a]*" - D")),
                                     expression(paste(eC[a]*" - W"))),
                            values=c(21,21,21,21))+
-        ylim(0,4)+
+        ylim(0,4.2)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 21, 21),
                                                        fill = c("white", "blue3", "white", "red2"),

@@ -67,7 +67,7 @@ make_leaf_water_potential_plots <- function() {
                                     expression(paste(eC[a]*" - W"))),
                            values=c(21,21,21,21))+
         ggtitle("E. pilularis")+
-        ylim(-4, 0)+
+        ylim(-3, 0)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 21, 21),
                                                        fill = c("white", "blue3", "white", "red2"),
@@ -129,7 +129,7 @@ make_leaf_water_potential_plots <- function() {
                                     expression(paste(eC[a]*" - W"))),
                            values=c(21,21,21,21))+
         ggtitle("E. populnea")+
-        ylim(-4, 0)+
+        ylim(-3, 0)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 21, 21),
                                                        fill = c("white", "blue3", "white", "red2"),
