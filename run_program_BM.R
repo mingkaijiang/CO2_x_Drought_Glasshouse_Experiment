@@ -55,6 +55,9 @@ make_pilularis_physiological_plots()
 make_populnea_physiological_plots()
 
 ### normalized Asat, i.e. Asat(time) / Asat(D1)
+### add error bars
+### stopped here. 
+### other issues to check - the explaination of the results lacked statistical power,
 make_normalized_Asat_plots()
 
 ### CO2 ratios of A and gs
