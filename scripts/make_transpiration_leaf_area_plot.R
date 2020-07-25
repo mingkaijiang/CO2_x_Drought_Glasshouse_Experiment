@@ -37,22 +37,29 @@ make_transpiration_leaf_area_plot <- function() {
    ### perform linear mixed effect model statistics 
    mod1 <- lmer(leaf_area ~ CO2 * H2O + (1|Glasshouse), data=pilDF)
    outDF1 <- anova(mod1)
-   write.csv(outDF1, paste0(outdir, "statistics_leaf_area_pilularis.csv"))
+   #write.csv(outDF1, paste0(outdir, "statistics_leaf_area_pilularis.csv"))
    
    mod2 <- lmer(transp_plant ~ CO2 * H2O + (1|Glasshouse), data=pilDF)
    outDF2 <- anova(mod2)
-   write.csv(outDF2, paste0(outdir, "statistics_transpiration_pilularis.csv"))
+   #write.csv(outDF2, paste0(outdir, "statistics_transpiration_pilularis.csv"))
+   
+   mod3 <- lmer(transp_leaf ~ CO2 * H2O + (1|Glasshouse), data=pilDF)
+   outDF3 <- anova(mod3)
+   write.csv(outDF3, paste0(outdir, "statistics_transpiration_per_leaf_area_populnea.csv"))
    
    
    ### perform linear mixed effect model statistics on LA
    mod1 <- lmer(leaf_area ~ CO2 * H2O + (1|Glasshouse), data=popDF)
    outDF1 <- anova(mod1)
-   write.csv(outDF1, paste0(outdir, "statistics_leaf_area_populnea.csv"))
+   #write.csv(outDF1, paste0(outdir, "statistics_leaf_area_populnea.csv"))
    
    mod2 <- lmer(transp_plant ~ CO2 * H2O + (1|Glasshouse), data=popDF)
    outDF2 <- anova(mod2)
-   write.csv(outDF2, paste0(outdir, "statistics_transpiration_populnea.csv"))
+   #write.csv(outDF2, paste0(outdir, "statistics_transpiration_populnea.csv"))
    
+   mod4 <- lmer(transp_leaf ~ CO2 * H2O + (1|Glasshouse), data=popDF)
+   outDF4 <- anova(mod4)
+   write.csv(outDF4, paste0(outdir, "statistics_transpiration_per_leaf_area_populnea.csv"))
    
    ############################# Finish statistical tests ###############################
    
@@ -248,7 +255,10 @@ make_transpiration_leaf_area_plot <- function() {
       scale_x_continuous(limits=c(0.5, 4.5),
                          breaks=c(1.5, 3.5),
                          labels=c("Well-watered","Droughted"))+
-      ylim(0, 1)
+      ylim(0, 1)+
+      annotate('text', x=3.7, y=1, label = expression(CO[2] * " n.s.    "))+
+      annotate('text', x=3.7, y=0.92, label = expression(H[2] * "O *      "))+
+      annotate('text', x=3.9, y=0.84, label = expression(CO[2] * " x " * H[2] * "O n.s."))
    
    
    
@@ -288,7 +298,10 @@ make_transpiration_leaf_area_plot <- function() {
       scale_x_continuous(limits=c(0.5, 4.5),
                          breaks=c(1.5, 3.5),
                          labels=c("Well-watered","Droughted"))+
-      ylim(0, 4)
+      ylim(0, 4)+
+      annotate('text', x=3.65, y=4, label = expression(CO[2] * " **     "))+
+      annotate('text', x=3.7, y=3.7, label = expression(H[2] * "O n.s.   "))+
+      annotate('text', x=3.9, y=3.4, label = expression(CO[2] * " x " * H[2] * "O n.s."))
    
    
    combined_legend <- get_legend(p1 + theme(legend.position="bottom",
