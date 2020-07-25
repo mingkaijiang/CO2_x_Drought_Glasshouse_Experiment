@@ -43,7 +43,7 @@ make_populnea_physiological_plots <- function() {
           font=2,cex=0.75, line = 2.25)	
     par(las=1)
     mtext(side=3,text="Daily",line=0.5,font=1,cex=1.0)
-    text(0.25,27.75, "(a)", pos=4,cex=1,font=2)
+    text(x=2, y=25, expression(bold("(a)")), cex=1.5)
     
     #POP A Early
     par(las=1)
@@ -69,7 +69,7 @@ make_populnea_physiological_plots <- function() {
                              , length = .035, angle = 90, code = 3,col="red")) 
     mtext(side = 3, text ="E. populnea", line = 2.5,font=4, cex=1.0)
     mtext(side=3,text="Morning",line=0.5,font=1,cex=1.0)
-    text(0.25,27.75, "(b)", pos=4,cex=1,font=2)
+    text(x=2, y=25, expression(bold("(b)")), cex=1.5)
     
     #POP A Late
     par(las=1)
@@ -93,11 +93,8 @@ make_populnea_physiological_plots <- function() {
     with(POPPhysGraph,arrows(Day[Trt=="POPEND"],
                              UAlate[Trt=="POPEND"], Day[Trt=="POPEND"], LAlate[Trt=="POPEND"]
                              , length = .035, angle = 90, code = 3,col="red")) 
-    legend("topright",  expression(aC[a]~-~W, aC[a]~-~D,eC[a]~-~W ,eC[a]~-~D),
-           cex=1.35,bty="n",
-           pch = c(19,1,19,1),lty=c(2,1,2,1), col=c("blue","blue","red","red"))
     mtext(side=3,text="Midday",line=0.5,font=1,cex=1.0)
-    text(0.25,27.75, "(c)", pos=4,cex=1,font=2)
+    text(x=2, y=25, expression(bold("(c)")), cex=1.5)
     
     #POP GS Daily
     par(las=1)
@@ -123,7 +120,7 @@ make_populnea_physiological_plots <- function() {
     mtext(side = 2, text =expression(bold(g[s])), line = 3.75,font=2.5, cex=1.0)
     mtext(side = 2, text =expression(bold((mol~m^-2~s^-1))),
           font=2,cex=0.75, line = 2.25)	
-    text(0.25,0.435, "(d)", pos=4,cex=1,font=2)
+    text(x=2, y=0.4, expression(bold("(d)")), cex=1.5)
     
     #POP GS Early
     par(las=1)
@@ -146,8 +143,8 @@ make_populnea_physiological_plots <- function() {
     with(POPPhysGraph,arrows(Day[Trt=="POPEND"],
                              Ugsearly[Trt=="POPEND"], Day[Trt=="POPEND"], Lgsearly[Trt=="POPEND"]
                              , length = .035, angle = 90, code = 3,col="red")) 
-    mtext(side=1,text="DAY",line=2.75,font=2,cex=1.0)
-    text(0.25,0.435, "(e)", pos=4,cex=1,font=2)
+    mtext(side=1,text="Day",line=2.75,font=2,cex=1.0)
+    text(x=2, y=0.4, expression(bold("(e)")), cex=1.5)
     
     #POP GS Late
     par(las=1)
@@ -171,7 +168,10 @@ make_populnea_physiological_plots <- function() {
                              Ugslate[Trt=="POPEND"], Day[Trt=="POPEND"], Lgslate[Trt=="POPEND"]
                              , length = .035, angle = 90, code = 3,col="red")) 
     par(las=3)
-    text(0.25,0.435, "(f)", pos=4,cex=1,font=2)
+    text(x=2, y=0.4, expression(bold("(f)")), cex=1.5)
+    legend("topright",  expression(aC[a]~-~W, aC[a]~-~D,eC[a]~-~W ,eC[a]~-~D),
+           cex=1.35,bty="n",
+           pch = c(19,1,19,1),lty=c(2,1,2,1), col=c("blue","blue","red","red"))
     
     dev.off()
     

@@ -63,9 +63,10 @@ make_predawn_water_potential_with_swc_plots <- function() {
    mtext(side=1,text=expression(bold(s.w.c.~(m^3~m^-3))),line=3,cex=1.25)
    axis(1,labels=TRUE,tck=-0.03,cex.axis=1.25)
    title(main="E. pilularis",  font.main=4,cex.main=1.1,line=0.5)
-   legend("topleft",  expression(aC[a]~-~W,aC[a]~-~D,eC[a]~-~W,eC[a]~-~D),
+   legend("bottomleft",  expression(aC[a]~-~W,aC[a]~-~D,eC[a]~-~W,eC[a]~-~D),
           cex=1.025,bty="n",
           pch=c(19,1,19,1), col=c("blue","blue","red","red"))
+   text(x=0, y=-0.18, expression(bold("(a)")), cex=1.2)
    
    #POP pre-dawn leaf water potential vs. soil water content
    par(mar=c(2, 0.5, 4, 1))
@@ -96,6 +97,7 @@ make_predawn_water_potential_with_swc_plots <- function() {
    mtext(side=1,text=expression(bold(s.w.c.~(m^3~m^-3))),line=3,cex=1.25)
    axis(1,labels=TRUE,tck=-0.03,cex.axis=1.25)
    title(main="E. populnea",  font.main=4,cex.main=1.1,line=0.5)
+   text(x=0, y=-0.25, expression(bold("(b)")), cex=1.2)
    
    dev.off()
    
