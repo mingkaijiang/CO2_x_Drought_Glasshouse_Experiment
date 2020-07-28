@@ -12,11 +12,17 @@ make_statistics_leaf_area_and_biomass_table <- function() {
     ### total biomass
     myDF$TOT <- with(myDF, SM+LM+FRM+CRM)
     
+    ### Root to shoot ratio
+    myDF$RS_ratio <- with(myDF, (Root/(Leaf+Stem)))
+    
+    ### Root mass to leaf area ratio
+    myDF$RL_ratio <- with(myDF, (Root/LA_plant))
+    
     
     ### prepare outDF
     outDF <- data.frame(rep(c("Epilularis", "Epopulnea"), each = 7),
                         rep(c("LA", "total", "leaf", "stem",
-                              "root", "froot", "croot"), 2),
+                              "root", "RS_ratio", "RL_ratio"), 2),
                         NA, NA, NA, NA, NA, NA,
                         NA, NA, NA, NA, NA, NA)
     colnames(outDF) <- c("Species", "Variable", 
@@ -26,7 +32,7 @@ make_statistics_leaf_area_and_biomass_table <- function() {
                          "p_CO2", "p_H2O", "p_CO2_H2O")
     
     outDF2 <- data.frame(c("LA", "total", "leaf", "stem",
-                               "root", "froot", "croot"),
+                               "root", "RS_ratio", "RL_ratio"),
                          NA, NA, NA, NA, NA, NA,
                          NA, NA, NA, NA, NA, NA,
                          NA, NA, NA, NA, NA, NA,
@@ -172,54 +178,54 @@ make_statistics_leaf_area_and_biomass_table <- function() {
     outDF$p_H2O[outDF$Species=="Epilularis"&outDF$Variable=="root"] <- round(anov$`Pr(>F)`[2], 4)
     outDF$p_CO2_H2O[outDF$Species=="Epilularis"&outDF$Variable=="root"] <- round(anov$`Pr(>F)`[3], 4)
     
-    ### fineroot biomass
-    mod1 <- lmer(FineRoot ~ CO2 * H2O + (1|GH), data=subDF)
+    ### RS ratio
+    mod1 <- lmer(RS_ratio ~ CO2 * H2O + (1|GH), data=subDF)
     anov <- anova(mod1)
     
     # nominator
-    outDF$Nominator_CO2[outDF$Species=="Epilularis"&outDF$Variable=="froot"] <- anov$NumDF[1]
-    outDF$Nominator_H2O[outDF$Species=="Epilularis"&outDF$Variable=="froot"] <- anov$NumDF[2]
-    outDF$Nominator_CO2_H2O[outDF$Species=="Epilularis"&outDF$Variable=="froot"] <- anov$NumDF[3]
+    outDF$Nominator_CO2[outDF$Species=="Epilularis"&outDF$Variable=="RS_ratio"] <- anov$NumDF[1]
+    outDF$Nominator_H2O[outDF$Species=="Epilularis"&outDF$Variable=="RS_ratio"] <- anov$NumDF[2]
+    outDF$Nominator_CO2_H2O[outDF$Species=="Epilularis"&outDF$Variable=="RS_ratio"] <- anov$NumDF[3]
     
     #denominator
-    outDF$Denominator_CO2[outDF$Species=="Epilularis"&outDF$Variable=="froot"] <- anov$DenDF[1]
-    outDF$Denominator_H2O[outDF$Species=="Epilularis"&outDF$Variable=="froot"] <- anov$DenDF[2]
-    outDF$Denominator_CO2_H2O[outDF$Species=="Epilularis"&outDF$Variable=="froot"] <- anov$DenDF[3]
+    outDF$Denominator_CO2[outDF$Species=="Epilularis"&outDF$Variable=="RS_ratio"] <- anov$DenDF[1]
+    outDF$Denominator_H2O[outDF$Species=="Epilularis"&outDF$Variable=="RS_ratio"] <- anov$DenDF[2]
+    outDF$Denominator_CO2_H2O[outDF$Species=="Epilularis"&outDF$Variable=="RS_ratio"] <- anov$DenDF[3]
     
     # F-value
-    outDF$F_CO2[outDF$Species=="Epilularis"&outDF$Variable=="froot"] <- anov$`F value`[1]
-    outDF$F_H2O[outDF$Species=="Epilularis"&outDF$Variable=="froot"] <- anov$`F value`[2]
-    outDF$F_CO2_H2O[outDF$Species=="Epilularis"&outDF$Variable=="froot"] <- anov$`F value`[3]
+    outDF$F_CO2[outDF$Species=="Epilularis"&outDF$Variable=="RS_ratio"] <- anov$`F value`[1]
+    outDF$F_H2O[outDF$Species=="Epilularis"&outDF$Variable=="RS_ratio"] <- anov$`F value`[2]
+    outDF$F_CO2_H2O[outDF$Species=="Epilularis"&outDF$Variable=="RS_ratio"] <- anov$`F value`[3]
     
     # p-value
-    outDF$p_CO2[outDF$Species=="Epilularis"&outDF$Variable=="froot"] <- round(anov$`Pr(>F)`[1], 4)
-    outDF$p_H2O[outDF$Species=="Epilularis"&outDF$Variable=="froot"] <- round(anov$`Pr(>F)`[2], 4)
-    outDF$p_CO2_H2O[outDF$Species=="Epilularis"&outDF$Variable=="froot"] <- round(anov$`Pr(>F)`[3], 4)
+    outDF$p_CO2[outDF$Species=="Epilularis"&outDF$Variable=="RS_ratio"] <- round(anov$`Pr(>F)`[1], 4)
+    outDF$p_H2O[outDF$Species=="Epilularis"&outDF$Variable=="RS_ratio"] <- round(anov$`Pr(>F)`[2], 4)
+    outDF$p_CO2_H2O[outDF$Species=="Epilularis"&outDF$Variable=="RS_ratio"] <- round(anov$`Pr(>F)`[3], 4)
     
     
-    ### Croot biomass
-    mod1 <- lmer(CoarseRoot ~ CO2 * H2O + (1|GH), data=subDF)
+    ### RL_ratio 
+    mod1 <- lmer(RL_ratio ~ CO2 * H2O + (1|GH), data=subDF)
     anov <- anova(mod1)
     
     # nominator
-    outDF$Nominator_CO2[outDF$Species=="Epilularis"&outDF$Variable=="croot"] <- anov$NumDF[1]
-    outDF$Nominator_H2O[outDF$Species=="Epilularis"&outDF$Variable=="croot"] <- anov$NumDF[2]
-    outDF$Nominator_CO2_H2O[outDF$Species=="Epilularis"&outDF$Variable=="croot"] <- anov$NumDF[3]
+    outDF$Nominator_CO2[outDF$Species=="Epilularis"&outDF$Variable=="RL_ratio"] <- anov$NumDF[1]
+    outDF$Nominator_H2O[outDF$Species=="Epilularis"&outDF$Variable=="RL_ratio"] <- anov$NumDF[2]
+    outDF$Nominator_CO2_H2O[outDF$Species=="Epilularis"&outDF$Variable=="RL_ratio"] <- anov$NumDF[3]
     
     #denominator
-    outDF$Denominator_CO2[outDF$Species=="Epilularis"&outDF$Variable=="croot"] <- anov$DenDF[1]
-    outDF$Denominator_H2O[outDF$Species=="Epilularis"&outDF$Variable=="croot"] <- anov$DenDF[2]
-    outDF$Denominator_CO2_H2O[outDF$Species=="Epilularis"&outDF$Variable=="croot"] <- anov$DenDF[3]
+    outDF$Denominator_CO2[outDF$Species=="Epilularis"&outDF$Variable=="RL_ratio"] <- anov$DenDF[1]
+    outDF$Denominator_H2O[outDF$Species=="Epilularis"&outDF$Variable=="RL_ratio"] <- anov$DenDF[2]
+    outDF$Denominator_CO2_H2O[outDF$Species=="Epilularis"&outDF$Variable=="RL_ratio"] <- anov$DenDF[3]
     
     # F-value
-    outDF$F_CO2[outDF$Species=="Epilularis"&outDF$Variable=="croot"] <- anov$`F value`[1]
-    outDF$F_H2O[outDF$Species=="Epilularis"&outDF$Variable=="croot"] <- anov$`F value`[2]
-    outDF$F_CO2_H2O[outDF$Species=="Epilularis"&outDF$Variable=="croot"] <- anov$`F value`[3]
+    outDF$F_CO2[outDF$Species=="Epilularis"&outDF$Variable=="RL_ratio"] <- anov$`F value`[1]
+    outDF$F_H2O[outDF$Species=="Epilularis"&outDF$Variable=="RL_ratio"] <- anov$`F value`[2]
+    outDF$F_CO2_H2O[outDF$Species=="Epilularis"&outDF$Variable=="RL_ratio"] <- anov$`F value`[3]
     
     # p-value
-    outDF$p_CO2[outDF$Species=="Epilularis"&outDF$Variable=="croot"] <- round(anov$`Pr(>F)`[1], 4)
-    outDF$p_H2O[outDF$Species=="Epilularis"&outDF$Variable=="croot"] <- round(anov$`Pr(>F)`[2], 4)
-    outDF$p_CO2_H2O[outDF$Species=="Epilularis"&outDF$Variable=="croot"] <- round(anov$`Pr(>F)`[3], 4)
+    outDF$p_CO2[outDF$Species=="Epilularis"&outDF$Variable=="RL_ratio"] <- round(anov$`Pr(>F)`[1], 4)
+    outDF$p_H2O[outDF$Species=="Epilularis"&outDF$Variable=="RL_ratio"] <- round(anov$`Pr(>F)`[2], 4)
+    outDF$p_CO2_H2O[outDF$Species=="Epilularis"&outDF$Variable=="RL_ratio"] <- round(anov$`Pr(>F)`[3], 4)
     
     
     
@@ -347,54 +353,54 @@ make_statistics_leaf_area_and_biomass_table <- function() {
     outDF$p_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="root"] <- round(anov$`Pr(>F)`[2], 4)
     outDF$p_CO2_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="root"] <- round(anov$`Pr(>F)`[3], 4)
     
-    ### fineroot biomass
-    mod1 <- lmer(FineRoot ~ CO2 * H2O + (1|GH), data=subDF)
+    ### RS ratio
+    mod1 <- lmer(RS_ratio ~ CO2 * H2O + (1|GH), data=subDF)
     anov <- anova(mod1)
     
     # nominator
-    outDF$Nominator_CO2[outDF$Species=="Epopulnea"&outDF$Variable=="froot"] <- anov$NumDF[1]
-    outDF$Nominator_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="froot"] <- anov$NumDF[2]
-    outDF$Nominator_CO2_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="froot"] <- anov$NumDF[3]
+    outDF$Nominator_CO2[outDF$Species=="Epopulnea"&outDF$Variable=="RS_ratio"] <- anov$NumDF[1]
+    outDF$Nominator_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="RS_ratio"] <- anov$NumDF[2]
+    outDF$Nominator_CO2_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="RS_ratio"] <- anov$NumDF[3]
     
     #denominator
-    outDF$Denominator_CO2[outDF$Species=="Epopulnea"&outDF$Variable=="froot"] <- anov$DenDF[1]
-    outDF$Denominator_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="froot"] <- anov$DenDF[2]
-    outDF$Denominator_CO2_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="froot"] <- anov$DenDF[3]
+    outDF$Denominator_CO2[outDF$Species=="Epopulnea"&outDF$Variable=="RS_ratio"] <- anov$DenDF[1]
+    outDF$Denominator_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="RS_ratio"] <- anov$DenDF[2]
+    outDF$Denominator_CO2_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="RS_ratio"] <- anov$DenDF[3]
     
     # F-value
-    outDF$F_CO2[outDF$Species=="Epopulnea"&outDF$Variable=="froot"] <- anov$`F value`[1]
-    outDF$F_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="froot"] <- anov$`F value`[2]
-    outDF$F_CO2_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="froot"] <- anov$`F value`[3]
+    outDF$F_CO2[outDF$Species=="Epopulnea"&outDF$Variable=="RS_ratio"] <- anov$`F value`[1]
+    outDF$F_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="RS_ratio"] <- anov$`F value`[2]
+    outDF$F_CO2_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="RS_ratio"] <- anov$`F value`[3]
     
     # p-value
-    outDF$p_CO2[outDF$Species=="Epopulnea"&outDF$Variable=="froot"] <- round(anov$`Pr(>F)`[1], 4)
-    outDF$p_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="froot"] <- round(anov$`Pr(>F)`[2], 4)
-    outDF$p_CO2_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="froot"] <- round(anov$`Pr(>F)`[3], 4)
+    outDF$p_CO2[outDF$Species=="Epopulnea"&outDF$Variable=="RS_ratio"] <- round(anov$`Pr(>F)`[1], 4)
+    outDF$p_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="RS_ratio"] <- round(anov$`Pr(>F)`[2], 4)
+    outDF$p_CO2_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="RS_ratio"] <- round(anov$`Pr(>F)`[3], 4)
     
     
-    ### Croot biomass
-    mod1 <- lmer(CoarseRoot ~ CO2 * H2O + (1|GH), data=subDF)
+    ### RL_ratio 
+    mod1 <- lmer(RL_ratio ~ CO2 * H2O + (1|GH), data=subDF)
     anov <- anova(mod1)
     
     # nominator
-    outDF$Nominator_CO2[outDF$Species=="Epopulnea"&outDF$Variable=="croot"] <- anov$NumDF[1]
-    outDF$Nominator_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="croot"] <- anov$NumDF[2]
-    outDF$Nominator_CO2_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="croot"] <- anov$NumDF[3]
+    outDF$Nominator_CO2[outDF$Species=="Epopulnea"&outDF$Variable=="RL_ratio"] <- anov$NumDF[1]
+    outDF$Nominator_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="RL_ratio"] <- anov$NumDF[2]
+    outDF$Nominator_CO2_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="RL_ratio"] <- anov$NumDF[3]
     
     #denominator
-    outDF$Denominator_CO2[outDF$Species=="Epopulnea"&outDF$Variable=="croot"] <- anov$DenDF[1]
-    outDF$Denominator_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="croot"] <- anov$DenDF[2]
-    outDF$Denominator_CO2_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="croot"] <- anov$DenDF[3]
+    outDF$Denominator_CO2[outDF$Species=="Epopulnea"&outDF$Variable=="RL_ratio"] <- anov$DenDF[1]
+    outDF$Denominator_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="RL_ratio"] <- anov$DenDF[2]
+    outDF$Denominator_CO2_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="RL_ratio"] <- anov$DenDF[3]
     
     # F-value
-    outDF$F_CO2[outDF$Species=="Epopulnea"&outDF$Variable=="croot"] <- anov$`F value`[1]
-    outDF$F_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="croot"] <- anov$`F value`[2]
-    outDF$F_CO2_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="croot"] <- anov$`F value`[3]
+    outDF$F_CO2[outDF$Species=="Epopulnea"&outDF$Variable=="RL_ratio"] <- anov$`F value`[1]
+    outDF$F_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="RL_ratio"] <- anov$`F value`[2]
+    outDF$F_CO2_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="RL_ratio"] <- anov$`F value`[3]
     
     # p-value
-    outDF$p_CO2[outDF$Species=="Epopulnea"&outDF$Variable=="croot"] <- round(anov$`Pr(>F)`[1], 4)
-    outDF$p_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="croot"] <- round(anov$`Pr(>F)`[2], 4)
-    outDF$p_CO2_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="croot"] <- round(anov$`Pr(>F)`[3], 4)
+    outDF$p_CO2[outDF$Species=="Epopulnea"&outDF$Variable=="RL_ratio"] <- round(anov$`Pr(>F)`[1], 4)
+    outDF$p_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="RL_ratio"] <- round(anov$`Pr(>F)`[2], 4)
+    outDF$p_CO2_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="RL_ratio"] <- round(anov$`Pr(>F)`[3], 4)
     
     
     ### save output
@@ -605,87 +611,87 @@ make_statistics_leaf_area_and_biomass_table <- function() {
     outDF2$p_H2O_S[outDF2$Variable=="root"] <- anov$`Pr(>F)`[6]
     outDF2$p_CO2_H2O_S[outDF2$Variable=="root"] <- anov$`Pr(>F)`[7]
     
-    ### fineroot biomass
-    mod1 <- lmer(FineRoot ~ CO2 * H2O * Species + (1|GH), data=myDF)
+    ### RS ratio
+    mod1 <- lmer(RS_ratio ~ CO2 * H2O * Species + (1|GH), data=myDF)
     anov <- anova(mod1)
     
     # nominator
-    outDF2$Nominator_CO2[outDF2$Variable=="froot"] <- anov$NumDF[1]
-    outDF2$Nominator_H2O[outDF2$Variable=="froot"] <- anov$NumDF[2]
-    outDF2$Nominator_S[outDF2$Variable=="froot"] <- anov$NumDF[3]
-    outDF2$Nominator_CO2_H2O[outDF2$Variable=="froot"] <- anov$NumDF[4]
-    outDF2$Nominator_CO2_S[outDF2$Variable=="froot"] <- anov$NumDF[5]
-    outDF2$Nominator_H2O_S[outDF2$Variable=="froot"] <- anov$NumDF[6]
-    outDF2$Nominator_CO2_H2O_S[outDF2$Variable=="froot"] <- anov$NumDF[7]
+    outDF2$Nominator_CO2[outDF2$Variable=="RS_ratio"] <- anov$NumDF[1]
+    outDF2$Nominator_H2O[outDF2$Variable=="RS_ratio"] <- anov$NumDF[2]
+    outDF2$Nominator_S[outDF2$Variable=="RS_ratio"] <- anov$NumDF[3]
+    outDF2$Nominator_CO2_H2O[outDF2$Variable=="RS_ratio"] <- anov$NumDF[4]
+    outDF2$Nominator_CO2_S[outDF2$Variable=="RS_ratio"] <- anov$NumDF[5]
+    outDF2$Nominator_H2O_S[outDF2$Variable=="RS_ratio"] <- anov$NumDF[6]
+    outDF2$Nominator_CO2_H2O_S[outDF2$Variable=="RS_ratio"] <- anov$NumDF[7]
     
     #denominator
-    outDF2$Denominator_CO2[outDF2$Variable=="froot"] <- anov$DenDF[1]
-    outDF2$Denominator_H2O[outDF2$Variable=="froot"] <- anov$DenDF[2]
-    outDF2$Denominator_S[outDF2$Variable=="froot"] <- anov$DenDF[3]
-    outDF2$Denominator_CO2_H2O[outDF2$Variable=="froot"] <- anov$DenDF[4]
-    outDF2$Denominator_CO2_S[outDF2$Variable=="froot"] <- anov$DenDF[5]
-    outDF2$Denominator_H2O_S[outDF2$Variable=="froot"] <- anov$DenDF[6]
-    outDF2$Denominator_CO2_H2O_S[outDF2$Variable=="froot"] <- anov$DenDF[7]
+    outDF2$Denominator_CO2[outDF2$Variable=="RS_ratio"] <- anov$DenDF[1]
+    outDF2$Denominator_H2O[outDF2$Variable=="RS_ratio"] <- anov$DenDF[2]
+    outDF2$Denominator_S[outDF2$Variable=="RS_ratio"] <- anov$DenDF[3]
+    outDF2$Denominator_CO2_H2O[outDF2$Variable=="RS_ratio"] <- anov$DenDF[4]
+    outDF2$Denominator_CO2_S[outDF2$Variable=="RS_ratio"] <- anov$DenDF[5]
+    outDF2$Denominator_H2O_S[outDF2$Variable=="RS_ratio"] <- anov$DenDF[6]
+    outDF2$Denominator_CO2_H2O_S[outDF2$Variable=="RS_ratio"] <- anov$DenDF[7]
     
     # F-value
-    outDF2$F_CO2[outDF2$Variable=="froot"] <- anov$`F value`[1]
-    outDF2$F_H2O[outDF2$Variable=="froot"] <- anov$`F value`[2]
-    outDF2$F_S[outDF2$Variable=="froot"] <- anov$`F value`[3]
-    outDF2$F_CO2_H2O[outDF2$Variable=="froot"] <- anov$`F value`[4]
-    outDF2$F_CO2_S[outDF2$Variable=="froot"] <- anov$`F value`[5]
-    outDF2$F_H2O_S[outDF2$Variable=="froot"] <- anov$`F value`[6]
-    outDF2$F_CO2_H2O_S[outDF2$Variable=="froot"] <- anov$`F value`[7]
+    outDF2$F_CO2[outDF2$Variable=="RS_ratio"] <- anov$`F value`[1]
+    outDF2$F_H2O[outDF2$Variable=="RS_ratio"] <- anov$`F value`[2]
+    outDF2$F_S[outDF2$Variable=="RS_ratio"] <- anov$`F value`[3]
+    outDF2$F_CO2_H2O[outDF2$Variable=="RS_ratio"] <- anov$`F value`[4]
+    outDF2$F_CO2_S[outDF2$Variable=="RS_ratio"] <- anov$`F value`[5]
+    outDF2$F_H2O_S[outDF2$Variable=="RS_ratio"] <- anov$`F value`[6]
+    outDF2$F_CO2_H2O_S[outDF2$Variable=="RS_ratio"] <- anov$`F value`[7]
     
     # p-value
-    outDF2$p_CO2[outDF2$Variable=="froot"] <- round(anov$`Pr(>F)`[1], 4)
-    outDF2$p_H2O[outDF2$Variable=="froot"] <- round(anov$`Pr(>F)`[2], 4)
-    outDF2$p_S[outDF2$Variable=="froot"] <- anov$`Pr(>F)`[3]
-    outDF2$p_CO2_H2O[outDF2$Variable=="froot"] <- anov$`Pr(>F)`[4]
-    outDF2$p_CO2_S[outDF2$Variable=="froot"] <- anov$`Pr(>F)`[5]
-    outDF2$p_H2O_S[outDF2$Variable=="froot"] <- anov$`Pr(>F)`[6]
-    outDF2$p_CO2_H2O_S[outDF2$Variable=="froot"] <- anov$`Pr(>F)`[7]
+    outDF2$p_CO2[outDF2$Variable=="RS_ratio"] <- round(anov$`Pr(>F)`[1], 4)
+    outDF2$p_H2O[outDF2$Variable=="RS_ratio"] <- round(anov$`Pr(>F)`[2], 4)
+    outDF2$p_S[outDF2$Variable=="RS_ratio"] <- anov$`Pr(>F)`[3]
+    outDF2$p_CO2_H2O[outDF2$Variable=="RS_ratio"] <- anov$`Pr(>F)`[4]
+    outDF2$p_CO2_S[outDF2$Variable=="RS_ratio"] <- anov$`Pr(>F)`[5]
+    outDF2$p_H2O_S[outDF2$Variable=="RS_ratio"] <- anov$`Pr(>F)`[6]
+    outDF2$p_CO2_H2O_S[outDF2$Variable=="RS_ratio"] <- anov$`Pr(>F)`[7]
     
     
     
-    ### Croot biomass
-    mod1 <- lmer(CoarseRoot ~ CO2 * H2O * Species + (1|GH), data=myDF)
+    ### RL_ratio 
+    mod1 <- lmer(RL_ratio ~ CO2 * H2O * Species + (1|GH), data=myDF)
     anov <- anova(mod1)
     
     # nominator
-    outDF2$Nominator_CO2[outDF2$Variable=="croot"] <- anov$NumDF[1]
-    outDF2$Nominator_H2O[outDF2$Variable=="croot"] <- anov$NumDF[2]
-    outDF2$Nominator_S[outDF2$Variable=="croot"] <- anov$NumDF[3]
-    outDF2$Nominator_CO2_H2O[outDF2$Variable=="croot"] <- anov$NumDF[4]
-    outDF2$Nominator_CO2_S[outDF2$Variable=="croot"] <- anov$NumDF[5]
-    outDF2$Nominator_H2O_S[outDF2$Variable=="croot"] <- anov$NumDF[6]
-    outDF2$Nominator_CO2_H2O_S[outDF2$Variable=="croot"] <- anov$NumDF[7]
+    outDF2$Nominator_CO2[outDF2$Variable=="RL_ratio"] <- anov$NumDF[1]
+    outDF2$Nominator_H2O[outDF2$Variable=="RL_ratio"] <- anov$NumDF[2]
+    outDF2$Nominator_S[outDF2$Variable=="RL_ratio"] <- anov$NumDF[3]
+    outDF2$Nominator_CO2_H2O[outDF2$Variable=="RL_ratio"] <- anov$NumDF[4]
+    outDF2$Nominator_CO2_S[outDF2$Variable=="RL_ratio"] <- anov$NumDF[5]
+    outDF2$Nominator_H2O_S[outDF2$Variable=="RL_ratio"] <- anov$NumDF[6]
+    outDF2$Nominator_CO2_H2O_S[outDF2$Variable=="RL_ratio"] <- anov$NumDF[7]
     
     #denominator
-    outDF2$Denominator_CO2[outDF2$Variable=="croot"] <- anov$DenDF[1]
-    outDF2$Denominator_H2O[outDF2$Variable=="croot"] <- anov$DenDF[2]
-    outDF2$Denominator_S[outDF2$Variable=="croot"] <- anov$DenDF[3]
-    outDF2$Denominator_CO2_H2O[outDF2$Variable=="croot"] <- anov$DenDF[4]
-    outDF2$Denominator_CO2_S[outDF2$Variable=="croot"] <- anov$DenDF[5]
-    outDF2$Denominator_H2O_S[outDF2$Variable=="croot"] <- anov$DenDF[6]
-    outDF2$Denominator_CO2_H2O_S[outDF2$Variable=="croot"] <- anov$DenDF[7]
+    outDF2$Denominator_CO2[outDF2$Variable=="RL_ratio"] <- anov$DenDF[1]
+    outDF2$Denominator_H2O[outDF2$Variable=="RL_ratio"] <- anov$DenDF[2]
+    outDF2$Denominator_S[outDF2$Variable=="RL_ratio"] <- anov$DenDF[3]
+    outDF2$Denominator_CO2_H2O[outDF2$Variable=="RL_ratio"] <- anov$DenDF[4]
+    outDF2$Denominator_CO2_S[outDF2$Variable=="RL_ratio"] <- anov$DenDF[5]
+    outDF2$Denominator_H2O_S[outDF2$Variable=="RL_ratio"] <- anov$DenDF[6]
+    outDF2$Denominator_CO2_H2O_S[outDF2$Variable=="RL_ratio"] <- anov$DenDF[7]
     
     # F-value
-    outDF2$F_CO2[outDF2$Variable=="croot"] <- anov$`F value`[1]
-    outDF2$F_H2O[outDF2$Variable=="croot"] <- anov$`F value`[2]
-    outDF2$F_S[outDF2$Variable=="croot"] <- anov$`F value`[3]
-    outDF2$F_CO2_H2O[outDF2$Variable=="croot"] <- anov$`F value`[4]
-    outDF2$F_CO2_S[outDF2$Variable=="croot"] <- anov$`F value`[5]
-    outDF2$F_H2O_S[outDF2$Variable=="croot"] <- anov$`F value`[6]
-    outDF2$F_CO2_H2O_S[outDF2$Variable=="croot"] <- anov$`F value`[7]
+    outDF2$F_CO2[outDF2$Variable=="RL_ratio"] <- anov$`F value`[1]
+    outDF2$F_H2O[outDF2$Variable=="RL_ratio"] <- anov$`F value`[2]
+    outDF2$F_S[outDF2$Variable=="RL_ratio"] <- anov$`F value`[3]
+    outDF2$F_CO2_H2O[outDF2$Variable=="RL_ratio"] <- anov$`F value`[4]
+    outDF2$F_CO2_S[outDF2$Variable=="RL_ratio"] <- anov$`F value`[5]
+    outDF2$F_H2O_S[outDF2$Variable=="RL_ratio"] <- anov$`F value`[6]
+    outDF2$F_CO2_H2O_S[outDF2$Variable=="RL_ratio"] <- anov$`F value`[7]
     
     # p-value
-    outDF2$p_CO2[outDF2$Variable=="croot"] <- round(anov$`Pr(>F)`[1], 4)
-    outDF2$p_H2O[outDF2$Variable=="croot"] <- round(anov$`Pr(>F)`[2], 4)
-    outDF2$p_S[outDF2$Variable=="croot"] <- anov$`Pr(>F)`[3]
-    outDF2$p_CO2_H2O[outDF2$Variable=="croot"] <- anov$`Pr(>F)`[4]
-    outDF2$p_CO2_S[outDF2$Variable=="croot"] <- anov$`Pr(>F)`[5]
-    outDF2$p_H2O_S[outDF2$Variable=="croot"] <- anov$`Pr(>F)`[6]
-    outDF2$p_CO2_H2O_S[outDF2$Variable=="croot"] <- anov$`Pr(>F)`[7]
+    outDF2$p_CO2[outDF2$Variable=="RL_ratio"] <- round(anov$`Pr(>F)`[1], 4)
+    outDF2$p_H2O[outDF2$Variable=="RL_ratio"] <- round(anov$`Pr(>F)`[2], 4)
+    outDF2$p_S[outDF2$Variable=="RL_ratio"] <- anov$`Pr(>F)`[3]
+    outDF2$p_CO2_H2O[outDF2$Variable=="RL_ratio"] <- anov$`Pr(>F)`[4]
+    outDF2$p_CO2_S[outDF2$Variable=="RL_ratio"] <- anov$`Pr(>F)`[5]
+    outDF2$p_H2O_S[outDF2$Variable=="RL_ratio"] <- anov$`Pr(>F)`[6]
+    outDF2$p_CO2_H2O_S[outDF2$Variable=="RL_ratio"] <- anov$`Pr(>F)`[7]
     
     
     
