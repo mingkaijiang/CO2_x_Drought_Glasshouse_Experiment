@@ -15,6 +15,29 @@ make_statistics_leaf_water_relations_gas_exchange_table <- function() {
     #myDF1$Day <- as.character(myDF1$Day)
     #myDF2$Day <- as.character(myDF2$Day)
     
+    myDF1$transp_plant2 <- with(myDF1, (transp_leaf_early+transp_leaf_late)/2)
+    mod1 <- lmer(transp_plant ~ CO2 * H2O * Day + (1|Glasshouse), data=myDF1)
+    mod1 <- lmer(transp_leaf_early ~ CO2 * H2O * Day + (1|Glasshouse), data=myDF1)
+    mod1 <- lmer(transp_leaf_late ~ CO2 * H2O * Day + (1|Glasshouse), data=myDF1)
+    mod1 <- lmer(transp_plant2 ~ CO2 * H2O * Day + (1|Glasshouse), data=myDF1)
+    
+    myDF2$transp_plant2 <- with(myDF2, (transp_leaf_early+transp_leaf_late)/2)
+    mod1 <- lmer(transp_plant ~ CO2 * H2O * Day + (1|Glasshouse), data=myDF2)
+    mod1 <- lmer(transp_leaf_early ~ CO2 * H2O * Day + (1|Glasshouse), data=myDF2)
+    mod1 <- lmer(transp_leaf_late ~ CO2 * H2O * Day + (1|Glasshouse), data=myDF2)
+    mod1 <- lmer(transp_plant2 ~ CO2 * H2O * Day + (1|Glasshouse), data=myDF2)
+    
+    mod1 <- lmer(psiPD ~ CO2 * H2O * SWC + (1|Glasshouse), data=myDF1)
+    mod1 <- lmer(psiMD ~ CO2 * H2O * SWC + (1|Glasshouse), data=myDF1)
+
+    mod1 <- lmer(psiPD ~ CO2 * H2O * SWC + (1|Glasshouse), data=myDF2)
+    mod1 <- lmer(psiMD ~ CO2 * H2O * SWC + (1|Glasshouse), data=myDF2)
+    
+    mod1 <- lmer(psiPD ~ CO2 * H2O * Day + (1|Glasshouse), data=myDF1)
+    mod1 <- lmer(psiMD ~ CO2 * H2O * Day + (1|Glasshouse), data=myDF1)
+    
+    anov <- anova(mod1)
+    anov
     
     #### prepare output
     outDF <- data.frame(rep(c("Epilularis", "Epopulnea"), each = 8),
