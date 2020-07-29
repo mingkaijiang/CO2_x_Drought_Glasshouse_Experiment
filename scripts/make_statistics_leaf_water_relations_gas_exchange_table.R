@@ -33,9 +33,42 @@ make_statistics_leaf_water_relations_gas_exchange_table <- function() {
     mod1 <- lmer(psiPD ~ CO2 * H2O * SWC + (1|Glasshouse), data=myDF2)
     mod1 <- lmer(psiMD ~ CO2 * H2O * SWC + (1|Glasshouse), data=myDF2)
     
-    mod1 <- lmer(psiPD ~ CO2 * H2O * Day + (1|Glasshouse), data=myDF1)
-    mod1 <- lmer(psiMD ~ CO2 * H2O * Day + (1|Glasshouse), data=myDF1)
     
+    anov <- anova(mod1)
+    anov
+    
+    
+    myDF1$whole_plant <- with(myDF1, transp_plant/(psiPD - psiMD))
+    myDF2$whole_plant <- with(myDF2, transp_plant/(psiPD - psiMD))
+    
+    mod1 <- lmer(whole_plant ~ CO2 * H2O * Day + (1|Glasshouse), data=myDF1)
+    anov <- anova(mod1)
+    anov
+    
+    mod1 <- lmer(whole_plant ~ CO2 * H2O * Day + (1|Glasshouse), data=myDF2)
+    anov <- anova(mod1)
+    anov
+    
+    myDF1$Asat <- with(myDF1, (Aearly+Alate)/2)
+    myDF2$Asat <- with(myDF2, (Aearly+Alate)/2)
+    
+    myDF1$gs <- with(myDF1, (gsearly+gslate)/2)
+    myDF2$gs <- with(myDF2, (gsearly+gslate)/2)
+    
+    mod1 <- lmer(Asat ~ CO2 * H2O * Day + (1|Glasshouse), data=myDF1)
+    anov <- anova(mod1)
+    anov
+    
+    mod1 <- lmer(gs ~ CO2 * H2O * Day + (1|Glasshouse), data=myDF1)
+    anov <- anova(mod1)
+    anov
+    
+    
+    mod1 <- lmer(Asat ~ CO2 * H2O * Day + (1|Glasshouse), data=myDF2)
+    anov <- anova(mod1)
+    anov
+    
+    mod1 <- lmer(gs ~ CO2 * H2O * Day + (1|Glasshouse), data=myDF2)
     anov <- anova(mod1)
     anov
     

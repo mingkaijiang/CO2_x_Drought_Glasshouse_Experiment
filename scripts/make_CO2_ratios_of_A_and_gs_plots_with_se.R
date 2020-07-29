@@ -1037,4 +1037,281 @@ make_CO2_ratios_of_A_and_gs_plots_with_se <- function() {
               ncol=1, rel_heights=c(1, 0.1))
     dev.off() 
     
+    
+    
+    
+    
+    
+    
+    
+    ### combined species plot
+    p1 <- ggplot(plotDF1, aes(x=Day, y=CO2_Adaily, group=Trt)) +
+        geom_point(aes(col=Trt, fill=Trt), pch=21, size=5)+
+        geom_line(aes(col=Trt))+
+        geom_errorbar(aes(col=Trt, x=Day, 
+                          ymin=CO2_AdailyLO, 
+                          ymax=CO2_AdailyUP),
+                      width=0.2)+
+        theme_linedraw() +
+        geom_hline(yintercept=1, col="black", lty=2)+
+        theme(panel.grid.minor=element_blank(),
+              axis.text.x=element_text(size=12),
+              axis.title.x=element_blank(),
+              axis.text.y=element_text(size=12),
+              axis.title.y=element_text(size=14),
+              legend.text=element_text(size=14),
+              legend.title=element_text(size=16),
+              panel.grid.major=element_blank(),
+              legend.position="none",
+              legend.box = 'horizontal',
+              legend.box.just = 'left',
+              plot.title = element_text(size=16, face="bold", 
+                                        hjust = 0.5))+
+        ylab(expression(paste(CO[2]* " ratio " * A[sat])))+
+        scale_color_manual(name="",
+                           limits=c("D", "ND"),
+                           labels=c("Droughted", "Well-watered"),
+                           values=c("brown", "orange"),
+                           guide=guide_legend(nrow=1))+
+        scale_fill_manual(name="",
+                          limits=c("D", "ND"),
+                          labels=c("Droughted", "Well-watered"),
+                          values=c("brown", "orange"),
+                          guide=guide_legend(nrow=1))+
+        ggtitle("E. pilularis")+
+        ylim(0, 4)+
+        xlab("Day")+
+        guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
+                                                       fill = c("brown", "orange"),
+                                                       col = c("brown", "orange"))))+
+        scale_x_continuous(limits=c(0, 8),
+                           breaks=c(0, 2, 4, 6, 8, 10))
+    
+    p3 <- ggplot(plotDF1, aes(x=Day, y=CO2_GSdaily, group=Trt)) +
+        geom_point(aes(col=Trt, fill=Trt), pch=21, size=5)+
+        geom_line(aes(col=Trt))+
+        geom_errorbar(aes(col=Trt, x=Day, 
+                          ymin=CO2_GSdailyLO, 
+                          ymax=CO2_GSdailyUP),
+                      width=0.2)+
+        theme_linedraw() +
+        geom_hline(yintercept=1, col="black", lty=2)+
+        theme(panel.grid.minor=element_blank(),
+              axis.text.x=element_text(size=12),
+              axis.title.x=element_blank(),
+              axis.text.y=element_text(size=12),
+              axis.title.y=element_text(size=14),
+              legend.text=element_text(size=14),
+              legend.title=element_text(size=16),
+              panel.grid.major=element_blank(),
+              legend.position="none",
+              legend.box = 'horizontal',
+              legend.box.just = 'left',
+              plot.title = element_text(size=16, face="bold", 
+                                        hjust = 0.5))+
+        ylab(expression(paste(CO[2]* " ratio " * g[s])))+
+        scale_color_manual(name="",
+                           limits=c("D", "ND"),
+                           labels=c("Droughted", "Well-watered"),
+                           values=c("brown", "orange"),
+                           guide=guide_legend(nrow=1))+
+        scale_fill_manual(name="",
+                          limits=c("D", "ND"),
+                          labels=c("Droughted", "Well-watered"),
+                          values=c("brown", "orange"),
+                          guide=guide_legend(nrow=1))+
+        ylim(0, 3)+
+        xlab("Day")+
+        guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
+                                                       fill = c("brown", "orange"),
+                                                       col = c("brown", "orange"))))+
+        scale_x_continuous(limits=c(0, 8),
+                           breaks=c(0, 2, 4, 6, 8, 10))
+    
+    
+    p5 <- ggplot(plotDF1, aes(x=Day, y=CO2_WUEdaily, group=Trt)) +
+        geom_point(aes(col=Trt, fill=Trt), pch=21, size=5)+
+        geom_line(aes(col=Trt))+
+        geom_errorbar(aes(col=Trt, x=Day, 
+                          ymin=CO2_WUEdailyLO, 
+                          ymax=CO2_WUEdailyUP),
+                      width=0.2)+
+        geom_hline(yintercept=1, col="black", lty=2)+
+        theme_linedraw() +
+        theme(panel.grid.minor=element_blank(),
+              axis.text.x=element_text(size=12),
+              axis.title.x=element_text(size=14),
+              axis.text.y=element_text(size=12),
+              axis.title.y=element_text(size=14),
+              legend.text=element_text(size=14),
+              legend.title=element_text(size=16),
+              panel.grid.major=element_blank(),
+              legend.position="none",
+              legend.box = 'horizontal',
+              legend.box.just = 'left',
+              plot.title = element_text(size=16, face="bold", 
+                                        hjust = 0.5))+
+        ylab(expression(paste(CO[2]* " ratio iWUE")))+
+        scale_color_manual(name="",
+                           limits=c("D", "ND"),
+                           labels=c("Droughted", "Well-watered"),
+                           values=c("brown", "orange"),
+                           guide=guide_legend(nrow=1))+
+        scale_fill_manual(name="",
+                          limits=c("D", "ND"),
+                          labels=c("Droughted", "Well-watered"),
+                          values=c("brown", "orange"),
+                          guide=guide_legend(nrow=1))+
+        ylim(0, 4)+
+        xlab("Day")+
+        guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
+                                                       fill = c("brown", "orange"),
+                                                       col = c("brown", "orange"))))+
+        scale_x_continuous(limits=c(0, 8),
+                           breaks=c(0, 2, 4, 6, 8, 10))
+    
+    
+    p2 <- ggplot(plotDF2, aes(x=Day, y=CO2_Adaily, group=Trt)) +
+        geom_point(aes(col=Trt, fill=Trt), pch=21, size=5)+
+        geom_line(aes(col=Trt))+
+        geom_errorbar(aes(col=Trt, x=Day, 
+                          ymin=CO2_AdailyLO, 
+                          ymax=CO2_AdailyUP),
+                      width=1.)+
+        geom_hline(yintercept=1, col="black", lty=2)+
+        theme_linedraw() +
+        theme(panel.grid.minor=element_blank(),
+              axis.text.x=element_text(size=12),
+              axis.title.x=element_blank(),
+              axis.text.y=element_text(size=12),
+              axis.title.y=element_blank(),
+              legend.text=element_text(size=14),
+              legend.title=element_text(size=16),
+              panel.grid.major=element_blank(),
+              legend.position="none",
+              legend.box = 'horizontal',
+              legend.box.just = 'left',
+              plot.title = element_text(size=16, face="bold", 
+                                        hjust = 0.5))+
+        ylab(expression(paste(CO[2]* " ratio " * A[sat])))+
+        scale_color_manual(name="",
+                           limits=c("D", "ND"),
+                           labels=c("Droughted", "Well-watered"),
+                           values=c("brown", "orange"),
+                           guide=guide_legend(nrow=1))+
+        scale_fill_manual(name="",
+                          limits=c("D", "ND"),
+                          labels=c("Droughted", "Well-watered"),
+                          values=c("brown", "orange"),
+                          guide=guide_legend(nrow=1))+
+        ggtitle("E. populnea")+
+        ylim(0, 4)+
+        xlab("Day")+
+        guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
+                                                       fill = c("brown", "orange"),
+                                                       col = c("brown", "orange"))))+
+        scale_x_continuous(limits=c(0, 20),
+                           breaks=c(0, 4, 8, 12, 16, 20))
+    
+    p4 <- ggplot(plotDF2, aes(x=Day, y=CO2_GSdaily, group=Trt)) +
+        geom_point(aes(col=Trt, fill=Trt), pch=21, size=5)+
+        geom_line(aes(col=Trt))+
+        geom_errorbar(aes(col=Trt, x=Day, 
+                          ymin=CO2_GSdailyLO, 
+                          ymax=CO2_GSdailyUP),
+                      width=1.)+
+        theme_linedraw() +
+        geom_hline(yintercept=1, col="black", lty=2)+
+        theme(panel.grid.minor=element_blank(),
+              axis.text.x=element_text(size=12),
+              axis.title.x=element_blank(),
+              axis.text.y=element_text(size=12),
+              axis.title.y=element_blank(),
+              legend.text=element_text(size=14),
+              legend.title=element_text(size=16),
+              panel.grid.major=element_blank(),
+              legend.position="none",
+              legend.box = 'horizontal',
+              legend.box.just = 'left',
+              plot.title = element_text(size=16, face="bold", 
+                                        hjust = 0.5))+
+        ylab(expression(paste(CO[2]* " ratio " * g[s])))+
+        scale_color_manual(name="",
+                           limits=c("D", "ND"),
+                           labels=c("Droughted", "Well-watered"),
+                           values=c("brown", "orange"),
+                           guide=guide_legend(nrow=1))+
+        scale_fill_manual(name="",
+                          limits=c("D", "ND"),
+                          labels=c("Droughted", "Well-watered"),
+                          values=c("brown", "orange"),
+                          guide=guide_legend(nrow=1))+
+        ylim(0, 3)+
+        xlab("Day")+
+        guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
+                                                       fill = c("brown", "orange"),
+                                                       col = c("brown", "orange"))))+
+        scale_x_continuous(limits=c(0, 20),
+                           breaks=c(0, 4, 8, 12, 16, 20))
+    
+    
+    p6 <- ggplot(plotDF2, aes(x=Day, y=CO2_WUEdaily, group=Trt)) +
+        geom_point(aes(col=Trt, fill=Trt), pch=21, size=5)+
+        geom_line(aes(col=Trt))+
+        geom_errorbar(aes(col=Trt, x=Day, 
+                          ymin=CO2_WUEdailyLO, 
+                          ymax=CO2_WUEdailyUP),
+                      width=1.)+
+        theme_linedraw() +
+        geom_hline(yintercept=1, col="black", lty=2)+
+        theme(panel.grid.minor=element_blank(),
+              axis.text.x=element_text(size=12),
+              axis.title.x=element_text(size=14),
+              axis.text.y=element_text(size=12),
+              axis.title.y=element_blank(),
+              legend.text=element_text(size=14),
+              legend.title=element_text(size=16),
+              panel.grid.major=element_blank(),
+              legend.position="none",
+              legend.box = 'horizontal',
+              legend.box.just = 'left',
+              plot.title = element_text(size=16, face="bold", 
+                                        hjust = 0.5))+
+        ylab(expression(paste(CO[2]* " ratio iWUE")))+
+        scale_color_manual(name="",
+                           limits=c("D", "ND"),
+                           labels=c("Droughted", "Well-watered"),
+                           values=c("brown", "orange"),
+                           guide=guide_legend(nrow=1))+
+        scale_fill_manual(name="",
+                          limits=c("D", "ND"),
+                          labels=c("Droughted", "Well-watered"),
+                          values=c("brown", "orange"),
+                          guide=guide_legend(nrow=1))+
+        ylim(0, 4)+
+        xlab("Day")+
+        guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
+                                                       fill = c("brown", "orange"),
+                                                       col = c("brown", "orange"))))+
+        scale_x_continuous(limits=c(0, 20),
+                           breaks=c(0, 4, 8, 12, 16, 20))
+    
+    
+    ### output
+    combined_legend <- get_legend(p1 + theme(legend.position="bottom",
+                                             legend.box = 'vertical',
+                                             legend.box.just = 'left'))
+    
+    
+    combined_plots <- plot_grid(p1, p2, p3, p4, p5, p6,
+                                labels=c("(a)", "(b)", "(c)", "(d)", "(e)", "(f)"), 
+                                ncol=2, align="h", axis = "l",
+                                rel_widths=c(1,0.9),
+                                label_x=0.85, label_y=0.85)
+    
+    
+    pdf(paste0(outdir, "F10.CO2_ratio_daily_species_combined.pdf"), width=12, height=12)
+    plot_grid(combined_plots, combined_legend, 
+              ncol=1, rel_heights=c(1, 0.1))
+    dev.off() 
 }

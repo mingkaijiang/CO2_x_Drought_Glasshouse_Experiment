@@ -207,7 +207,7 @@ make_predawn_water_potential_with_swc_plots <- function() {
                                   expression(paste(eC[a]*" - W"))),
                          values=c(21,21,21,21))+
       #ggtitle("E. pilularis")+
-      ylim(-3, 0)+
+      ylim(-4, 0)+
       ylab(expression(bold(psi[md]~~(MPa))))+
       guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 21, 21),
                                                      fill = c("white", "blue3", "white", "red2"),
@@ -268,7 +268,7 @@ make_predawn_water_potential_with_swc_plots <- function() {
                                   expression(paste(eC[a]*" - W"))),
                          values=c(21,21,21,21))+
       #ggtitle("E. populnea")+
-      ylim(-3, 0)+
+      ylim(-4, 0)+
       ylab(expression(bold(psi[md]~~(MPa))))+
       guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 21, 21),
                                                      fill = c("white", "blue3", "white", "red2"),
