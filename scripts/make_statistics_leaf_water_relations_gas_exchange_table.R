@@ -9,73 +9,30 @@ make_statistics_leaf_water_relations_gas_exchange_table <- function() {
     myDF1 <- subset(myDF1, Day <= 6)
     myDF2 <- subset(myDF2, Day <= 16)
     
+    ### set class
     myDF1$Glasshouse <- as.character(myDF1$Glasshouse)
     myDF2$Glasshouse <- as.character(myDF2$Glasshouse)
     
-    #myDF1$Day <- as.character(myDF1$Day)
-    #myDF2$Day <- as.character(myDF2$Day)
+    myDF1$CO2 <- as.character(myDF1$CO2)
+    myDF2$CO2 <- as.character(myDF2$CO2)
     
-    myDF1$transp_plant2 <- with(myDF1, (transp_leaf_early+transp_leaf_late)/2)
-    mod1 <- lmer(transp_plant ~ CO2 * H2O * Day + (1|Glasshouse), data=myDF1)
-    mod1 <- lmer(transp_leaf_early ~ CO2 * H2O * Day + (1|Glasshouse), data=myDF1)
-    mod1 <- lmer(transp_leaf_late ~ CO2 * H2O * Day + (1|Glasshouse), data=myDF1)
-    mod1 <- lmer(transp_plant2 ~ CO2 * H2O * Day + (1|Glasshouse), data=myDF1)
+    myDF1$H2O <- as.character(myDF1$H2O)
+    myDF2$H2O <- as.character(myDF2$H2O)
     
-    myDF2$transp_plant2 <- with(myDF2, (transp_leaf_early+transp_leaf_late)/2)
-    mod1 <- lmer(transp_plant ~ CO2 * H2O * Day + (1|Glasshouse), data=myDF2)
-    mod1 <- lmer(transp_leaf_early ~ CO2 * H2O * Day + (1|Glasshouse), data=myDF2)
-    mod1 <- lmer(transp_leaf_late ~ CO2 * H2O * Day + (1|Glasshouse), data=myDF2)
-    mod1 <- lmer(transp_plant2 ~ CO2 * H2O * Day + (1|Glasshouse), data=myDF2)
+    ### calculations
+    myDF1$Adaily <- with(myDF1, (Aearly+Alate)/2)
+    myDF2$Adaily <- with(myDF2, (Aearly+Alate)/2)
     
-    mod1 <- lmer(psiPD ~ CO2 * H2O * SWC + (1|Glasshouse), data=myDF1)
-    mod1 <- lmer(psiMD ~ CO2 * H2O * SWC + (1|Glasshouse), data=myDF1)
+    myDF1$gsdaily <- with(myDF1, (gsearly+gslate)/2)
+    myDF2$gsdaily <- with(myDF2, (gsearly+gslate)/2)
+    
 
-    mod1 <- lmer(psiPD ~ CO2 * H2O * SWC + (1|Glasshouse), data=myDF2)
-    mod1 <- lmer(psiMD ~ CO2 * H2O * SWC + (1|Glasshouse), data=myDF2)
-    
-    
-    anov <- anova(mod1)
-    anov
-    
-    
-    myDF1$whole_plant <- with(myDF1, transp_plant/(psiPD - psiMD))
-    myDF2$whole_plant <- with(myDF2, transp_plant/(psiPD - psiMD))
-    
-    mod1 <- lmer(whole_plant ~ CO2 * H2O * Day + (1|Glasshouse), data=myDF1)
-    anov <- anova(mod1)
-    anov
-    
-    mod1 <- lmer(whole_plant ~ CO2 * H2O * Day + (1|Glasshouse), data=myDF2)
-    anov <- anova(mod1)
-    anov
-    
-    myDF1$Asat <- with(myDF1, (Aearly+Alate)/2)
-    myDF2$Asat <- with(myDF2, (Aearly+Alate)/2)
-    
-    myDF1$gs <- with(myDF1, (gsearly+gslate)/2)
-    myDF2$gs <- with(myDF2, (gsearly+gslate)/2)
-    
-    mod1 <- lmer(Asat ~ CO2 * H2O * Day + (1|Glasshouse), data=myDF1)
-    anov <- anova(mod1)
-    anov
-    
-    mod1 <- lmer(gs ~ CO2 * H2O * Day + (1|Glasshouse), data=myDF1)
-    anov <- anova(mod1)
-    anov
-    
-    
-    mod1 <- lmer(Asat ~ CO2 * H2O * Day + (1|Glasshouse), data=myDF2)
-    anov <- anova(mod1)
-    anov
-    
-    mod1 <- lmer(gs ~ CO2 * H2O * Day + (1|Glasshouse), data=myDF2)
-    anov <- anova(mod1)
-    anov
-    
     #### prepare output
-    outDF <- data.frame(rep(c("Epilularis", "Epopulnea"), each = 8),
-                        rep(c("swc", "transpiration", "psiPD", "psiMD",
-                              "Aearly", "Alate", "gsearly", "gslate"), 2),
+    outDF <- data.frame(rep(c("Epilularis", "Epopulnea"), each = 7),
+                        rep(c("swc", "transpiration", 
+                              "psiPD", "psiMD",
+                              "Adaily", "gsdaily", 
+                              "E_psi"), 2),
                         NA, NA, NA, NA, NA, NA,
                         NA, NA, NA, NA, NA, NA,
                         NA, NA, NA, NA, NA, NA,
@@ -181,6 +138,7 @@ make_statistics_leaf_water_relations_gas_exchange_table <- function() {
     outDF$p_CO2_H2O_T[outDF$Species=="Epilularis"&outDF$Variable=="transpiration"] <- round(anov$`Pr(>F)`[7], 4)
     
     
+    
     ### psiPD
     mod1 <- lmer(psiPD ~ CO2 * H2O * Day + (1|Glasshouse), data=myDF1)
     anov <- anova(mod1)
@@ -264,172 +222,130 @@ make_statistics_leaf_water_relations_gas_exchange_table <- function() {
     outDF$p_H2O_T[outDF$Species=="Epilularis"&outDF$Variable=="psiMD"] <- round(anov$`Pr(>F)`[6], 4)
     outDF$p_CO2_H2O_T[outDF$Species=="Epilularis"&outDF$Variable=="psiMD"] <- round(anov$`Pr(>F)`[7], 4)
     
-    ### Aearly
-    mod1 <- lmer(Aearly ~ CO2 * H2O * Day + (1|Glasshouse), data=myDF1)
+    ### A daily
+    mod1 <- lmer(Adaily ~ CO2 * H2O * Day + (1|Glasshouse), data=myDF1)
     anov <- anova(mod1)
     
     # nominator
-    outDF$Nominator_CO2[outDF$Species=="Epilularis"&outDF$Variable=="Aearly"] <- anov$NumDF[1]
-    outDF$Nominator_H2O[outDF$Species=="Epilularis"&outDF$Variable=="Aearly"] <- anov$NumDF[2]
-    outDF$Nominator_T[outDF$Species=="Epilularis"&outDF$Variable=="Aearly"] <- anov$NumDF[3]
-    outDF$Nominator_CO2_H2O[outDF$Species=="Epilularis"&outDF$Variable=="Aearly"] <- anov$NumDF[4]
-    outDF$Nominator_CO2_T[outDF$Species=="Epilularis"&outDF$Variable=="Aearly"] <- anov$NumDF[5]
-    outDF$Nominator_H2O_T[outDF$Species=="Epilularis"&outDF$Variable=="Aearly"] <- anov$NumDF[6]
-    outDF$Nominator_CO2_H2O_T[outDF$Species=="Epilularis"&outDF$Variable=="Aearly"] <- anov$NumDF[7]
+    outDF$Nominator_CO2[outDF$Species=="Epilularis"&outDF$Variable=="Adaily"] <- anov$NumDF[1]
+    outDF$Nominator_H2O[outDF$Species=="Epilularis"&outDF$Variable=="Adaily"] <- anov$NumDF[2]
+    outDF$Nominator_T[outDF$Species=="Epilularis"&outDF$Variable=="Adaily"] <- anov$NumDF[3]
+    outDF$Nominator_CO2_H2O[outDF$Species=="Epilularis"&outDF$Variable=="Adaily"] <- anov$NumDF[4]
+    outDF$Nominator_CO2_T[outDF$Species=="Epilularis"&outDF$Variable=="Adaily"] <- anov$NumDF[5]
+    outDF$Nominator_H2O_T[outDF$Species=="Epilularis"&outDF$Variable=="Adaily"] <- anov$NumDF[6]
+    outDF$Nominator_CO2_H2O_T[outDF$Species=="Epilularis"&outDF$Variable=="Adaily"] <- anov$NumDF[7]
     
     #denominator
-    outDF$Denominator_CO2[outDF$Species=="Epilularis"&outDF$Variable=="Aearly"] <- anov$DenDF[1]
-    outDF$Denominator_H2O[outDF$Species=="Epilularis"&outDF$Variable=="Aearly"] <- anov$DenDF[2]
-    outDF$Denominator_T[outDF$Species=="Epilularis"&outDF$Variable=="Aearly"] <- anov$DenDF[3]
-    outDF$Denominator_CO2_H2O[outDF$Species=="Epilularis"&outDF$Variable=="Aearly"] <- anov$DenDF[4]
-    outDF$Denominator_CO2_T[outDF$Species=="Epilularis"&outDF$Variable=="Aearly"] <- anov$DenDF[5]
-    outDF$Denominator_H2O_T[outDF$Species=="Epilularis"&outDF$Variable=="Aearly"] <- anov$DenDF[6]
-    outDF$Denominator_CO2_H2O_T[outDF$Species=="Epilularis"&outDF$Variable=="Aearly"] <- anov$DenDF[7]
+    outDF$Denominator_CO2[outDF$Species=="Epilularis"&outDF$Variable=="Adaily"] <- anov$DenDF[1]
+    outDF$Denominator_H2O[outDF$Species=="Epilularis"&outDF$Variable=="Adaily"] <- anov$DenDF[2]
+    outDF$Denominator_T[outDF$Species=="Epilularis"&outDF$Variable=="Adaily"] <- anov$DenDF[3]
+    outDF$Denominator_CO2_H2O[outDF$Species=="Epilularis"&outDF$Variable=="Adaily"] <- anov$DenDF[4]
+    outDF$Denominator_CO2_T[outDF$Species=="Epilularis"&outDF$Variable=="Adaily"] <- anov$DenDF[5]
+    outDF$Denominator_H2O_T[outDF$Species=="Epilularis"&outDF$Variable=="Adaily"] <- anov$DenDF[6]
+    outDF$Denominator_CO2_H2O_T[outDF$Species=="Epilularis"&outDF$Variable=="Adaily"] <- anov$DenDF[7]
     
     # F-value
-    outDF$F_CO2[outDF$Species=="Epilularis"&outDF$Variable=="Aearly"] <- anov$`F value`[1]
-    outDF$F_H2O[outDF$Species=="Epilularis"&outDF$Variable=="Aearly"] <- anov$`F value`[2]
-    outDF$F_T[outDF$Species=="Epilularis"&outDF$Variable=="Aearly"] <- anov$`F value`[3]
-    outDF$F_CO2_H2O[outDF$Species=="Epilularis"&outDF$Variable=="Aearly"] <- anov$`F value`[4]
-    outDF$F_CO2_T[outDF$Species=="Epilularis"&outDF$Variable=="Aearly"] <- anov$`F value`[5]
-    outDF$F_H2O_T[outDF$Species=="Epilularis"&outDF$Variable=="Aearly"] <- anov$`F value`[6]
-    outDF$F_CO2_H2O_T[outDF$Species=="Epilularis"&outDF$Variable=="Aearly"] <- anov$`F value`[7]    
+    outDF$F_CO2[outDF$Species=="Epilularis"&outDF$Variable=="Adaily"] <- anov$`F value`[1]
+    outDF$F_H2O[outDF$Species=="Epilularis"&outDF$Variable=="Adaily"] <- anov$`F value`[2]
+    outDF$F_T[outDF$Species=="Epilularis"&outDF$Variable=="Adaily"] <- anov$`F value`[3]
+    outDF$F_CO2_H2O[outDF$Species=="Epilularis"&outDF$Variable=="Adaily"] <- anov$`F value`[4]
+    outDF$F_CO2_T[outDF$Species=="Epilularis"&outDF$Variable=="Adaily"] <- anov$`F value`[5]
+    outDF$F_H2O_T[outDF$Species=="Epilularis"&outDF$Variable=="Adaily"] <- anov$`F value`[6]
+    outDF$F_CO2_H2O_T[outDF$Species=="Epilularis"&outDF$Variable=="Adaily"] <- anov$`F value`[7]    
     
     
     # p-value
-    outDF$p_CO2[outDF$Species=="Epilularis"&outDF$Variable=="Aearly"] <- round(anov$`Pr(>F)`[1], 4)
-    outDF$p_H2O[outDF$Species=="Epilularis"&outDF$Variable=="Aearly"] <- round(anov$`Pr(>F)`[2], 4)
-    outDF$p_T[outDF$Species=="Epilularis"&outDF$Variable=="Aearly"] <- round(anov$`Pr(>F)`[3], 4)
-    outDF$p_CO2_H2O[outDF$Species=="Epilularis"&outDF$Variable=="Aearly"] <- round(anov$`Pr(>F)`[4], 4)
-    outDF$p_CO2_T[outDF$Species=="Epilularis"&outDF$Variable=="Aearly"] <- round(anov$`Pr(>F)`[5], 4)
-    outDF$p_H2O_T[outDF$Species=="Epilularis"&outDF$Variable=="Aearly"] <- round(anov$`Pr(>F)`[6], 4)
-    outDF$p_CO2_H2O_T[outDF$Species=="Epilularis"&outDF$Variable=="Aearly"] <- round(anov$`Pr(>F)`[7], 4)
+    outDF$p_CO2[outDF$Species=="Epilularis"&outDF$Variable=="Adaily"] <- round(anov$`Pr(>F)`[1], 4)
+    outDF$p_H2O[outDF$Species=="Epilularis"&outDF$Variable=="Adaily"] <- round(anov$`Pr(>F)`[2], 4)
+    outDF$p_T[outDF$Species=="Epilularis"&outDF$Variable=="Adaily"] <- round(anov$`Pr(>F)`[3], 4)
+    outDF$p_CO2_H2O[outDF$Species=="Epilularis"&outDF$Variable=="Adaily"] <- round(anov$`Pr(>F)`[4], 4)
+    outDF$p_CO2_T[outDF$Species=="Epilularis"&outDF$Variable=="Adaily"] <- round(anov$`Pr(>F)`[5], 4)
+    outDF$p_H2O_T[outDF$Species=="Epilularis"&outDF$Variable=="Adaily"] <- round(anov$`Pr(>F)`[6], 4)
+    outDF$p_CO2_H2O_T[outDF$Species=="Epilularis"&outDF$Variable=="Adaily"] <- round(anov$`Pr(>F)`[7], 4)
     
     
-    ### Alate
-    mod1 <- lmer(Alate ~ CO2 * H2O * Day + (1|Glasshouse), data=myDF1)
+    ### gs daily
+    mod1 <- lmer(gsdaily ~ CO2 * H2O * Day + (1|Glasshouse), data=myDF1)
     anov <- anova(mod1)
     
     # nominator
-    outDF$Nominator_CO2[outDF$Species=="Epilularis"&outDF$Variable=="Alate"] <- anov$NumDF[1]
-    outDF$Nominator_H2O[outDF$Species=="Epilularis"&outDF$Variable=="Alate"] <- anov$NumDF[2]
-    outDF$Nominator_T[outDF$Species=="Epilularis"&outDF$Variable=="Alate"] <- anov$NumDF[3]
-    outDF$Nominator_CO2_H2O[outDF$Species=="Epilularis"&outDF$Variable=="Alate"] <- anov$NumDF[4]
-    outDF$Nominator_CO2_T[outDF$Species=="Epilularis"&outDF$Variable=="Alate"] <- anov$NumDF[5]
-    outDF$Nominator_H2O_T[outDF$Species=="Epilularis"&outDF$Variable=="Alate"] <- anov$NumDF[6]
-    outDF$Nominator_CO2_H2O_T[outDF$Species=="Epilularis"&outDF$Variable=="Alate"] <- anov$NumDF[7]
+    outDF$Nominator_CO2[outDF$Species=="Epilularis"&outDF$Variable=="gsdaily"] <- anov$NumDF[1]
+    outDF$Nominator_H2O[outDF$Species=="Epilularis"&outDF$Variable=="gsdaily"] <- anov$NumDF[2]
+    outDF$Nominator_T[outDF$Species=="Epilularis"&outDF$Variable=="gsdaily"] <- anov$NumDF[3]
+    outDF$Nominator_CO2_H2O[outDF$Species=="Epilularis"&outDF$Variable=="gsdaily"] <- anov$NumDF[4]
+    outDF$Nominator_CO2_T[outDF$Species=="Epilularis"&outDF$Variable=="gsdaily"] <- anov$NumDF[5]
+    outDF$Nominator_H2O_T[outDF$Species=="Epilularis"&outDF$Variable=="gsdaily"] <- anov$NumDF[6]
+    outDF$Nominator_CO2_H2O_T[outDF$Species=="Epilularis"&outDF$Variable=="gsdaily"] <- anov$NumDF[7]
     
     #denominator
-    outDF$Denominator_CO2[outDF$Species=="Epilularis"&outDF$Variable=="Alate"] <- anov$DenDF[1]
-    outDF$Denominator_H2O[outDF$Species=="Epilularis"&outDF$Variable=="Alate"] <- anov$DenDF[2]
-    outDF$Denominator_T[outDF$Species=="Epilularis"&outDF$Variable=="Alate"] <- anov$DenDF[3]
-    outDF$Denominator_CO2_H2O[outDF$Species=="Epilularis"&outDF$Variable=="Alate"] <- anov$DenDF[4]
-    outDF$Denominator_CO2_T[outDF$Species=="Epilularis"&outDF$Variable=="Alate"] <- anov$DenDF[5]
-    outDF$Denominator_H2O_T[outDF$Species=="Epilularis"&outDF$Variable=="Alate"] <- anov$DenDF[6]
-    outDF$Denominator_CO2_H2O_T[outDF$Species=="Epilularis"&outDF$Variable=="Alate"] <- anov$DenDF[7]
+    outDF$Denominator_CO2[outDF$Species=="Epilularis"&outDF$Variable=="gsdaily"] <- anov$DenDF[1]
+    outDF$Denominator_H2O[outDF$Species=="Epilularis"&outDF$Variable=="gsdaily"] <- anov$DenDF[2]
+    outDF$Denominator_T[outDF$Species=="Epilularis"&outDF$Variable=="gsdaily"] <- anov$DenDF[3]
+    outDF$Denominator_CO2_H2O[outDF$Species=="Epilularis"&outDF$Variable=="gsdaily"] <- anov$DenDF[4]
+    outDF$Denominator_CO2_T[outDF$Species=="Epilularis"&outDF$Variable=="gsdaily"] <- anov$DenDF[5]
+    outDF$Denominator_H2O_T[outDF$Species=="Epilularis"&outDF$Variable=="gsdaily"] <- anov$DenDF[6]
+    outDF$Denominator_CO2_H2O_T[outDF$Species=="Epilularis"&outDF$Variable=="gsdaily"] <- anov$DenDF[7]
     
     # F-value
-    outDF$F_CO2[outDF$Species=="Epilularis"&outDF$Variable=="Alate"] <- anov$`F value`[1]
-    outDF$F_H2O[outDF$Species=="Epilularis"&outDF$Variable=="Alate"] <- anov$`F value`[2]
-    outDF$F_T[outDF$Species=="Epilularis"&outDF$Variable=="Alate"] <- anov$`F value`[3]
-    outDF$F_CO2_H2O[outDF$Species=="Epilularis"&outDF$Variable=="Alate"] <- anov$`F value`[4]
-    outDF$F_CO2_T[outDF$Species=="Epilularis"&outDF$Variable=="Alate"] <- anov$`F value`[5]
-    outDF$F_H2O_T[outDF$Species=="Epilularis"&outDF$Variable=="Alate"] <- anov$`F value`[6]
-    outDF$F_CO2_H2O_T[outDF$Species=="Epilularis"&outDF$Variable=="Alate"] <- anov$`F value`[7]    
+    outDF$F_CO2[outDF$Species=="Epilularis"&outDF$Variable=="gsdaily"] <- anov$`F value`[1]
+    outDF$F_H2O[outDF$Species=="Epilularis"&outDF$Variable=="gsdaily"] <- anov$`F value`[2]
+    outDF$F_T[outDF$Species=="Epilularis"&outDF$Variable=="gsdaily"] <- anov$`F value`[3]
+    outDF$F_CO2_H2O[outDF$Species=="Epilularis"&outDF$Variable=="gsdaily"] <- anov$`F value`[4]
+    outDF$F_CO2_T[outDF$Species=="Epilularis"&outDF$Variable=="gsdaily"] <- anov$`F value`[5]
+    outDF$F_H2O_T[outDF$Species=="Epilularis"&outDF$Variable=="gsdaily"] <- anov$`F value`[6]
+    outDF$F_CO2_H2O_T[outDF$Species=="Epilularis"&outDF$Variable=="gsdaily"] <- anov$`F value`[7]    
     
     
     # p-value
-    outDF$p_CO2[outDF$Species=="Epilularis"&outDF$Variable=="Alate"] <- round(anov$`Pr(>F)`[1], 4)
-    outDF$p_H2O[outDF$Species=="Epilularis"&outDF$Variable=="Alate"] <- round(anov$`Pr(>F)`[2], 4)
-    outDF$p_T[outDF$Species=="Epilularis"&outDF$Variable=="Alate"] <- round(anov$`Pr(>F)`[3], 4)
-    outDF$p_CO2_H2O[outDF$Species=="Epilularis"&outDF$Variable=="Alate"] <- round(anov$`Pr(>F)`[4], 4)
-    outDF$p_CO2_T[outDF$Species=="Epilularis"&outDF$Variable=="Alate"] <- round(anov$`Pr(>F)`[5], 4)
-    outDF$p_H2O_T[outDF$Species=="Epilularis"&outDF$Variable=="Alate"] <- round(anov$`Pr(>F)`[6], 4)
-    outDF$p_CO2_H2O_T[outDF$Species=="Epilularis"&outDF$Variable=="Alate"] <- round(anov$`Pr(>F)`[7], 4)
+    outDF$p_CO2[outDF$Species=="Epilularis"&outDF$Variable=="gsdaily"] <- round(anov$`Pr(>F)`[1], 4)
+    outDF$p_H2O[outDF$Species=="Epilularis"&outDF$Variable=="gsdaily"] <- round(anov$`Pr(>F)`[2], 4)
+    outDF$p_T[outDF$Species=="Epilularis"&outDF$Variable=="gsdaily"] <- round(anov$`Pr(>F)`[3], 4)
+    outDF$p_CO2_H2O[outDF$Species=="Epilularis"&outDF$Variable=="gsdaily"] <- round(anov$`Pr(>F)`[4], 4)
+    outDF$p_CO2_T[outDF$Species=="Epilularis"&outDF$Variable=="gsdaily"] <- round(anov$`Pr(>F)`[5], 4)
+    outDF$p_H2O_T[outDF$Species=="Epilularis"&outDF$Variable=="gsdaily"] <- round(anov$`Pr(>F)`[6], 4)
+    outDF$p_CO2_H2O_T[outDF$Species=="Epilularis"&outDF$Variable=="gsdaily"] <- round(anov$`Pr(>F)`[7], 4)
     
     
-    ### gsearly
-    mod1 <- lmer(gsearly ~ CO2 * H2O * Day + (1|Glasshouse), data=myDF1)
+    ### E_psi
+    mod1 <- lmer(E_psi ~ CO2 * H2O * Day + (1|Glasshouse), data=myDF1)
     anov <- anova(mod1)
     
     # nominator
-    outDF$Nominator_CO2[outDF$Species=="Epilularis"&outDF$Variable=="gsearly"] <- anov$NumDF[1]
-    outDF$Nominator_H2O[outDF$Species=="Epilularis"&outDF$Variable=="gsearly"] <- anov$NumDF[2]
-    outDF$Nominator_T[outDF$Species=="Epilularis"&outDF$Variable=="gsearly"] <- anov$NumDF[3]
-    outDF$Nominator_CO2_H2O[outDF$Species=="Epilularis"&outDF$Variable=="gsearly"] <- anov$NumDF[4]
-    outDF$Nominator_CO2_T[outDF$Species=="Epilularis"&outDF$Variable=="gsearly"] <- anov$NumDF[5]
-    outDF$Nominator_H2O_T[outDF$Species=="Epilularis"&outDF$Variable=="gsearly"] <- anov$NumDF[6]
-    outDF$Nominator_CO2_H2O_T[outDF$Species=="Epilularis"&outDF$Variable=="gsearly"] <- anov$NumDF[7]
+    outDF$Nominator_CO2[outDF$Species=="Epilularis"&outDF$Variable=="E_psi"] <- anov$NumDF[1]
+    outDF$Nominator_H2O[outDF$Species=="Epilularis"&outDF$Variable=="E_psi"] <- anov$NumDF[2]
+    outDF$Nominator_T[outDF$Species=="Epilularis"&outDF$Variable=="E_psi"] <- anov$NumDF[3]
+    outDF$Nominator_CO2_H2O[outDF$Species=="Epilularis"&outDF$Variable=="E_psi"] <- anov$NumDF[4]
+    outDF$Nominator_CO2_T[outDF$Species=="Epilularis"&outDF$Variable=="E_psi"] <- anov$NumDF[5]
+    outDF$Nominator_H2O_T[outDF$Species=="Epilularis"&outDF$Variable=="E_psi"] <- anov$NumDF[6]
+    outDF$Nominator_CO2_H2O_T[outDF$Species=="Epilularis"&outDF$Variable=="E_psi"] <- anov$NumDF[7]
     
     #denominator
-    outDF$Denominator_CO2[outDF$Species=="Epilularis"&outDF$Variable=="gsearly"] <- anov$DenDF[1]
-    outDF$Denominator_H2O[outDF$Species=="Epilularis"&outDF$Variable=="gsearly"] <- anov$DenDF[2]
-    outDF$Denominator_T[outDF$Species=="Epilularis"&outDF$Variable=="gsearly"] <- anov$DenDF[3]
-    outDF$Denominator_CO2_H2O[outDF$Species=="Epilularis"&outDF$Variable=="gsearly"] <- anov$DenDF[4]
-    outDF$Denominator_CO2_T[outDF$Species=="Epilularis"&outDF$Variable=="gsearly"] <- anov$DenDF[5]
-    outDF$Denominator_H2O_T[outDF$Species=="Epilularis"&outDF$Variable=="gsearly"] <- anov$DenDF[6]
-    outDF$Denominator_CO2_H2O_T[outDF$Species=="Epilularis"&outDF$Variable=="gsearly"] <- anov$DenDF[7]
+    outDF$Denominator_CO2[outDF$Species=="Epilularis"&outDF$Variable=="E_psi"] <- anov$DenDF[1]
+    outDF$Denominator_H2O[outDF$Species=="Epilularis"&outDF$Variable=="E_psi"] <- anov$DenDF[2]
+    outDF$Denominator_T[outDF$Species=="Epilularis"&outDF$Variable=="E_psi"] <- anov$DenDF[3]
+    outDF$Denominator_CO2_H2O[outDF$Species=="Epilularis"&outDF$Variable=="E_psi"] <- anov$DenDF[4]
+    outDF$Denominator_CO2_T[outDF$Species=="Epilularis"&outDF$Variable=="E_psi"] <- anov$DenDF[5]
+    outDF$Denominator_H2O_T[outDF$Species=="Epilularis"&outDF$Variable=="E_psi"] <- anov$DenDF[6]
+    outDF$Denominator_CO2_H2O_T[outDF$Species=="Epilularis"&outDF$Variable=="E_psi"] <- anov$DenDF[7]
     
     # F-value
-    outDF$F_CO2[outDF$Species=="Epilularis"&outDF$Variable=="gsearly"] <- anov$`F value`[1]
-    outDF$F_H2O[outDF$Species=="Epilularis"&outDF$Variable=="gsearly"] <- anov$`F value`[2]
-    outDF$F_T[outDF$Species=="Epilularis"&outDF$Variable=="gsearly"] <- anov$`F value`[3]
-    outDF$F_CO2_H2O[outDF$Species=="Epilularis"&outDF$Variable=="gsearly"] <- anov$`F value`[4]
-    outDF$F_CO2_T[outDF$Species=="Epilularis"&outDF$Variable=="gsearly"] <- anov$`F value`[5]
-    outDF$F_H2O_T[outDF$Species=="Epilularis"&outDF$Variable=="gsearly"] <- anov$`F value`[6]
-    outDF$F_CO2_H2O_T[outDF$Species=="Epilularis"&outDF$Variable=="gsearly"] <- anov$`F value`[7]    
+    outDF$F_CO2[outDF$Species=="Epilularis"&outDF$Variable=="E_psi"] <- anov$`F value`[1]
+    outDF$F_H2O[outDF$Species=="Epilularis"&outDF$Variable=="E_psi"] <- anov$`F value`[2]
+    outDF$F_T[outDF$Species=="Epilularis"&outDF$Variable=="E_psi"] <- anov$`F value`[3]
+    outDF$F_CO2_H2O[outDF$Species=="Epilularis"&outDF$Variable=="E_psi"] <- anov$`F value`[4]
+    outDF$F_CO2_T[outDF$Species=="Epilularis"&outDF$Variable=="E_psi"] <- anov$`F value`[5]
+    outDF$F_H2O_T[outDF$Species=="Epilularis"&outDF$Variable=="E_psi"] <- anov$`F value`[6]
+    outDF$F_CO2_H2O_T[outDF$Species=="Epilularis"&outDF$Variable=="E_psi"] <- anov$`F value`[7]    
     
     
     # p-value
-    outDF$p_CO2[outDF$Species=="Epilularis"&outDF$Variable=="gsearly"] <- round(anov$`Pr(>F)`[1], 4)
-    outDF$p_H2O[outDF$Species=="Epilularis"&outDF$Variable=="gsearly"] <- round(anov$`Pr(>F)`[2], 4)
-    outDF$p_T[outDF$Species=="Epilularis"&outDF$Variable=="gsearly"] <- round(anov$`Pr(>F)`[3], 4)
-    outDF$p_CO2_H2O[outDF$Species=="Epilularis"&outDF$Variable=="gsearly"] <- round(anov$`Pr(>F)`[4], 4)
-    outDF$p_CO2_T[outDF$Species=="Epilularis"&outDF$Variable=="gsearly"] <- round(anov$`Pr(>F)`[5], 4)
-    outDF$p_H2O_T[outDF$Species=="Epilularis"&outDF$Variable=="gsearly"] <- round(anov$`Pr(>F)`[6], 4)
-    outDF$p_CO2_H2O_T[outDF$Species=="Epilularis"&outDF$Variable=="gsearly"] <- round(anov$`Pr(>F)`[7], 4)
-    
-    
-    ### gslate
-    mod1 <- lmer(gslate ~ CO2 * H2O * Day + (1|Glasshouse), data=myDF1)
-    anov <- anova(mod1)
-    
-    # nominator
-    outDF$Nominator_CO2[outDF$Species=="Epilularis"&outDF$Variable=="gslate"] <- anov$NumDF[1]
-    outDF$Nominator_H2O[outDF$Species=="Epilularis"&outDF$Variable=="gslate"] <- anov$NumDF[2]
-    outDF$Nominator_T[outDF$Species=="Epilularis"&outDF$Variable=="gslate"] <- anov$NumDF[3]
-    outDF$Nominator_CO2_H2O[outDF$Species=="Epilularis"&outDF$Variable=="gslate"] <- anov$NumDF[4]
-    outDF$Nominator_CO2_T[outDF$Species=="Epilularis"&outDF$Variable=="gslate"] <- anov$NumDF[5]
-    outDF$Nominator_H2O_T[outDF$Species=="Epilularis"&outDF$Variable=="gslate"] <- anov$NumDF[6]
-    outDF$Nominator_CO2_H2O_T[outDF$Species=="Epilularis"&outDF$Variable=="gslate"] <- anov$NumDF[7]
-    
-    #denominator
-    outDF$Denominator_CO2[outDF$Species=="Epilularis"&outDF$Variable=="gslate"] <- anov$DenDF[1]
-    outDF$Denominator_H2O[outDF$Species=="Epilularis"&outDF$Variable=="gslate"] <- anov$DenDF[2]
-    outDF$Denominator_T[outDF$Species=="Epilularis"&outDF$Variable=="gslate"] <- anov$DenDF[3]
-    outDF$Denominator_CO2_H2O[outDF$Species=="Epilularis"&outDF$Variable=="gslate"] <- anov$DenDF[4]
-    outDF$Denominator_CO2_T[outDF$Species=="Epilularis"&outDF$Variable=="gslate"] <- anov$DenDF[5]
-    outDF$Denominator_H2O_T[outDF$Species=="Epilularis"&outDF$Variable=="gslate"] <- anov$DenDF[6]
-    outDF$Denominator_CO2_H2O_T[outDF$Species=="Epilularis"&outDF$Variable=="gslate"] <- anov$DenDF[7]
-    
-    # F-value
-    outDF$F_CO2[outDF$Species=="Epilularis"&outDF$Variable=="gslate"] <- anov$`F value`[1]
-    outDF$F_H2O[outDF$Species=="Epilularis"&outDF$Variable=="gslate"] <- anov$`F value`[2]
-    outDF$F_T[outDF$Species=="Epilularis"&outDF$Variable=="gslate"] <- anov$`F value`[3]
-    outDF$F_CO2_H2O[outDF$Species=="Epilularis"&outDF$Variable=="gslate"] <- anov$`F value`[4]
-    outDF$F_CO2_T[outDF$Species=="Epilularis"&outDF$Variable=="gslate"] <- anov$`F value`[5]
-    outDF$F_H2O_T[outDF$Species=="Epilularis"&outDF$Variable=="gslate"] <- anov$`F value`[6]
-    outDF$F_CO2_H2O_T[outDF$Species=="Epilularis"&outDF$Variable=="gslate"] <- anov$`F value`[7]    
-    
-    
-    # p-value
-    outDF$p_CO2[outDF$Species=="Epilularis"&outDF$Variable=="gslate"] <- round(anov$`Pr(>F)`[1], 4)
-    outDF$p_H2O[outDF$Species=="Epilularis"&outDF$Variable=="gslate"] <- round(anov$`Pr(>F)`[2], 4)
-    outDF$p_T[outDF$Species=="Epilularis"&outDF$Variable=="gslate"] <- round(anov$`Pr(>F)`[3], 4)
-    outDF$p_CO2_H2O[outDF$Species=="Epilularis"&outDF$Variable=="gslate"] <- round(anov$`Pr(>F)`[4], 4)
-    outDF$p_CO2_T[outDF$Species=="Epilularis"&outDF$Variable=="gslate"] <- round(anov$`Pr(>F)`[5], 4)
-    outDF$p_H2O_T[outDF$Species=="Epilularis"&outDF$Variable=="gslate"] <- round(anov$`Pr(>F)`[6], 4)
-    outDF$p_CO2_H2O_T[outDF$Species=="Epilularis"&outDF$Variable=="gslate"] <- round(anov$`Pr(>F)`[7], 4)
+    outDF$p_CO2[outDF$Species=="Epilularis"&outDF$Variable=="E_psi"] <- round(anov$`Pr(>F)`[1], 4)
+    outDF$p_H2O[outDF$Species=="Epilularis"&outDF$Variable=="E_psi"] <- round(anov$`Pr(>F)`[2], 4)
+    outDF$p_T[outDF$Species=="Epilularis"&outDF$Variable=="E_psi"] <- round(anov$`Pr(>F)`[3], 4)
+    outDF$p_CO2_H2O[outDF$Species=="Epilularis"&outDF$Variable=="E_psi"] <- round(anov$`Pr(>F)`[4], 4)
+    outDF$p_CO2_T[outDF$Species=="Epilularis"&outDF$Variable=="E_psi"] <- round(anov$`Pr(>F)`[5], 4)
+    outDF$p_H2O_T[outDF$Species=="Epilularis"&outDF$Variable=="E_psi"] <- round(anov$`Pr(>F)`[6], 4)
+    outDF$p_CO2_H2O_T[outDF$Species=="Epilularis"&outDF$Variable=="E_psi"] <- round(anov$`Pr(>F)`[7], 4)
     
     
     
@@ -518,6 +434,7 @@ make_statistics_leaf_water_relations_gas_exchange_table <- function() {
     outDF$p_CO2_H2O_T[outDF$Species=="Epopulnea"&outDF$Variable=="transpiration"] <- round(anov$`Pr(>F)`[7], 4)
     
     
+    
     ### psiPD
     mod1 <- lmer(psiPD ~ CO2 * H2O * Day + (1|Glasshouse), data=myDF2)
     anov <- anova(mod1)
@@ -601,172 +518,132 @@ make_statistics_leaf_water_relations_gas_exchange_table <- function() {
     outDF$p_H2O_T[outDF$Species=="Epopulnea"&outDF$Variable=="psiMD"] <- round(anov$`Pr(>F)`[6], 4)
     outDF$p_CO2_H2O_T[outDF$Species=="Epopulnea"&outDF$Variable=="psiMD"] <- round(anov$`Pr(>F)`[7], 4)
     
-    ### Aearly
-    mod1 <- lmer(Aearly ~ CO2 * H2O * Day + (1|Glasshouse), data=myDF2)
+    ### Adaily
+    mod1 <- lmer(Adaily ~ CO2 * H2O * Day + (1|Glasshouse), data=myDF2)
     anov <- anova(mod1)
     
     # nominator
-    outDF$Nominator_CO2[outDF$Species=="Epopulnea"&outDF$Variable=="Aearly"] <- anov$NumDF[1]
-    outDF$Nominator_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="Aearly"] <- anov$NumDF[2]
-    outDF$Nominator_T[outDF$Species=="Epopulnea"&outDF$Variable=="Aearly"] <- anov$NumDF[3]
-    outDF$Nominator_CO2_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="Aearly"] <- anov$NumDF[4]
-    outDF$Nominator_CO2_T[outDF$Species=="Epopulnea"&outDF$Variable=="Aearly"] <- anov$NumDF[5]
-    outDF$Nominator_H2O_T[outDF$Species=="Epopulnea"&outDF$Variable=="Aearly"] <- anov$NumDF[6]
-    outDF$Nominator_CO2_H2O_T[outDF$Species=="Epopulnea"&outDF$Variable=="Aearly"] <- anov$NumDF[7]
+    outDF$Nominator_CO2[outDF$Species=="Epopulnea"&outDF$Variable=="Adaily"] <- anov$NumDF[1]
+    outDF$Nominator_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="Adaily"] <- anov$NumDF[2]
+    outDF$Nominator_T[outDF$Species=="Epopulnea"&outDF$Variable=="Adaily"] <- anov$NumDF[3]
+    outDF$Nominator_CO2_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="Adaily"] <- anov$NumDF[4]
+    outDF$Nominator_CO2_T[outDF$Species=="Epopulnea"&outDF$Variable=="Adaily"] <- anov$NumDF[5]
+    outDF$Nominator_H2O_T[outDF$Species=="Epopulnea"&outDF$Variable=="Adaily"] <- anov$NumDF[6]
+    outDF$Nominator_CO2_H2O_T[outDF$Species=="Epopulnea"&outDF$Variable=="Adaily"] <- anov$NumDF[7]
     
     #denominator
-    outDF$Denominator_CO2[outDF$Species=="Epopulnea"&outDF$Variable=="Aearly"] <- anov$DenDF[1]
-    outDF$Denominator_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="Aearly"] <- anov$DenDF[2]
-    outDF$Denominator_T[outDF$Species=="Epopulnea"&outDF$Variable=="Aearly"] <- anov$DenDF[3]
-    outDF$Denominator_CO2_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="Aearly"] <- anov$DenDF[4]
-    outDF$Denominator_CO2_T[outDF$Species=="Epopulnea"&outDF$Variable=="Aearly"] <- anov$DenDF[5]
-    outDF$Denominator_H2O_T[outDF$Species=="Epopulnea"&outDF$Variable=="Aearly"] <- anov$DenDF[6]
-    outDF$Denominator_CO2_H2O_T[outDF$Species=="Epopulnea"&outDF$Variable=="Aearly"] <- anov$DenDF[7]
+    outDF$Denominator_CO2[outDF$Species=="Epopulnea"&outDF$Variable=="Adaily"] <- anov$DenDF[1]
+    outDF$Denominator_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="Adaily"] <- anov$DenDF[2]
+    outDF$Denominator_T[outDF$Species=="Epopulnea"&outDF$Variable=="Adaily"] <- anov$DenDF[3]
+    outDF$Denominator_CO2_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="Adaily"] <- anov$DenDF[4]
+    outDF$Denominator_CO2_T[outDF$Species=="Epopulnea"&outDF$Variable=="Adaily"] <- anov$DenDF[5]
+    outDF$Denominator_H2O_T[outDF$Species=="Epopulnea"&outDF$Variable=="Adaily"] <- anov$DenDF[6]
+    outDF$Denominator_CO2_H2O_T[outDF$Species=="Epopulnea"&outDF$Variable=="Adaily"] <- anov$DenDF[7]
     
     # F-value
-    outDF$F_CO2[outDF$Species=="Epopulnea"&outDF$Variable=="Aearly"] <- anov$`F value`[1]
-    outDF$F_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="Aearly"] <- anov$`F value`[2]
-    outDF$F_T[outDF$Species=="Epopulnea"&outDF$Variable=="Aearly"] <- anov$`F value`[3]
-    outDF$F_CO2_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="Aearly"] <- anov$`F value`[4]
-    outDF$F_CO2_T[outDF$Species=="Epopulnea"&outDF$Variable=="Aearly"] <- anov$`F value`[5]
-    outDF$F_H2O_T[outDF$Species=="Epopulnea"&outDF$Variable=="Aearly"] <- anov$`F value`[6]
-    outDF$F_CO2_H2O_T[outDF$Species=="Epopulnea"&outDF$Variable=="Aearly"] <- anov$`F value`[7]    
+    outDF$F_CO2[outDF$Species=="Epopulnea"&outDF$Variable=="Adaily"] <- anov$`F value`[1]
+    outDF$F_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="Adaily"] <- anov$`F value`[2]
+    outDF$F_T[outDF$Species=="Epopulnea"&outDF$Variable=="Adaily"] <- anov$`F value`[3]
+    outDF$F_CO2_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="Adaily"] <- anov$`F value`[4]
+    outDF$F_CO2_T[outDF$Species=="Epopulnea"&outDF$Variable=="Adaily"] <- anov$`F value`[5]
+    outDF$F_H2O_T[outDF$Species=="Epopulnea"&outDF$Variable=="Adaily"] <- anov$`F value`[6]
+    outDF$F_CO2_H2O_T[outDF$Species=="Epopulnea"&outDF$Variable=="Adaily"] <- anov$`F value`[7]    
     
     
     # p-value
-    outDF$p_CO2[outDF$Species=="Epopulnea"&outDF$Variable=="Aearly"] <- round(anov$`Pr(>F)`[1], 4)
-    outDF$p_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="Aearly"] <- round(anov$`Pr(>F)`[2], 4)
-    outDF$p_T[outDF$Species=="Epopulnea"&outDF$Variable=="Aearly"] <- round(anov$`Pr(>F)`[3], 4)
-    outDF$p_CO2_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="Aearly"] <- round(anov$`Pr(>F)`[4], 4)
-    outDF$p_CO2_T[outDF$Species=="Epopulnea"&outDF$Variable=="Aearly"] <- round(anov$`Pr(>F)`[5], 4)
-    outDF$p_H2O_T[outDF$Species=="Epopulnea"&outDF$Variable=="Aearly"] <- round(anov$`Pr(>F)`[6], 4)
-    outDF$p_CO2_H2O_T[outDF$Species=="Epopulnea"&outDF$Variable=="Aearly"] <- round(anov$`Pr(>F)`[7], 4)
+    outDF$p_CO2[outDF$Species=="Epopulnea"&outDF$Variable=="Adaily"] <- round(anov$`Pr(>F)`[1], 4)
+    outDF$p_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="Adaily"] <- round(anov$`Pr(>F)`[2], 4)
+    outDF$p_T[outDF$Species=="Epopulnea"&outDF$Variable=="Adaily"] <- round(anov$`Pr(>F)`[3], 4)
+    outDF$p_CO2_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="Adaily"] <- round(anov$`Pr(>F)`[4], 4)
+    outDF$p_CO2_T[outDF$Species=="Epopulnea"&outDF$Variable=="Adaily"] <- round(anov$`Pr(>F)`[5], 4)
+    outDF$p_H2O_T[outDF$Species=="Epopulnea"&outDF$Variable=="Adaily"] <- round(anov$`Pr(>F)`[6], 4)
+    outDF$p_CO2_H2O_T[outDF$Species=="Epopulnea"&outDF$Variable=="Adaily"] <- round(anov$`Pr(>F)`[7], 4)
     
     
-    ### Alate
-    mod1 <- lmer(Alate ~ CO2 * H2O * Day + (1|Glasshouse), data=myDF1)
+    
+    
+    ### gsdaily
+    mod1 <- lmer(gsdaily ~ CO2 * H2O * Day + (1|Glasshouse), data=myDF2)
     anov <- anova(mod1)
     
     # nominator
-    outDF$Nominator_CO2[outDF$Species=="Epopulnea"&outDF$Variable=="Alate"] <- anov$NumDF[1]
-    outDF$Nominator_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="Alate"] <- anov$NumDF[2]
-    outDF$Nominator_T[outDF$Species=="Epopulnea"&outDF$Variable=="Alate"] <- anov$NumDF[3]
-    outDF$Nominator_CO2_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="Alate"] <- anov$NumDF[4]
-    outDF$Nominator_CO2_T[outDF$Species=="Epopulnea"&outDF$Variable=="Alate"] <- anov$NumDF[5]
-    outDF$Nominator_H2O_T[outDF$Species=="Epopulnea"&outDF$Variable=="Alate"] <- anov$NumDF[6]
-    outDF$Nominator_CO2_H2O_T[outDF$Species=="Epopulnea"&outDF$Variable=="Alate"] <- anov$NumDF[7]
+    outDF$Nominator_CO2[outDF$Species=="Epopulnea"&outDF$Variable=="gsdaily"] <- anov$NumDF[1]
+    outDF$Nominator_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="gsdaily"] <- anov$NumDF[2]
+    outDF$Nominator_T[outDF$Species=="Epopulnea"&outDF$Variable=="gsdaily"] <- anov$NumDF[3]
+    outDF$Nominator_CO2_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="gsdaily"] <- anov$NumDF[4]
+    outDF$Nominator_CO2_T[outDF$Species=="Epopulnea"&outDF$Variable=="gsdaily"] <- anov$NumDF[5]
+    outDF$Nominator_H2O_T[outDF$Species=="Epopulnea"&outDF$Variable=="gsdaily"] <- anov$NumDF[6]
+    outDF$Nominator_CO2_H2O_T[outDF$Species=="Epopulnea"&outDF$Variable=="gsdaily"] <- anov$NumDF[7]
     
     #denominator
-    outDF$Denominator_CO2[outDF$Species=="Epopulnea"&outDF$Variable=="Alate"] <- anov$DenDF[1]
-    outDF$Denominator_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="Alate"] <- anov$DenDF[2]
-    outDF$Denominator_T[outDF$Species=="Epopulnea"&outDF$Variable=="Alate"] <- anov$DenDF[3]
-    outDF$Denominator_CO2_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="Alate"] <- anov$DenDF[4]
-    outDF$Denominator_CO2_T[outDF$Species=="Epopulnea"&outDF$Variable=="Alate"] <- anov$DenDF[5]
-    outDF$Denominator_H2O_T[outDF$Species=="Epopulnea"&outDF$Variable=="Alate"] <- anov$DenDF[6]
-    outDF$Denominator_CO2_H2O_T[outDF$Species=="Epopulnea"&outDF$Variable=="Alate"] <- anov$DenDF[7]
+    outDF$Denominator_CO2[outDF$Species=="Epopulnea"&outDF$Variable=="gsdaily"] <- anov$DenDF[1]
+    outDF$Denominator_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="gsdaily"] <- anov$DenDF[2]
+    outDF$Denominator_T[outDF$Species=="Epopulnea"&outDF$Variable=="gsdaily"] <- anov$DenDF[3]
+    outDF$Denominator_CO2_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="gsdaily"] <- anov$DenDF[4]
+    outDF$Denominator_CO2_T[outDF$Species=="Epopulnea"&outDF$Variable=="gsdaily"] <- anov$DenDF[5]
+    outDF$Denominator_H2O_T[outDF$Species=="Epopulnea"&outDF$Variable=="gsdaily"] <- anov$DenDF[6]
+    outDF$Denominator_CO2_H2O_T[outDF$Species=="Epopulnea"&outDF$Variable=="gsdaily"] <- anov$DenDF[7]
     
     # F-value
-    outDF$F_CO2[outDF$Species=="Epopulnea"&outDF$Variable=="Alate"] <- anov$`F value`[1]
-    outDF$F_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="Alate"] <- anov$`F value`[2]
-    outDF$F_T[outDF$Species=="Epopulnea"&outDF$Variable=="Alate"] <- anov$`F value`[3]
-    outDF$F_CO2_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="Alate"] <- anov$`F value`[4]
-    outDF$F_CO2_T[outDF$Species=="Epopulnea"&outDF$Variable=="Alate"] <- anov$`F value`[5]
-    outDF$F_H2O_T[outDF$Species=="Epopulnea"&outDF$Variable=="Alate"] <- anov$`F value`[6]
-    outDF$F_CO2_H2O_T[outDF$Species=="Epopulnea"&outDF$Variable=="Alate"] <- anov$`F value`[7]    
+    outDF$F_CO2[outDF$Species=="Epopulnea"&outDF$Variable=="gsdaily"] <- anov$`F value`[1]
+    outDF$F_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="gsdaily"] <- anov$`F value`[2]
+    outDF$F_T[outDF$Species=="Epopulnea"&outDF$Variable=="gsdaily"] <- anov$`F value`[3]
+    outDF$F_CO2_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="gsdaily"] <- anov$`F value`[4]
+    outDF$F_CO2_T[outDF$Species=="Epopulnea"&outDF$Variable=="gsdaily"] <- anov$`F value`[5]
+    outDF$F_H2O_T[outDF$Species=="Epopulnea"&outDF$Variable=="gsdaily"] <- anov$`F value`[6]
+    outDF$F_CO2_H2O_T[outDF$Species=="Epopulnea"&outDF$Variable=="gsdaily"] <- anov$`F value`[7]    
     
     
     # p-value
-    outDF$p_CO2[outDF$Species=="Epopulnea"&outDF$Variable=="Alate"] <- round(anov$`Pr(>F)`[1], 4)
-    outDF$p_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="Alate"] <- round(anov$`Pr(>F)`[2], 4)
-    outDF$p_T[outDF$Species=="Epopulnea"&outDF$Variable=="Alate"] <- round(anov$`Pr(>F)`[3], 4)
-    outDF$p_CO2_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="Alate"] <- round(anov$`Pr(>F)`[4], 4)
-    outDF$p_CO2_T[outDF$Species=="Epopulnea"&outDF$Variable=="Alate"] <- round(anov$`Pr(>F)`[5], 4)
-    outDF$p_H2O_T[outDF$Species=="Epopulnea"&outDF$Variable=="Alate"] <- round(anov$`Pr(>F)`[6], 4)
-    outDF$p_CO2_H2O_T[outDF$Species=="Epopulnea"&outDF$Variable=="Alate"] <- round(anov$`Pr(>F)`[7], 4)
+    outDF$p_CO2[outDF$Species=="Epopulnea"&outDF$Variable=="gsdaily"] <- round(anov$`Pr(>F)`[1], 4)
+    outDF$p_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="gsdaily"] <- round(anov$`Pr(>F)`[2], 4)
+    outDF$p_T[outDF$Species=="Epopulnea"&outDF$Variable=="gsdaily"] <- round(anov$`Pr(>F)`[3], 4)
+    outDF$p_CO2_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="gsdaily"] <- round(anov$`Pr(>F)`[4], 4)
+    outDF$p_CO2_T[outDF$Species=="Epopulnea"&outDF$Variable=="gsdaily"] <- round(anov$`Pr(>F)`[5], 4)
+    outDF$p_H2O_T[outDF$Species=="Epopulnea"&outDF$Variable=="gsdaily"] <- round(anov$`Pr(>F)`[6], 4)
+    outDF$p_CO2_H2O_T[outDF$Species=="Epopulnea"&outDF$Variable=="gsdaily"] <- round(anov$`Pr(>F)`[7], 4)
     
     
-    ### gsearly
-    mod1 <- lmer(gsearly ~ CO2 * H2O * Day + (1|Glasshouse), data=myDF2)
+    ### E_psi
+    mod1 <- lmer(E_psi ~ CO2 * H2O * Day + (1|Glasshouse), data=myDF2)
     anov <- anova(mod1)
     
     # nominator
-    outDF$Nominator_CO2[outDF$Species=="Epopulnea"&outDF$Variable=="gsearly"] <- anov$NumDF[1]
-    outDF$Nominator_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="gsearly"] <- anov$NumDF[2]
-    outDF$Nominator_T[outDF$Species=="Epopulnea"&outDF$Variable=="gsearly"] <- anov$NumDF[3]
-    outDF$Nominator_CO2_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="gsearly"] <- anov$NumDF[4]
-    outDF$Nominator_CO2_T[outDF$Species=="Epopulnea"&outDF$Variable=="gsearly"] <- anov$NumDF[5]
-    outDF$Nominator_H2O_T[outDF$Species=="Epopulnea"&outDF$Variable=="gsearly"] <- anov$NumDF[6]
-    outDF$Nominator_CO2_H2O_T[outDF$Species=="Epopulnea"&outDF$Variable=="gsearly"] <- anov$NumDF[7]
+    outDF$Nominator_CO2[outDF$Species=="Epopulnea"&outDF$Variable=="E_psi"] <- anov$NumDF[1]
+    outDF$Nominator_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="E_psi"] <- anov$NumDF[2]
+    outDF$Nominator_T[outDF$Species=="Epopulnea"&outDF$Variable=="E_psi"] <- anov$NumDF[3]
+    outDF$Nominator_CO2_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="E_psi"] <- anov$NumDF[4]
+    outDF$Nominator_CO2_T[outDF$Species=="Epopulnea"&outDF$Variable=="E_psi"] <- anov$NumDF[5]
+    outDF$Nominator_H2O_T[outDF$Species=="Epopulnea"&outDF$Variable=="E_psi"] <- anov$NumDF[6]
+    outDF$Nominator_CO2_H2O_T[outDF$Species=="Epopulnea"&outDF$Variable=="E_psi"] <- anov$NumDF[7]
     
     #denominator
-    outDF$Denominator_CO2[outDF$Species=="Epopulnea"&outDF$Variable=="gsearly"] <- anov$DenDF[1]
-    outDF$Denominator_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="gsearly"] <- anov$DenDF[2]
-    outDF$Denominator_T[outDF$Species=="Epopulnea"&outDF$Variable=="gsearly"] <- anov$DenDF[3]
-    outDF$Denominator_CO2_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="gsearly"] <- anov$DenDF[4]
-    outDF$Denominator_CO2_T[outDF$Species=="Epopulnea"&outDF$Variable=="gsearly"] <- anov$DenDF[5]
-    outDF$Denominator_H2O_T[outDF$Species=="Epopulnea"&outDF$Variable=="gsearly"] <- anov$DenDF[6]
-    outDF$Denominator_CO2_H2O_T[outDF$Species=="Epopulnea"&outDF$Variable=="gsearly"] <- anov$DenDF[7]
+    outDF$Denominator_CO2[outDF$Species=="Epopulnea"&outDF$Variable=="E_psi"] <- anov$DenDF[1]
+    outDF$Denominator_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="E_psi"] <- anov$DenDF[2]
+    outDF$Denominator_T[outDF$Species=="Epopulnea"&outDF$Variable=="E_psi"] <- anov$DenDF[3]
+    outDF$Denominator_CO2_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="E_psi"] <- anov$DenDF[4]
+    outDF$Denominator_CO2_T[outDF$Species=="Epopulnea"&outDF$Variable=="E_psi"] <- anov$DenDF[5]
+    outDF$Denominator_H2O_T[outDF$Species=="Epopulnea"&outDF$Variable=="E_psi"] <- anov$DenDF[6]
+    outDF$Denominator_CO2_H2O_T[outDF$Species=="Epopulnea"&outDF$Variable=="E_psi"] <- anov$DenDF[7]
     
     # F-value
-    outDF$F_CO2[outDF$Species=="Epopulnea"&outDF$Variable=="gsearly"] <- anov$`F value`[1]
-    outDF$F_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="gsearly"] <- anov$`F value`[2]
-    outDF$F_T[outDF$Species=="Epopulnea"&outDF$Variable=="gsearly"] <- anov$`F value`[3]
-    outDF$F_CO2_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="gsearly"] <- anov$`F value`[4]
-    outDF$F_CO2_T[outDF$Species=="Epopulnea"&outDF$Variable=="gsearly"] <- anov$`F value`[5]
-    outDF$F_H2O_T[outDF$Species=="Epopulnea"&outDF$Variable=="gsearly"] <- anov$`F value`[6]
-    outDF$F_CO2_H2O_T[outDF$Species=="Epopulnea"&outDF$Variable=="gsearly"] <- anov$`F value`[7]    
+    outDF$F_CO2[outDF$Species=="Epopulnea"&outDF$Variable=="E_psi"] <- anov$`F value`[1]
+    outDF$F_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="E_psi"] <- anov$`F value`[2]
+    outDF$F_T[outDF$Species=="Epopulnea"&outDF$Variable=="E_psi"] <- anov$`F value`[3]
+    outDF$F_CO2_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="E_psi"] <- anov$`F value`[4]
+    outDF$F_CO2_T[outDF$Species=="Epopulnea"&outDF$Variable=="E_psi"] <- anov$`F value`[5]
+    outDF$F_H2O_T[outDF$Species=="Epopulnea"&outDF$Variable=="E_psi"] <- anov$`F value`[6]
+    outDF$F_CO2_H2O_T[outDF$Species=="Epopulnea"&outDF$Variable=="E_psi"] <- anov$`F value`[7]    
     
     
     # p-value
-    outDF$p_CO2[outDF$Species=="Epopulnea"&outDF$Variable=="gsearly"] <- round(anov$`Pr(>F)`[1], 4)
-    outDF$p_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="gsearly"] <- round(anov$`Pr(>F)`[2], 4)
-    outDF$p_T[outDF$Species=="Epopulnea"&outDF$Variable=="gsearly"] <- round(anov$`Pr(>F)`[3], 4)
-    outDF$p_CO2_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="gsearly"] <- round(anov$`Pr(>F)`[4], 4)
-    outDF$p_CO2_T[outDF$Species=="Epopulnea"&outDF$Variable=="gsearly"] <- round(anov$`Pr(>F)`[5], 4)
-    outDF$p_H2O_T[outDF$Species=="Epopulnea"&outDF$Variable=="gsearly"] <- round(anov$`Pr(>F)`[6], 4)
-    outDF$p_CO2_H2O_T[outDF$Species=="Epopulnea"&outDF$Variable=="gsearly"] <- round(anov$`Pr(>F)`[7], 4)
-    
-    
-    ### gslate
-    mod1 <- lmer(gslate ~ CO2 * H2O * Day + (1|Glasshouse), data=myDF2)
-    anov <- anova(mod1)
-    
-    # nominator
-    outDF$Nominator_CO2[outDF$Species=="Epopulnea"&outDF$Variable=="gslate"] <- anov$NumDF[1]
-    outDF$Nominator_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="gslate"] <- anov$NumDF[2]
-    outDF$Nominator_T[outDF$Species=="Epopulnea"&outDF$Variable=="gslate"] <- anov$NumDF[3]
-    outDF$Nominator_CO2_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="gslate"] <- anov$NumDF[4]
-    outDF$Nominator_CO2_T[outDF$Species=="Epopulnea"&outDF$Variable=="gslate"] <- anov$NumDF[5]
-    outDF$Nominator_H2O_T[outDF$Species=="Epopulnea"&outDF$Variable=="gslate"] <- anov$NumDF[6]
-    outDF$Nominator_CO2_H2O_T[outDF$Species=="Epopulnea"&outDF$Variable=="gslate"] <- anov$NumDF[7]
-    
-    #denominator
-    outDF$Denominator_CO2[outDF$Species=="Epopulnea"&outDF$Variable=="gslate"] <- anov$DenDF[1]
-    outDF$Denominator_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="gslate"] <- anov$DenDF[2]
-    outDF$Denominator_T[outDF$Species=="Epopulnea"&outDF$Variable=="gslate"] <- anov$DenDF[3]
-    outDF$Denominator_CO2_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="gslate"] <- anov$DenDF[4]
-    outDF$Denominator_CO2_T[outDF$Species=="Epopulnea"&outDF$Variable=="gslate"] <- anov$DenDF[5]
-    outDF$Denominator_H2O_T[outDF$Species=="Epopulnea"&outDF$Variable=="gslate"] <- anov$DenDF[6]
-    outDF$Denominator_CO2_H2O_T[outDF$Species=="Epopulnea"&outDF$Variable=="gslate"] <- anov$DenDF[7]
-    
-    # F-value
-    outDF$F_CO2[outDF$Species=="Epopulnea"&outDF$Variable=="gslate"] <- anov$`F value`[1]
-    outDF$F_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="gslate"] <- anov$`F value`[2]
-    outDF$F_T[outDF$Species=="Epopulnea"&outDF$Variable=="gslate"] <- anov$`F value`[3]
-    outDF$F_CO2_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="gslate"] <- anov$`F value`[4]
-    outDF$F_CO2_T[outDF$Species=="Epopulnea"&outDF$Variable=="gslate"] <- anov$`F value`[5]
-    outDF$F_H2O_T[outDF$Species=="Epopulnea"&outDF$Variable=="gslate"] <- anov$`F value`[6]
-    outDF$F_CO2_H2O_T[outDF$Species=="Epopulnea"&outDF$Variable=="gslate"] <- anov$`F value`[7]    
-    
-    
-    # p-value
-    outDF$p_CO2[outDF$Species=="Epopulnea"&outDF$Variable=="gslate"] <- round(anov$`Pr(>F)`[1], 4)
-    outDF$p_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="gslate"] <- round(anov$`Pr(>F)`[2], 4)
-    outDF$p_T[outDF$Species=="Epopulnea"&outDF$Variable=="gslate"] <- round(anov$`Pr(>F)`[3], 4)
-    outDF$p_CO2_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="gslate"] <- round(anov$`Pr(>F)`[4], 4)
-    outDF$p_CO2_T[outDF$Species=="Epopulnea"&outDF$Variable=="gslate"] <- round(anov$`Pr(>F)`[5], 4)
-    outDF$p_H2O_T[outDF$Species=="Epopulnea"&outDF$Variable=="gslate"] <- round(anov$`Pr(>F)`[6], 4)
-    outDF$p_CO2_H2O_T[outDF$Species=="Epopulnea"&outDF$Variable=="gslate"] <- round(anov$`Pr(>F)`[7], 4)
+    outDF$p_CO2[outDF$Species=="Epopulnea"&outDF$Variable=="E_psi"] <- round(anov$`Pr(>F)`[1], 4)
+    outDF$p_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="E_psi"] <- round(anov$`Pr(>F)`[2], 4)
+    outDF$p_T[outDF$Species=="Epopulnea"&outDF$Variable=="E_psi"] <- round(anov$`Pr(>F)`[3], 4)
+    outDF$p_CO2_H2O[outDF$Species=="Epopulnea"&outDF$Variable=="E_psi"] <- round(anov$`Pr(>F)`[4], 4)
+    outDF$p_CO2_T[outDF$Species=="Epopulnea"&outDF$Variable=="E_psi"] <- round(anov$`Pr(>F)`[5], 4)
+    outDF$p_H2O_T[outDF$Species=="Epopulnea"&outDF$Variable=="E_psi"] <- round(anov$`Pr(>F)`[6], 4)
+    outDF$p_CO2_H2O_T[outDF$Species=="Epopulnea"&outDF$Variable=="E_psi"] <- round(anov$`Pr(>F)`[7], 4)
     
     
     ### save output
