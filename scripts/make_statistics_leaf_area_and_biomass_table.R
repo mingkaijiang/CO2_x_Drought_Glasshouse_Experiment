@@ -18,10 +18,12 @@ make_statistics_leaf_area_and_biomass_table <- function() {
     ### Root mass to leaf area ratio
     myDF$RL_ratio <- with(myDF, (Root/LA_plant))
     
+    ### Root mass to leaf area ratio
+    myDF$FRLA_ratio <- with(myDF, (FineRoot/LA_plant))
     
     ### prepare outDF
     outDF <- data.frame(rep(c("Epilularis", "Epopulnea"), each = 7),
-                        rep(c("LA", "total", "leaf", "stem",
+                        rep(c("LA", "total", "leaf", "stem", 
                               "root", "RS_ratio", "RL_ratio"), 2),
                         NA, NA, NA, NA, NA, NA,
                         NA, NA, NA, NA, NA, NA)
@@ -31,8 +33,8 @@ make_statistics_leaf_area_and_biomass_table <- function() {
                          "F_CO2", "F_H2O", "F_CO2_H2O", 
                          "p_CO2", "p_H2O", "p_CO2_H2O")
     
-    outDF2 <- data.frame(c("LA", "total", "leaf", "stem",
-                               "root", "RS_ratio", "RL_ratio"),
+    outDF2 <- data.frame(c("LA", "total", "leaf", "stem", "fineroot",
+                               "root", "RS_ratio", "RL_ratio", "FRLA_ratio"),
                          NA, NA, NA, NA, NA, NA,
                          NA, NA, NA, NA, NA, NA,
                          NA, NA, NA, NA, NA, NA,
@@ -570,6 +572,46 @@ make_statistics_leaf_area_and_biomass_table <- function() {
     outDF2$p_H2O_S[outDF2$Variable=="stem"] <- anov$`Pr(>F)`[6]
     outDF2$p_CO2_H2O_S[outDF2$Variable=="stem"] <- anov$`Pr(>F)`[7]
     
+    ### fineroot
+    mod1 <- lmer(FineRoot ~ CO2 * H2O * Species + (1|GH), data=myDF)
+    anov <- anova(mod1)
+    
+    # nominator
+    outDF2$Nominator_CO2[outDF2$Variable=="fineroot"] <- anov$NumDF[1]
+    outDF2$Nominator_H2O[outDF2$Variable=="fineroot"] <- anov$NumDF[2]
+    outDF2$Nominator_S[outDF2$Variable=="fineroot"] <- anov$NumDF[3]
+    outDF2$Nominator_CO2_H2O[outDF2$Variable=="fineroot"] <- anov$NumDF[4]
+    outDF2$Nominator_CO2_S[outDF2$Variable=="fineroot"] <- anov$NumDF[5]
+    outDF2$Nominator_H2O_S[outDF2$Variable=="fineroot"] <- anov$NumDF[6]
+    outDF2$Nominator_CO2_H2O_S[outDF2$Variable=="fineroot"] <- anov$NumDF[7]
+    
+    #denominator
+    outDF2$Denominator_CO2[outDF2$Variable=="fineroot"] <- anov$DenDF[1]
+    outDF2$Denominator_H2O[outDF2$Variable=="fineroot"] <- anov$DenDF[2]
+    outDF2$Denominator_S[outDF2$Variable=="fineroot"] <- anov$DenDF[3]
+    outDF2$Denominator_CO2_H2O[outDF2$Variable=="fineroot"] <- anov$DenDF[4]
+    outDF2$Denominator_CO2_S[outDF2$Variable=="fineroot"] <- anov$DenDF[5]
+    outDF2$Denominator_H2O_S[outDF2$Variable=="fineroot"] <- anov$DenDF[6]
+    outDF2$Denominator_CO2_H2O_S[outDF2$Variable=="fineroot"] <- anov$DenDF[7]
+    
+    # F-value
+    outDF2$F_CO2[outDF2$Variable=="fineroot"] <- anov$`F value`[1]
+    outDF2$F_H2O[outDF2$Variable=="fineroot"] <- anov$`F value`[2]
+    outDF2$F_S[outDF2$Variable=="fineroot"] <- anov$`F value`[3]
+    outDF2$F_CO2_H2O[outDF2$Variable=="fineroot"] <- anov$`F value`[4]
+    outDF2$F_CO2_S[outDF2$Variable=="fineroot"] <- anov$`F value`[5]
+    outDF2$F_H2O_S[outDF2$Variable=="fineroot"] <- anov$`F value`[6]
+    outDF2$F_CO2_H2O_S[outDF2$Variable=="fineroot"] <- anov$`F value`[7]
+    
+    # p-value
+    outDF2$p_CO2[outDF2$Variable=="fineroot"] <- round(anov$`Pr(>F)`[1], 4)
+    outDF2$p_H2O[outDF2$Variable=="fineroot"] <- round(anov$`Pr(>F)`[2], 4)
+    outDF2$p_S[outDF2$Variable=="fineroot"] <- anov$`Pr(>F)`[3]
+    outDF2$p_CO2_H2O[outDF2$Variable=="fineroot"] <- anov$`Pr(>F)`[4]
+    outDF2$p_CO2_S[outDF2$Variable=="fineroot"] <- anov$`Pr(>F)`[5]
+    outDF2$p_H2O_S[outDF2$Variable=="fineroot"] <- anov$`Pr(>F)`[6]
+    outDF2$p_CO2_H2O_S[outDF2$Variable=="fineroot"] <- anov$`Pr(>F)`[7]
+    
     
     ### root biomass
     mod1 <- lmer(Root ~ CO2 * H2O * Species + (1|GH), data=myDF)
@@ -694,6 +736,45 @@ make_statistics_leaf_area_and_biomass_table <- function() {
     outDF2$p_CO2_H2O_S[outDF2$Variable=="RL_ratio"] <- anov$`Pr(>F)`[7]
     
     
+    ### FRLA_ratio
+    mod1 <- lmer(FRLA_ratio ~ CO2 * H2O * Species + (1|GH), data=myDF)
+    anov <- anova(mod1)
+    
+    # nominator
+    outDF2$Nominator_CO2[outDF2$Variable=="FRLA_ratio"] <- anov$NumDF[1]
+    outDF2$Nominator_H2O[outDF2$Variable=="FRLA_ratio"] <- anov$NumDF[2]
+    outDF2$Nominator_S[outDF2$Variable=="FRLA_ratio"] <- anov$NumDF[3]
+    outDF2$Nominator_CO2_H2O[outDF2$Variable=="FRLA_ratio"] <- anov$NumDF[4]
+    outDF2$Nominator_CO2_S[outDF2$Variable=="FRLA_ratio"] <- anov$NumDF[5]
+    outDF2$Nominator_H2O_S[outDF2$Variable=="FRLA_ratio"] <- anov$NumDF[6]
+    outDF2$Nominator_CO2_H2O_S[outDF2$Variable=="FRLA_ratio"] <- anov$NumDF[7]
+    
+    #denominator
+    outDF2$Denominator_CO2[outDF2$Variable=="FRLA_ratio"] <- anov$DenDF[1]
+    outDF2$Denominator_H2O[outDF2$Variable=="FRLA_ratio"] <- anov$DenDF[2]
+    outDF2$Denominator_S[outDF2$Variable=="FRLA_ratio"] <- anov$DenDF[3]
+    outDF2$Denominator_CO2_H2O[outDF2$Variable=="FRLA_ratio"] <- anov$DenDF[4]
+    outDF2$Denominator_CO2_S[outDF2$Variable=="FRLA_ratio"] <- anov$DenDF[5]
+    outDF2$Denominator_H2O_S[outDF2$Variable=="FRLA_ratio"] <- anov$DenDF[6]
+    outDF2$Denominator_CO2_H2O_S[outDF2$Variable=="FRLA_ratio"] <- anov$DenDF[7]
+    
+    # F-value
+    outDF2$F_CO2[outDF2$Variable=="FRLA_ratio"] <- anov$`F value`[1]
+    outDF2$F_H2O[outDF2$Variable=="FRLA_ratio"] <- anov$`F value`[2]
+    outDF2$F_S[outDF2$Variable=="FRLA_ratio"] <- anov$`F value`[3]
+    outDF2$F_CO2_H2O[outDF2$Variable=="FRLA_ratio"] <- anov$`F value`[4]
+    outDF2$F_CO2_S[outDF2$Variable=="FRLA_ratio"] <- anov$`F value`[5]
+    outDF2$F_H2O_S[outDF2$Variable=="FRLA_ratio"] <- anov$`F value`[6]
+    outDF2$F_CO2_H2O_S[outDF2$Variable=="FRLA_ratio"] <- anov$`F value`[7]
+    
+    # p-value
+    outDF2$p_CO2[outDF2$Variable=="FRLA_ratio"] <- round(anov$`Pr(>F)`[1], 4)
+    outDF2$p_H2O[outDF2$Variable=="FRLA_ratio"] <- round(anov$`Pr(>F)`[2], 4)
+    outDF2$p_S[outDF2$Variable=="FRLA_ratio"] <- anov$`Pr(>F)`[3]
+    outDF2$p_CO2_H2O[outDF2$Variable=="FRLA_ratio"] <- anov$`Pr(>F)`[4]
+    outDF2$p_CO2_S[outDF2$Variable=="FRLA_ratio"] <- anov$`Pr(>F)`[5]
+    outDF2$p_H2O_S[outDF2$Variable=="FRLA_ratio"] <- anov$`Pr(>F)`[6]
+    outDF2$p_CO2_H2O_S[outDF2$Variable=="FRLA_ratio"] <- anov$`Pr(>F)`[7]
     
     ### save output
     write.csv(outDF2, paste0(outdir, "statistics_leaf_area_biomass.csv"), row.names=F)
