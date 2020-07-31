@@ -4,6 +4,17 @@ make_transpiration_leaf_area_plot <- function() {
    pilDF<-read.csv("data/glasshouse2/PILtransp_leafarea.csv",sep=",", header=TRUE)
    popDF<-read.csv("data/glasshouse2/POPtransp_leafarea.csv",sep=",", header=TRUE)
    
+   ### test statistics for day 1
+   subDF1 <- subset(pilDF, Day == 1)
+   subDF2 <- subset(popDF, Day == 1)
+   
+   mod1 <- lmer(transp_plant ~ CO2 * H2O + (1|Glasshouse), data=subDF1)
+   anov1 <- anova(mod1)
+   anov1
+   
+   mod2 <- lmer(transp_plant ~ CO2 * H2O + (1|Glasshouse), data=subDF2)
+   anov2 <- anova(mod2)
+   anov2
    
    #### obtain summary DF
    sumDF1 <- summaryBy(leaf_area+transp_plant~Trt, FUN=c(mean,se),
