@@ -31,15 +31,21 @@ make_leaf_area_and_biomass_plots_by_H2O()
 
 
 ### make soil water content and leaf transpiration plots for the two species
+make_statistics_leaf_water_relations_gas_exchange_table_at_the_start_of_the_drydown()
+
 make_statistics_leaf_water_relations_gas_exchange_table()
 
 make_swc_and_transpiration_plots()
+
+make_swc_and_transpiration_plots_based_on_raw_data() # the two plots are identical so OK
 
 ### transpiration as function of leaf area
 make_transpiration_leaf_area_plot()
 
 ### pre-dawn and midday leaf water potentials
 make_leaf_water_potential_plots()
+
+make_leaf_water_potential_plots_based_on_raw_data() # the two plots are identical so OK
 
 ### pre-dawn water potential with swc
 make_predawn_water_potential_with_swc_plots()
@@ -50,6 +56,8 @@ make_whole_plant_hydraulic_conductance_plot()
 ### leaf gas exchange fluxes
 make_physiological_plots()
 
+make_physiological_plots_based_on_raw_data() # the two plots are identical so OK
+ 
 make_pilularis_physiological_plots()
 
 make_populnea_physiological_plots()
