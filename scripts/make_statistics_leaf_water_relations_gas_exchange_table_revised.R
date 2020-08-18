@@ -1,4 +1,4 @@
-make_statistics_leaf_water_relations_gas_exchange_table_at_the_start_of_the_drydown <- function() {
+make_statistics_leaf_water_relations_gas_exchange_table_revised <- function() {
     
     
     ############################# perform statistical tests ##############################
@@ -6,8 +6,8 @@ make_statistics_leaf_water_relations_gas_exchange_table_at_the_start_of_the_dryd
     myDF1 <- read.csv("data/glasshouse2/Drydown_gasexchange_pilularis.csv")
     myDF2 <- read.csv("data/glasshouse2/Drydown_gasexchange_populnea.csv")
     
-    myDF1 <- subset(myDF1, Day == 1)
-    myDF2 <- subset(myDF2, Day == 1)
+    myDF1 <- subset(myDF1, Day <= 6)
+    myDF2 <- subset(myDF2, Day <= 16)
     
     ### set class
     myDF1$Glasshouse <- as.factor(myDF1$Glasshouse)
@@ -18,7 +18,7 @@ make_statistics_leaf_water_relations_gas_exchange_table_at_the_start_of_the_dryd
     
     myDF1$H2O <- as.factor(myDF1$H2O)
     myDF2$H2O <- as.factor(myDF2$H2O)
-    
+
     ### calculations
     myDF1$Adaily <- with(myDF1, (Aearly+Alate)/2)
     myDF2$Adaily <- with(myDF2, (Aearly+Alate)/2)
@@ -26,10 +26,10 @@ make_statistics_leaf_water_relations_gas_exchange_table_at_the_start_of_the_dryd
     myDF1$gsdaily <- with(myDF1, (gsearly+gslate)/2)
     myDF2$gsdaily <- with(myDF2, (gsearly+gslate)/2)
     
-
+    
     ######################################################################
     ### SWC
-    mod1<-lme(log(SWC)~CO2*H2O,random=~1|Glasshouse/Replicate,data=myDF1)
+    mod1<-lme(SWC~CO2*H2O*Day,random=~1|Glasshouse/Replicate,data=myDF1)
     summary(mod1)
     
     #Testing normality of residuals
@@ -42,12 +42,12 @@ make_statistics_leaf_water_relations_gas_exchange_table_at_the_start_of_the_dryd
     anov
     
     # save
-    write.csv(anov,file="output/BM/statistics/Epilularis/swc-initial.csv")
+    write.csv(anov,file="output/BM/statistics/Epilularis/swc.csv")
     
     
     ######################################################################
     ### transpiration
-    mod1<-lme(log(transp_plant)~CO2*H2O,random=~1|Glasshouse/Replicate,data=myDF1)
+    mod1<-lme(log(transp_plant)~CO2*H2O*Day,random=~1|Glasshouse/Replicate,data=myDF1)
     summary(mod1)
     
     #Testing normality of residuals
@@ -60,12 +60,12 @@ make_statistics_leaf_water_relations_gas_exchange_table_at_the_start_of_the_dryd
     anov
     
     # save
-    write.csv(anov,file="output/BM/statistics/Epilularis/transpiration-initial.csv")
+    write.csv(anov,file="output/BM/statistics/Epilularis/transpiration.csv")
     
     
     ######################################################################
     ### psiPD
-    mod1<-lme(psiPD~CO2*H2O,random=~1|Glasshouse/Replicate,data=myDF1)
+    mod1<-lme(psiPD~CO2*H2O*Day,random=~1|Glasshouse/Replicate,data=myDF1)
     summary(mod1)
     
     #Testing normality of residuals
@@ -78,11 +78,11 @@ make_statistics_leaf_water_relations_gas_exchange_table_at_the_start_of_the_dryd
     anov
     
     # save
-    write.csv(anov,file="output/BM/statistics/Epilularis/psiPD-initial.csv")
+    write.csv(anov,file="output/BM/statistics/Epilularis/psiPD.csv")
     
     ######################################################################
     ### psiMD
-    mod1<-lme(psiMD~CO2*H2O,random=~1|Glasshouse/Replicate,data=myDF1)
+    mod1<-lme(psiMD~CO2*H2O*Day,random=~1|Glasshouse/Replicate,data=myDF1)
     summary(mod1)
     
     #Testing normality of residuals
@@ -95,13 +95,13 @@ make_statistics_leaf_water_relations_gas_exchange_table_at_the_start_of_the_dryd
     anov
     
     # save
-    write.csv(anov,file="output/BM/statistics/Epilularis/psiMD-initial.csv")
+    write.csv(anov,file="output/BM/statistics/Epilularis/psiMD.csv")
     
     
     
     ######################################################################
     ### Adaily
-    mod1<-lme(Adaily~CO2*H2O,random=~1|Glasshouse/Replicate,data=myDF1)
+    mod1<-lme(Adaily~CO2*H2O*Day,random=~1|Glasshouse/Replicate,data=myDF1)
     summary(mod1)
     
     #Testing normality of residuals
@@ -114,12 +114,12 @@ make_statistics_leaf_water_relations_gas_exchange_table_at_the_start_of_the_dryd
     anov
     
     # save
-    write.csv(anov,file="output/BM/statistics/Epilularis/Adaily-initial.csv")
+    write.csv(anov,file="output/BM/statistics/Epilularis/Adaily.csv")
     
     
     ######################################################################
     ### gsdaily
-    mod1<-lme(log(gsdaily)~CO2*H2O,random=~1|Glasshouse/Replicate,data=myDF1)
+    mod1<-lme(log(gsdaily)~CO2*H2O*Day,random=~1|Glasshouse/Replicate,data=myDF1)
     summary(mod1)
     
     #Testing normality of residuals
@@ -132,12 +132,12 @@ make_statistics_leaf_water_relations_gas_exchange_table_at_the_start_of_the_dryd
     anov
     
     # save
-    write.csv(anov,file="output/BM/statistics/Epilularis/gsdaily-initial.csv")
+    write.csv(anov,file="output/BM/statistics/Epilularis/gsdaily.csv")
     
-    
+   
     ######################################################################
     ### Epsi
-    mod1<-lme(log(E_psi)~CO2*H2O,random=~1|Glasshouse/Replicate,data=myDF1)
+    mod1<-lme(log(E_psi)~CO2*H2O*Day,random=~1|Glasshouse/Replicate,data=myDF1)
     summary(mod1)
     
     #Testing normality of residuals
@@ -150,13 +150,13 @@ make_statistics_leaf_water_relations_gas_exchange_table_at_the_start_of_the_dryd
     anov
     
     # save
-    write.csv(anov,file="output/BM/statistics/Epilularis/E_psi-initial.csv")
+    write.csv(anov,file="output/BM/statistics/Epilularis/E_psi.csv")
     
     
     ######################## populnea
     ######################################################################
     ### SWC
-    mod1<-lme(SWC~CO2*H2O,random=~1|Glasshouse/Replicate,data=myDF2)
+    mod1<-lme(SWC~CO2*H2O*Day,random=~1|Glasshouse/Replicate,data=myDF2)
     summary(mod1)
     
     #Testing normality of residuals
@@ -169,12 +169,12 @@ make_statistics_leaf_water_relations_gas_exchange_table_at_the_start_of_the_dryd
     anov
     
     # save
-    write.csv(anov,file="output/BM/statistics/Epopulnea/swc-initial.csv")
+    write.csv(anov,file="output/BM/statistics/Epopulnea/swc.csv")
     
     
     ######################################################################
     ### transpiration
-    mod1<-lme(transp_plant~CO2*H2O,random=~1|Glasshouse/Replicate,data=myDF2)
+    mod1<-lme(transp_plant~CO2*H2O*Day,random=~1|Glasshouse/Replicate,data=myDF2)
     summary(mod1)
     
     #Testing normality of residuals
@@ -187,12 +187,12 @@ make_statistics_leaf_water_relations_gas_exchange_table_at_the_start_of_the_dryd
     anov
     
     # save
-    write.csv(anov,file="output/BM/statistics/Epopulnea/transpiration-initial.csv")
+    write.csv(anov,file="output/BM/statistics/Epopulnea/transpiration.csv")
     
     
     ######################################################################
     ### psiPD
-    mod1<-lme(psiPD~CO2*H2O,random=~1|Glasshouse/Replicate,data=myDF2)
+    mod1<-lme(log(abs(psiPD))~CO2*H2O*Day,random=~1|Glasshouse/Replicate,data=myDF2)
     summary(mod1)
     
     #Testing normality of residuals
@@ -205,11 +205,11 @@ make_statistics_leaf_water_relations_gas_exchange_table_at_the_start_of_the_dryd
     anov
     
     # save
-    write.csv(anov,file="output/BM/statistics/Epopulnea/psiPD-initial.csv")
+    write.csv(anov,file="output/BM/statistics/Epopulnea/psiPD.csv")
     
     ######################################################################
     ### psiMD
-    mod1<-lme(psiMD~CO2*H2O,random=~1|Glasshouse/Replicate,data=myDF2)
+    mod1<-lme(log(abs(psiMD))~CO2*H2O*Day,random=~1|Glasshouse/Replicate,data=myDF2)
     summary(mod1)
     
     #Testing normality of residuals
@@ -222,13 +222,13 @@ make_statistics_leaf_water_relations_gas_exchange_table_at_the_start_of_the_dryd
     anov
     
     # save
-    write.csv(anov,file="output/BM/statistics/Epopulnea/psiMD-initial.csv")
+    write.csv(anov,file="output/BM/statistics/Epopulnea/psiMD.csv")
     
     
     
     ######################################################################
     ### Adaily
-    mod1<-lme(Adaily~CO2*H2O,random=~1|Glasshouse/Replicate,data=myDF2)
+    mod1<-lme(Adaily~CO2*H2O*Day,random=~1|Glasshouse/Replicate,data=myDF2)
     summary(mod1)
     
     #Testing normality of residuals
@@ -241,12 +241,12 @@ make_statistics_leaf_water_relations_gas_exchange_table_at_the_start_of_the_dryd
     anov
     
     # save
-    write.csv(anov,file="output/BM/statistics/Epopulnea/Adaily-initial.csv")
+    write.csv(anov,file="output/BM/statistics/Epopulnea/Adaily.csv")
     
     
     ######################################################################
     ### gsdaily
-    mod1<-lme(gsdaily~CO2*H2O,random=~1|Glasshouse/Replicate,data=myDF2)
+    mod1<-lme(log(gsdaily)~CO2*H2O*Day,random=~1|Glasshouse/Replicate,data=myDF2)
     summary(mod1)
     
     #Testing normality of residuals
@@ -259,12 +259,12 @@ make_statistics_leaf_water_relations_gas_exchange_table_at_the_start_of_the_dryd
     anov
     
     # save
-    write.csv(anov,file="output/BM/statistics/Epopulnea/gsdaily-initial.csv")
+    write.csv(anov,file="output/BM/statistics/Epopulnea/gsdaily.csv")
     
     
     ######################################################################
     ### Epsi
-    mod1<-lme(E_psi~CO2*H2O,random=~1|Glasshouse/Replicate,data=myDF2)
+    mod1<-lme(log(E_psi)~CO2*H2O*Day,random=~1|Glasshouse/Replicate,data=myDF2)
     summary(mod1)
     
     #Testing normality of residuals
@@ -277,7 +277,9 @@ make_statistics_leaf_water_relations_gas_exchange_table_at_the_start_of_the_dryd
     anov
     
     # save
-    write.csv(anov,file="output/BM/statistics/Epopulnea/E_psi-initial.csv")
+    write.csv(anov,file="output/BM/statistics/Epopulnea/E_psi.csv")
+    
+    
     
     
 }

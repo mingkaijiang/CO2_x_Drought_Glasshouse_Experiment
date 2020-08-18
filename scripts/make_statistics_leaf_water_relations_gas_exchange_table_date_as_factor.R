@@ -10,14 +10,14 @@ make_statistics_leaf_water_relations_gas_exchange_table_date_as_factor <- functi
     myDF2 <- subset(myDF2, Day <= 16)
     
     ### set class
-    myDF1$Glasshouse <- as.character(myDF1$Glasshouse)
-    myDF2$Glasshouse <- as.character(myDF2$Glasshouse)
+    myDF1$Glasshouse <- as.factor(myDF1$Glasshouse)
+    myDF2$Glasshouse <- as.factor(myDF2$Glasshouse)
     
-    myDF1$CO2 <- as.character(myDF1$CO2)
-    myDF2$CO2 <- as.character(myDF2$CO2)
+    myDF1$CO2 <- as.factor(myDF1$CO2)
+    myDF2$CO2 <- as.factor(myDF2$CO2)
     
-    myDF1$H2O <- as.character(myDF1$H2O)
-    myDF2$H2O <- as.character(myDF2$H2O)
+    myDF1$H2O <- as.factor(myDF1$H2O)
+    myDF2$H2O <- as.factor(myDF2$H2O)
     
     myDF1$Day <- as.character(myDF1$Day)
     myDF2$Day <- as.character(myDF2$Day)
@@ -311,7 +311,7 @@ make_statistics_leaf_water_relations_gas_exchange_table_date_as_factor <- functi
     
     
     ### E_psi
-    mod1 <- lmer(E_psi ~ CO2 * H2O * Day + (1|Glasshouse), data=myDF1)
+    mod1 <- lmer(logE_psi ~ CO2 * H2O * Day + (1|Glasshouse), data=myDF1)
     anov <- anova(mod1)
     
     

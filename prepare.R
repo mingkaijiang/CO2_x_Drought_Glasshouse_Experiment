@@ -8,10 +8,22 @@ if(!dir.exists("output/BM")) {
     dir.create("output/BM", showWarnings = FALSE)
 }
 
-
-if(!dir.exists("output/DT")) {
-    dir.create("output/DT", showWarnings = FALSE)
+if(!dir.exists("output/BM/statistics")) {
+    dir.create("output/BM/statistics", showWarnings = FALSE)
 }
+
+if(!dir.exists("output/BM/statistics/Epilularis")) {
+    dir.create("output/BM/statistics/Epilularis", showWarnings = FALSE)
+}
+
+if(!dir.exists("output/BM/statistics/Epopulnea")) {
+    dir.create("output/BM/statistics/Epopulnea", showWarnings = FALSE)
+}
+
+
+#if(!dir.exists("output/DT")) {
+#    dir.create("output/DT", showWarnings = FALSE)
+#}
 
 #### Install packages
 if(!require(pacman))install.packages("pacman")
