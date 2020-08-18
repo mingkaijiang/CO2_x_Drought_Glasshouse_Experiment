@@ -22,7 +22,7 @@ make_glasshouse_condition_plots()
 #make_leaf_area_plot()
 
 ### read in leaf area and biomass data & make plots for the two species
-make_statistics_leaf_area_and_biomass_table()
+make_statistics_leaf_area_and_biomass_table_revised()
 
 make_leaf_area_and_biomass_plots_by_CO2()
 
@@ -59,9 +59,9 @@ make_physiological_plots()
 
 make_physiological_plots_based_on_raw_data() # the two plots are identical so OK
  
-make_pilularis_physiological_plots()
+#make_pilularis_physiological_plots()
 
-make_populnea_physiological_plots()
+#make_populnea_physiological_plots()
 
 ### normalized Asat, i.e. Asat(time) / Asat(D1)
 ### add error bars

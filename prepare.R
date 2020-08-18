@@ -20,6 +20,10 @@ if(!dir.exists("output/BM/statistics/Epopulnea")) {
     dir.create("output/BM/statistics/Epopulnea", showWarnings = FALSE)
 }
 
+if(!dir.exists("output/BM/statistics/Species")) {
+    dir.create("output/BM/statistics/Species", showWarnings = FALSE)
+}
+
 
 #if(!dir.exists("output/DT")) {
 #    dir.create("output/DT", showWarnings = FALSE)
