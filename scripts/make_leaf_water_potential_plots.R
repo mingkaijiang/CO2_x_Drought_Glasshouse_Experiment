@@ -8,14 +8,17 @@ make_leaf_water_potential_plots <- function() {
     
     
     ## remove data points with unequal sample size
-    n1 <- min(unique(pilDF[pilDF$n.1<6,]$Day))
-    n2 <- min(unique(popDF[popDF$n.1<6,]$Day))
+    #n1 <- min(unique(pilDF[pilDF$n.1<6,]$Day))
+    #n2 <- min(unique(popDF[popDF$n.1<6,]$Day))
     
-    pilDF <- pilDF[pilDF$Day<n1, ]
-    popDF <- popDF[popDF$Day<n2, ]
+    #pilDF <- pilDF[pilDF$Day<n1, ]
+    #popDF <- popDF[popDF$Day<n2, ]
     
     #### plotting
     p1 <- ggplot(pilDF, aes(x=Day, y=psiPD, group=Trt)) +
+        geom_rect(ymin = -5, ymax = 0, 
+                  xmin = 6.5, xmax = 10,
+                  fill = alpha("lightyellow", 0.2))+
         geom_errorbar(aes(col=Trt, x=Day, 
                           ymin=psiPD-psiPDSE, ymax=psiPD+psiPDSE),
                       width=0.2)+
@@ -67,17 +70,20 @@ make_leaf_water_potential_plots <- function() {
                                     expression(paste(eC[a]*" - W"))),
                            values=c(21,21,21,21))+
         ggtitle("E. pilularis")+
-        ylim(-3, 0)+
+        ylim(-5, 0)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 21, 21),
                                                        fill = c("white", "blue3", "white", "red2"),
                                                        col = c("blue3", "blue3", "red2", "red2"),
                                                        linetype = c("dotted", "solid", "dotted", "solid"))))+
-        scale_x_continuous(limits=c(0, 8),
+        scale_x_continuous(limits=c(0, 10),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
     
     p2 <- ggplot(popDF, aes(x=Day, y=psiPD, group=Trt)) +
+        geom_rect(ymin = -5, ymax = 0, 
+                  xmin = 16.5, xmax = 30,
+                  fill = alpha("lightyellow", 0.2))+
         geom_errorbar(aes(col=Trt, x=Day, 
                           ymin=psiPD-psiPDSE, ymax=psiPD+psiPDSE),
                       width=0.6)+
@@ -129,18 +135,21 @@ make_leaf_water_potential_plots <- function() {
                                     expression(paste(eC[a]*" - W"))),
                            values=c(21,21,21,21))+
         ggtitle("E. populnea")+
-        ylim(-3, 0)+
+        ylim(-5, 0)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 21, 21),
                                                        fill = c("white", "blue3", "white", "red2"),
                                                        col = c("blue3", "blue3", "red2", "red2"),
                                                        linetype = c("dotted", "solid", "dotted", "solid"))))+
-        scale_x_continuous(limits=c(0, 20),
-                           breaks=c(0, 4, 8, 12, 16, 20))
+        scale_x_continuous(limits=c(0, 30),
+                           breaks=c(0, 5, 10, 15, 20, 25, 30))
     
     
     
     p3 <- ggplot(pilDF, aes(x=Day, y=psiMD, group=Trt)) +
+        geom_rect(ymin = -4, ymax = 0, 
+                  xmin = 6.5, xmax = 10,
+                  fill = alpha("lightyellow", 0.2))+
         geom_errorbar(aes(col=Trt, x=Day, 
                           ymin=psiMD-psiMDSE, ymax=psiMD+psiMDSE),
                       width=0.2)+
@@ -197,12 +206,15 @@ make_leaf_water_potential_plots <- function() {
                                                        fill = c("white", "blue3", "white", "red2"),
                                                        col = c("blue3", "blue3", "red2", "red2"),
                                                        linetype = c("dotted", "solid", "dotted", "solid"))))+
-        scale_x_continuous(limits=c(0, 8),
+        scale_x_continuous(limits=c(0, 10),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
     
     
     p4 <- ggplot(popDF, aes(x=Day, y=psiMD, group=Trt)) +
+        geom_rect(ymin = -4, ymax = 0, 
+                  xmin = 16.5, xmax = 30,
+                  fill = alpha("lightyellow", 0.2))+
         geom_errorbar(aes(col=Trt, x=Day, 
                           ymin=psiMD-psiMDSE, ymax=psiMD+psiMDSE),
                       width=0.6)+
@@ -259,8 +271,8 @@ make_leaf_water_potential_plots <- function() {
                                                        fill = c("white", "blue3", "white", "red2"),
                                                        col = c("blue3", "blue3", "red2", "red2"),
                                                        linetype = c("dotted", "solid", "dotted", "solid"))))+
-        scale_x_continuous(limits=c(0, 20),
-                           breaks=c(0, 4, 8, 12, 16, 20))
+        scale_x_continuous(limits=c(0, 30),
+                           breaks=c(0, 5, 10, 15, 20, 25, 30))
     
     ### output
     combined_legend <- get_legend(p1 + theme(legend.position="bottom",
