@@ -1,14 +1,13 @@
 
 
 #FIGURES (Eucalyptus populnea)
-POPPhysGraph<-read.csv("data/Populnea_Phys.csv",sep=",", header=TRUE)
+POPPhysGraph<-read.csv("data/Populnea_Phys2.csv",sep=",", header=TRUE)
 names(POPPhysGraph)
 str(POPPhysGraph)
 
-pdf("output/original_populnea_Figure4_test1.pdf")
+pdf("output/original_populnea_Figure4_test2.pdf")
 
 #FIGURE 4 - Eucalyptus populnea (Pre-Dawn and Midday LWP, SWC and Daily Transpiration)
-#windows(12.5,10)
 par(mfrow=c(2,2), omi=c(.65, 0.75, 0.75, .65)) 
 par(mar=c(0, 0, 0, 0))
 par(xaxs="i",yaxs="i")
@@ -125,5 +124,6 @@ axis(4,labels=TRUE,tck=-.03,cex.axis=1.25)
 axis(1,labels=TRUE,tck=0.03,cex.axis=1.25)
 mtext(side=1,text=expression(bold(DAY)),line=2.5,font=2.5,cex=1.0)
 text(35,2.625, "(d)", pos=4,cex=1,font=2) 
+
 dev.off()
 
