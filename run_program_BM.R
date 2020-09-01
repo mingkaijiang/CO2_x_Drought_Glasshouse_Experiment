@@ -13,6 +13,12 @@ source("prepare.R")
 
 outdir <- "output/BM/"
 
+############################# data processing #################################
+### Prepare data beyond day 6 and 16
+fill_missing_values_E_pilularis <- function() {
+    
+}
+
 ############################# plotting #################################
 ### make glasshouse condition (T, RH and VPD during day and night times) plots
 ### open the function to plot!
@@ -27,7 +33,6 @@ make_statistics_leaf_area_and_biomass_table_revised()
 make_leaf_area_and_biomass_plots_by_CO2()
 
 make_leaf_area_and_biomass_plots_by_H2O()
-
 
 
 ### make soil water content and leaf transpiration plots for the two species
