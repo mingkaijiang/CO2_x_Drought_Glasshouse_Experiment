@@ -3,6 +3,9 @@ re_calculate_means_and_sds <- function() {
     #################### E. pilularis
     myDF1 <- read.csv("data/glasshouse2/Drydown_gasexchange_pilularis_processed.csv")
     
+    ### recalcualte E_psi
+    myDF1$E_psi <- with(myDF1, (transp_plant/(psiPD-psiMD)))
+    
     
     ## create dailyDF
     dDF1 <- myDF1[,c("Replicate", "Trt", "Day", "Aearly", "gsearly", "transp_leaf_early")]
@@ -53,9 +56,10 @@ re_calculate_means_and_sds <- function() {
     
     
     #################### E. populnea
-    
     myDF2 <- read.csv("data/glasshouse2/Drydown_gasexchange_populnea_processed.csv")
     
+    ### recalcualte E_psi
+    myDF2$E_psi <- with(myDF2, (transp_plant/(psiPD-psiMD)))
     
     ## create dailyDF
     dDF1 <- myDF2[,c("Replicate", "Trt", "Day", "Aearly", "gsearly", "transp_leaf_early")]

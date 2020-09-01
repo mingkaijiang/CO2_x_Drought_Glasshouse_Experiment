@@ -15,9 +15,7 @@ outdir <- "output/BM/"
 
 ############################# data processing #################################
 ### Prepare data beyond day 6 and 16
-fill_missing_values_E_pilularis <- function() {
-    
-}
+re_calculate_means_and_sds()
 
 ############################# plotting #################################
 ### make glasshouse condition (T, RH and VPD during day and night times) plots

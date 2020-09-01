@@ -1,9 +1,9 @@
 make_whole_plant_hydraulic_conductance_plot <- function() {
  
    #Eucalyptus pilularis
-    pilDF<-read.csv("data/glasshouse2/Drydown_gasexchange_pilularis.csv",sep=",", header=TRUE)
+    pilDF<-read.csv("data/glasshouse2/Drydown_gasexchange_pilularis_processed.csv",sep=",", header=TRUE)
     #Eucalyptus populnea
-    popDF<-read.csv("data/glasshouse2/Drydown_gasexchange_populnea.csv",sep=",", header=TRUE)
+    popDF<-read.csv("data/glasshouse2/Drydown_gasexchange_populnea_processed.csv",sep=",", header=TRUE)
     
     ## remove data points with unequal sample size
     ## E.pilularis: Day > 6, well-watered
@@ -11,8 +11,8 @@ make_whole_plant_hydraulic_conductance_plot <- function() {
     ## E. populnea: POPAND: day >=19
     ## E. populnea: POPED: day >= 22
     ## E. populnea: POPEND: day >= 19
-    pilDF <- pilDF[pilDF$Day<7, ]
-    popDF <- popDF[popDF$Day<19, ]
+    #pilDF <- pilDF[pilDF$Day<7, ]
+    #popDF <- popDF[popDF$Day<19, ]
     
     
     ### plotting DFs
@@ -92,7 +92,7 @@ make_whole_plant_hydraulic_conductance_plot <- function() {
                                                        fill = c("white", "blue3", "white", "red2"),
                                                        col = c("blue3", "blue3", "red2", "red2"),
                                                        linetype = c("dotted", "solid", "dotted", "solid"))))+
-        scale_x_continuous(limits=c(0, 8),
+        scale_x_continuous(limits=c(0, 10),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
     
@@ -156,8 +156,8 @@ make_whole_plant_hydraulic_conductance_plot <- function() {
                                                        fill = c("white", "blue3", "white", "red2"),
                                                        col = c("blue3", "blue3", "red2", "red2"),
                                                        linetype = c("dotted", "solid", "dotted", "solid"))))+
-        scale_x_continuous(limits=c(0, 20),
-                           breaks=c(0, 4, 8, 12, 16, 20))
+        scale_x_continuous(limits=c(0, 31),
+                           breaks=c(0, 5, 10, 15, 20, 25, 30))
     
     ### output
     combined_legend <- get_legend(p1 + theme(legend.position="bottom",
@@ -237,7 +237,7 @@ make_whole_plant_hydraulic_conductance_plot <- function() {
                                                        fill = c("white", "blue3", "white", "red2"),
                                                        col = c("blue3", "blue3", "red2", "red2"),
                                                        linetype = c("dotted", "solid", "dotted", "solid"))))+
-        scale_x_continuous(limits=c(0, 8),
+        scale_x_continuous(limits=c(0, 10),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
     
@@ -301,8 +301,8 @@ make_whole_plant_hydraulic_conductance_plot <- function() {
                                                        fill = c("white", "blue3", "white", "red2"),
                                                        col = c("blue3", "blue3", "red2", "red2"),
                                                        linetype = c("dotted", "solid", "dotted", "solid"))))+
-        scale_x_continuous(limits=c(0, 20),
-                           breaks=c(0, 4, 8, 12, 16, 20))
+        scale_x_continuous(limits=c(0, 31),
+                           breaks=c(0, 5, 10, 15, 20, 25, 30))
     
     ### output
     combined_legend <- get_legend(p1 + theme(legend.position="bottom",
