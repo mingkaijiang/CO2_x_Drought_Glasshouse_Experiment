@@ -3,8 +3,8 @@ make_statistics_leaf_water_relations_gas_exchange_table_at_the_start_of_the_dryd
     
     ############################# perform statistical tests ##############################
     ### read in raw data
-    myDF1 <- read.csv("data/glasshouse2/Drydown_gasexchange_pilularis.csv")
-    myDF2 <- read.csv("data/glasshouse2/Drydown_gasexchange_populnea.csv")
+    myDF1 <- read.csv("data/glasshouse2/Drydown_gasexchange_pilularis_processed.csv")
+    myDF2 <- read.csv("data/glasshouse2/Drydown_gasexchange_populnea_processed.csv")
     
     myDF1 <- subset(myDF1, Day == 1)
     myDF2 <- subset(myDF2, Day == 1)
@@ -19,14 +19,7 @@ make_statistics_leaf_water_relations_gas_exchange_table_at_the_start_of_the_dryd
     myDF1$H2O <- as.factor(myDF1$H2O)
     myDF2$H2O <- as.factor(myDF2$H2O)
     
-    ### calculations
-    myDF1$Adaily <- with(myDF1, (Aearly+Alate)/2)
-    myDF2$Adaily <- with(myDF2, (Aearly+Alate)/2)
     
-    myDF1$gsdaily <- with(myDF1, (gsearly+gslate)/2)
-    myDF2$gsdaily <- with(myDF2, (gsearly+gslate)/2)
-    
-
     ######################################################################
     ### SWC
     mod1<-lme(log(SWC)~CO2*H2O,random=~1|Glasshouse/Replicate,data=myDF1)

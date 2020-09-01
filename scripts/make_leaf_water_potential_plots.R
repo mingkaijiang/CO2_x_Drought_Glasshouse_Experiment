@@ -1,10 +1,10 @@
 make_leaf_water_potential_plots <- function() {
     
     ### E. pilularis
-    pilDF<-read.csv("data/glasshouse2/Pilularis_Phys.csv",sep=",", header=TRUE)
+    pilDF<-read.csv("data/glasshouse2/Pilularis_Phys_Processed.csv",sep=",", header=TRUE)
     
     ### E. populnea
-    popDF<-read.csv("data/glasshouse2/Populnea_Phys.csv",sep=",", header=TRUE)
+    popDF<-read.csv("data/glasshouse2/Populnea_Phys_Processed.csv",sep=",", header=TRUE)
     
     
     ## remove data points with unequal sample size
@@ -70,7 +70,7 @@ make_leaf_water_potential_plots <- function() {
                                     expression(paste(eC[a]*" - W"))),
                            values=c(21,21,21,21))+
         ggtitle("E. pilularis")+
-        ylim(-5, 0)+
+        ylim(-4, 0)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 21, 21),
                                                        fill = c("white", "blue3", "white", "red2"),
@@ -135,13 +135,13 @@ make_leaf_water_potential_plots <- function() {
                                     expression(paste(eC[a]*" - W"))),
                            values=c(21,21,21,21))+
         ggtitle("E. populnea")+
-        ylim(-5, 0)+
+        ylim(-4, 0)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 21, 21),
                                                        fill = c("white", "blue3", "white", "red2"),
                                                        col = c("blue3", "blue3", "red2", "red2"),
                                                        linetype = c("dotted", "solid", "dotted", "solid"))))+
-        scale_x_continuous(limits=c(0, 30),
+        scale_x_continuous(limits=c(0, 31),
                            breaks=c(0, 5, 10, 15, 20, 25, 30))
     
     
@@ -271,7 +271,7 @@ make_leaf_water_potential_plots <- function() {
                                                        fill = c("white", "blue3", "white", "red2"),
                                                        col = c("blue3", "blue3", "red2", "red2"),
                                                        linetype = c("dotted", "solid", "dotted", "solid"))))+
-        scale_x_continuous(limits=c(0, 30),
+        scale_x_continuous(limits=c(0, 31),
                            breaks=c(0, 5, 10, 15, 20, 25, 30))
     
     ### output

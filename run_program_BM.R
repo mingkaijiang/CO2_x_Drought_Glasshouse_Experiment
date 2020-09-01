@@ -43,7 +43,7 @@ make_statistics_leaf_water_relations_gas_exchange_table_revised()
 
 make_swc_and_transpiration_plots()
 
-make_swc_and_transpiration_plots_based_on_raw_data() # the two plots are identical so OK
+#make_swc_and_transpiration_plots_based_on_raw_data() # the two plots are identical so OK
 
 ### transpiration as function of leaf area
 make_transpiration_leaf_area_plot()
@@ -51,7 +51,7 @@ make_transpiration_leaf_area_plot()
 ### pre-dawn and midday leaf water potentials
 make_leaf_water_potential_plots()
 
-make_leaf_water_potential_plots_based_on_raw_data() # the two plots are identical so OK
+#make_leaf_water_potential_plots_based_on_raw_data() # the two plots are identical so OK
 
 ### pre-dawn water potential with swc
 make_predawn_water_potential_with_swc_plots()

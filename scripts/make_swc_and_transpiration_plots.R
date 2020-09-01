@@ -2,22 +2,10 @@ make_swc_and_transpiration_plots <- function() {
     
     ### read in processed data for plotting
     ### E. pilularis
-    pilDF<-read.csv("data/glasshouse2/Pilularis_Phys.csv",sep=",", header=TRUE)
+    pilDF<-read.csv("data/glasshouse2/Pilularis_Phys_Processed.csv",sep=",", header=TRUE)
     
     ### E. populnea
-    popDF<-read.csv("data/glasshouse2/Populnea_Phys.csv",sep=",", header=TRUE)
-    
-    ### filter by days
-    #n1 <- min(unique(pilDF[pilDF$n.1<6,]$Day))
-    #n2 <- min(unique(popDF[popDF$n.1<6,]$Day))
-    
-    #pilDF <- pilDF[pilDF$Day<n1, ]
-    #popDF <- popDF[popDF$Day<n2, ]
-    
-    
-    #pilDF <- pilDF[pilDF$n.1==6, ]
-    #popDF <- popDF[popDF$n.1==6, ]
-    
+    popDF<-read.csv("data/glasshouse2/Populnea_Phys_Processed.csv",sep=",", header=TRUE)
     
     
     #### plotting
@@ -147,7 +135,7 @@ make_swc_and_transpiration_plots <- function() {
                                                        fill = c("white", "blue3", "white", "red2"),
                                                        col = c("blue3", "blue3", "red2", "red2"),
                                                        linetype = c("dotted", "solid", "dotted", "solid"))))+
-        scale_x_continuous(limits=c(0, 30),
+        scale_x_continuous(limits=c(0, 31),
                            breaks=c(0, 5, 10, 15, 20, 25, 30))
     
     
@@ -279,7 +267,7 @@ make_swc_and_transpiration_plots <- function() {
                                                        fill = c("white", "blue3", "white", "red2"),
                                                        col = c("blue3", "blue3", "red2", "red2"),
                                                        linetype = c("dotted", "solid", "dotted", "solid"))))+
-        scale_x_continuous(limits=c(0, 30),
+        scale_x_continuous(limits=c(0, 31),
                            breaks=c(0, 5, 10, 15, 20, 25, 30))
     
     ### output
