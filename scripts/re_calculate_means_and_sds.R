@@ -5,25 +5,28 @@ re_calculate_means_and_sds <- function() {
     
     ### recalcualte E_psi
     myDF1$E_psi <- with(myDF1, (transp_plant/(psiPD-psiMD)))
-    
+    myDF1$Adaily <- with(myDF1, ((Aearly+Alate)/2))
+    myDF1$gsdaily <- with(myDF1, ((gsearly+gslate)/2))
     
     ## create dailyDF
-    dDF1 <- myDF1[,c("Replicate", "Trt", "Day", "Aearly", "gsearly", "transp_leaf_early")]
-    dDF2 <- myDF1[,c("Replicate", "Trt", "Day", "Alate", "gslate", "transp_leaf_late")]
+    #dDF1 <- myDF1[,c("Replicate", "Trt", "Day", "Aearly", "gsearly", "transp_leaf_early")]
+    #dDF2 <- myDF1[,c("Replicate", "Trt", "Day", "Alate", "gslate", "transp_leaf_late")]
+    #
+    #colnames(dDF1) <- colnames(dDF2) <- c("Replicate", "Trt", "Day", "Adaily", "gsdaily", "transp_leaf_daily")
+    #
+    #dDF <- rbind(dDF1, dDF2)
+    #
+    #### summary by
+    #outDF1 <- summaryBy(psiPD+psiMD+transp_plant+E_psi+SWC+Aearly+Alate+gsearly+gslate+transp_leaf_early+transp_leaf_late~Trt+Day,
+    #                    FUN=c(mean, sd, se), data=myDF1)
+    #
+    #outDF2 <- summaryBy(Adaily+gsdaily+transp_leaf_daily~Trt+Day,
+    #                    FUN=c(mean, sd, se), data=dDF)
+    #
+    #outDF <- merge(outDF1, outDF2, by=c("Trt", "Day"))
     
-    colnames(dDF1) <- colnames(dDF2) <- c("Replicate", "Trt", "Day", "Adaily", "gsdaily", "transp_leaf_daily")
-    
-    dDF <- rbind(dDF1, dDF2)
-    
-    ### summary by
-    outDF1 <- summaryBy(psiPD+psiMD+transp_plant+E_psi+SWC+Aearly+Alate+gsearly+gslate+transp_leaf_early+transp_leaf_late~Trt+Day,
-                        FUN=c(mean, sd, se), data=myDF1)
-    
-    outDF2 <- summaryBy(Adaily+gsdaily+transp_leaf_daily~Trt+Day,
-                        FUN=c(mean, sd, se), data=dDF)
-    
-    outDF <- merge(outDF1, outDF2, by=c("Trt", "Day"))
-    
+    outDF <- summaryBy(psiPD+psiMD+transp_plant+E_psi+SWC+Aearly+Alate+gsearly+gslate+transp_leaf_early+transp_leaf_late+Adaily+gsdaily~Trt+Day,
+                       FUN=c(mean, sd, se), data=myDF1)
     
     ### restructure
     outDF <- outDF[,c("Trt", "Day", 
@@ -60,24 +63,28 @@ re_calculate_means_and_sds <- function() {
     
     ### recalcualte E_psi
     myDF2$E_psi <- with(myDF2, (transp_plant/(psiPD-psiMD)))
+    myDF2$Adaily <- with(myDF2, ((Aearly+Alate)/2))
+    myDF2$gsdaily <- with(myDF2, ((gsearly+gslate)/2))
     
     ## create dailyDF
-    dDF1 <- myDF2[,c("Replicate", "Trt", "Day", "Aearly", "gsearly", "transp_leaf_early")]
-    dDF2 <- myDF2[,c("Replicate", "Trt", "Day", "Alate", "gslate", "transp_leaf_late")]
+    #dDF1 <- myDF2[,c("Replicate", "Trt", "Day", "Aearly", "gsearly", "transp_leaf_early")]
+    #dDF2 <- myDF2[,c("Replicate", "Trt", "Day", "Alate", "gslate", "transp_leaf_late")]
+    #
+    #colnames(dDF1) <- colnames(dDF2) <- c("Replicate", "Trt", "Day", "Adaily", "gsdaily", "transp_leaf_daily")
+    #
+    #dDF <- rbind(dDF1, dDF2)
+    #
+    #### summary by
+    #outDF1 <- summaryBy(psiPD+psiMD+transp_plant+E_psi+SWC+Aearly+Alate+gsearly+gslate+transp_leaf_early+transp_leaf_late~Trt+Day,
+    #                    FUN=c(mean, sd, se), data=myDF2)
+    #
+    #outDF2 <- summaryBy(Adaily+gsdaily+transp_leaf_daily~Trt+Day,
+    #                    FUN=c(mean, sd, se), data=dDF)
+    #
+    #outDF <- merge(outDF1, outDF2, by=c("Trt", "Day"))
     
-    colnames(dDF1) <- colnames(dDF2) <- c("Replicate", "Trt", "Day", "Adaily", "gsdaily", "transp_leaf_daily")
-    
-    dDF <- rbind(dDF1, dDF2)
-    
-    ### summary by
-    outDF1 <- summaryBy(psiPD+psiMD+transp_plant+E_psi+SWC+Aearly+Alate+gsearly+gslate+transp_leaf_early+transp_leaf_late~Trt+Day,
-                        FUN=c(mean, sd, se), data=myDF2)
-    
-    outDF2 <- summaryBy(Adaily+gsdaily+transp_leaf_daily~Trt+Day,
-                        FUN=c(mean, sd, se), data=dDF)
-    
-    outDF <- merge(outDF1, outDF2, by=c("Trt", "Day"))
-    
+    outDF <- summaryBy(psiPD+psiMD+transp_plant+E_psi+SWC+Aearly+Alate+gsearly+gslate+transp_leaf_early+transp_leaf_late+Adaily+gsdaily~Trt+Day,
+                       FUN=c(mean, sd, se), data=myDF2)
     
     ### restructure
     outDF <- outDF[,c("Trt", "Day", 

@@ -4,12 +4,7 @@ make_physiological_plots <- function() {
     pilDF<-read.csv("data/glasshouse2/Pilularis_Phys_Processed.csv",sep=",", header=TRUE)
     popDF<-read.csv("data/glasshouse2/Populnea_Phys_Processed.csv",sep=",", header=TRUE)
     
-    ## remove data points with unequal sample size
-    #n1 <- min(unique(PILPhysGraph[PILPhysGraph$n.1<6,]$Day))
-    #n2 <- min(unique(POPPhysGraph[POPPhysGraph$n.1<6,]$Day))
     
-    #pilDF <- PILPhysGraph[PILPhysGraph$Day<n1, ]
-    #popDF <- POPPhysGraph[POPPhysGraph$Day<n2, ]
     
     
     ################################### Plotting ######################################
