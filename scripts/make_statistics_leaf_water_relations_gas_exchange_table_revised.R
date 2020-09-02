@@ -6,8 +6,6 @@ make_statistics_leaf_water_relations_gas_exchange_table_revised <- function() {
     myDF1 <- read.csv("data/glasshouse2/Drydown_gasexchange_pilularis_processed.csv")
     myDF2 <- read.csv("data/glasshouse2/Drydown_gasexchange_populnea_processed.csv")
     
-    #myDF1 <- subset(myDF1, Day <= 8)
-    #myDF2 <- subset(myDF2, Day <= 16)
     
     ### set class
     myDF1$Glasshouse <- as.factor(myDF1$Glasshouse)
@@ -51,7 +49,7 @@ make_statistics_leaf_water_relations_gas_exchange_table_revised <- function() {
     
     ######################################################################
     ### SWC
-    mod1<-lme(SWC~CO2*H2O*Day,random=~1|Glasshouse/Replicate,data=myDF1, na.action = na.omit)
+    mod1<-lme(log(SWC)~CO2*H2O*Day,random=~1|Glasshouse/Replicate,data=myDF1, na.action = na.omit)
     summary(mod1)
     
     #Testing normality of residuals
@@ -155,6 +153,40 @@ make_statistics_leaf_water_relations_gas_exchange_table_revised <- function() {
     # save
     #write.csv(anov,file="output/BM/statistics/Epilularis/Adaily.csv")
     
+    ######################################################################
+    ### Aearly
+    mod1<-lme(Aearly~CO2*H2O*Day,random=~1|Glasshouse/Replicate,data=myDF1)
+    summary(mod1)
+    
+    #Testing normality of residuals
+    qqnorm(resid(mod1))
+    qqline(resid(mod1))
+    shapiro.test(resid(mod1))
+    
+    # anova
+    anov<-anova(mod1)
+    anov
+    
+    # save
+    write.csv(anov,file="output/BM/statistics/Epilularis/Aearly.csv")
+    
+    ######################################################################
+    ### Alate
+    mod1<-lme(Alate~CO2*H2O*Day,random=~1|Glasshouse/Replicate,data=myDF1)
+    summary(mod1)
+    
+    #Testing normality of residuals
+    qqnorm(resid(mod1))
+    qqline(resid(mod1))
+    shapiro.test(resid(mod1))
+    
+    # anova
+    anov<-anova(mod1)
+    anov
+    
+    # save
+    write.csv(anov,file="output/BM/statistics/Epilularis/Alate.csv")
+    
     
     ######################################################################
     ### gsdaily 1
@@ -190,6 +222,41 @@ make_statistics_leaf_water_relations_gas_exchange_table_revised <- function() {
     # save
     #write.csv(anov,file="output/BM/statistics/Epilularis/gsdaily.csv")
    
+    ######################################################################
+    ### gsearly
+    mod1<-lme(log(gsearly)~CO2*H2O*Day,random=~1|Glasshouse/Replicate,data=myDF1)
+    summary(mod1)
+    
+    #Testing normality of residuals
+    qqnorm(resid(mod1))
+    qqline(resid(mod1))
+    shapiro.test(resid(mod1))
+    
+    # anova
+    anov<-anova(mod1)
+    anov
+    
+    # save
+    write.csv(anov,file="output/BM/statistics/Epilularis/gsearly.csv")
+    
+    ######################################################################
+    ### gslate
+    mod1<-lme(log(gslate)~CO2*H2O*Day,random=~1|Glasshouse/Replicate,data=myDF1)
+    summary(mod1)
+    
+    #Testing normality of residuals
+    qqnorm(resid(mod1))
+    qqline(resid(mod1))
+    shapiro.test(resid(mod1))
+    
+    # anova
+    anov<-anova(mod1)
+    anov
+    
+    # save
+    write.csv(anov,file="output/BM/statistics/Epilularis/gslate.csv")
+    
+    
     ######################################################################
     ### Epsi
     mod1<-lme(log(E_psi)~CO2*H2O*Day,random=~1|Glasshouse/Replicate,data=myDF1)
@@ -229,7 +296,7 @@ make_statistics_leaf_water_relations_gas_exchange_table_revised <- function() {
     
     ######################################################################
     ### transpiration
-    mod1<-lme(transp_plant~CO2*H2O*Day,random=~1|Glasshouse/Replicate,data=myDF2)
+    mod1<-lme(log(transp_plant)~CO2*H2O*Day,random=~1|Glasshouse/Replicate,data=myDF2)
     summary(mod1)
     
     #Testing normality of residuals
@@ -261,6 +328,7 @@ make_statistics_leaf_water_relations_gas_exchange_table_revised <- function() {
     
     # save
     write.csv(anov,file="output/BM/statistics/Epopulnea/psiPD.csv")
+    
     
     ######################################################################
     ### psiMD
@@ -316,6 +384,42 @@ make_statistics_leaf_water_relations_gas_exchange_table_revised <- function() {
     
     
     ######################################################################
+    ### Aearly
+    mod1<-lme(Aearly~CO2*H2O*Day,random=~1|Glasshouse/Replicate,data=myDF2)
+    summary(mod1)
+    
+    #Testing normality of residuals
+    qqnorm(resid(mod1))
+    qqline(resid(mod1))
+    shapiro.test(resid(mod1))
+    
+    # anova
+    anov<-anova(mod1)
+    anov
+    
+    # save
+    write.csv(anov,file="output/BM/statistics/Epopulnea/Aearly.csv")
+    
+    
+    ######################################################################
+    ### Alate
+    mod1<-lme(Alate~CO2*H2O*Day,random=~1|Glasshouse/Replicate,data=myDF2)
+    summary(mod1)
+    
+    #Testing normality of residuals
+    qqnorm(resid(mod1))
+    qqline(resid(mod1))
+    shapiro.test(resid(mod1))
+    
+    # anova
+    anov<-anova(mod1)
+    anov
+    
+    # save
+    write.csv(anov,file="output/BM/statistics/Epopulnea/Alate.csv")
+    
+    
+    ######################################################################
     ### gsdaily
     mod1<-lme(log(gsdaily)~CO2*H2O*Day,random=~1|Glasshouse/Replicate,data=myDF2)
     summary(mod1)
@@ -347,6 +451,41 @@ make_statistics_leaf_water_relations_gas_exchange_table_revised <- function() {
     
     # save
     #write.csv(anov,file="output/BM/statistics/Epopulnea/gsdaily.csv")
+    
+    
+    ######################################################################
+    ### gsearly
+    mod1<-lme(log(gsearly)~CO2*H2O*Day,random=~1|Glasshouse/Replicate,data=myDF2)
+    summary(mod1)
+    
+    #Testing normality of residuals
+    qqnorm(resid(mod1))
+    qqline(resid(mod1))
+    shapiro.test(resid(mod1))
+    
+    # anova
+    anov<-anova(mod1)
+    anov
+    
+    # save
+    write.csv(anov,file="output/BM/statistics/Epopulnea/gsearly.csv")
+    
+    ######################################################################
+    ### gslate
+    mod1<-lme(log(gslate)~CO2*H2O*Day,random=~1|Glasshouse/Replicate,data=myDF2)
+    summary(mod1)
+    
+    #Testing normality of residuals
+    qqnorm(resid(mod1))
+    qqline(resid(mod1))
+    shapiro.test(resid(mod1))
+    
+    # anova
+    anov<-anova(mod1)
+    anov
+    
+    # save
+    write.csv(anov,file="output/BM/statistics/Epopulnea/gslate.csv")
     
     
     ######################################################################

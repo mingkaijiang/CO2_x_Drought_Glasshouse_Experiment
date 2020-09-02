@@ -4,60 +4,69 @@ make_CO2_ratios_of_A_and_gs_plots_with_se <- function() {
     pilDF<-read.csv("data/glasshouse2/Drydown_gasexchange_pilularis_processed.csv",sep=",", header=TRUE)
     popDF<-read.csv("data/glasshouse2/Drydown_gasexchange_populnea_processed.csv",sep=",", header=TRUE)
     
-    ## remove data points with unequal sample size
-    #pilDF <- pilDF[pilDF$Day<7, ]
-    #popDF <- popDF[popDF$Day<19, ]
+    
+    ### Method 1 average
+    pilDF$Adaily <- with(pilDF, ((Aearly+Alate)/2))
+    pilDF$gsdaily <- with(pilDF, ((gsearly+gslate)/2))
+    
+    popDF$Adaily <- with(popDF, ((Aearly+Alate)/2))
+    popDF$gsdaily <- with(popDF, ((gsearly+gslate)/2))
+    
+    pilDF$WUE_daily <- pilDF$Adaily / pilDF$gsdaily
+    popDF$WUE_daily <- popDF$Adaily / popDF$gsdaily
+    
+
     
     ### daily DF
-    ## E. pilularis
-    tmpDF1 <- myDF1[,c("Replicate", "Trt", "CO2", "H2O", "Glasshouse", "Day", "Aearly", "gsearly", "transp_leaf_early")]
-    tmpDF2 <- myDF1[,c("Replicate", "Trt", "CO2", "H2O", "Glasshouse", "Day", "Alate", "gslate", "transp_leaf_late")]
-    
-    colnames(tmpDF1) <- colnames(tmpDF2) <- c("Replicate", "Trt", "CO2", "H2O", "Glasshouse", "Day", "Adaily", "gsdaily", "transp_leaf_daily")
-    
-    dDF1 <- rbind(tmpDF1, tmpDF2)
-    
-    # E. populnea
-    tmpDF1 <- myDF2[,c("Replicate", "Trt", "CO2", "H2O", "Glasshouse", "Day", "Aearly", "gsearly", "transp_leaf_early")]
-    tmpDF2 <- myDF2[,c("Replicate", "Trt", "CO2", "H2O", "Glasshouse", "Day", "Alate", "gslate", "transp_leaf_late")]
-    
-    colnames(tmpDF1) <- colnames(tmpDF2) <- c("Replicate", "Trt", "CO2", "H2O", "Glasshouse", "Day", "Adaily", "gsdaily", "transp_leaf_daily")
-    
-    dDF2 <- rbind(tmpDF1, tmpDF2)
+    ### E. pilularis
+    #tmpDF1 <- myDF1[,c("Replicate", "Trt", "CO2", "H2O", "Glasshouse", "Day", "Aearly", "gsearly", "transp_leaf_early")]
+    #tmpDF2 <- myDF1[,c("Replicate", "Trt", "CO2", "H2O", "Glasshouse", "Day", "Alate", "gslate", "transp_leaf_late")]
+    #
+    #colnames(tmpDF1) <- colnames(tmpDF2) <- c("Replicate", "Trt", "CO2", "H2O", "Glasshouse", "Day", "Adaily", "gsdaily", "transp_leaf_daily")
+    #
+    #dDF1 <- rbind(tmpDF1, tmpDF2)
+    #
+    ## E. populnea
+    #tmpDF1 <- myDF2[,c("Replicate", "Trt", "CO2", "H2O", "Glasshouse", "Day", "Aearly", "gsearly", "transp_leaf_early")]
+    #tmpDF2 <- myDF2[,c("Replicate", "Trt", "CO2", "H2O", "Glasshouse", "Day", "Alate", "gslate", "transp_leaf_late")]
+    #
+    #colnames(tmpDF1) <- colnames(tmpDF2) <- c("Replicate", "Trt", "CO2", "H2O", "Glasshouse", "Day", "Adaily", "gsdaily", "transp_leaf_daily")
+    #
+    #dDF2 <- rbind(tmpDF1, tmpDF2)
     
     ### calculate iWUE
-    dDF1$WUE_daily <- dDF1$Adaily / dDF1$gsdaily
+    #dDF1$WUE_daily <- dDF1$Adaily / dDF1$gsdaily
     pilDF$WUE_early <- pilDF$Aearly / pilDF$gsearly
     pilDF$WUE_late <- pilDF$Alate / pilDF$gslate
     
-    dDF2$WUE_daily <- dDF2$Adaily / dDF2$gsdaily
+    #dDF2$WUE_daily <- dDF2$Adaily / dDF2$gsdaily
     popDF$WUE_early <- popDF$Aearly / popDF$gsearly
     popDF$WUE_late <- popDF$Alate / popDF$gslate
     
     
     ### calculate log values
-    dDF1$log_Adaily <- log(dDF1$Adaily)
+    pilDF$log_Adaily <- log(pilDF$Adaily)
     pilDF$log_Aearly <- log(pilDF$Aearly)
     pilDF$log_Alate <- log(pilDF$Alate)
     
-    dDF1$log_gsdaily <- log(dDF1$gsdaily)
+    pilDF$log_gsdaily <- log(pilDF$gsdaily)
     pilDF$log_gsearly <- log(pilDF$gsearly)
     pilDF$log_gslate <- log(pilDF$gslate)
     
-    dDF1$log_WUE_daily <- log(dDF1$WUE_daily)
+    pilDF$log_WUE_daily <- log(pilDF$WUE_daily)
     pilDF$log_WUE_early <- log(pilDF$WUE_early)
     pilDF$log_WUE_late <- log(pilDF$WUE_late)
     
     
-    dDF2$log_Adaily <- log(dDF2$Adaily)
+    popDF$log_Adaily <- log(popDF$Adaily)
     popDF$log_Aearly <- log(popDF$Aearly)
     popDF$log_Alate <- log(popDF$Alate)
     
-    dDF2$log_gsdaily <- log(dDF2$gsdaily)
+    popDF$log_gsdaily <- log(popDF$gsdaily)
     popDF$log_gsearly <- log(popDF$gsearly)
     popDF$log_gslate <- log(popDF$gslate)
     
-    dDF2$log_WUE_daily <- log(dDF2$WUE_daily)
+    popDF$log_WUE_daily <- log(popDF$WUE_daily)
     popDF$log_WUE_early <- log(popDF$WUE_early)
     popDF$log_WUE_late <- log(popDF$WUE_late)
     
@@ -69,7 +78,7 @@ make_CO2_ratios_of_A_and_gs_plots_with_se <- function() {
     
     pilDF2 <- summaryBy(log_Adaily+log_gsdaily+
                             log_WUE_daily~Trt+CO2+H2O+Day,
-                        FUN=c(mean,se), data=dDF1, keep.names=T)
+                        FUN=c(mean,se), data=pilDF, keep.names=T)
     
     
     popDF1 <- summaryBy(log_Aearly+log_Alate+log_gsearly+log_gslate+
@@ -78,7 +87,7 @@ make_CO2_ratios_of_A_and_gs_plots_with_se <- function() {
     
     popDF2 <- summaryBy(log_Adaily+log_gsdaily+
                             log_WUE_daily~Trt+CO2+H2O+Day,
-                        FUN=c(mean,se), data=dDF2, keep.names=T)
+                        FUN=c(mean,se), data=popDF, keep.names=T)
     
     ### merge
     pDF1 <- merge(pilDF1, pilDF2, by=c("Trt", "CO2", "H2O", "Day"))
@@ -1113,7 +1122,7 @@ make_CO2_ratios_of_A_and_gs_plots_with_se <- function() {
                           values=c("brown", "orange"),
                           guide=guide_legend(nrow=1))+
         ggtitle("E. pilularis")+
-        ylim(0, 4)+
+        ylim(0, 10)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("brown", "orange"),
@@ -1196,7 +1205,7 @@ make_CO2_ratios_of_A_and_gs_plots_with_se <- function() {
                           labels=c("Droughted", "Well-watered"),
                           values=c("brown", "orange"),
                           guide=guide_legend(nrow=1))+
-        ylim(0, 10)+
+        ylim(0, 4)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("brown", "orange"),
@@ -1239,7 +1248,7 @@ make_CO2_ratios_of_A_and_gs_plots_with_se <- function() {
                           values=c("brown", "orange"),
                           guide=guide_legend(nrow=1))+
         ggtitle("E. populnea")+
-        ylim(0, 4)+
+        ylim(0, 10)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("brown", "orange"),
