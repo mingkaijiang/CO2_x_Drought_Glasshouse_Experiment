@@ -147,7 +147,7 @@ make_leaf_water_potential_plots <- function() {
     
     
     p3 <- ggplot(pilDF, aes(x=Day, y=psiMD, group=Trt)) +
-        geom_rect(ymin = -4, ymax = 0, 
+        geom_rect(ymin = -4.1, ymax = 0, 
                   xmin = 6.5, xmax = 10,
                   fill = alpha("lightyellow", 0.2))+
         geom_errorbar(aes(col=Trt, x=Day, 
@@ -200,7 +200,7 @@ make_leaf_water_potential_plots <- function() {
                                     expression(paste(eC[a]*" - D")),
                                     expression(paste(eC[a]*" - W"))),
                            values=c(21,21,21,21))+
-        ylim(-4, 0)+
+        ylim(-4.1, 0)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 21, 21),
                                                        fill = c("white", "blue3", "white", "red2"),
@@ -212,7 +212,7 @@ make_leaf_water_potential_plots <- function() {
     
     
     p4 <- ggplot(popDF, aes(x=Day, y=psiMD, group=Trt)) +
-        geom_rect(ymin = -4, ymax = 0, 
+        geom_rect(ymin = -4.1, ymax = 0, 
                   xmin = 16.5, xmax = 40,
                   fill = alpha("lightyellow", 0.2))+
         geom_errorbar(aes(col=Trt, x=Day, 
@@ -265,7 +265,7 @@ make_leaf_water_potential_plots <- function() {
                                     expression(paste(eC[a]*" - D")),
                                     expression(paste(eC[a]*" - W"))),
                            values=c(21,21,21,21))+
-        ylim(-4, 0)+
+        ylim(-4.1, 0)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 21, 21),
                                                        fill = c("white", "blue3", "white", "red2"),

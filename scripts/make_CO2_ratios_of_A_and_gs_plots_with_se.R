@@ -1196,7 +1196,7 @@ make_CO2_ratios_of_A_and_gs_plots_with_se <- function() {
                           labels=c("Droughted", "Well-watered"),
                           values=c("brown", "orange"),
                           guide=guide_legend(nrow=1))+
-        ylim(0, 4)+
+        ylim(0, 10)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21),
                                                        fill = c("brown", "orange"),

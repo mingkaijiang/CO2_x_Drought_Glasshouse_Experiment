@@ -193,8 +193,8 @@ make_whole_plant_hydraulic_conductance_plot <- function() {
               legend.box.just = 'left',
               plot.title = element_text(size=16, face="bold.italic", 
                                         hjust = 0.5))+
-        ylab(expression(paste("log E / "*psi[pd] * "-" * psi[md] * 
-                                  " (l " * d^-1 * " " * MPa^-1 * ")")))+
+        ylab(expression(paste("log [E / "*psi[pd] * "-" * psi[md] * 
+                                  "] (l " * d^-1 * " " * MPa^-1 * ")")))+
         scale_color_manual(name="",
                            limits=c("PILAD", "PILAND", "PILED", "PILEND"),
                            labels=c(expression(paste(aC[a]*" - D")), 
@@ -226,7 +226,7 @@ make_whole_plant_hydraulic_conductance_plot <- function() {
                                     expression(paste(eC[a]*" - W"))),
                            values=c(21,21,21,21))+
         ggtitle("E. pilularis")+
-        ylim(-4, 4)+
+        ylim(-3, 3)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 21, 21),
                                                        fill = c("white", "blue3", "white", "red2"),
@@ -290,7 +290,7 @@ make_whole_plant_hydraulic_conductance_plot <- function() {
                                     expression(paste(eC[a]*" - W"))),
                            values=c(21,21,21,21))+
         ggtitle("E. populnea")+
-        ylim(-4, 4)+
+        ylim(-3, 3)+
         xlab("Day")+
         guides(fill = guide_legend(override.aes = list(shape = c(21, 21, 21, 21),
                                                        fill = c("white", "blue3", "white", "red2"),
