@@ -76,7 +76,7 @@ make_swc_and_transpiration_plots <- function() {
     
     p2 <- ggplot(popDF, aes(x=Day, y=SWC, group=Trt)) +
         geom_rect(ymin = 0, ymax = 0.4, 
-                  xmin = 16.5, xmax = 30,
+                  xmin = 16.5, xmax = 40,
                   fill = alpha("lightyellow", 0.2))+
         geom_errorbar(aes(col=Trt, x=Day, 
                           ymin=SWC-SWCSE, ymax=SWC+SWCSE),
@@ -135,8 +135,8 @@ make_swc_and_transpiration_plots <- function() {
                                                        fill = c("white", "blue3", "white", "red2"),
                                                        col = c("blue3", "blue3", "red2", "red2"),
                                                        linetype = c("dotted", "solid", "dotted", "solid"))))+
-        scale_x_continuous(limits=c(0, 31),
-                           breaks=c(0, 5, 10, 15, 20, 25, 30))
+        scale_x_continuous(limits=c(0, 40),
+                           breaks=c(0, 5, 10, 15, 20, 25, 30, 35, 40))
     
     
     
@@ -208,7 +208,7 @@ make_swc_and_transpiration_plots <- function() {
     
     p4 <- ggplot(popDF, aes(x=Day, y=transp_plant, group=Trt)) +
         geom_rect(ymin = 0, ymax = 4, 
-                  xmin = 16.5, xmax = 30,
+                  xmin = 16.5, xmax = 40,
                   fill = alpha("lightyellow", 0.2))+
         geom_errorbar(aes(col=Trt, x=Day, 
                           ymin=transp_plant-transp_plantSE, 
@@ -267,8 +267,8 @@ make_swc_and_transpiration_plots <- function() {
                                                        fill = c("white", "blue3", "white", "red2"),
                                                        col = c("blue3", "blue3", "red2", "red2"),
                                                        linetype = c("dotted", "solid", "dotted", "solid"))))+
-        scale_x_continuous(limits=c(0, 31),
-                           breaks=c(0, 5, 10, 15, 20, 25, 30))
+        scale_x_continuous(limits=c(0, 40),
+                           breaks=c(0, 5, 10, 15, 20, 25, 30, 35, 40))
     
     ### output
     combined_legend <- get_legend(p1 + theme(legend.position="bottom",

@@ -1,15 +1,15 @@
 make_physiological_plots <- function() {
         
     #FIGURES (Eucalyptus pilularis)
-    PILPhysGraph<-read.csv("data/glasshouse2/Pilularis_Phys.csv",sep=",", header=TRUE)
-    POPPhysGraph<-read.csv("data/glasshouse2/Populnea_Phys.csv",sep=",", header=TRUE)
+    pilDF<-read.csv("data/glasshouse2/Pilularis_Phys_Processed.csv",sep=",", header=TRUE)
+    popDF<-read.csv("data/glasshouse2/Populnea_Phys_Processed.csv",sep=",", header=TRUE)
     
     ## remove data points with unequal sample size
-    n1 <- min(unique(PILPhysGraph[PILPhysGraph$n.1<6,]$Day))
-    n2 <- min(unique(POPPhysGraph[POPPhysGraph$n.1<6,]$Day))
+    #n1 <- min(unique(PILPhysGraph[PILPhysGraph$n.1<6,]$Day))
+    #n2 <- min(unique(POPPhysGraph[POPPhysGraph$n.1<6,]$Day))
     
-    pilDF <- PILPhysGraph[PILPhysGraph$Day<n1, ]
-    popDF <- POPPhysGraph[POPPhysGraph$Day<n2, ]
+    #pilDF <- PILPhysGraph[PILPhysGraph$Day<n1, ]
+    #popDF <- POPPhysGraph[POPPhysGraph$Day<n2, ]
     
     
     ################################### Plotting ######################################
@@ -71,7 +71,7 @@ make_physiological_plots <- function() {
                                                        fill = c("white", "blue3", "white", "red2"),
                                                        col = c("blue3", "blue3", "red2", "red2"),
                                                        linetype = c("dotted", "solid", "dotted", "solid"))))+
-        scale_x_continuous(limits=c(0, 8),
+        scale_x_continuous(limits=c(0, 10),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
     
@@ -133,13 +133,13 @@ make_physiological_plots <- function() {
                                                        fill = c("white", "blue3", "white", "red2"),
                                                        col = c("blue3", "blue3", "red2", "red2"),
                                                        linetype = c("dotted", "solid", "dotted", "solid"))))+
-        scale_x_continuous(limits=c(0, 20),
-                           breaks=c(0, 4, 8, 12, 16, 20))
+        scale_x_continuous(limits=c(0, 40),
+                           breaks=c(0, 5, 10, 15, 20, 25, 30, 35, 40))
     
     
-    p3 <- ggplot(pilDF, aes(x=Day, y=gsDaily, group=Trt)) +
+    p3 <- ggplot(pilDF, aes(x=Day, y=gsdaily, group=Trt)) +
         geom_errorbar(aes(col=Trt, x=Day, 
-                          ymin=gsDaily-gsDailySE, ymax=gsDaily+gsDailySE),
+                          ymin=gsdaily-gsdailySE, ymax=gsdaily+gsdailySE),
                       width=0.2)+
         geom_point(aes(col=Trt, fill=Trt, pch=Trt), size=2)+
         geom_line(aes(col=Trt, lty=Trt))+
@@ -194,14 +194,14 @@ make_physiological_plots <- function() {
                                                        fill = c("white", "blue3", "white", "red2"),
                                                        col = c("blue3", "blue3", "red2", "red2"),
                                                        linetype = c("dotted", "solid", "dotted", "solid"))))+
-        scale_x_continuous(limits=c(0, 8),
+        scale_x_continuous(limits=c(0, 10),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
     
     
-    p4 <- ggplot(popDF, aes(x=Day, y=gsDaily, group=Trt)) +
+    p4 <- ggplot(popDF, aes(x=Day, y=gsdaily, group=Trt)) +
         geom_errorbar(aes(col=Trt, x=Day, 
-                          ymin=gsDaily-gsDailySE, ymax=gsDaily+gsDailySE),
+                          ymin=gsdaily-gsdailySE, ymax=gsdaily+gsdailySE),
                       width=0.6)+
         geom_point(aes(col=Trt, fill=Trt, pch=Trt), size=2)+
         geom_line(aes(col=Trt, lty=Trt))+
@@ -256,8 +256,8 @@ make_physiological_plots <- function() {
                                                        fill = c("white", "blue3", "white", "red2"),
                                                        col = c("blue3", "blue3", "red2", "red2"),
                                                        linetype = c("dotted", "solid", "dotted", "solid"))))+
-        scale_x_continuous(limits=c(0, 20),
-                           breaks=c(0, 4, 8, 12, 16, 20))
+        scale_x_continuous(limits=c(0, 40),
+                           breaks=c(0, 5, 10, 15, 20, 25, 30, 35, 40))
     
     ### output
     combined_legend <- get_legend(p1 + theme(legend.position="bottom",

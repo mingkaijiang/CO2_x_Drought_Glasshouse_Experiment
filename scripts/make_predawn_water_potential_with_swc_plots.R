@@ -22,8 +22,8 @@ make_predawn_water_potential_with_swc_plots <- function() {
    #n1 <- min(unique(PILPhysGraph[PILPhysGraph$n.1<6,]$Day))
    #n2 <- min(unique(POPPhysGraph[POPPhysGraph$n.1<6,]$Day))
    
-   #pilDF <- PILPhysGraph[PILPhysGraph$Day<n1, ]
-   #popDF <- POPPhysGraph[POPPhysGraph$Day<n2, ]
+   pilDF <- PILPhysGraph#[PILPhysGraph$Day<n1, ]
+   popDF <- POPPhysGraph#[POPPhysGraph$Day<n2, ]
    
    
    

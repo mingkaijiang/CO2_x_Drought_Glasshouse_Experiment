@@ -1,15 +1,15 @@
 make_normalized_Asat_plots <- function() {
     
     ### read input
-    pilDF<-read.csv("data/glasshouse2/Pilularis_Phys.csv",sep=",", header=TRUE)
-    popDF<-read.csv("data/glasshouse2/Populnea_Phys.csv",sep=",", header=TRUE)
+    pilDF<-read.csv("data/glasshouse2/Pilularis_Phys_Processed.csv",sep=",", header=TRUE)
+    popDF<-read.csv("data/glasshouse2/Populnea_Phys_Processed.csv",sep=",", header=TRUE)
     
     ## remove data points with unequal sample size
-    n1 <- min(unique(pilDF[pilDF$n.1<6,]$Day))
-    n2 <- min(unique(popDF[popDF$n.1<6,]$Day))
+    #n1 <- min(unique(pilDF[pilDF$n.1<6,]$Day))
+    #n2 <- min(unique(popDF[popDF$n.1<6,]$Day))
     
-    pilDF <- pilDF[pilDF$Day<n1, ]
-    popDF <- popDF[popDF$Day<n2, ]
+    #pilDF <- pilDF[pilDF$Day<n1, ]
+    #popDF <- popDF[popDF$Day<n2, ]
     
     
     ### baseline 1 day Asat
@@ -101,7 +101,7 @@ make_normalized_Asat_plots <- function() {
                                                        fill = c("white", "blue3", "white", "red2"),
                                                        col = c("blue3", "blue3", "red2", "red2"),
                                                        linetype = c("dotted", "dotted", "solid", "solid"))))+
-        scale_x_continuous(limits=c(0, 8),
+        scale_x_continuous(limits=c(0, 10),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
     
@@ -160,7 +160,7 @@ make_normalized_Asat_plots <- function() {
                                                        fill = c("white", "blue3", "white", "red2"),
                                                        col = c("blue3", "blue3", "red2", "red2"),
                                                        linetype = c("dotted", "dotted", "solid", "solid"))))+
-        scale_x_continuous(limits=c(0, 8),
+        scale_x_continuous(limits=c(0, 10),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
     
@@ -219,7 +219,7 @@ make_normalized_Asat_plots <- function() {
                                                        fill = c("white", "blue3", "white", "red2"),
                                                        col = c("blue3", "blue3", "red2", "red2"),
                                                        linetype = c("dotted", "dotted", "solid", "solid"))))+
-        scale_x_continuous(limits=c(0, 8),
+        scale_x_continuous(limits=c(0, 10),
                            breaks=c(0, 2, 4, 6, 8, 10))
     
     
@@ -279,8 +279,8 @@ make_normalized_Asat_plots <- function() {
                                                        fill = c("white", "blue3", "white", "red2"),
                                                        col = c("blue3", "blue3", "red2", "red2"),
                                                        linetype = c("dotted", "dotted", "solid", "solid"))))+
-        scale_x_continuous(limits=c(0, 20),
-                           breaks=c(0, 4, 8, 12, 16, 20))
+        scale_x_continuous(limits=c(0, 40),
+                           breaks=c(0, 5, 10, 15, 20, 25, 30, 35, 40))
     
     p4 <- ggplot(popDF, aes(x=Day, y=AearlyNORM, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt, pch=Trt), size=2)+
@@ -337,8 +337,8 @@ make_normalized_Asat_plots <- function() {
                                                        fill = c("white", "blue3", "white", "red2"),
                                                        col = c("blue3", "blue3", "red2", "red2"),
                                                        linetype = c("dotted", "dotted", "solid", "solid"))))+
-        scale_x_continuous(limits=c(0, 20),
-                           breaks=c(0, 4, 8, 12, 16, 20))
+        scale_x_continuous(limits=c(0, 40),
+                           breaks=c(0, 5, 10, 15, 20, 25, 30, 35, 40))
     
     p6 <- ggplot(popDF, aes(x=Day, y=AlateNORM, group=Trt)) +
         geom_point(aes(col=Trt, fill=Trt, pch=Trt), size=2)+
@@ -395,8 +395,8 @@ make_normalized_Asat_plots <- function() {
                                                        fill = c("white", "blue3", "white", "red2"),
                                                        col = c("blue3", "blue3", "red2", "red2"),
                                                        linetype = c("dotted", "dotted", "solid", "solid"))))+
-        scale_x_continuous(limits=c(0, 20),
-                           breaks=c(0, 4, 8, 12, 16, 20))
+        scale_x_continuous(limits=c(0, 40),
+                           breaks=c(0, 5, 10, 15, 20, 25, 30, 35, 40))
     
     
     ### output

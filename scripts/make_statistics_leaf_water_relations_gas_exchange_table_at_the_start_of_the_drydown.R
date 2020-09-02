@@ -20,6 +20,23 @@ make_statistics_leaf_water_relations_gas_exchange_table_at_the_start_of_the_dryd
     myDF2$H2O <- as.factor(myDF2$H2O)
     
     
+    ### daily DF
+    ## E. pilularis
+    tmpDF1 <- myDF1[,c("Replicate", "Trt", "CO2", "H2O", "Glasshouse", "Day", "Aearly", "gsearly", "transp_leaf_early")]
+    tmpDF2 <- myDF1[,c("Replicate", "Trt", "CO2", "H2O", "Glasshouse", "Day", "Alate", "gslate", "transp_leaf_late")]
+    
+    colnames(tmpDF1) <- colnames(tmpDF2) <- c("Replicate", "Trt", "CO2", "H2O", "Glasshouse", "Day", "Adaily", "gsdaily", "transp_leaf_daily")
+    
+    dDF1 <- rbind(tmpDF1, tmpDF2)
+    
+    # E. populnea
+    tmpDF1 <- myDF2[,c("Replicate", "Trt", "CO2", "H2O", "Glasshouse", "Day", "Aearly", "gsearly", "transp_leaf_early")]
+    tmpDF2 <- myDF2[,c("Replicate", "Trt", "CO2", "H2O", "Glasshouse", "Day", "Alate", "gslate", "transp_leaf_late")]
+    
+    colnames(tmpDF1) <- colnames(tmpDF2) <- c("Replicate", "Trt", "CO2", "H2O", "Glasshouse", "Day", "Adaily", "gsdaily", "transp_leaf_daily")
+    
+    dDF2 <- rbind(tmpDF1, tmpDF2)
+    
     ######################################################################
     ### SWC
     mod1<-lme(log(SWC)~CO2*H2O,random=~1|Glasshouse/Replicate,data=myDF1)
@@ -94,7 +111,7 @@ make_statistics_leaf_water_relations_gas_exchange_table_at_the_start_of_the_dryd
     
     ######################################################################
     ### Adaily
-    mod1<-lme(Adaily~CO2*H2O,random=~1|Glasshouse/Replicate,data=myDF1)
+    mod1<-lme(Adaily~CO2*H2O,random=~1|Glasshouse/Replicate,data=dDF1)
     summary(mod1)
     
     #Testing normality of residuals
@@ -112,7 +129,7 @@ make_statistics_leaf_water_relations_gas_exchange_table_at_the_start_of_the_dryd
     
     ######################################################################
     ### gsdaily
-    mod1<-lme(log(gsdaily)~CO2*H2O,random=~1|Glasshouse/Replicate,data=myDF1)
+    mod1<-lme(log(gsdaily)~CO2*H2O,random=~1|Glasshouse/Replicate,data=dDF1)
     summary(mod1)
     
     #Testing normality of residuals
@@ -221,7 +238,7 @@ make_statistics_leaf_water_relations_gas_exchange_table_at_the_start_of_the_dryd
     
     ######################################################################
     ### Adaily
-    mod1<-lme(Adaily~CO2*H2O,random=~1|Glasshouse/Replicate,data=myDF2)
+    mod1<-lme(Adaily~CO2*H2O,random=~1|Glasshouse/Replicate,data=dDF2)
     summary(mod1)
     
     #Testing normality of residuals
@@ -239,7 +256,7 @@ make_statistics_leaf_water_relations_gas_exchange_table_at_the_start_of_the_dryd
     
     ######################################################################
     ### gsdaily
-    mod1<-lme(gsdaily~CO2*H2O,random=~1|Glasshouse/Replicate,data=myDF2)
+    mod1<-lme(gsdaily~CO2*H2O,random=~1|Glasshouse/Replicate,data=dDF2)
     summary(mod1)
     
     #Testing normality of residuals
@@ -274,3 +291,4 @@ make_statistics_leaf_water_relations_gas_exchange_table_at_the_start_of_the_dryd
     
     
 }
+

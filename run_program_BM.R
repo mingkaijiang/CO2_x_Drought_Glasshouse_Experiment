@@ -33,12 +33,12 @@ make_leaf_area_and_biomass_plots_by_CO2()
 make_leaf_area_and_biomass_plots_by_H2O()
 
 
-### make soil water content and leaf transpiration plots for the two species
+### make statistical summary table for fluxes
 make_statistics_leaf_water_relations_gas_exchange_table_at_the_start_of_the_drydown()
 
 make_statistics_leaf_water_relations_gas_exchange_table_revised()
 
-
+### make soil water content and leaf transpiration plots for the two species
 make_swc_and_transpiration_plots()
 
 #make_swc_and_transpiration_plots_based_on_raw_data() # the two plots are identical so OK
@@ -60,7 +60,7 @@ make_whole_plant_hydraulic_conductance_plot()
 ### leaf gas exchange fluxes
 make_physiological_plots()
 
-make_physiological_plots_based_on_raw_data() # the two plots are identical so OK
+#make_physiological_plots_based_on_raw_data() # the two plots are identical so OK
  
 #make_pilularis_physiological_plots()
 
