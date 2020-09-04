@@ -67,7 +67,13 @@ make_physiological_plots <- function() {
                                                        col = c("blue3", "blue3", "red2", "red2"),
                                                        linetype = c("dotted", "solid", "dotted", "solid"))))+
         scale_x_continuous(limits=c(0, 10),
-                           breaks=c(0, 2, 4, 6, 8, 10))
+                           breaks=c(0, 2, 4, 6, 8, 10))+
+        geom_segment(aes(x=7, y=25, xend=9, yend=25), col="blue3") +  # A-ND
+        geom_segment(aes(x=7, y=23, xend=7, yend=25), col="blue3")+  # A-ND
+        geom_segment(aes(x=9, y=23, xend=9, yend=25), col="blue3")+  # A-ND
+        geom_segment(aes(x=7, y=22, xend=9, yend=22), col="red2") + # E-ND
+        geom_segment(aes(x=7, y=20, xend=7, yend=22), col="red2")+  # E-ND
+        geom_segment(aes(x=9, y=20, xend=9, yend=22), col="red2")   # E-ND
     
     
     p2 <- ggplot(popDF, aes(x=Day, y=Adaily, group=Trt)) +
@@ -129,7 +135,19 @@ make_physiological_plots <- function() {
                                                        col = c("blue3", "blue3", "red2", "red2"),
                                                        linetype = c("dotted", "solid", "dotted", "solid"))))+
         scale_x_continuous(limits=c(0, 40),
-                           breaks=c(0, 5, 10, 15, 20, 25, 30, 35, 40))
+                           breaks=c(0, 5, 10, 15, 20, 25, 30, 35, 40))+
+        geom_segment(aes(x=19, y=26, xend=37, yend=26), col="blue3")+   #A-ND
+        geom_segment(aes(x=19, y=26, xend=19, yend=24), col="blue3")+   #A-ND
+        geom_segment(aes(x=37, y=26, xend=37, yend=24), col="blue3")+   #A-ND
+        geom_segment(aes(x=19, y=29, xend=37, yend=29), col="red2")+   #E-ND
+        geom_segment(aes(x=19, y=27, xend=19, yend=29), col="red2")+   #E-ND
+        geom_segment(aes(x=37, y=27, xend=37, yend=29), col="red2")+   #E-ND
+        geom_segment(aes(x=31, y=20, xend=37, yend=20), col="blue3", lty="dotted") +   #A-D
+        geom_segment(aes(x=31, y=20, xend=31, yend=18), col="blue3", lty="dotted")+   #A-D
+        geom_segment(aes(x=37, y=20, xend=37, yend=18), col="blue3", lty="dotted")+   #A-D
+        geom_segment(aes(x=22, y=23, xend=37, yend=23), col="red2", lty="dotted")+   #E-D
+        geom_segment(aes(x=22, y=23, xend=22, yend=21), col="red2", lty="dotted")+   #E-D
+        geom_segment(aes(x=37, y=23, xend=37, yend=21), col="red2", lty="dotted")    #E-D
     
     
     p3 <- ggplot(pilDF, aes(x=Day, y=gsdaily, group=Trt)) +
@@ -263,7 +281,7 @@ make_physiological_plots <- function() {
     combined_plots <- plot_grid(p1, p2, p3, p4,
                                 labels=c("(a)", "(b)", "(c)", "(d)"), 
                                 ncol=2, align="vh", axis = "l",
-                                label_x=0.84, label_y=0.86)
+                                label_x=0.2, label_y=0.86)
     
     
     pdf(paste0(outdir, "F8.Gas_exchange_daily.pdf"), width=8, height=8)

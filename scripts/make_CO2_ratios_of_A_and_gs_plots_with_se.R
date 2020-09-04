@@ -1211,7 +1211,10 @@ make_CO2_ratios_of_A_and_gs_plots_with_se <- function() {
                                                        fill = c("brown", "orange"),
                                                        col = c("brown", "orange"))))+
         scale_x_continuous(limits=c(0, 10),
-                           breaks=c(0, 2, 4, 6, 8, 10))
+                           breaks=c(0, 2, 4, 6, 8, 10))+
+        geom_segment(aes(x=7, y=0.2, xend=9, yend=0.2), col="orange") +  # ND
+        geom_segment(aes(x=7, y=0.2, xend=7, yend=0.4), col="orange")+  # ND
+        geom_segment(aes(x=9, y=0.2, xend=9, yend=0.4), col="orange")  # ND
     
     
     p2 <- ggplot(plotDF2, aes(x=Day, y=CO2_Adaily, group=Trt)) +
@@ -1296,6 +1299,7 @@ make_CO2_ratios_of_A_and_gs_plots_with_se <- function() {
                                                        col = c("brown", "orange"))))+
         scale_x_continuous(limits=c(0, 40),
                            breaks=c(0, 5, 10, 15, 20, 25, 30, 35, 40))
+        
     
     
     p6 <- ggplot(plotDF2, aes(x=Day, y=CO2_WUEdaily, group=Trt)) +
@@ -1337,7 +1341,13 @@ make_CO2_ratios_of_A_and_gs_plots_with_se <- function() {
                                                        fill = c("brown", "orange"),
                                                        col = c("brown", "orange"))))+
         scale_x_continuous(limits=c(0, 40),
-                           breaks=c(0, 5, 10, 15, 20, 25, 30, 35, 40))
+                           breaks=c(0, 5, 10, 15, 20, 25, 30, 35, 40))+
+        geom_segment(aes(x=19, y=0.2, xend=37, yend=0.2), col="orange") +  # ND
+        geom_segment(aes(x=19, y=0.2, xend=19, yend=0.4), col="orange")+   # ND
+        geom_segment(aes(x=37, y=0.2, xend=37, yend=0.4), col="orange")+   # ND
+        geom_segment(aes(x=22, y=0.5, xend=37, yend=0.5), col="brown") +  # D
+        geom_segment(aes(x=22, y=0.5, xend=22, yend=0.7), col="brown")+   # D
+        geom_segment(aes(x=37, y=0.5, xend=37, yend=0.7), col="brown")    # D
     
     
     ### output

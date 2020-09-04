@@ -193,8 +193,8 @@ make_whole_plant_hydraulic_conductance_plot <- function() {
               legend.box.just = 'left',
               plot.title = element_text(size=16, face="bold.italic", 
                                         hjust = 0.5))+
-        ylab(expression(paste("log [E / "*psi[pd] * "-" * psi[md] * 
-                                  "] (l " * d^-1 * " " * MPa^-1 * ")")))+
+        ylab(expression(paste("log [E / ("*psi[pd] * "-" * psi[md] * 
+                                  ")] (l " * d^-1 * " " * MPa^-1 * ")")))+
         scale_color_manual(name="",
                            limits=c("PILAD", "PILAND", "PILED", "PILEND"),
                            labels=c(expression(paste(aC[a]*" - D")), 
@@ -233,8 +233,13 @@ make_whole_plant_hydraulic_conductance_plot <- function() {
                                                        col = c("blue3", "blue3", "red2", "red2"),
                                                        linetype = c("dotted", "solid", "dotted", "solid"))))+
         scale_x_continuous(limits=c(0, 10),
-                           breaks=c(0, 2, 4, 6, 8, 10))
-    
+                           breaks=c(0, 2, 4, 6, 8, 10)) +
+        geom_segment(aes(x=7, y=-1.7, xend=9, yend=-1.7), col="blue3") +  # A-ND
+        geom_segment(aes(x=7, y=-1.7, xend=7, yend=-1.5), col="blue3")+  # A-ND
+        geom_segment(aes(x=9, y=-1.7, xend=9, yend=-1.5), col="blue3")+  # A-ND
+        geom_segment(aes(x=7, y=-2.0, xend=9, yend=-2.0), col="red2") + # E-ND
+        geom_segment(aes(x=7, y=-1.8, xend=7, yend=-2.0), col="red2")+  # E-ND
+        geom_segment(aes(x=9, y=-1.8, xend=9, yend=-2.0), col="red2")   # E-ND
     
     
     p2 <- ggplot(plotDF2, aes(x=Day, y=log_E_psi, group=Trt)) +
@@ -297,7 +302,20 @@ make_whole_plant_hydraulic_conductance_plot <- function() {
                                                        col = c("blue3", "blue3", "red2", "red2"),
                                                        linetype = c("dotted", "solid", "dotted", "solid"))))+
         scale_x_continuous(limits=c(0, 40),
-                           breaks=c(0, 5, 10, 15, 20, 25, 30, 35, 40))
+                           breaks=c(0, 5, 10, 15, 20, 25, 30, 35, 40))+
+        geom_segment(aes(x=19, y=1.0, xend=37, yend=1.0), col="blue3")+   #A-ND
+        geom_segment(aes(x=19, y=1.0, xend=19, yend=0.8), col="blue3")+   #A-ND
+        geom_segment(aes(x=37, y=1.0, xend=37, yend=0.8), col="blue3")+   #A-ND
+        geom_segment(aes(x=19, y=1.3, xend=37, yend=1.3), col="red2")+   #E-ND
+        geom_segment(aes(x=19, y=1.3, xend=19, yend=1.1), col="red2")+   #E-ND
+        geom_segment(aes(x=37, y=1.3, xend=37, yend=1.1), col="red2")+   #E-ND
+        geom_segment(aes(x=31, y=0.4, xend=37, yend=0.4), col="blue3", lty="dotted") +   #A-D
+        geom_segment(aes(x=31, y=0.4, xend=31, yend=0.2), col="blue3", lty="dotted")+   #A-D
+        geom_segment(aes(x=37, y=0.4, xend=37, yend=0.2), col="blue3", lty="dotted")+   #A-D
+        geom_segment(aes(x=22, y=0.7, xend=37, yend=0.7), col="red2", lty="dotted")+   #E-D
+        geom_segment(aes(x=22, y=0.7, xend=22, yend=0.5), col="red2", lty="dotted")+   #E-D
+        geom_segment(aes(x=37, y=0.7, xend=37, yend=0.5), col="red2", lty="dotted") 
+    
     
     ### output
     combined_legend <- get_legend(p1 + theme(legend.position="bottom",

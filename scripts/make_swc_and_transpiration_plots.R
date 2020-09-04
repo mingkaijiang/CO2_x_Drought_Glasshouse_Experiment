@@ -10,9 +10,9 @@ make_swc_and_transpiration_plots <- function() {
     
     #### plotting
     p1 <- ggplot(pilDF, aes(x=Day, y=SWC, group=Trt)) +
-        geom_rect(ymin = 0, ymax = 0.4, 
-                  xmin = 6.5, xmax = 10,
-                  fill = alpha("lightyellow", 0.2))+
+        #geom_rect(ymin = 0, ymax = 0.4, 
+        #          xmin = 6.5, xmax = 10,
+        #          fill = alpha("lightyellow", 0.2))+
         geom_errorbar(aes(col=Trt, x=Day, 
                           ymin=SWC-SWCSE, ymax=SWC+SWCSE),
                       width=0.2)+
@@ -71,13 +71,16 @@ make_swc_and_transpiration_plots <- function() {
                                                        col = c("blue3", "blue3", "red2", "red2"),
                                                        linetype = c("dotted", "solid", "dotted", "solid"))))+
         scale_x_continuous(limits=c(0, 10),
-                           breaks=c(0, 2, 4, 6, 8, 10))
+                           breaks=c(0, 2, 4, 6, 8, 10))+
+        geom_segment(aes(x=7, y=0.35, xend=9, yend=0.35), col="blue3") +  # A-ND
+        geom_segment(aes(x=7, y=0.33, xend=7, yend=0.35), col="blue3")+  # A-ND
+        geom_segment(aes(x=9, y=0.33, xend=9, yend=0.35), col="blue3")+  # A-ND
+        geom_segment(aes(x=7, y=0.32, xend=9, yend=0.32), col="red2") + # E-ND
+        geom_segment(aes(x=7, y=0.30, xend=7, yend=0.32), col="red2")+  # E-ND
+        geom_segment(aes(x=9, y=0.30, xend=9, yend=0.32), col="red2")   # E-ND
     
     
     p2 <- ggplot(popDF, aes(x=Day, y=SWC, group=Trt)) +
-        geom_rect(ymin = 0, ymax = 0.4, 
-                  xmin = 16.5, xmax = 40,
-                  fill = alpha("lightyellow", 0.2))+
         geom_errorbar(aes(col=Trt, x=Day, 
                           ymin=SWC-SWCSE, ymax=SWC+SWCSE),
                       width=0.2)+
@@ -136,14 +139,22 @@ make_swc_and_transpiration_plots <- function() {
                                                        col = c("blue3", "blue3", "red2", "red2"),
                                                        linetype = c("dotted", "solid", "dotted", "solid"))))+
         scale_x_continuous(limits=c(0, 40),
-                           breaks=c(0, 5, 10, 15, 20, 25, 30, 35, 40))
-    
+                           breaks=c(0, 5, 10, 15, 20, 25, 30, 35, 40))+
+        geom_segment(aes(x=19, y=0.32, xend=37, yend=0.32), col="blue3")+   #A-ND
+        geom_segment(aes(x=19, y=0.30, xend=19, yend=0.32), col="blue3")+   #A-ND
+        geom_segment(aes(x=37, y=0.30, xend=37, yend=0.32), col="blue3")+   #A-ND
+        geom_segment(aes(x=19, y=0.29, xend=37, yend=0.29), col="red2")+   #E-ND
+        geom_segment(aes(x=19, y=0.27, xend=19, yend=0.29), col="red2")+   #E-ND
+        geom_segment(aes(x=37, y=0.27, xend=37, yend=0.29), col="red2")+   #E-ND
+        geom_segment(aes(x=31, y=0.38, xend=37, yend=0.38), col="blue3", lty="dotted") +   #A-D
+        geom_segment(aes(x=31, y=0.36, xend=31, yend=0.38), col="blue3", lty="dotted")+   #A-D
+        geom_segment(aes(x=37, y=0.36, xend=37, yend=0.38), col="blue3", lty="dotted")+   #A-D
+        geom_segment(aes(x=22, y=0.35, xend=37, yend=0.35), col="red2", lty="dotted")+   #E-D
+        geom_segment(aes(x=22, y=0.33, xend=22, yend=0.35), col="red2", lty="dotted")+   #E-D
+        geom_segment(aes(x=37, y=0.33, xend=37, yend=0.35), col="red2", lty="dotted")    #E-D
     
     
     p3 <- ggplot(pilDF, aes(x=Day, y=transp_plant, group=Trt)) +
-        geom_rect(ymin = 0, ymax = 4, 
-                  xmin = 6.5, xmax = 10,
-                  fill = alpha("lightyellow", 0.2))+
         geom_errorbar(aes(col=Trt, x=Day, 
                           ymin=transp_plant-transp_plantSE, 
                           ymax=transp_plant+transp_plantSE),
@@ -207,9 +218,6 @@ make_swc_and_transpiration_plots <- function() {
     
     
     p4 <- ggplot(popDF, aes(x=Day, y=transp_plant, group=Trt)) +
-        geom_rect(ymin = 0, ymax = 4, 
-                  xmin = 16.5, xmax = 40,
-                  fill = alpha("lightyellow", 0.2))+
         geom_errorbar(aes(col=Trt, x=Day, 
                           ymin=transp_plant-transp_plantSE, 
                           ymax=transp_plant+transp_plantSE),
