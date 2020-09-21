@@ -29,6 +29,154 @@ make_statistics_leaf_area_and_biomass_table_revised <- function() {
     myDF$CO2 <- as.factor(myDF$CO2)
     myDF$H2O <- as.factor(myDF$H2O)
     
+    ######################################################################
+    ### LAI
+    mod1<-lme(log(LA)~CO2*H2O*Species,random=~1|GH/Replicate,data=myDF)
+    summary(mod1)
+    
+    #Testing normality of residuals
+    qqnorm(resid(mod1))
+    qqline(resid(mod1))
+    shapiro.test(resid(mod1))
+    
+    # anova
+    anov<-anova(mod1)
+    anov
+    
+    # save
+    write.csv(anov,file="output/BM/statistics/Species/LA-initial.csv")
+    
+    
+    ######################################################################
+    ### TOT
+    mod1<-lme(log(TOT)~CO2*H2O*Species,random=~1|GH/Replicate,data=myDF)
+    summary(mod1)
+    
+    #Testing normality of residuals
+    qqnorm(resid(mod1))
+    qqline(resid(mod1))
+    shapiro.test(resid(mod1))
+    
+    # anova
+    anov<-anova(mod1)
+    anov
+    
+    # save
+    write.csv(anov,file="output/BM/statistics/Species/TOT-initial.csv")
+    
+    
+    ######################################################################
+    ### Leaf
+    mod1<-lme(log(LM)~CO2*H2O*Species,random=~1|GH/Replicate,data=myDF)
+    summary(mod1)
+    
+    #Testing normality of residuals
+    qqnorm(resid(mod1))
+    qqline(resid(mod1))
+    shapiro.test(resid(mod1))
+    
+    # anova
+    anov<-anova(mod1)
+    anov
+    
+    # save
+    write.csv(anov,file="output/BM/statistics/Species/LM-initial.csv")
+    
+    
+    ######################################################################
+    ### stem
+    mod1<-lme(log(Stem)~CO2*H2O*Species,random=~1|GH/Replicate,data=myDF)
+    summary(mod1)
+    
+    #Testing normality of residuals
+    qqnorm(resid(mod1))
+    qqline(resid(mod1))
+    shapiro.test(resid(mod1))
+    
+    # anova
+    anov<-anova(mod1)
+    anov
+    
+    # save
+    write.csv(anov,file="output/BM/statistics/Species/Stem-initial.csv")
+    
+    
+    ######################################################################
+    ### Root
+    mod1<-lme(log(Root)~CO2*H2O*Species,random=~1|GH/Replicate,data=myDF)
+    summary(mod1)
+    
+    #Testing normality of residuals
+    qqnorm(resid(mod1))
+    qqline(resid(mod1))
+    shapiro.test(resid(mod1))
+    
+    # anova
+    anov<-anova(mod1)
+    anov
+    
+    # save
+    write.csv(anov,file="output/BM/statistics/Species/Root-initial.csv")
+    
+    
+    ######################################################################
+    ### Fineroot
+    mod1<-lme(log(FineRoot)~CO2*H2O*Species,random=~1|GH/Replicate,data=myDF)
+    summary(mod1)
+    
+    #Testing normality of residuals
+    qqnorm(resid(mod1))
+    qqline(resid(mod1))
+    shapiro.test(resid(mod1))
+    
+    # anova
+    anov<-anova(mod1)
+    anov
+    
+    # save
+    write.csv(anov,file="output/BM/statistics/Species/FR-initial.csv")
+    
+    
+    ######################################################################
+    ### RS ratio
+    mod1<-lme(log(RS_ratio)~CO2*H2O*Species,random=~1|GH/Replicate,data=myDF)
+    summary(mod1)
+    
+    #Testing normality of residuals
+    qqnorm(resid(mod1))
+    qqline(resid(mod1))
+    shapiro.test(resid(mod1))
+    
+    # anova
+    anov<-anova(mod1)
+    anov
+    
+    # save
+    write.csv(anov,file="output/BM/statistics/Species/RS_ratio-initial.csv")
+    
+    
+    ######################################################################
+    ### RL ratio
+    mod1<-lme(log(RL_ratio)~CO2*H2O*Species,random=~1|GH/Replicate,data=myDF)
+    summary(mod1)
+    
+    #Testing normality of residuals
+    qqnorm(resid(mod1))
+    qqline(resid(mod1))
+    shapiro.test(resid(mod1))
+    
+    # anova
+    anov<-anova(mod1)
+    anov
+    
+    # save
+    write.csv(anov,file="output/BM/statistics/Species/RL_ratio-initial.csv")
+    
+    
+    
+    
+    
+    
     
     
     
