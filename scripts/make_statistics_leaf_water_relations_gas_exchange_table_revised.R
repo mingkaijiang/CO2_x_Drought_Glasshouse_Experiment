@@ -50,6 +50,12 @@ make_statistics_leaf_water_relations_gas_exchange_table_revised <- function() {
     
     dDF2 <- rbind(tmpDF1, tmpDF2)
 
+    myDF1$psiPD_psiMD <- NULL
+    myDF1$Species <- "PIL"
+    myDF2$Species <- "POP"
+    
+    myDF <- rbind(myDF1, myDF2)
+    
     
     ######################################################################
     ### SWC
