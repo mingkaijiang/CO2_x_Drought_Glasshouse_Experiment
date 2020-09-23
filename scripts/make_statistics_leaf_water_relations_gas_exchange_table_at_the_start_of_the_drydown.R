@@ -277,7 +277,7 @@ make_statistics_leaf_water_relations_gas_exchange_table_at_the_start_of_the_dryd
     
     ######################################################################
     ### transpiration
-    mod1<-lme(log(log(transp_plant))~CO2*H2O,random=~1|Glasshouse/Replicate,data=myDF1)
+    mod1<-lme(log(transp_plant)~CO2*H2O,random=~1|Glasshouse/Replicate,data=myDF1)
     summary(mod1)
     
     #Testing normality of residuals
