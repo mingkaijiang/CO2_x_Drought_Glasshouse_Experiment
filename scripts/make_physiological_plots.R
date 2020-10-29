@@ -170,7 +170,7 @@ make_physiological_plots <- function() {
               legend.box.just = 'left',
               plot.title = element_text(size=16, face="bold.italic", 
                                         hjust = 0.5))+
-        ylab(expression(paste(g[s]*" (" * mu *"mol " * m^-2 * " " * s^-1 * ")")))+
+        ylab(expression(paste(g[s]*" (mol " * m^-2 * " " * s^-1 * ")")))+
         scale_color_manual(name="",
                            limits=c("PILAD", "PILAND", "PILED", "PILEND"),
                            labels=c(expression(paste(aC[a]*" - D")), 
@@ -232,7 +232,7 @@ make_physiological_plots <- function() {
               legend.box.just = 'left',
               plot.title = element_text(size=16, face="bold.italic", 
                                         hjust = 0.5))+
-        ylab(expression(paste(g[s]*" (" * mu *"mol " * m^-2 * " " * s^-1 * ")")))+
+        ylab(expression(paste(g[s]*" (mol " * m^-2 * " " * s^-1 * ")")))+
         scale_color_manual(name="",
                            limits=c("POPAD", "POPAND", "POPED", "POPEND"),
                            labels=c(expression(paste(aC[a]*" - D")), 
