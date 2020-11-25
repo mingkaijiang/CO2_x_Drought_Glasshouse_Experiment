@@ -22,6 +22,9 @@ re_calculate_means_and_sds()
 ### open the function to plot!
 make_glasshouse_condition_plots()
 
+## check if VPD has any effect on transpiration and stomatal conductance during drydown
+check_effect_of_VPD()
+
 ### leaf area of two species
 #make_leaf_area_plot()
 
