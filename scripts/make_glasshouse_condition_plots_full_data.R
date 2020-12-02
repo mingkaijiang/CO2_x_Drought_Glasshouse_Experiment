@@ -300,7 +300,7 @@ make_glasshouse_condition_plots_full_data <- function() {
     
     
     ### plotting combined data frame
-    p1 <- ggplot(plotDF, aes(x=NormDateTime, y=Tair, group=CO2)) +
+    p1 <- ggplot(subDF1, aes(x=DateTime, y=Tair, group=CO2)) +
         geom_point(aes(color=CO2), pch=19)+
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
@@ -335,10 +335,9 @@ make_glasshouse_condition_plots_full_data <- function() {
                                                        fill = c("blue3", "red2"),
                                                        size= c(10, 10))))
     
-    plot(p1)
+
     
-    
-    p3 <- ggplot(plotDF, aes(x=DateTime, y=RH, group=CO2)) +
+    p3 <- ggplot(subDF1, aes(x=DateTime, y=RH, group=CO2)) +
         geom_point(aes(color=CO2), pch=19)+
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
@@ -370,11 +369,11 @@ make_glasshouse_condition_plots_full_data <- function() {
                          labels=date_format("%m-%d"))+
         ylim(35, 100)
     
-    p5 <- ggplot(plotDF, aes(x=NormDateTime, y=VPD, group=CO2)) +
+    p5 <- ggplot(subDF1, aes(x=DateTime, y=VPD, group=CO2)) +
         geom_point(aes(color=CO2), pch=19)+
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
-              axis.text.x=element_text(size=12),
+              axis.text.x=element_text(size=8),
               axis.title.x=element_text(size=14),
               axis.text.y=element_text(size=12),
               axis.title.y=element_text(size=14),
@@ -398,11 +397,113 @@ make_glasshouse_condition_plots_full_data <- function() {
                            values=c("blue3", "red2"),
                            guide=guide_legend(nrow=1))+
         scale_x_datetime(name="Date", 
-                         breaks=date_breaks("1 day"),
-                         labels=date_format("%d"))+
+                         breaks=date_breaks("24 hour"),
+                         labels=date_format("%m-%d"))+
         ylim(0,3)
     
-    plot(p5)
+    
+    p2 <- ggplot(subDF2, aes(x=DateTime, y=Tair, group=CO2)) +
+        geom_point(aes(color=CO2), pch=19)+
+        theme_linedraw() +
+        theme(panel.grid.minor=element_blank(),
+              axis.text.x=element_blank(),
+              axis.title.x=element_blank(),
+              axis.text.y=element_blank(),
+              axis.title.y=element_blank(),
+              legend.text=element_text(size=24),
+              legend.title=element_text(size=20),
+              panel.grid.major=element_blank(),
+              legend.position="none",
+              legend.box = 'horizontal',
+              legend.box.just = 'left',
+              plot.title = element_text(size=30, face="bold", 
+                                        hjust = 0.5))+
+        ylab(expression(paste("Temperature ("*degree*"C)")))+
+        scale_shape_manual(name=expression(CO[2]),
+                           limits=c("A", "E"),
+                           labels=c("amb", "ele"),
+                           values=c(19,19),
+                           guide=guide_legend(nrow=1))+
+        scale_color_manual(name=expression(CO[2]),
+                           limits=c("A", "E"),
+                           labels=c("amb", "ele"),
+                           values=c("blue3", "red2"),
+                           guide=guide_legend(nrow=1))+
+        scale_x_datetime(name="Date", 
+                         breaks=date_breaks("24 hour"),
+                         labels=date_format("%m-%d"))+
+        ylim(10, 35)+
+        guides(fill = guide_legend(override.aes = list(shape = c(19, 19),
+                                                       fill = c("blue3", "red2"),
+                                                       size= c(10, 10))))
+    
+    
+    
+    p4 <- ggplot(subDF2, aes(x=DateTime, y=RH, group=CO2)) +
+        geom_point(aes(color=CO2), pch=19)+
+        theme_linedraw() +
+        theme(panel.grid.minor=element_blank(),
+              axis.text.x=element_blank(),
+              axis.title.x=element_blank(),
+              axis.text.y=element_blank(),
+              axis.title.y=element_blank(),
+              legend.text=element_text(size=12),
+              legend.title=element_text(size=14),
+              panel.grid.major=element_blank(),
+              legend.position="none",
+              legend.box = 'horizontal',
+              legend.box.just = 'left',
+              plot.title = element_text(size=14, face="bold", 
+                                        hjust = 0.5))+
+        ylab("Relative Humidity (%)")+
+        scale_shape_manual(name=expression(CO[2]),
+                           limits=c("A", "E"),
+                           labels=c("amb", "ele"),
+                           values=c(19,19),
+                           guide=guide_legend(nrow=1))+
+        scale_color_manual(name=expression(CO[2]),
+                           limits=c("A", "E"),
+                           labels=c("amb", "ele"),
+                           values=c("blue3", "red2"),
+                           guide=guide_legend(nrow=1))+
+        scale_x_datetime(name="Date", 
+                         breaks=date_breaks("24 hour"),
+                         labels=date_format("%m-%d"))+
+        ylim(35, 100)
+    
+    p6 <- ggplot(subDF2, aes(x=DateTime, y=VPD, group=CO2)) +
+        geom_point(aes(color=CO2), pch=19)+
+        theme_linedraw() +
+        theme(panel.grid.minor=element_blank(),
+              axis.text.x=element_text(size=8),
+              axis.title.x=element_text(size=14),
+              axis.text.y=element_blank(),
+              axis.title.y=element_blank(),
+              legend.text=element_text(size=12),
+              legend.title=element_text(size=14),
+              panel.grid.major=element_blank(),
+              legend.position="none",
+              legend.box = 'horizontal',
+              legend.box.just = 'left',
+              plot.title = element_text(size=14, face="bold", 
+                                        hjust = 0.5))+
+        ylab("Vapor Pressure Deficit (kPa)")+
+        scale_shape_manual(name=expression(CO[2]),
+                           limits=c("A", "E"),
+                           labels=c("amb", "ele"),
+                           values=c(19,19),
+                           guide=guide_legend(nrow=1))+
+        scale_color_manual(name=expression(CO[2]),
+                           limits=c("A", "E"),
+                           labels=c("amb", "ele"),
+                           values=c("blue3", "red2"),
+                           guide=guide_legend(nrow=1))+
+        scale_x_datetime(name="Date", 
+                         breaks=date_breaks("24 hour"),
+                         labels=date_format("%m-%d"))+
+        ylim(0,3)
+    
+    #plot(p5)
     
     
     ### output
@@ -411,14 +512,58 @@ make_glasshouse_condition_plots_full_data <- function() {
                                              legend.box.just = 'left'))
     
     
-    combined_plots <- plot_grid(p1, p3, p5,
-                                labels=c("(a)", "(b)", "(c)"), 
-                                ncol=1, align="vh", axis = "l",
-                                label_x=0.08, label_y=0.85)
+    combined_plots <- plot_grid(p1, p2, p3, p4, p5, p6, 
+                                labels=c("(a)", "(b)", "(c)", "(d)", "(e)", "(f)"), 
+                                ncol=2, align="v", axis = "l",
+                                label_x=c(0.12, 0.08), label_y=0.9,
+                                rel_widths=c(0.8, 1.8))
     
-    pdf(paste0(outdir, "F1.glasshouse_condition.pdf"), width=8, height=12)
+    pdf(paste0(outdir, "F1.glasshouse_condition_full.pdf"), width=18, height=8)
     plot_grid(combined_plots, combined_legend, 
               ncol=1, rel_heights=c(1, 0.1))
     dev.off() 
+    
+    
+    
+    
+    
+    
+    ################################################################
+    ###                       Check VPD effect                   ###
+    ################################################################
+    ### check if there is a DAY, GH and CO2 effect on VPD
+    mod1<-lme(VPD~CO2+Day+Species+Time,random=~1|GH,data=plotDF)
+    summary(mod1)
+    
+    ### calculate daily statistics of met conditions
+    dDF <- summaryBy(VPD+Tair~GH+CO2+Day+Species, FUN=c(mean, se), data=plotDF, keep.names=T)
+    
+    colnames(dDF) <- c("Glasshouse", "CO2", "Day", "Species", 
+                       "VPD.mean", "Tair.mean",
+                       "VPD.se", "Tair.se")
+    
+    
+    ### read in physiologycal measurements
+    pilDF <- read.csv("data/glasshouse2/Drydown_gasexchange_pilularis_processed.csv")
+    popDF <- read.csv("data/glasshouse2/Drydown_gasexchange_populnea_processed.csv")
+    
+    pilDF$Species <- "PIL"
+    popDF$Species <- "POP"
+    
+    pilDF$psiPD_psiMD <- NULL
+    
+    ### merge
+    physDF <- rbind(pilDF, popDF)
+    
+    ### merge
+    mgDF <- merge(physDF, dDF, by=c("Day", "Glasshouse", "CO2", "Species"))
+
+    
+    ### check stats on effect of VPD
+    mod1<-lme(log(transp_plant)~CO2*Day*VPD.mean*Species,random=~1|Glasshouse/Replicate,
+              data=mgDF, na.action = na.omit)
+    summary(mod1)
+    
+    print("no VPD effect found")
     
 }

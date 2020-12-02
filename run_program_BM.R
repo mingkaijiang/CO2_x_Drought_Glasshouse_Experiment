@@ -23,11 +23,9 @@ re_calculate_means_and_sds()
 make_glasshouse_condition_plots()
 
 ### This is based on the full dataset, not only just a subset
+### In addition to print out met figure, it also checks the effect of VPD
 make_glasshouse_condition_plots_full_data()
 
-
-### check if VPD has any effect on transpiration and stomatal conductance during drydown
-check_effect_of_VPD()
 
 ### leaf area of two species
 #make_leaf_area_plot()

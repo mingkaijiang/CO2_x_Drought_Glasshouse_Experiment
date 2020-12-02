@@ -1,9 +1,11 @@
 check_effect_of_VPD <- function() {
     
     ### read in met data
-    myDF1 <- read.csv("data/glasshouse2/met/AMBIENT_GH_TEMP_RH_PILULARIS_DRYDOWN_DAY.csv")
-    myDF2 <- read.csv("data/glasshouse2/met/ELEVATED_GH_TEMP_RH_PILULARIS_DRYDOWN_DAY.csv")
-
+    myDF1 <- read.csv("data/glasshouse2/Full_Experiment_HOBO_Data_Loggers/AMBIENT_GH_RH_AND_TEMP_DAY.csv")
+    myDF2 <- read.csv("data/glasshouse2/Full_Experiment_HOBO_Data_Loggers/AMBIENT_GH_RH_AND_TEMP_NIGHT.csv")
+    myDF3 <- read.csv("data/glasshouse2/Full_Experiment_HOBO_Data_Loggers/ELEVATED_GH_RH_AND_TEMP_DAY.csv")
+    myDF4 <- read.csv("data/glasshouse2/Full_Experiment_HOBO_Data_Loggers/ELEVATED_GH_RH_AND_TEMP_NIGHT.csv")
+    
     ### merge by day and night separately
     metDF <- rbind(myDF1, myDF2)
 
