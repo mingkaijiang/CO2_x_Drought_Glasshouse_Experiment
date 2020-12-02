@@ -1,11 +1,10 @@
-make_glasshouse_condition_plots <- function() {
+make_glasshouse_condition_plots_full_data <- function() {
     ### four documents
-    
-    myDF1 <- read.csv("data/glasshouse2/met/AMBIENT_GH_TEMP_RH_PILULARIS_DRYDOWN_DAY.csv")
-    myDF2 <- read.csv("data/glasshouse2/met/AMBIENT_GH_TEMP_RH_PILULARIS_DRYDOWN_NIGHT.csv")
-    myDF3 <- read.csv("data/glasshouse2/met/ELEVATED_GH_TEMP_RH_PILULARIS_DRYDOWN_DAY.csv")
-    myDF4 <- read.csv("data/glasshouse2/met/ELEVATED_GH_TEMP_RH_PILULARIS_DRYDOWN_NIGHT.csv")
-    
+
+    myDF1 <- read.csv("data/glasshouse2/Full_Experiment_HOBO_Data_Loggers/AMBIENT_GH_RH_AND_TEMP_DAY.csv")
+    myDF2 <- read.csv("data/glasshouse2/Full_Experiment_HOBO_Data_Loggers/AMBIENT_GH_RH_AND_TEMP_NIGHT.csv")
+    myDF3 <- read.csv("data/glasshouse2/Full_Experiment_HOBO_Data_Loggers/ELEVATED_GH_RH_AND_TEMP_DAY.csv")
+    myDF4 <- read.csv("data/glasshouse2/Full_Experiment_HOBO_Data_Loggers/ELEVATED_GH_RH_AND_TEMP_NIGHT.csv")
     
     ### merge by day and night separately
     plotDF1 <- rbind(myDF1, myDF3)
@@ -14,7 +13,7 @@ make_glasshouse_condition_plots <- function() {
     plotDF <- rbind(plotDF1, plotDF2)
     
     colnames(plotDF) <- colnames(plotDF1) <- colnames(plotDF2) <- c("DateTime", "Tair", "RH", "SVP",
-                                                                    "RHdeficit", "VPD", "DAY",
+                                                                    "RHdeficit", "VPD",
                                                                     "GH", "CO2")
     
     ### setting date and time
