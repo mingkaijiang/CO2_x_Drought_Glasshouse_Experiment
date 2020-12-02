@@ -1,6 +1,10 @@
 make_glasshouse_condition_plots_full_data <- function() {
+    
+    ### This is the meteorological condition throuhgout the whole experiment
+    ### we are only interested in day-time conditions over the dry-down period
+    ### hence no need to analyze the full set.
+    
     ### four documents
-
     myDF1 <- read.csv("data/glasshouse2/Full_Experiment_HOBO_Data_Loggers/AMBIENT_GH_RH_AND_TEMP_DAY.csv")
     myDF2 <- read.csv("data/glasshouse2/Full_Experiment_HOBO_Data_Loggers/AMBIENT_GH_RH_AND_TEMP_NIGHT.csv")
     myDF3 <- read.csv("data/glasshouse2/Full_Experiment_HOBO_Data_Loggers/ELEVATED_GH_RH_AND_TEMP_DAY.csv")
@@ -48,226 +52,255 @@ make_glasshouse_condition_plots_full_data <- function() {
     plotDF2$DateTime <- as.POSIXct(paste0(as.character(plotDF2$Date), " ", 
                                           as.character(plotDF2$Time)),
                                    format="%Y-%m-%d %H:%M:%S")
+    
+    
+    
+    ### prepare day list for each species
+    subDF1 <- subset(plotDF, Date > "2010-11-07")
+    subDF1$Day <- as.numeric(subDF1$Date - as.Date("2010-11-07"))
+    subDF1 <- subset(subDF1, Day <= 9)
+    
+    subDF2 <- subset(plotDF, Date > "2011-01-03")
+    subDF2$Day <- as.numeric(subDF2$Date - as.Date("2011-01-03"))
+    
+    
+    ### add species information
+    subDF1$Species <- "PIL"
+    subDF2$Species <- "POP"
+    
+    ### normalize the date
+    subDF1$tmp1 <- subDF1$Date + 57
+    subDF1$NormDateTime <- as.POSIXct(paste0(as.character(subDF1$tmp1), " ", 
+                                             as.character(subDF1$Time)),
+                                      format="%Y-%m-%d %H:%M:%S")
+    
+    subDF1$tmp1 <- NULL
+    
+    subDF2$NormDateTime <- subDF2$DateTime
 
+    ### merge
+    plotDF <- rbind(subDF1, subDF2)    
+    
+    
     
     ### plotting
-    p1 <- ggplot(plotDF1, aes(x=DateTime, y=Tair, group=CO2)) +
-        geom_point(aes(color=CO2), pch=19)+
-        theme_linedraw() +
-        theme(panel.grid.minor=element_blank(),
-              axis.text.x=element_blank(),
-              axis.title.x=element_blank(),
-              axis.text.y=element_text(size=12),
-              axis.title.y=element_text(size=14),
-              legend.text=element_text(size=24),
-              legend.title=element_text(size=20),
-              panel.grid.major=element_blank(),
-              legend.position="none",
-              legend.box = 'horizontal',
-              legend.box.just = 'left',
-              plot.title = element_text(size=30, face="bold", 
-                                        hjust = 0.5))+
-        ylab(expression(paste("Temperature ("*degree*"C)")))+
-        scale_shape_manual(name=expression(CO[2]),
-                          limits=c("A", "E"),
-                          labels=c("amb", "ele"),
-                          values=c(19,19),
-                          guide=guide_legend(nrow=1))+
-        scale_color_manual(name=expression(CO[2]),
-                           limits=c("A", "E"),
-                           labels=c("amb", "ele"),
-                           values=c("blue3", "red2"),
-                           guide=guide_legend(nrow=1))+
-        scale_x_datetime(name="Date", 
-                         breaks=date_breaks("24 hour"),
-                         labels=date_format("%m-%d"))+
-        ggtitle("Daytime")+
-        ylim(10, 35)+
-        guides(fill = guide_legend(override.aes = list(shape = c(19, 19),
-                                                       fill = c("blue3", "red2"),
-                                                       size= c(10, 10))))
-    
-    ### night time
-    p2 <- ggplot(plotDF2, aes(x=DateTime, y=Tair, group=CO2)) +
-        geom_point(aes(color=CO2), pch=19)+
-        theme_linedraw() +
-        theme(panel.grid.minor=element_blank(),
-              axis.text.x=element_blank(),
-              axis.title.x=element_blank(),
-              axis.text.y=element_text(size=12),
-              axis.title.y=element_blank(),
-              legend.text=element_text(size=12),
-              legend.title=element_text(size=14),
-              panel.grid.major=element_blank(),
-              legend.position="none",
-              legend.box = 'horizontal',
-              legend.box.just = 'left',
-              plot.title = element_text(size=30, face="bold", 
-                                        hjust = 0.5))+
-        ylab(expression(paste("Temperature ("*degree*"C)")))+
-        scale_shape_manual(name=expression(CO[2]),
-                           limits=c("A", "E"),
-                           labels=c("amb", "ele"),
-                           values=c(19,19),
-                           guide=guide_legend(nrow=1))+
-        scale_color_manual(name=expression(CO[2]),
-                          limits=c("A", "E"),
-                          labels=c("amb", "ele"),
-                          values=c("blue3", "red2"),
-                          guide=guide_legend(nrow=1))+
-        scale_x_datetime(name="Date", 
-                         breaks=date_breaks("24 hour"),
-                         labels=date_format("%m-%d"))+
-        ggtitle("Nighttime")+
-        ylim(10, 35)
-    
-    
-    p3 <- ggplot(plotDF1, aes(x=DateTime, y=RH, group=CO2)) +
-        geom_point(aes(color=CO2), pch=19)+
-        theme_linedraw() +
-        theme(panel.grid.minor=element_blank(),
-              axis.text.x=element_blank(),
-              axis.title.x=element_blank(),
-              axis.text.y=element_text(size=12),
-              axis.title.y=element_text(size=14),
-              legend.text=element_text(size=12),
-              legend.title=element_text(size=14),
-              panel.grid.major=element_blank(),
-              legend.position="none",
-              legend.box = 'horizontal',
-              legend.box.just = 'left',
-              plot.title = element_text(size=14, face="bold", 
-                                        hjust = 0.5))+
-        ylab("Relative Humidity (%)")+
-        scale_shape_manual(name=expression(CO[2]),
-                           limits=c("A", "E"),
-                           labels=c("amb", "ele"),
-                           values=c(19,19),
-                           guide=guide_legend(nrow=1))+
-        scale_color_manual(name=expression(CO[2]),
-                          limits=c("A", "E"),
-                          labels=c("amb", "ele"),
-                          values=c("blue3", "red2"),
-                          guide=guide_legend(nrow=1))+
-        scale_x_datetime(name="Date", 
-                         breaks=date_breaks("24 hour"),
-                         labels=date_format("%m-%d"))+
-        ylim(35, 100)
-    
-    ### night time
-    p4 <- ggplot(plotDF2, aes(x=DateTime, y=RH, group=CO2)) +
-        geom_point(aes(color=CO2), pch=19)+
-        theme_linedraw() +
-        theme(panel.grid.minor=element_blank(),
-              axis.text.x=element_blank(),
-              axis.title.x=element_blank(),
-              axis.text.y=element_text(size=12),
-              axis.title.y=element_blank(),
-              legend.text=element_text(size=12),
-              legend.title=element_text(size=14),
-              panel.grid.major=element_blank(),
-              legend.position="none",
-              legend.box = 'horizontal',
-              legend.box.just = 'left',
-              plot.title = element_text(size=14, face="bold", 
-                                        hjust = 0.5))+
-        ylab("Relative Humidity (%)")+
-        scale_shape_manual(name=expression(CO[2]),
-                           limits=c("A", "E"),
-                           labels=c("amb", "ele"),
-                           values=c(19,19),
-                           guide=guide_legend(nrow=1))+
-        scale_color_manual(name=expression(CO[2]),
-                          limits=c("A", "E"),
-                          labels=c("amb", "ele"),
-                          values=c("blue3", "red2"),
-                          guide=guide_legend(nrow=1))+
-        scale_x_datetime(name="Date", 
-                         breaks=date_breaks("24 hour"),
-                         labels=date_format("%m-%d"))+
-        ylim(35, 100)
-    
-    
-    p5 <- ggplot(plotDF1, aes(x=DateTime, y=VPD, group=CO2)) +
-        geom_point(aes(color=CO2), pch=19)+
-        theme_linedraw() +
-        theme(panel.grid.minor=element_blank(),
-              axis.text.x=element_text(size=12),
-              axis.title.x=element_text(size=14),
-              axis.text.y=element_text(size=12),
-              axis.title.y=element_text(size=14),
-              legend.text=element_text(size=12),
-              legend.title=element_text(size=14),
-              panel.grid.major=element_blank(),
-              legend.position="none",
-              legend.box = 'horizontal',
-              legend.box.just = 'left',
-              plot.title = element_text(size=14, face="bold", 
-                                        hjust = 0.5))+
-        ylab("Vapor Pressure Deficit (kPa)")+
-        scale_shape_manual(name=expression(CO[2]),
-                           limits=c("A", "E"),
-                           labels=c("amb", "ele"),
-                           values=c(19,19),
-                           guide=guide_legend(nrow=1))+
-        scale_color_manual(name=expression(CO[2]),
-                          limits=c("A", "E"),
-                          labels=c("amb", "ele"),
-                          values=c("blue3", "red2"),
-                          guide=guide_legend(nrow=1))+
-        scale_x_datetime(name="Date", 
-                         breaks=date_breaks("24 hour"),
-                         labels=date_format("%m-%d"))+
-        ylim(0,3)
-    
-    ### night time
-    p6 <- ggplot(plotDF2, aes(x=DateTime, y=VPD, group=CO2)) +
-        geom_point(aes(color=CO2), pch=19)+
-        theme_linedraw() +
-        theme(panel.grid.minor=element_blank(),
-              axis.text.x=element_text(size=12),
-              axis.title.x=element_text(size=14),
-              axis.text.y=element_text(size=12),
-              axis.title.y=element_blank(),
-              legend.text=element_text(size=12),
-              legend.title=element_text(size=14),
-              panel.grid.major=element_blank(),
-              legend.position="none",
-              legend.box = 'horizontal',
-              legend.box.just = 'left',
-              plot.title = element_text(size=14, face="bold", 
-                                        hjust = 0.5))+
-        ylab("Vapor Pressure Deficit (kPa)")+
-        scale_shape_manual(name=expression(CO[2]),
-                           limits=c("A", "E"),
-                           labels=c("amb", "ele"),
-                           values=c(19,19),
-                           guide=guide_legend(nrow=1))+
-        scale_color_manual(name=expression(CO[2]),
-                          limits=c("A", "E"),
-                          labels=c("amb", "ele"),
-                          values=c("blue3", "red2"),
-                          guide=guide_legend(nrow=1))+
-        scale_x_datetime(name="Date", 
-                         breaks=date_breaks("24 hour"),
-                         labels=date_format("%m-%d"))+
-        ylim(0,3)
-    
-    ### output
-    combined_legend <- get_legend(p1 + theme(legend.position="bottom",
-                                     legend.box = 'vertical',
-                                     legend.box.just = 'left'))
-
-    
-    combined_plots <- plot_grid(p1, p2, p3, p4, p5, p6,
-                                 labels=c("(a)", "(b)", "(c)", "(d)", "(e)", "(f)"), 
-                                 ncol=2, align="vh", axis = "l",
-                                 label_x=0.08, label_y=0.85)
-    
+    #p1 <- ggplot(plotDF1, aes(x=DateTime, y=Tair, group=CO2)) +
+    #    geom_point(aes(color=CO2), pch=19)+
+    #    theme_linedraw() +
+    #    theme(panel.grid.minor=element_blank(),
+    #          axis.text.x=element_blank(),
+    #          axis.title.x=element_blank(),
+    #          axis.text.y=element_text(size=12),
+    #          axis.title.y=element_text(size=14),
+    #          legend.text=element_text(size=24),
+    #          legend.title=element_text(size=20),
+    #          panel.grid.major=element_blank(),
+    #          legend.position="none",
+    #          legend.box = 'horizontal',
+    #          legend.box.just = 'left',
+    #          plot.title = element_text(size=30, face="bold", 
+    #                                    hjust = 0.5))+
+    #    ylab(expression(paste("Temperature ("*degree*"C)")))+
+    #    scale_shape_manual(name=expression(CO[2]),
+    #                      limits=c("A", "E"),
+    #                      labels=c("amb", "ele"),
+    #                      values=c(19,19),
+    #                      guide=guide_legend(nrow=1))+
+    #    scale_color_manual(name=expression(CO[2]),
+    #                       limits=c("A", "E"),
+    #                       labels=c("amb", "ele"),
+    #                       values=c("blue3", "red2"),
+    #                       guide=guide_legend(nrow=1))+
+    #    scale_x_datetime(name="Date", 
+    #                     breaks=date_breaks("24 hour"),
+    #                     labels=date_format("%m-%d"))+
+    #    ggtitle("Daytime")+
+    #    ylim(10, 35)+
+    #    guides(fill = guide_legend(override.aes = list(shape = c(19, 19),
+    #                                                   fill = c("blue3", "red2"),
+    #                                                   size= c(10, 10))))
+    #
+    #### night time
+    #p2 <- ggplot(plotDF2, aes(x=DateTime, y=Tair, group=CO2)) +
+    #    geom_point(aes(color=CO2), pch=19)+
+    #    theme_linedraw() +
+    #    theme(panel.grid.minor=element_blank(),
+    #          axis.text.x=element_blank(),
+    #          axis.title.x=element_blank(),
+    #          axis.text.y=element_text(size=12),
+    #          axis.title.y=element_blank(),
+    #          legend.text=element_text(size=12),
+    #          legend.title=element_text(size=14),
+    #          panel.grid.major=element_blank(),
+    #          legend.position="none",
+    #          legend.box = 'horizontal',
+    #          legend.box.just = 'left',
+    #          plot.title = element_text(size=30, face="bold", 
+    #                                    hjust = 0.5))+
+    #    ylab(expression(paste("Temperature ("*degree*"C)")))+
+    #    scale_shape_manual(name=expression(CO[2]),
+    #                       limits=c("A", "E"),
+    #                       labels=c("amb", "ele"),
+    #                       values=c(19,19),
+    #                       guide=guide_legend(nrow=1))+
+    #    scale_color_manual(name=expression(CO[2]),
+    #                      limits=c("A", "E"),
+    #                      labels=c("amb", "ele"),
+    #                      values=c("blue3", "red2"),
+    #                      guide=guide_legend(nrow=1))+
+    #    scale_x_datetime(name="Date", 
+    #                     breaks=date_breaks("24 hour"),
+    #                     labels=date_format("%m-%d"))+
+    #    ggtitle("Nighttime")+
+    #    ylim(10, 35)
+    #
+    #
+    #p3 <- ggplot(plotDF1, aes(x=DateTime, y=RH, group=CO2)) +
+    #    geom_point(aes(color=CO2), pch=19)+
+    #    theme_linedraw() +
+    #    theme(panel.grid.minor=element_blank(),
+    #          axis.text.x=element_blank(),
+    #          axis.title.x=element_blank(),
+    #          axis.text.y=element_text(size=12),
+    #          axis.title.y=element_text(size=14),
+    #          legend.text=element_text(size=12),
+    #          legend.title=element_text(size=14),
+    #          panel.grid.major=element_blank(),
+    #          legend.position="none",
+    #          legend.box = 'horizontal',
+    #          legend.box.just = 'left',
+    #          plot.title = element_text(size=14, face="bold", 
+    #                                    hjust = 0.5))+
+    #    ylab("Relative Humidity (%)")+
+    #    scale_shape_manual(name=expression(CO[2]),
+    #                       limits=c("A", "E"),
+    #                       labels=c("amb", "ele"),
+    #                       values=c(19,19),
+    #                       guide=guide_legend(nrow=1))+
+    #    scale_color_manual(name=expression(CO[2]),
+    #                      limits=c("A", "E"),
+    #                      labels=c("amb", "ele"),
+    #                      values=c("blue3", "red2"),
+    #                      guide=guide_legend(nrow=1))+
+    #    scale_x_datetime(name="Date", 
+    #                     breaks=date_breaks("24 hour"),
+    #                     labels=date_format("%m-%d"))+
+    #    ylim(35, 100)
+    #
+    #### night time
+    #p4 <- ggplot(plotDF2, aes(x=DateTime, y=RH, group=CO2)) +
+    #    geom_point(aes(color=CO2), pch=19)+
+    #    theme_linedraw() +
+    #    theme(panel.grid.minor=element_blank(),
+    #          axis.text.x=element_blank(),
+    #          axis.title.x=element_blank(),
+    #          axis.text.y=element_text(size=12),
+    #          axis.title.y=element_blank(),
+    #          legend.text=element_text(size=12),
+    #          legend.title=element_text(size=14),
+    #          panel.grid.major=element_blank(),
+    #          legend.position="none",
+    #          legend.box = 'horizontal',
+    #          legend.box.just = 'left',
+    #          plot.title = element_text(size=14, face="bold", 
+    #                                    hjust = 0.5))+
+    #    ylab("Relative Humidity (%)")+
+    #    scale_shape_manual(name=expression(CO[2]),
+    #                       limits=c("A", "E"),
+    #                       labels=c("amb", "ele"),
+    #                       values=c(19,19),
+    #                       guide=guide_legend(nrow=1))+
+    #    scale_color_manual(name=expression(CO[2]),
+    #                      limits=c("A", "E"),
+    #                      labels=c("amb", "ele"),
+    #                      values=c("blue3", "red2"),
+    #                      guide=guide_legend(nrow=1))+
+    #    scale_x_datetime(name="Date", 
+    #                     breaks=date_breaks("24 hour"),
+    #                     labels=date_format("%m-%d"))+
+    #    ylim(35, 100)
+    #
+    #
+    #p5 <- ggplot(plotDF1, aes(x=DateTime, y=VPD, group=CO2)) +
+    #    geom_point(aes(color=CO2), pch=19)+
+    #    theme_linedraw() +
+    #    theme(panel.grid.minor=element_blank(),
+    #          axis.text.x=element_text(size=12),
+    #          axis.title.x=element_text(size=14),
+    #          axis.text.y=element_text(size=12),
+    #          axis.title.y=element_text(size=14),
+    #          legend.text=element_text(size=12),
+    #          legend.title=element_text(size=14),
+    #          panel.grid.major=element_blank(),
+    #          legend.position="none",
+    #          legend.box = 'horizontal',
+    #          legend.box.just = 'left',
+    #          plot.title = element_text(size=14, face="bold", 
+    #                                    hjust = 0.5))+
+    #    ylab("Vapor Pressure Deficit (kPa)")+
+    #    scale_shape_manual(name=expression(CO[2]),
+    #                       limits=c("A", "E"),
+    #                       labels=c("amb", "ele"),
+    #                       values=c(19,19),
+    #                       guide=guide_legend(nrow=1))+
+    #    scale_color_manual(name=expression(CO[2]),
+    #                      limits=c("A", "E"),
+    #                      labels=c("amb", "ele"),
+    #                      values=c("blue3", "red2"),
+    #                      guide=guide_legend(nrow=1))+
+    #    scale_x_datetime(name="Date", 
+    #                     breaks=date_breaks("24 hour"),
+    #                     labels=date_format("%m-%d"))+
+    #    ylim(0,3)
+    #
+    #### night time
+    #p6 <- ggplot(plotDF2, aes(x=DateTime, y=VPD, group=CO2)) +
+    #    geom_point(aes(color=CO2), pch=19)+
+    #    theme_linedraw() +
+    #    theme(panel.grid.minor=element_blank(),
+    #          axis.text.x=element_text(size=12),
+    #          axis.title.x=element_text(size=14),
+    #          axis.text.y=element_text(size=12),
+    #          axis.title.y=element_blank(),
+    #          legend.text=element_text(size=12),
+    #          legend.title=element_text(size=14),
+    #          panel.grid.major=element_blank(),
+    #          legend.position="none",
+    #          legend.box = 'horizontal',
+    #          legend.box.just = 'left',
+    #          plot.title = element_text(size=14, face="bold", 
+    #                                    hjust = 0.5))+
+    #    ylab("Vapor Pressure Deficit (kPa)")+
+    #    scale_shape_manual(name=expression(CO[2]),
+    #                       limits=c("A", "E"),
+    #                       labels=c("amb", "ele"),
+    #                       values=c(19,19),
+    #                       guide=guide_legend(nrow=1))+
+    #    scale_color_manual(name=expression(CO[2]),
+    #                      limits=c("A", "E"),
+    #                      labels=c("amb", "ele"),
+    #                      values=c("blue3", "red2"),
+    #                      guide=guide_legend(nrow=1))+
+    #    scale_x_datetime(name="Date", 
+    #                     breaks=date_breaks("24 hour"),
+    #                     labels=date_format("%m-%d"))+
+    #    ylim(0,3)
+    #
+    #### output
+    #combined_legend <- get_legend(p1 + theme(legend.position="bottom",
+    #                                 legend.box = 'vertical',
+    #                                 legend.box.just = 'left'))
+    #
+    #
+    #combined_plots <- plot_grid(p1, p2, p3, p4, p5, p6,
+    #                             labels=c("(a)", "(b)", "(c)", "(d)", "(e)", "(f)"), 
+    #                             ncol=2, align="vh", axis = "l",
+    #                             label_x=0.08, label_y=0.85)
+    #
     
     
     ### plotting combined data frame
-    p1 <- ggplot(plotDF, aes(x=DateTime, y=Tair, group=CO2)) +
+    p1 <- ggplot(plotDF, aes(x=NormDateTime, y=Tair, group=CO2)) +
         geom_point(aes(color=CO2), pch=19)+
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
@@ -302,8 +335,10 @@ make_glasshouse_condition_plots_full_data <- function() {
                                                        fill = c("blue3", "red2"),
                                                        size= c(10, 10))))
     
+    plot(p1)
     
-    p3 <- ggplot(plotDF1, aes(x=DateTime, y=RH, group=CO2)) +
+    
+    p3 <- ggplot(plotDF, aes(x=DateTime, y=RH, group=CO2)) +
         geom_point(aes(color=CO2), pch=19)+
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
@@ -335,7 +370,7 @@ make_glasshouse_condition_plots_full_data <- function() {
                          labels=date_format("%m-%d"))+
         ylim(35, 100)
     
-    p5 <- ggplot(plotDF1, aes(x=DateTime, y=VPD, group=CO2)) +
+    p5 <- ggplot(plotDF, aes(x=NormDateTime, y=VPD, group=CO2)) +
         geom_point(aes(color=CO2), pch=19)+
         theme_linedraw() +
         theme(panel.grid.minor=element_blank(),
@@ -363,9 +398,11 @@ make_glasshouse_condition_plots_full_data <- function() {
                            values=c("blue3", "red2"),
                            guide=guide_legend(nrow=1))+
         scale_x_datetime(name="Date", 
-                         breaks=date_breaks("24 hour"),
-                         labels=date_format("%m-%d"))+
+                         breaks=date_breaks("1 day"),
+                         labels=date_format("%d"))+
         ylim(0,3)
+    
+    plot(p5)
     
     
     ### output
