@@ -43,6 +43,10 @@ make_transpiration_leaf_area_plot <- function() {
    barDF2$brk[barDF2$Trt=="POPAND"] <- 1.2
    barDF2$brk[barDF2$Trt=="POPEND"] <- 1.8
    
+   ### merge
+   plotDF1 <- merge(barDF1, sumDF1, by="Trt")
+   plotDF2 <- merge(barDF2, sumDF2, by="Trt")
+   
    
    ############################# perform statistical tests ##############################
    ### perform linear mixed effect model statistics 
@@ -229,6 +233,84 @@ make_transpiration_leaf_area_plot <- function() {
    dev.off() 
    
    
+   ### plant total transpiration 
+   p1 <- ggplot(data=plotDF1, 
+                aes(brk, transp_plant.mean)) +
+      geom_bar(stat = "identity", aes(fill=Trt), 
+               position="dodge", col="black") +
+      geom_errorbar(aes(x=brk, ymin=transp_plant.mean-transp_plant.se, 
+                        ymax=transp_plant.mean+transp_plant.se), 
+                    position=position_dodge(0.9), width=0.2) +
+      ggtitle("E. pilularis")+
+      theme_linedraw() +
+      theme(panel.grid.minor=element_blank(),
+            axis.text.x=element_text(size=12),
+            axis.title.x=element_text(size=14),
+            axis.text.y=element_text(size=12),
+            axis.title.y=element_text(size=14),
+            legend.text=element_text(size=12),
+            legend.title=element_text(size=14),
+            panel.grid.major=element_blank(),
+            legend.position="none",
+            legend.box = 'horizontal',
+            legend.box.just = 'left',
+            plot.title = element_text(size=14, face="bold.italic", 
+                                      hjust = 0.5))+
+      ylab(expression(paste("Plant transpiration (l " * " " * d^-1 * ")")))+
+      scale_fill_manual(name="",
+                        limits=c("PILAD", "PILAND", "PILED", "PILEND"),
+                        labels=c(expression(paste(aC[a]*" - D")), 
+                                 expression(paste(aC[a]*" - W")),
+                                 expression(paste(eC[a]*" - D")),
+                                 expression(paste(eC[a]*" - W"))),
+                        values=c(alpha("blue3", 0.2), "blue3", 
+                                 alpha("red2", 0.2), "red2"),
+                        guide=guide_legend(nrow=1))+
+      xlab("")+
+      scale_x_continuous(limits=c(0.5, 4.5),
+                         breaks=c(1.5, 3.5),
+                         labels=c("Well-watered","Droughted"))+
+      ylim(0, 5)
+   
+   p2 <- ggplot(data=plotDF2, 
+                aes(brk, transp_plant.mean)) +
+      geom_bar(stat = "identity", aes(fill=Trt), 
+               position="dodge", col="black") +
+      geom_errorbar(aes(x=brk, ymin=transp_plant.mean-transp_plant.se, 
+                        ymax=transp_plant.mean+transp_plant.se), 
+                    position=position_dodge(0.9), width=0.2) +
+      ggtitle("E. populnea")+
+      theme_linedraw() +
+      theme(panel.grid.minor=element_blank(),
+            axis.text.x=element_text(size=12),
+            axis.title.x=element_text(size=14),
+            axis.text.y=element_text(size=12),
+            axis.title.y=element_text(size=14),
+            legend.text=element_text(size=12),
+            legend.title=element_text(size=14),
+            panel.grid.major=element_blank(),
+            legend.position="none",
+            legend.box = 'horizontal',
+            legend.box.just = 'left',
+            plot.title = element_text(size=14, face="bold.italic", 
+                                      hjust = 0.5))+
+      ylab(expression(paste("Plant transpiration (l " * " " * d^-1 * ")")))+
+      scale_fill_manual(name="",
+                        limits=c("POPAD", "POPAND", "POPED", "POPEND"),
+                        labels=c(expression(paste(aC[a]*" - D")), 
+                                 expression(paste(aC[a]*" - W")),
+                                 expression(paste(eC[a]*" - D")),
+                                 expression(paste(eC[a]*" - W"))),
+                        values=c(alpha("blue3", 0.2), "blue3", 
+                                 alpha("red2", 0.2), "red2"),
+                        guide=guide_legend(nrow=1))+
+      xlab("")+
+      scale_x_continuous(limits=c(0.5, 4.5),
+                         breaks=c(1.5, 3.5),
+                         labels=c("Well-watered","Droughted"))+
+      ylim(0, 4)
+   
+   
    #### plant transpiration per leaf area bar plant
    p3 <- ggplot(data=barDF1, 
                 aes(brk, transp_leaf.mean)) +
@@ -252,7 +334,7 @@ make_transpiration_leaf_area_plot <- function() {
             legend.box.just = 'left',
             plot.title = element_text(size=14, face="bold.italic", 
                                       hjust = 0.5))+
-      ylab(expression(paste("Transpiration (l " * m^-2 * " " * d^-1 * ")")))+
+      ylab(expression(paste("Leaf transpiration (l " * m^-2 * " " * d^-1 * ")")))+
       scale_fill_manual(name="",
                         limits=c("PILAD", "PILAND", "PILED", "PILEND"),
                         labels=c(expression(paste(aC[a]*" - D")), 
@@ -295,7 +377,7 @@ make_transpiration_leaf_area_plot <- function() {
             legend.box.just = 'left',
             plot.title = element_text(size=14, face="bold.italic", 
                                       hjust = 0.5))+
-      ylab(expression(paste("Transpiration (l " * m^-2 * " " * d^-1 * ")")))+
+      ylab(expression(paste("Leaf transpiration (l " * m^-2 * " " * d^-1 * ")")))+
       scale_fill_manual(name="",
                         limits=c("POPAD", "POPAND", "POPED", "POPEND"),
                         labels=c(expression(paste(aC[a]*" - D")), 
@@ -348,7 +430,7 @@ make_transpiration_leaf_area_plot <- function() {
    combined_plots2 <- plot_grid(p3, p4, 
                                 labels=c("(c)", "(d)"), 
                                 ncol=2, align="vh", axis = "l",
-                                label_x=0.18, label_y=0.94)
+                                label_x=0.18, label_y=0.9)
    
    pdf(paste0(outdir, "F4.transpiration_per_leaf_area_combined.pdf"), width=10, height=10)
    plot_grid(combined_plots1, legend1, 

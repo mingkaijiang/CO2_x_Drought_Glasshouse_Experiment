@@ -56,6 +56,18 @@ make_statistics_leaf_water_relations_gas_exchange_table_nonlinear <- function() 
     
     ######################################################################
     ### SWC
+    test <- groupedData(transp_plant ~ Day | Glasshouse/Replicate, data=myDF1) ## not strictly necessary
+    initVals <- getInitial(transp_plant ~ SSlogis(Day, CO2, H2O), data = test)
+    baseModel<- nlme(transp_plant ~ SSlogis(Day, CO2, H2O),
+                     data = test,
+                     fixed = list(CO2 ~ 1, H2O ~ 1),
+                     random = Day + CO2 + H2O ~ 1|Glasshouse/Replicate,
+                     start = initVals
+    )
+    
+    
+    
+    
     mod1<-lme(log(SWC)~CO2*H2O*Day,random=~1|Glasshouse/Replicate,data=myDF1, na.action = na.omit)
     summary(mod1)
     
