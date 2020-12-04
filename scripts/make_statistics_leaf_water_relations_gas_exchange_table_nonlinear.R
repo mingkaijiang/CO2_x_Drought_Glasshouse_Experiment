@@ -55,6 +55,19 @@ make_statistics_leaf_water_relations_gas_exchange_table_nonlinear <- function() 
     
     
     ######################################################################
+    startvec <- c(Asym = 200, xmid = 725, scal = 350)
+    nform <- ~Asym/(1+exp((xmid-input)/scal))
+    ## b. Use deriv() to construct function:
+    nfun <- deriv(nform,namevec=c("Asym","xmid","scal"),
+                  function.arg=c("input","Asym","xmid","scal"))
+    
+    (nm1 <- nlmer(circumference ~ nfun(age, Asym, xmid, scal) ~ Asym|Tree,
+                  Orange, start = startvec))
+    
+    
+    with(Orange, plot(circumference~age, col=Tree))
+    
+    
     ### SWC
     test <- groupedData(transp_plant ~ Day | Glasshouse/Replicate, data=myDF1) ## not strictly necessary
     initVals <- getInitial(transp_plant ~ SSlogis(Day, CO2, H2O), data = test)
