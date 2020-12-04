@@ -120,7 +120,7 @@ make_leaf_area_and_biomass_plots_by_H2O <- function() {
                            limits=c("D", "ND"),
                            values=c(0.2, 1.0),
                            labels=c("D", "W"),
-                           guide=guide_legend(nrow=1))+
+                           guide="none")+
         xlab("")+
         scale_x_continuous(limits=c(0.5, 4.5),
                          breaks=c(1.5, 3.5),
@@ -162,7 +162,7 @@ make_leaf_area_and_biomass_plots_by_H2O <- function() {
                            limits=c("D", "ND"),
                            values=c(0.2, 1.0),
                            labels=c("D", "W"),
-                           guide=guide_legend(nrow=1))+
+                           guide="none")+
         xlab("")+
         scale_x_continuous(limits=c(0.5, 4.5),
                            breaks=c(1.5, 3.5),
@@ -203,7 +203,7 @@ make_leaf_area_and_biomass_plots_by_H2O <- function() {
                            limits=c("D", "ND"),
                            labels=c("D", "W"),
                            values=c(0.2, 1.0),
-                           guide=guide_legend(nrow=1))+
+                           guide="none")+
         xlab("")+
         ylim(0, 3000)+
         scale_x_continuous(limits=c(0.5, 4.5),
@@ -243,7 +243,7 @@ make_leaf_area_and_biomass_plots_by_H2O <- function() {
                            limits=c("D", "ND"),
                            labels=c("D", "W"),
                            values=c(0.2, 1.0),
-                           guide=guide_legend(nrow=1))+
+                           guide="none")+
         xlab("")+
         ylim(0, 1000)+
         scale_x_continuous(limits=c(0.5, 4.5),
