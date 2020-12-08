@@ -524,7 +524,66 @@ make_glasshouse_condition_plots_full_data <- function() {
     dev.off() 
     
     
+    ################################################################
+    ###         Check glasshouse effect on VPD                   ###
+    ################################################################
     
+    ### compute daily mean and max of VPD
+    statDF <- summaryBy(VPD~CO2+GH+Day+Species, FUN=c(mean, max),
+                        data=plotDF, keep.names=T)
+
+    
+    ### split by species
+    testDF1 <- subset(statDF, Species == "PIL")
+    testDF2 <- subset(statDF, Species == "POP")
+    
+    ### check if VPD differ between glasshouses
+    mod1 <- lm(VPD.mean~GH, data=testDF1)
+    summary(mod1)
+    mod2 <- lm(VPD.mean~GH, data=testDF2)
+    summary(mod2)
+    
+    mod1 <- lm(VPD.max~GH, data=testDF1)
+    summary(mod1)
+    mod2 <- lm(VPD.max~GH, data=testDF2)
+    summary(mod2) # different among GH!
+    
+    ### check if VPD differ by glasshouse and day
+    mod1<-lm(VPD.mean~GH*Day,data=testDF1)
+    summary(mod1)
+    mod2<-lm(VPD.mean~GH*Day,data=testDF2)
+    summary(mod2)
+    
+    mod1<-lm(VPD.max~GH*Day,data=testDF1)
+    summary(mod1)
+    mod2<-lm(VPD.max~GH*Day,data=testDF2)
+    summary(mod2)
+    
+    ### check if VPD differ by species, with GH as random factor
+    mod1<-lme(VPD.mean~Species,random=~1|GH,data=statDF)
+    summary(mod1) # species effect
+    mod2<-lme(VPD.max~Species,random=~1|GH,data=statDF)
+    summary(mod2) 
+    
+    ### check if VPD differ by species, with day + RH as random factor
+    mod1<-lme(VPD.mean~Species,random=~1|GH/Day,data=statDF)
+    summary(mod1)
+    mod2<-lme(VPD.max~Species,random=~1|GH/Day,data=statDF)
+    summary(mod2)
+    
+    ### check if VPD differ by species and CO2, with glasshouse as random factor
+    mod1<-lme(VPD.mean~CO2*Species,random=~1|GH,data=statDF)
+    summary(mod1) # species effect but very very weak
+    mod1<-lme(VPD.max~CO2*Species,random=~1|GH,data=statDF)
+    summary(mod1) 
+    
+    ### check if VPD differ by species and CO2, with glasshouse and day as random factors
+    mod1<-lme(VPD.mean~CO2*Species,random=~1|GH/Day,data=statDF)
+    summary(mod1) 
+    mod1<-lme(VPD.max~CO2*Species,random=~1|GH/Day,data=statDF)
+    summary(mod1) 
+    
+    ## we can confirm that, VPD do not differ among CO2 treatment and between species
     
     
     
