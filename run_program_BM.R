@@ -50,10 +50,10 @@ make_statistics_leaf_water_relations_gas_exchange_table_revised()
 
 ### make statistical summary table for fluxes, before the 
 ### pre-determined physiological threshold was reached
-make_average_rate_comparison_before_threshold()
+make_average_and_fixed_date_rate_comparison_before_threshold()
 
 ### check number of days before stress is reached
-check_statistics_on_number_of_unstress_days()
+#check_statistics_on_number_of_unstress_days()
 
 
 ### make statistical summary table for fluxes during the drydown - non-linear test

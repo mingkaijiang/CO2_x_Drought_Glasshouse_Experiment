@@ -1,4 +1,4 @@
-make_average_rate_comparison_before_threshold <- function() {
+make_average_and_fixed_date_rate_comparison_before_threshold <- function() {
     
     
     ############################# perform statistical tests ##############################
