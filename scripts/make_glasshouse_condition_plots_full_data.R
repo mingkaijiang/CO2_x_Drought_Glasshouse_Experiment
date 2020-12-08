@@ -588,18 +588,11 @@ make_glasshouse_condition_plots_full_data <- function() {
     
     
     ################################################################
-    ###                       Check VPD effect                   ###
+    ###    Check if VPD predicts transpiration                   ###
     ################################################################
-    ### check if there is a DAY, GH and CO2 effect on VPD
-    mod1<-lme(VPD~CO2+Day+Species+Time,random=~1|GH,data=plotDF)
-    summary(mod1)
-    
-    ### calculate daily statistics of met conditions
-    dDF <- summaryBy(VPD+Tair~GH+CO2+Day+Species, FUN=c(mean, se), data=plotDF, keep.names=T)
-    
-    colnames(dDF) <- c("Glasshouse", "CO2", "Day", "Species", 
-                       "VPD.mean", "Tair.mean",
-                       "VPD.se", "Tair.se")
+    ### assign column names
+    colnames(statDF) <- c("CO2", "Glasshouse", "Day", "Species", 
+                       "VPD.mean", "VPD.max")
     
     
     ### read in physiologycal measurements
@@ -615,14 +608,30 @@ make_glasshouse_condition_plots_full_data <- function() {
     physDF <- rbind(pilDF, popDF)
     
     ### merge
-    mgDF <- merge(physDF, dDF, by=c("Day", "Glasshouse", "CO2", "Species"))
+    mgDF <- merge(physDF, statDF, by=c("Day", "Glasshouse", "CO2", "Species"))
 
+    ### split by species
+    statDF1 <- mgDF[mgDF$Species=="PIL",]
+    statDF2 <- mgDF[mgDF$Species=="POP",]
     
-    ### check stats on effect of VPD
-    mod1<-lme(log(transp_plant)~CO2*Day*VPD.mean*Species,random=~1|Glasshouse/Replicate,
-              data=mgDF, na.action = na.omit)
+    
+    ### check if VPD explains transpiration     
+    mod1<-lme(log(transp_plant)~CO2*Day*VPD.mean,random=~1|Glasshouse/Replicate,
+              data=statDF1)
     summary(mod1)
     
-    print("no VPD effect found")
+    mod1<-lme(log(transp_plant)~CO2*Day*VPD.max,random=~1|Glasshouse/Replicate,
+              data=statDF1)
+    summary(mod1)
+    
+    mod1<-lme(log(transp_plant)~CO2*Day*VPD.mean,random=~1|Glasshouse/Replicate,
+              data=statDF2)
+    summary(mod1)
+    
+    mod1<-lme(log(transp_plant)~CO2*Day*VPD.max,random=~1|Glasshouse/Replicate,
+              data=statDF2)
+    summary(mod1)
+    
+    
     
 }
