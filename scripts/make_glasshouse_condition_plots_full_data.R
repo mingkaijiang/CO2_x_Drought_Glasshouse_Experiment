@@ -54,6 +54,11 @@ make_glasshouse_condition_plots_full_data <- function() {
                                    format="%Y-%m-%d %H:%M:%S")
     
     
+    test <- summaryBy(VPD~CO2+GH+Date, FUN=mean,
+                      data=plotDF, keep.names=T) 
+    
+    mean(test$VPD)
+    max(test$VPD)
     
     ### prepare day list for each species
     subDF1 <- subset(plotDF, Date > "2010-11-07")
@@ -633,5 +638,5 @@ make_glasshouse_condition_plots_full_data <- function() {
     summary(mod1)
     
     
-    
+
 }
