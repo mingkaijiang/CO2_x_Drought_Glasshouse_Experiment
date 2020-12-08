@@ -47,6 +47,12 @@ make_statistics_leaf_water_relations_gas_exchange_table_at_the_start_of_the_dryd
 ### make sattistical summary table for fluxes during the drydown - linear test
 make_statistics_leaf_water_relations_gas_exchange_table_revised()
 
+
+### make statistical summary table for fluxes, before the 
+### pre-determined physiological threshold was reached
+make_average_rate_comparison_before_threshold()
+
+
 ### make statistical summary table for fluxes during the drydown - non-linear test
 make_statistics_leaf_water_relations_gas_exchange_table_nonlinear()
 
