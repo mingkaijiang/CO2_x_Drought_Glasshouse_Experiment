@@ -44,12 +44,17 @@ make_biomass_allocation_plot()
 ### make statistical summary table for fluxes, at the start of the drydown
 make_statistics_leaf_water_relations_gas_exchange_table_at_the_start_of_the_drydown()
 
-### make sattistical summary table for fluxes during the drydown - linear test
+### make satistical summary table for fluxes during the drydown - linear test
 make_statistics_leaf_water_relations_gas_exchange_table_revised()
 
 
 ### make statistical summary table for fluxes, before the 
 ### pre-determined physiological threshold was reached
+make_statistics_leaf_water_relations_gas_exchange_table_before_stress()
+
+### make statistical summary table for fluxes,
+### 1. average over days before stress was reached (i.e. on and before day 6 and 16)
+### 2. on day 6 and 16 (i.e. the day before stress was reached)
 make_average_and_fixed_date_rate_comparison_before_threshold()
 
 ### check number of days before stress is reached
