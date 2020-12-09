@@ -553,6 +553,13 @@ make_glasshouse_condition_plots_full_data <- function() {
     mod2 <- lm(VPD.max~GH, data=testDF2)
     summary(mod2) # different among GH!
     
+    ### check if GH is a random factor
+    mod1<-lme(VPD.mean~Species*CO2,random=~1|GH,data=statDF)
+    summary(mod1) 
+    mod1<-lme(VPD.max~Species*CO2,random=~1|GH,data=statDF)
+    summary(mod1) 
+    
+    
     ### check if VPD differ by glasshouse and day
     mod1<-lm(VPD.mean~GH*Day,data=testDF1)
     summary(mod1)
@@ -583,10 +590,10 @@ make_glasshouse_condition_plots_full_data <- function() {
     summary(mod1) 
     
     ### check if VPD differ by species and CO2, with glasshouse and day as random factors
-    mod1<-lme(VPD.mean~CO2*Species,random=~1|GH/Day,data=statDF)
-    summary(mod1) 
-    mod1<-lme(VPD.max~CO2*Species,random=~1|GH/Day,data=statDF)
-    summary(mod1) 
+    #mod1<-lme(VPD.mean~CO2*Species,random=~1|GH/Day,data=statDF)
+    #summary(mod1) 
+    #mod1<-lme(VPD.max~CO2*Species,random=~1|GH/Day,data=statDF)
+    #summary(mod1) 
     
     ## we can confirm that, VPD do not differ among CO2 treatment and between species
     
@@ -637,6 +644,23 @@ make_glasshouse_condition_plots_full_data <- function() {
               data=statDF2)
     summary(mod1)
     
+    
+    
+    mod1<-lme(log(transp_plant)~CO2*VPD.mean,random=~1|Glasshouse/Replicate,
+              data=statDF1)
+    summary(mod1)
+    
+    mod1<-lme(log(transp_plant)~CO2*VPD.max,random=~1|Glasshouse/Replicate,
+              data=statDF1)
+    summary(mod1)
+    
+    mod1<-lme(log(transp_plant)~CO2*VPD.mean,random=~1|Glasshouse/Replicate,
+              data=statDF2)
+    summary(mod1)
+    
+    mod1<-lme(log(transp_plant)~CO2*VPD.max,random=~1|Glasshouse/Replicate,
+              data=statDF2)
+    summary(mod1)
     
 
 }
