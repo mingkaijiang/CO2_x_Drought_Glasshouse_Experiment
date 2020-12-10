@@ -55,6 +55,39 @@ make_statistics_leaf_water_relations_gas_exchange_table_nonlinear <- function() 
     
     
     ######################################################################
+    
+    library(nlme)
+    data <- groupedData(SWC ~ Day | Glasshouse, data=myDF1) ## not strictly necessary
+    initVals <- getInitial(SWC ~ SSasymp(Day, Asym, CO2, H2O), data = data)
+    baseModel<- nlme(SWC ~ SSasymp(Day, Asym, CO2, H2O),
+                     data = data,
+                     fixed = list(Asym ~ 1, CO2 ~ 1, H2O ~ 1),
+                     random = Asym + CO2 + H2O ~ 1|Glasshouse,
+                     start = initVals
+    )
+    
+    
+    summary(baseModel)
+    
+    
+    
+    ### SWC
+    
+    mod1<-lme(log(SWC)~CO2*H2O*Day,random=~1|Glasshouse/Replicate,data=myDF1, na.action = na.omit)
+    summary(mod1)
+    
+    #Testing normality of residuals
+    qqnorm(resid(mod1))
+    qqline(resid(mod1))
+    shapiro.test(resid(mod1))
+    
+    # anova
+    anov<-anova(mod1)
+    anov
+    
+    # save
+    write.csv(anov,file="output/BM/statistics/Epilularis/swc.csv")
+    
     startvec <- c(Asym = 200, xmid = 725, scal = 350)
     nform <- ~Asym/(1+exp((xmid-input)/scal))
     ## b. Use deriv() to construct function:
@@ -77,24 +110,6 @@ make_statistics_leaf_water_relations_gas_exchange_table_nonlinear <- function() 
                      random = Day + CO2 + H2O ~ 1|Glasshouse/Replicate,
                      start = initVals
     )
-    
-    
-    
-    
-    mod1<-lme(log(SWC)~CO2*H2O*Day,random=~1|Glasshouse/Replicate,data=myDF1, na.action = na.omit)
-    summary(mod1)
-    
-    #Testing normality of residuals
-    qqnorm(resid(mod1))
-    qqline(resid(mod1))
-    shapiro.test(resid(mod1))
-    
-    # anova
-    anov<-anova(mod1)
-    anov
-    
-    # save
-    write.csv(anov,file="output/BM/statistics/Epilularis/swc.csv")
     
     
     ######################################################################

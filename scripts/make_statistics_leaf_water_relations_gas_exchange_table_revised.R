@@ -62,6 +62,10 @@ make_statistics_leaf_water_relations_gas_exchange_table_revised <- function() {
     mod1<-lme(log(SWC)~CO2*H2O*Day,random=~1|Glasshouse/Replicate,data=myDF1, na.action = na.omit)
     summary(mod1)
     
+    mod2<-lm(log(SWC)~CO2*H2O*Day,data=myDF1, na.action = na.omit)
+    summary(mod2)
+    anova(mod1, mod2)
+
     #Testing normality of residuals
     qqnorm(resid(mod1))
     qqline(resid(mod1))
@@ -73,7 +77,7 @@ make_statistics_leaf_water_relations_gas_exchange_table_revised <- function() {
     
     # save
     write.csv(anov,file="output/BM/statistics/Epilularis/swc.csv")
-    
+
     
     ######################################################################
     ### transpiration

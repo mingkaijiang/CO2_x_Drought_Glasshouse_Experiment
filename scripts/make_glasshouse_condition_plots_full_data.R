@@ -543,15 +543,13 @@ make_glasshouse_condition_plots_full_data <- function() {
     testDF2 <- subset(statDF, Species == "POP")
     
     ### check if VPD differ between glasshouses
-    mod1 <- lm(VPD.mean~GH, data=testDF1)
+    mod1 <- lm(VPD.mean~GH*Species, data=statDF)
     summary(mod1)
-    mod2 <- lm(VPD.mean~GH, data=testDF2)
-    summary(mod2)
     
-    mod1 <- lm(VPD.max~GH, data=testDF1)
+    mod1 <- lm(VPD.max~GH*Species, data=statDF)
     summary(mod1)
-    mod2 <- lm(VPD.max~GH, data=testDF2)
-    summary(mod2) # different among GH!
+
+    
     
     ### check if GH is a random factor
     mod1<-lme(VPD.mean~Species*CO2,random=~1|GH,data=statDF)
