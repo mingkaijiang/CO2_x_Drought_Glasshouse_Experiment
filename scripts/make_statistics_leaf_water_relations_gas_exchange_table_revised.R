@@ -65,6 +65,12 @@ make_statistics_leaf_water_relations_gas_exchange_table_revised <- function() {
     mod2<-lm(log(SWC)~CO2*H2O*Day,data=myDF1, na.action = na.omit)
     summary(mod2)
     anova(mod1, mod2)
+    
+    
+    mod2<-lme(log(SWC)~Day,random=~1|Glasshouse/Replicate,data=myDF1, na.action = na.omit)
+    summary(mod2)
+    
+    with(myDF1, plot(log(SWC)~Day, type="p", col=Glasshouse))
 
     #Testing normality of residuals
     qqnorm(resid(mod1))
@@ -84,6 +90,10 @@ make_statistics_leaf_water_relations_gas_exchange_table_revised <- function() {
     mod1<-lme(log(transp_plant)~CO2*H2O*Day,random=~1|Glasshouse/Replicate,data=myDF1)
     summary(mod1)
     
+    mod2<-lm(log(transp_plant)~CO2*H2O*Day,data=myDF1, na.action = na.omit)
+    summary(mod2)
+    anova(mod1, mod2)
+    
     #Testing normality of residuals
     qqnorm(resid(mod1))
     qqline(resid(mod1))
@@ -102,6 +112,10 @@ make_statistics_leaf_water_relations_gas_exchange_table_revised <- function() {
     mod1<-lme(psiPD~CO2*H2O*Day,random=~1|Glasshouse/Replicate,data=myDF1)
     summary(mod1)
     
+    mod2<-lm(psiPD~CO2*H2O*Day,data=myDF1, na.action = na.omit)
+    summary(mod2)
+    anova(mod1, mod2)
+    
     #Testing normality of residuals
     qqnorm(resid(mod1))
     qqline(resid(mod1))
@@ -118,6 +132,10 @@ make_statistics_leaf_water_relations_gas_exchange_table_revised <- function() {
     ### psiMD
     mod1<-lme(psiMD~CO2*H2O*Day,random=~1|Glasshouse/Replicate,data=myDF1)
     summary(mod1)
+    
+    mod2<-lm(psiMD~CO2*H2O*Day,data=myDF1, na.action = na.omit)
+    summary(mod2)
+    anova(mod1, mod2)
     
     #Testing normality of residuals
     qqnorm(resid(mod1))
@@ -137,6 +155,10 @@ make_statistics_leaf_water_relations_gas_exchange_table_revised <- function() {
     ### Adaily 1
     mod1<-lme(log(Adaily)~CO2*H2O*Day,random=~1|Glasshouse/Replicate,data=myDF1)
     summary(mod1)
+    
+    mod2<-lm(log(Adaily)~CO2*H2O*Day,data=myDF1, na.action = na.omit)
+    summary(mod2)
+    anova(mod1, mod2)
     
     #Testing normality of residuals
     qqnorm(resid(mod1))
@@ -207,6 +229,10 @@ make_statistics_leaf_water_relations_gas_exchange_table_revised <- function() {
     mod1<-lme(log(gsdaily)~CO2*H2O*Day,random=~1|Glasshouse/Replicate,data=myDF1)
     summary(mod1)
     
+    mod2<-lm(log(gsdaily)~CO2*H2O*Day,data=myDF1, na.action = na.omit)
+    summary(mod2)
+    anova(mod1, mod2)
+    
     #Testing normality of residuals
     qqnorm(resid(mod1))
     qqline(resid(mod1))
@@ -276,6 +302,10 @@ make_statistics_leaf_water_relations_gas_exchange_table_revised <- function() {
     mod1<-lme(log(E_psi)~CO2*H2O*Day,random=~1|Glasshouse/Replicate,data=myDF1)
     summary(mod1)
     
+    mod2<-lm(log(E_psi)~CO2*H2O*Day,data=myDF1, na.action = na.omit)
+    summary(mod2)
+    anova(mod1, mod2)
+    
     #Testing normality of residuals
     qqnorm(resid(mod1))
     qqline(resid(mod1))
@@ -295,6 +325,10 @@ make_statistics_leaf_water_relations_gas_exchange_table_revised <- function() {
     mod1<-lme(log(SWC)~CO2*H2O*Day,random=~1|Glasshouse/Replicate,data=myDF2)
     summary(mod1)
     
+    mod2<-lm(log(SWC)~CO2*H2O*Day,data=myDF2, na.action = na.omit)
+    summary(mod2)
+    anova(mod1, mod2)
+    
     #Testing normality of residuals
     qqnorm(resid(mod1))
     qqline(resid(mod1))
@@ -312,6 +346,10 @@ make_statistics_leaf_water_relations_gas_exchange_table_revised <- function() {
     ### transpiration
     mod1<-lme(log(transp_plant)~CO2*H2O*Day,random=~1|Glasshouse/Replicate,data=myDF2)
     summary(mod1)
+    
+    mod2<-lm(log(transp_plant)~CO2*H2O*Day,data=myDF2, na.action = na.omit)
+    summary(mod2)
+    anova(mod1, mod2)
     
     #Testing normality of residuals
     qqnorm(resid(mod1))

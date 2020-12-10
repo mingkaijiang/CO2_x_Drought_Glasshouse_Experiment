@@ -62,7 +62,7 @@ make_average_and_fixed_date_rate_comparison_before_threshold()
 
 
 ### make statistical summary table for fluxes during the drydown - non-linear test
-make_statistics_leaf_water_relations_gas_exchange_table_nonlinear()
+#make_statistics_leaf_water_relations_gas_exchange_table_nonlinear()
 
 
 ### make soil water content and leaf transpiration plots for the two species
