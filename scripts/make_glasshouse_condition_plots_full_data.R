@@ -625,40 +625,22 @@ make_glasshouse_condition_plots_full_data <- function() {
     statDF2 <- mgDF[mgDF$Species=="POP",]
     
     
-    ### check if VPD explains transpiration     
-    mod1<-lme(log(transp_plant)~CO2*Day*VPD.mean,random=~1|Glasshouse/Replicate,
-              data=statDF1)
-    summary(mod1)
-    
-    mod1<-lme(log(transp_plant)~CO2*Day*VPD.max,random=~1|Glasshouse/Replicate,
-              data=statDF1)
-    summary(mod1)
-    
-    mod1<-lme(log(transp_plant)~CO2*Day*VPD.mean,random=~1|Glasshouse/Replicate,
-              data=statDF2)
-    summary(mod1)
-    
-    mod1<-lme(log(transp_plant)~CO2*Day*VPD.max,random=~1|Glasshouse/Replicate,
-              data=statDF2)
-    summary(mod1)
-    
-    
-    
+    ### check if VPD explains transpiration 
     mod1<-lme(log(transp_plant)~CO2*VPD.mean,random=~1|Glasshouse/Replicate,
               data=statDF1)
-    summary(mod1)
+    summary(mod1) # non-linear, curvature shape
     
     mod1<-lme(log(transp_plant)~CO2*VPD.max,random=~1|Glasshouse/Replicate,
               data=statDF1)
-    summary(mod1)
+    summary(mod1) # non-linear, curvature shape
     
     mod1<-lme(log(transp_plant)~CO2*VPD.mean,random=~1|Glasshouse/Replicate,
               data=statDF2)
-    summary(mod1)
+    summary(mod1) # yes, linear relationship
     
     mod1<-lme(log(transp_plant)~CO2*VPD.max,random=~1|Glasshouse/Replicate,
               data=statDF2)
-    summary(mod1)
+    summary(mod1) # yes, linear relationship
     
 
 }
